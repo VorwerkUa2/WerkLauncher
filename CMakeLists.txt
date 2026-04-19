@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 if(WIN32)
     # In Qt 5.1+ we have our own main() function, don't autolink to qtmain on Windows
-    cmake_policy(SET CMP0020 OLD)
+    cmake_policy(SET CMP0020 NEW)
 endif()
 
 project(Launcher)
@@ -52,29 +52,33 @@ set(CMAKE_JAVA_TARGET_OUTPUT_DIR ${PROJECT_BINARY_DIR}/jars)
 ######## Set compiler flags ########
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 set(CMAKE_C_STANDARD_REQUIRED true)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
 include(GenerateExportHeader)
-set(CMAKE_CXX_FLAGS " -Wall -pedantic -Wno-deprecated-declarations -D_GLIBCXX_USE_CXX11_ABI=0 -fstack-protector-strong --param=ssp-buffer-size=4 ${CMAKE_CXX_FLAGS}")
-set(CMAKE_CXX_FLAGS_RELEASE " -O3 -D_FORTIFY_SOURCE=2 ${CMAKE_CXX_FLAGS_RELEASE}")
-if(UNIX AND APPLE)
-    set(CMAKE_CXX_FLAGS " -stdlib=libc++ ${CMAKE_CXX_FLAGS}")
+if(MSVC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W3 /wd4251 /DQT_NO_DEPRECATED_WARNINGS=Y")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /O2")
+else()
+    set(CMAKE_CXX_FLAGS " -Wall -pedantic -Wno-deprecated-declarations -D_GLIBCXX_USE_CXX11_ABI=0 -fstack-protector-strong --param=ssp-buffer-size=4 ${CMAKE_CXX_FLAGS}")
+    set(CMAKE_CXX_FLAGS_RELEASE " -O3 -D_FORTIFY_SOURCE=2 ${CMAKE_CXX_FLAGS_RELEASE}")
+    if(UNIX AND APPLE)
+        set(CMAKE_CXX_FLAGS " -stdlib=libc++ ${CMAKE_CXX_FLAGS}")
+    endif()
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Werror -Werror=return-type -O0")
+    # Fix build with Qt 5.13
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_NO_DEPRECATED_WARNINGS=Y")
 endif()
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Werror -Werror=return-type -O0")
-
-# Fix build with Qt 5.13
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_NO_DEPRECATED_WARNINGS=Y")
 
 ##################################### Set Application options #####################################
 
 ######## Set URLs ########
-set(Launcher_NEWS_URL "https://multimc.org/posts.html" CACHE STRING "URL to open Launcher's news.")
-set(Launcher_NEWS_RSS_URL "https://multimc.org/rss.xml" CACHE STRING "URL to fetch Launcher's news RSS feed from.")
+set(Launcher_NEWS_URL "" CACHE STRING "URL to open Launcher's news.")
+set(Launcher_NEWS_RSS_URL "" CACHE STRING "URL to fetch Launcher's news RSS feed from.")
 
 ######## Set version numbers ########
-set(Launcher_VERSION_MAJOR    0)
-set(Launcher_VERSION_MINOR    7)
-set(Launcher_VERSION_HOTFIX   0)
+set(Launcher_VERSION_MAJOR    1)
+set(Launcher_VERSION_MINOR    0)
+set(Launcher_VERSION_HOTFIX   1)
 
 # Build number
 set(Launcher_VERSION_BUILD -1 CACHE STRING "Build number. -1 for no build number.")
@@ -104,34 +108,83 @@ add_custom_target(tcversion echo "\\#\\#teamcity[setParameter name=\\'env.LAUNCH
 ################################ 3rd Party Libs ################################
 
 # Find the required Qt parts
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Concurrent REQUIRED)
-find_package(Qt5Network REQUIRED)
-find_package(Qt5Test REQUIRED)
-find_package(Qt5Xml REQUIRED)
+list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.10.2/msvc2022_64")
+list(APPEND CMAKE_PREFIX_PATH "$ENV{USERPROFILE}/vcpkg/installed/x64-windows")
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Concurrent Network Test Xml Svg OpenGL)
 
-# The Qt5 cmake files don't provide its install paths, so ask qmake.
-include(QMakeQuery)
-query_qmake(QUERY QT_INSTALL_PLUGINS RESULT QT_PLUGINS_DIR)
-query_qmake(QUERY QT_INSTALL_LIBS RESULT QT_LIBS_DIR)
-query_qmake(QUERY QT_INSTALL_LIBEXECS RESULT QT_LIBEXECS_DIR)
+if(WIN32)
+    set(VCPKG_ROOT "$ENV{USERPROFILE}/vcpkg/installed/x64-windows")
+    set(QT_BIN_DIR "C:/Qt/6.10.2/msvc2022_64/bin")
+    
+    set(COMMON_DLLS
+        "${QT_BIN_DIR}/Qt6Core.dll"
+        "${QT_BIN_DIR}/Qt6Gui.dll"
+        "${QT_BIN_DIR}/Qt6Network.dll"
+        "${QT_BIN_DIR}/Qt6Widgets.dll"
+        "${QT_BIN_DIR}/Qt6Xml.dll"
+        "${QT_BIN_DIR}/Qt6Test.dll"
+        "${QT_BIN_DIR}/Qt6Concurrent.dll"
+        "${QT_BIN_DIR}/Qt6Svg.dll"
+        "${QT_BIN_DIR}/d3dcompiler_47.dll"
+        "${VCPKG_ROOT}/bin/zlib1.dll"
+    )
 
-if (Qt5_POSITION_INDEPENDENT_CODE)
+    set(COMMON_DLLS_DEBUG
+        "${QT_BIN_DIR}/Qt6Cored.dll"
+        "${QT_BIN_DIR}/Qt6Guid.dll"
+        "${QT_BIN_DIR}/Qt6Networkd.dll"
+        "${QT_BIN_DIR}/Qt6Widgetsd.dll"
+        "${QT_BIN_DIR}/Qt6Xmld.dll"
+        "${QT_BIN_DIR}/Qt6Testd.dll"
+        "${QT_BIN_DIR}/Qt6Concurrentd.dll"
+        "${QT_BIN_DIR}/Qt6Svgd.dll"
+        "${QT_BIN_DIR}/d3dcompiler_47.dll"
+        "${VCPKG_ROOT}/debug/bin/zlibd1.dll"
+    )
+
+    # Choose DLLs based on build type
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        set(DLLS_TO_DEPLOY ${COMMON_DLLS_DEBUG})
+    else()
+        set(DLLS_TO_DEPLOY ${COMMON_DLLS})
+    endif()
+
+    # 1. Configuration-time copy (Immediate fail-safe)
+    foreach(dll ${DLLS_TO_DEPLOY})
+        if(EXISTS "${dll}")
+            file(COPY "${dll}" DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+        endif()
+    endforeach()
+
+    # 2. Build-time target (Ensures updates and dependency tracking)
+    add_custom_target(DeployCommonDependencies ALL
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${COMMON_DLLS} "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+        COMMENT "Deploying common Qt and vcpkg dependencies to ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    )
+endif()
+
+# Qt 6 provides variables for paths
+set(QT_PLUGINS_DIR "${Qt6_INSTALL_PLUGINS}")
+set(QT_LIBS_DIR "${Qt6_INSTALL_LIBS}")
+set(QT_LIBEXECS_DIR "${Qt6_INSTALL_LIBEXECS}")
+
+if (Qt6_POSITION_INDEPENDENT_CODE)
     SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif()
 
 ####################################### Branding #######################################
 
-set(Launcher_CommonName "MultiMC")
+set(Launcher_CommonName "WerkLauncher")
 
-set(Launcher_Copyright "MultiMC Contributors")
-set(Launcher_Domain "multimc.org")
-set(Launcher_Name "${Launcher_CommonName}")
-set(Launcher_DisplayName "${Launcher_CommonName} 5")
-set(Launcher_UserAgent "${Launcher_CommonName}/5.0")
+set(Launcher_Copyright "Vorwerkua Studio")
+set(Launcher_Domain "werklauncher.com")
+set(Launcher_Name "MultiMC")
+set(Launcher_DisplayName "WerkLauncher")
+set(Launcher_APP_BINARY_NAME "WerkLauncher")
+set(Launcher_UserAgent "${Launcher_CommonName}/${Launcher_RELEASE_VERSION_NAME}")
 set(Launcher_ConfigFile "multimc.cfg")
-set(Launcher_Git "https://github.com/MultiMC/Launcher")
+set(Launcher_Git "https://github.com/WerkLauncher/Launcher")
 
 set(Launcher_Branding_ICNS "${PROJECT_SOURCE_DIR}/branding/${Launcher_CommonName}.icns")
 set(Launcher_Branding_WindowsRC "${PROJECT_SOURCE_DIR}/branding/multimc.rc")
@@ -141,10 +194,11 @@ set(Launcher_META_URL "https://meta.multimc.org/v1/")
 set(Launcher_PASTE_EE_API_KEY "utLvciUouSURFzfjPxLBf5W4ISsUX4pwBDF7N1AfZ")
 set(Launcher_MSA_CLIENT_ID "499546d9-bbfe-4b9b-a086-eb3d75afb78f")
 set(Launcher_IMGUR_CLIENT_ID "5b97b0713fba4a3")
-set(Launcher_BUG_TRACKER_URL "https://github.com/MultiMC/Launcher/issues")
-set(Launcher_DISCORD_URL "https://discord.gg/multimc")
-set(Launcher_SUBREDDIT_URL "https://www.reddit.com/r/MultiMC/")
-set(Launcher_PATREON_URL "https://www.patreon.com/multimc")
+set(Launcher_BUG_TRACKER_URL "https://github.com/WerkLauncher/Launcher/issues")
+set(Launcher_DISCORD_URL "https://discord.gg/PmkmWHRW8G")
+set(Launcher_TELEGRAM_URL "https://t.me/vorwerkua_chat")
+set(Launcher_SUBREDDIT_URL "")
+set(Launcher_PATREON_URL "")
 
 ####################################### Install layout #######################################
 
@@ -268,3 +322,5 @@ add_subdirectory(buildconfig)
 
 # NOTE: this must always be last to appease the CMake deity of quirky install command evaluation order.
 add_subdirectory(launcher)
+
+add_executable(Launcher ALIAS ${Launcher_Name})

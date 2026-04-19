@@ -18,30 +18,17 @@
 #include <QDialog>
 #include <net/NetJob.h>
 
-namespace Ui
-{
+namespace Ui {
 class AboutDialog;
 }
 
-class AboutDialog : public QDialog
-{
-    Q_OBJECT
+class AboutDialog : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit AboutDialog(QWidget *parent = 0);
-    ~AboutDialog();
-
-public
-slots:
-    /// Starts loading a list of Patreon patrons.
-    void loadPatronList();
-    
-    /// Slot for when the patron list loads successfully.
-    void patronListLoaded();
+  explicit AboutDialog(QWidget *parent = 0);
+  ~AboutDialog();
 
 private:
-    Ui::AboutDialog *ui;
-
-    NetJob::Ptr netJob;
-    QByteArray dataSink;
+  Ui::AboutDialog *ui;
 };

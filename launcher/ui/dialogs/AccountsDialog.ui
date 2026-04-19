@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>927</width>
-    <height>600</height>
+    <width>760</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -170,7 +170,7 @@
                 <verstretch>1</verstretch>
                </sizepolicy>
               </property>
-              <layout class="QGridLayout" name="gridLayout">
+              <layout class="QGridLayout" name="gridLayout_inner">
                <property name="leftMargin">
                 <number>0</number>
                </property>
@@ -371,6 +371,97 @@
            </item>
           </layout>
          </widget>
+         <widget class="QWidget" name="accountTypeSelectionPage">
+          <layout class="QGridLayout" name="gridLayout_selection">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+            <widget class="QFrame" name="frame_selection">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_selection" stretch="0,0,0">
+              <property name="spacing">
+               <number>10</number>
+              </property>
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>10</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>10</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_selection_title">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Select Account Type</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCommandLinkButton" name="btnSelectMicrosoft">
+                <property name="text">
+                 <string>Microsoft Account</string>
+                </property>
+                <property name="description">
+                 <string>Log in with your Microsoft account.</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../resources/multimc/multimc.qrc">
+                  <normaloff>:/icons/multimc/32x32/microsoft.png</normaloff>:/icons/multimc/32x32/microsoft.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>32</width>
+                  <height>32</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCommandLinkButton" name="btnSelectLittleSkin">
+                <property name="text">
+                 <string>Pirate Account</string>
+                </property>
+                <property name="description">
+                 <string>Play Minecraft using a pirate account.</string>
+                </property>
+                <property name="icon">
+                 <iconset theme="steve"/>
+                </property>
+               </widget>
+              </item>
+
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
          <widget class="QWidget" name="loginPage">
           <layout class="QGridLayout" name="gridLayout_5">
            <property name="leftMargin">
@@ -485,6 +576,96 @@
            </item>
           </layout>
          </widget>
+
+
+         <widget class="QWidget" name="littleSkinLoginPage">
+          <layout class="QGridLayout" name="gridLayout_ls">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+            <widget class="QFrame" name="frame_ls">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_ls">
+              <property name="spacing">
+               <number>15</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_ls_title">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Add Pirate Account</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_ls_link">
+                <property name="text">
+                 <string>Enter your nickname to play Minecraft.</string>
+                </property>
+                <property name="openExternalLinks">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lsEmailEdit">
+                <property name="placeholderText">
+                 <string>Email / Username</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lsPasswordEdit">
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+                <property name="placeholderText">
+                 <string>Required Password (for security)</string>
+                </property>
+                <property name="toolTip">
+                 <string>The first password you use will lock this nickname to your account on the server.</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCommandLinkButton" name="btnLittleSkinAdd">
+                <property name="text">
+                 <string>Log In</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnLittleSkinCancel">
+                <property name="text">
+                 <string>Cancel</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+
          <widget class="QWidget" name="setupProfilePage">
           <layout class="QGridLayout" name="gridLayout_3">
            <property name="leftMargin">
@@ -952,6 +1133,12 @@ Choose your name carefully:</string>
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>220</width>
+           <height>16777215</height>
+          </size>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>

@@ -6,7 +6,7 @@ const Config BuildConfig;
 Config::Config()
 {
     // Name and copyright
-    LAUNCHER_NAME = "@Launcher_Name@";
+    LAUNCHER_NAME = "@Launcher_DisplayName@";
     LAUNCHER_DISPLAYNAME = "@Launcher_DisplayName@";
     LAUNCHER_COPYRIGHT = "@Launcher_Copyright@";
     LAUNCHER_DOMAIN = "@Launcher_Domain@";
@@ -37,7 +37,7 @@ Config::Config()
     }
     else
     {
-        VERSION_CHANNEL = QObject::tr("custom");
+        VERSION_CHANNEL = QString();
     }
 
     VERSION_STR = "@Launcher_VERSION_STRING@";
@@ -52,6 +52,7 @@ Config::Config()
     DISCORD_URL = "@Launcher_DISCORD_URL@";
     SUBREDDIT_URL = "@Launcher_SUBREDDIT_URL@";
     PATREON_URL = "@Launcher_PATREON_URL@";
+    TELEGRAM_URL = "@Launcher_TELEGRAM_URL@";
 }
 
 QString Config::printableVersionString() const
@@ -59,7 +60,7 @@ QString Config::printableVersionString() const
     QString vstr = QString("%1.%2.%3").arg(QString::number(VERSION_MAJOR), QString::number(VERSION_MINOR), QString::number(VERSION_HOTFIX));
 
     // If the build is not a main release, append the channel
-    if(VERSION_CHANNEL != "develop")
+    if(!VERSION_CHANNEL.isEmpty() && VERSION_CHANNEL != "develop")
     {
         vstr += "-" + VERSION_CHANNEL;
     }

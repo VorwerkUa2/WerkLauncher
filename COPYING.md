@@ -1,8 +1,9 @@
-# MultiMC
+# WerkLauncher
 
 Portions are licensed under Apache 2.0 License:
 
     Copyright 2012-2021 MultiMC Contributors
+    Copyright 2021-2026 WerkLauncher Contributors
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
@@ -78,8 +79,8 @@ Portions are licensed under MS-PL:
 
 # Mojang assets
 
-    MultiMC contains some Minecraft assets owned by Mojang/Microsoft.
-    These are included, because MultiMC is, after all, a Minecraft launcher.
+    WerkLauncher contains some Minecraft assets owned by Mojang/Microsoft.
+    These are included, because WerkLauncher is, after all, a Minecraft launcher.
     And without some creeper faces, what is even the point.
 
     If someone from Mojang finds this objectionable, we'll replace these
@@ -107,12 +108,12 @@ Portions are licensed under MS-PL:
     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
     DEALINGS IN THE SOFTWARE.
 
-# Qt 5
+# Qt 6
 
-    Copyright (C) 2014 Digia Plc and/or its subsidiary(-ies).
-    Contact: http://www.qt-project.org/legal
+    Copyright (C) 2024 The Qt Company Ltd. and other contributors.
+    Contact: http://www.qt.io/licensing/
 
-    Licensed under LGPL v2.1
+    Licensed under LGPL v3 or GPL v2/v3
 
 # libnbt++
 

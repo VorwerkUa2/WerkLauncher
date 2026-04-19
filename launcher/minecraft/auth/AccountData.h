@@ -1,81 +1,91 @@
 #pragma once
-#include <QString>
+
 #include <QByteArray>
-#include <QVector>
-#include <katabasis/Bits.h>
+#include <QDateTime>
+#include <QJsonArray>
 #include <QJsonObject>
+#include <QMap>
+#include <QString>
+#include <katabasis/Bits.h>
 
 struct Skin {
-    QString id;
-    QString url;
-    QString variant;
+  QString id;
+  QString url;
+  QString variant;
 
-    QByteArray data;
+  QByteArray data;
 };
 
 struct Cape {
-    QString id;
-    QString url;
-    QString alias;
+  QString id;
+  QString url;
+  QString alias;
 
-    QByteArray data;
+  QByteArray data;
 };
 
 struct MinecraftEntitlement {
-    bool ownsMinecraft = false;
-    bool canPlayMinecraft = false;
-    Katabasis::Validity validity = Katabasis::Validity::None;
+  bool ownsMinecraft = false;
+  bool canPlayMinecraft = false;
+  Katabasis::Validity validity = Katabasis::Validity::None;
 };
 
 struct MinecraftProfile {
-    QString id;
-    QString name;
-    Skin skin;
-    QString currentCape;
-    QMap<QString, Cape> capes;
-    Katabasis::Validity validity = Katabasis::Validity::None;
+  QString id;
+  QString name;
+  Skin skin;
+  QString currentCape;
+  QMap<QString, Cape> capes;
+  Katabasis::Validity validity = Katabasis::Validity::None;
 };
+enum class AccountType { MSA, Mojang, Local, LittleSkin };
 
 enum class AccountState {
-    Unchecked,
-    Offline,
-    Working,
-    Online,
-    Errored,
-    Expired,
-    Gone,
-    MustMigrate
+  Unchecked,
+  Offline,
+  Working,
+  Online,
+  Errored,
+  Expired,
+  Gone,
+  MustMigrate
 };
 
 struct AccountData {
-    QJsonObject saveState() const;
-    bool resumeStateFromV3(QJsonObject data);
+  QJsonObject saveState() const;
+  bool resumeStateFromV3(QJsonObject data);
 
-    //! gamertag for MSA
-    QString gamerTag() const;
+  //! gamertag for MSA
+  QString gamerTag() const;
 
-    //! Yggdrasil access token, as passed to the game.
-    QString accessToken() const;
+  //! Yggdrasil access token, as passed to the game.
+  QString accessToken() const;
 
-    QString profileId() const;
-    QString profileName() const;
+  QString profileId() const;
+  QString profileName() const;
 
-    QString xid() const;
+  QString xid() const;
 
-    QString lastError() const;
+  QString lastError() const;
 
-    Katabasis::Token msaToken;
-    Katabasis::Token userToken;
-    Katabasis::Token xboxApiToken;
-    Katabasis::Token mojangservicesToken;
+  Katabasis::Token msaToken;
+  Katabasis::Token userToken;
+  Katabasis::Token xboxApiToken;
+  Katabasis::Token mojangservicesToken;
 
-    Katabasis::Token yggdrasilToken;
-    MinecraftProfile minecraftProfile;
-    MinecraftEntitlement minecraftEntitlement;
-    Katabasis::Validity validity_ = Katabasis::Validity::None;
+  Katabasis::Token yggdrasilToken;
+  MinecraftProfile minecraftProfile;
+  MinecraftEntitlement minecraftEntitlement;
+  Katabasis::Validity validity_ = Katabasis::Validity::None;
 
-    // runtime only information (not saved with the account)
-    QString internalId;
-    QString errorString;
-    AccountState accountState = AccountState::Unchecked;
+  // runtime only information (not saved with the account)
+  QString internalId;
+  QString errorString;
+  AccountType type = AccountType::MSA;
+  AccountState accountState = AccountState::Unchecked;
+
+  // Skin sync (optional for Local accounts)
+  QString syncUsername;
+  QString syncPassword;
+  QString syncUrl;
 };

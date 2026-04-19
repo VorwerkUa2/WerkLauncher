@@ -1,5 +1,13 @@
 project(application)
 
+# Silence MSVC STL deprecation warnings and CRT insecure warnings
+if(MSVC)
+    add_compile_definitions(
+        _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING
+        _CRT_SECURE_NO_WARNINGS
+    )
+endif()
+
 ################################ FILES ################################
 
 ######## Sources and headers ########
@@ -217,6 +225,10 @@ set(MINECRAFT_SOURCES
     minecraft/auth/flows/AuthFlow.h
     minecraft/auth/flows/MSA.cpp
     minecraft/auth/flows/MSA.h
+    minecraft/auth/flows/Local.cpp
+    minecraft/auth/flows/Local.h
+    minecraft/auth/flows/Yggdrasil.cpp
+    minecraft/auth/flows/Yggdrasil.h
 
     # Auth steps
     minecraft/auth/steps/EntitlementsStep.cpp
@@ -239,6 +251,12 @@ set(MINECRAFT_SOURCES
     # API call steps
     minecraft/auth/steps/SetSkinStep.cpp
     minecraft/auth/steps/SetSkinStep.h
+    minecraft/auth/steps/YggdrasilStep.cpp
+    minecraft/auth/steps/YggdrasilProfileStep.cpp
+    minecraft/auth/steps/YggdrasilProfileStep.h
+    minecraft/auth/steps/LocalSetupStep.cpp
+
+    minecraft/auth/steps/LocalSetupStep.h
     minecraft/auth/steps/SetCapeStep.cpp
     minecraft/auth/steps/SetCapeStep.h
     minecraft/auth/steps/MinecraftProfileCreateStep.cpp
@@ -278,6 +296,8 @@ set(MINECRAFT_SOURCES
     minecraft/launch/ScanModFolders.h
     minecraft/launch/VerifyJavaInstall.cpp
     minecraft/launch/VerifyJavaInstall.h
+    minecraft/launch/DownloadAuthlibInjector.cpp
+    minecraft/launch/DownloadAuthlibInjector.h
 
     minecraft/legacy/LegacyModList.h
     minecraft/legacy/LegacyModList.cpp
@@ -357,7 +377,7 @@ add_executable(PackageManifest
 )
 target_link_libraries(PackageManifest
     Launcher_logic
-    Qt5::Test
+    Qt6::Test
 )
 target_include_directories(PackageManifest
     PRIVATE ../cmake/UnitTest/
@@ -529,6 +549,8 @@ add_unit_test(Index
     LIBS Launcher_logic
     )
 
+
+
 ################################ COMPILE ################################
 
 # we need zlib
@@ -560,6 +582,8 @@ set(LOGIC_SOURCES
 
 SET(LAUNCHER_SOURCES
     # Application base
+    Logger.h
+    Logger.cpp
     Application.h
     Application.cpp
     UpdateController.cpp
@@ -627,14 +651,14 @@ SET(LAUNCHER_SOURCES
     ui/themes/FusionTheme.h
     ui/themes/BrightTheme.cpp
     ui/themes/BrightTheme.h
-    ui/themes/CustomTheme.cpp
-    ui/themes/CustomTheme.h
     ui/themes/DarkTheme.cpp
     ui/themes/DarkTheme.h
     ui/themes/ITheme.cpp
     ui/themes/ITheme.h
-    ui/themes/SystemTheme.cpp
-    ui/themes/SystemTheme.h
+
+    # Discord Rich Presence
+    discord/DiscordRPC.h
+    discord/DiscordRPC.cpp
 
     # Processes
     LaunchController.h
@@ -680,10 +704,6 @@ SET(LAUNCHER_SOURCES
     ui/pages/instance/WorldListPage.h
 
     # GUI - global settings pages
-    ui/pages/global/CustomCommandsPage.cpp
-    ui/pages/global/CustomCommandsPage.h
-    ui/pages/global/ExternalToolsPage.cpp
-    ui/pages/global/ExternalToolsPage.h
     ui/pages/global/JavaPage.cpp
     ui/pages/global/JavaPage.h
     ui/pages/global/LanguagePage.cpp
@@ -692,10 +712,6 @@ SET(LAUNCHER_SOURCES
     ui/pages/global/MinecraftPage.h
     ui/pages/global/LauncherPage.cpp
     ui/pages/global/LauncherPage.h
-    ui/pages/global/ProxyPage.cpp
-    ui/pages/global/ProxyPage.h
-    ui/pages/global/PasteEEPage.cpp
-    ui/pages/global/PasteEEPage.h
 
     # GUI - platform pages
     ui/pages/modplatform/VanillaPage.cpp
@@ -751,6 +767,8 @@ SET(LAUNCHER_SOURCES
     ui/dialogs/CustomMessageBox.h
     ui/dialogs/ExportInstanceDialog.cpp
     ui/dialogs/ExportInstanceDialog.h
+    ui/dialogs/GroupInputDialog.cpp
+    ui/dialogs/GroupInputDialog.h
     ui/dialogs/IconPickerDialog.cpp
     ui/dialogs/IconPickerDialog.h
     ui/dialogs/NewComponentDialog.cpp
@@ -812,6 +830,12 @@ SET(LAUNCHER_SOURCES
     ui/widgets/WideBar.cpp
     ui/widgets/WrapLabel.h
     ui/widgets/WrapLabel.cpp
+    ui/widgets/ToastNotification.h
+    ui/widgets/ToastNotification.cpp
+    ui/widgets/SidePanel.h
+    ui/widgets/SidePanel.cpp
+    ui/widgets/CustomTitleBar.h
+    ui/widgets/CustomTitleBar.cpp
 
     # GUI - instance group view
     ui/instanceview/InstanceProxyModel.cpp
@@ -827,7 +851,7 @@ SET(LAUNCHER_SOURCES
     ui/instanceview/VisualGroup.h
 )
 
-qt5_wrap_ui(LAUNCHER_UI
+qt6_wrap_ui(LAUNCHER_UI
     ui/dialogs/AboutDialog.ui
     ui/dialogs/AccountsDialog.ui
     ui/dialogs/CopyInstanceDialog.ui
@@ -874,15 +898,12 @@ qt5_wrap_ui(LAUNCHER_UI
     ui/widgets/MCModInfoFrame.ui
 )
 
-qt5_add_resources(LAUNCHER_RESOURCES
+qt6_add_resources(LAUNCHER_RESOURCES
     resources/backgrounds/backgrounds.qrc
     resources/multimc/multimc.qrc
     resources/pe_dark/pe_dark.qrc
     resources/pe_light/pe_light.qrc
     resources/pe_colored/pe_colored.qrc
-    resources/pe_blue/pe_blue.qrc
-    resources/OSX/OSX.qrc
-    resources/iOS/iOS.qrc
     resources/flat/flat.qrc
     resources/documents/documents.qrc
     resources/skins/skins.qrc
@@ -909,11 +930,12 @@ target_link_libraries(Launcher_logic
     qrcode
 )
 target_link_libraries(Launcher_logic
-    Qt5::Core
-    Qt5::Xml
-    Qt5::Network
-    Qt5::Concurrent
-    Qt5::Gui
+    Qt6::Core
+    Qt6::Xml
+    Qt6::Network
+    Qt6::Concurrent
+    Qt6::Gui
+    Qt6::OpenGL
 )
 target_link_libraries(Launcher_logic
     Launcher_iconfix
@@ -925,10 +947,18 @@ target_link_libraries(Launcher_logic
 
 add_executable(${Launcher_Name} MACOSX_BUNDLE WIN32 main.cpp ${LAUNCHER_RCS})
 target_link_libraries(${Launcher_Name} Launcher_logic)
+if(TARGET DeployCommonDependencies)
+    add_dependencies(${Launcher_Name} DeployCommonDependencies)
+endif()
+
+
 
 if(DEFINED Launcher_APP_BINARY_NAME)
     set_target_properties(${Launcher_Name} PROPERTIES OUTPUT_NAME "${Launcher_APP_BINARY_NAME}")
 endif()
+
+
+option(Launcher_BUILD_SHARED_LIBS "Build shared libraries" OFF)
 if(DEFINED Launcher_BINARY_RPATH)
     SET_TARGET_PROPERTIES(${Launcher_Name} PROPERTIES INSTALL_RPATH "${Launcher_BINARY_RPATH}")
 endif()
@@ -943,6 +973,25 @@ install(TARGETS ${Launcher_Name}
     LIBRARY DESTINATION ${LIBRARY_DEST_DIR} COMPONENT Runtime
     RUNTIME DESTINATION ${BINARY_DEST_DIR} COMPONENT Runtime
 )
+
+if(WIN32)
+    # Define locations for vcpkg DLLs based on build type
+    # Note: This assumes vcpkg integration is active or paths are known/standard relative to project
+    # Using hardcoded paths from previous context for robustness in this specific environment
+    set(VCPKG_ROOT "$ENV{USERPROFILE}/vcpkg/installed/x64-windows")
+    
+    add_dependencies(${Launcher_Name} JavaCheck NewLaunch)
+    add_custom_command(TARGET ${Launcher_Name} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E echo "Deploying assets..."
+        COMMAND C:/Qt/6.10.2/msvc2022_64/bin/windeployqt.exe --no-compiler-runtime --no-opengl-sw --no-translations --dir $<TARGET_FILE_DIR:${Launcher_Name}> $<TARGET_FILE:${Launcher_Name}>
+        COMMAND ${CMAKE_COMMAND} -E make_directory $<TARGET_FILE_DIR:${Launcher_Name}>/translations
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/translations/mmc_uk.qm $<TARGET_FILE_DIR:${Launcher_Name}>/translations/
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/translations/uk.po $<TARGET_FILE_DIR:${Launcher_Name}>/translations/
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/translations/index_v2.json $<TARGET_FILE_DIR:${Launcher_Name}>/translations/
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different C:/Qt/6.10.2/msvc2022_64/translations/qtbase_uk.qm $<TARGET_FILE_DIR:${Launcher_Name}>/translations/qt_uk.qm
+        COMMENT "Deploying plugins, translations and JavaCheck for ${Launcher_Name}"
+    )
+endif()
 
 #### The bundle mess! ####
 # Bundle utilities are used to complete the portable packages - they add all the libraries that would otherwise be missing on the target system.

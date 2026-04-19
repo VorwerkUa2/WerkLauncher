@@ -13,94 +13,92 @@
  * limitations under the License.
  */
 
-#include "Application.h"
 #include "NewComponentDialog.h"
+#include "Application.h"
+#include "ui/widgets/CustomTitleBar.h"
 #include "ui_NewComponentDialog.h"
 
 #include <BaseVersion.h>
+#include <InstanceList.h>
 #include <icons/IconList.h>
 #include <tasks/Task.h>
-#include <InstanceList.h>
 
-#include "VersionSelectDialog.h"
-#include "ProgressDialog.h"
 #include "IconPickerDialog.h"
+#include "ProgressDialog.h"
+#include "VersionSelectDialog.h"
 
+#include <QFileDialog>
 #include <QLayout>
 #include <QPushButton>
-#include <QFileDialog>
 #include <QValidator>
 
 #include <meta/Index.h>
 #include <meta/VersionList.h>
 
-NewComponentDialog::NewComponentDialog(const QString & initialName, const QString & initialUid, QWidget *parent)
-    : QDialog(parent), ui(new Ui::NewComponentDialog)
-{
-    ui->setupUi(this);
-    resize(minimumSizeHint());
+NewComponentDialog::NewComponentDialog(const QString &initialName,
+                                       const QString &initialUid,
+                                       QWidget *parent)
+    : QDialog(parent), ui(new Ui::NewComponentDialog) {
+  setWindowFlags(Qt::FramelessWindowHint | windowFlags());
+  ui->setupUi(this);
 
-    ui->nameTextBox->setText(initialName);
-    ui->uidTextBox->setText(initialUid);
+  auto titleBar = new CustomTitleBar(this);
+  titleBar->setTitle(tr("New Component"));
+  ui->verticalLayout->setContentsMargins(0, 0, 0, 0);
+  ui->verticalLayout->setSpacing(0);
+  ui->verticalLayout->insertWidget(0, titleBar);
+  resize(minimumSizeHint());
 
-    connect(ui->nameTextBox, &QLineEdit::textChanged, this, &NewComponentDialog::updateDialogState);
-    connect(ui->uidTextBox, &QLineEdit::textChanged, this, &NewComponentDialog::updateDialogState);
+  ui->nameTextBox->setText(initialName);
+  ui->uidTextBox->setText(initialUid);
 
-    auto groups = APPLICATION->instances()->getGroups().toSet();
-    ui->nameTextBox->setFocus();
+  connect(ui->nameTextBox, &QLineEdit::textChanged, this,
+          &NewComponentDialog::updateDialogState);
+  connect(ui->uidTextBox, &QLineEdit::textChanged, this,
+          &NewComponentDialog::updateDialogState);
 
-    originalPlaceholderText = ui->uidTextBox->placeholderText();
-    updateDialogState();
+  ui->nameTextBox->setFocus();
+
+  originalPlaceholderText = ui->uidTextBox->placeholderText();
+  updateDialogState();
 }
 
-NewComponentDialog::~NewComponentDialog()
-{
-    delete ui;
+NewComponentDialog::~NewComponentDialog() { delete ui; }
+
+void NewComponentDialog::updateDialogState() {
+  auto protoUid = ui->nameTextBox->text().toLower();
+  protoUid.remove(QRegularExpression("[^a-z]"));
+  if (protoUid.isEmpty()) {
+    ui->uidTextBox->setPlaceholderText(originalPlaceholderText);
+  } else {
+    QString suggestedUid = "org.multimc.custom." + protoUid;
+    ui->uidTextBox->setPlaceholderText(suggestedUid);
+  }
+  bool allowOK =
+      !name().isEmpty() && !uid().isEmpty() && !uidBlacklist.contains(uid());
+  ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(allowOK);
 }
 
-void NewComponentDialog::updateDialogState()
-{
-    auto protoUid = ui->nameTextBox->text().toLower();
-    protoUid.remove(QRegularExpression("[^a-z]"));
-    if(protoUid.isEmpty())
-    {
-        ui->uidTextBox->setPlaceholderText(originalPlaceholderText);
-    }
-    else
-    {
-        QString suggestedUid = "org.multimc.custom." + protoUid;
-        ui->uidTextBox->setPlaceholderText(suggestedUid);
-    }
-    bool allowOK = !name().isEmpty() && !uid().isEmpty() && !uidBlacklist.contains(uid());
-    ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(allowOK);
+QString NewComponentDialog::name() const {
+  auto result = ui->nameTextBox->text();
+  if (result.size()) {
+    return result.trimmed();
+  }
+  return QString();
 }
 
-QString NewComponentDialog::name() const
-{
-    auto result = ui->nameTextBox->text();
-    if(result.size())
-    {
-        return result.trimmed();
-    }
-    return QString();
+QString NewComponentDialog::uid() const {
+  auto result = ui->uidTextBox->text();
+  if (result.size()) {
+    return result.trimmed();
+  }
+  result = ui->uidTextBox->placeholderText();
+  if (result.size() && result != originalPlaceholderText) {
+    return result.trimmed();
+  }
+  return QString();
 }
 
-QString NewComponentDialog::uid() const
-{
-    auto result = ui->uidTextBox->text();
-    if(result.size())
-    {
-        return result.trimmed();
-    }
-    result = ui->uidTextBox->placeholderText();
-    if(result.size() && result != originalPlaceholderText)
-    {
-        return result.trimmed();
-    }
-    return QString();
-}
-
-void NewComponentDialog::setBlacklist(QStringList badUids)
-{
-    uidBlacklist = badUids;
+void NewComponentDialog::setBlacklist(QStringList badUids) {
+  uidBlacklist = badUids;
 }

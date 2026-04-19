@@ -19,6 +19,7 @@
 
 #include <QMainWindow>
 #include <QProcess>
+#include <QSystemTrayIcon>
 #include <QTimer>
 
 #include "BaseInstance.h"
@@ -38,190 +39,208 @@ class BaseProfilerFactory;
 class InstanceView;
 class KonamiCode;
 class InstanceTask;
+class CustomTitleBar;
+class SidePanel;
+class QLineEdit;
+class QComboBox;
+class QSystemTrayIcon;
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
-    class Ui;
+  class Ui;
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+  explicit MainWindow(QWidget *parent = 0);
+  ~MainWindow();
 
-    bool eventFilter(QObject *obj, QEvent *ev) override;
-    void closeEvent(QCloseEvent *event) override;
-    void changeEvent(QEvent * event) override;
-
-    void checkInstancePathForProblems();
-
-    void updatesAllowedChanged(bool allowed);
-
-    void droppedURLs(QList<QUrl> urls);
-signals:
-    void isClosing();
+  bool eventFilter(QObject *obj, QEvent *ev) override;
+  void closeEvent(QCloseEvent *event) override;
+  void changeEvent(QEvent *event) override;
+  void handleTrayIconActivation(QSystemTrayIcon::ActivationReason reason);
 
 protected:
-    QMenu * createPopupMenu() override;
+  bool nativeEvent(const QByteArray &eventType, void *message,
+                   qintptr *result) override;
+
+public slots:
+  void checkInstancePathForProblems();
+
+  void updatesAllowedChanged(bool allowed);
+
+  void droppedURLs(QList<QUrl> urls);
+signals:
+  void isClosing();
+
+protected:
+  QMenu *createPopupMenu() override;
 
 private slots:
-    void onCatToggled(bool);
+  void onCatToggled(bool);
 
-    void on_actionAbout_triggered();
+  void on_actionAbout_triggered();
 
-    void on_actionAddInstance_triggered();
+  void on_actionAddInstance_triggered();
 
-    void on_actionREDDIT_triggered();
+  void on_actionREDDIT_triggered();
 
-    void on_actionDISCORD_triggered();
+  void on_actionDISCORD_triggered();
 
-    void on_actionCopyInstance_triggered();
+  void on_actionTELEGRAM_triggered();
 
-    void on_actionChangeInstGroup_triggered();
+  void on_actionCopyInstance_triggered();
 
-    void on_actionChangeInstIcon_triggered();
-    void on_changeIconButton_clicked(bool)
-    {
-        on_actionChangeInstIcon_triggered();
-    }
+  void on_actionChangeInstGroup_triggered();
 
-    void on_actionViewInstanceFolder_triggered();
+  void on_actionChangeInstIcon_triggered();
+  void on_changeIconButton_clicked(bool) {
+    on_actionChangeInstIcon_triggered();
+  }
 
-    void on_actionConfig_Folder_triggered();
+  void on_actionViewInstanceFolder_triggered();
 
-    void on_actionViewSelectedInstFolder_triggered();
+  void on_actionConfig_Folder_triggered();
 
-    void on_actionViewSelectedMCFolder_triggered();
+  void on_actionViewSelectedInstFolder_triggered();
 
-    void on_actionViewSelectedModsFolder_triggered();
+  void on_actionViewSelectedMCFolder_triggered();
 
-    void refreshInstances();
+  void on_actionViewSelectedModsFolder_triggered();
 
-    void on_actionViewCentralModsFolder_triggered();
+  void refreshInstances();
 
-    void checkForUpdates();
+  void on_actionViewCentralModsFolder_triggered();
 
-    void on_actionSettings_triggered();
+  void checkForUpdates();
 
-    void on_actionInstanceSettings_triggered();
+  void on_actionSettings_triggered();
 
-    void on_actionManageAccounts_triggered();
+  void on_actionInstanceSettings_triggered();
 
-    void on_actionReportBug_triggered();
+  void on_actionManageAccounts_triggered();
 
-    void on_actionPatreon_triggered();
+  void on_actionReportBug_triggered();
 
-    void on_actionMoreNews_triggered();
+  void on_actionPatreon_triggered();
 
-    void newsButtonClicked();
+  void on_actionMoreNews_triggered();
 
-    void on_actionLaunchInstance_triggered();
+  void newsButtonClicked();
 
-    void on_actionLaunchInstanceOffline_triggered();
+  void on_actionLaunchInstance_triggered();
 
-    void on_actionDeleteInstance_triggered();
+  void on_actionLaunchInstanceOffline_triggered();
 
-    void deleteGroup();
+  void on_actionDeleteInstance_triggered();
 
-    void on_actionExportInstance_triggered();
+  void deleteGroup();
 
-    void on_actionRenameInstance_triggered();
-    void on_renameButton_clicked(bool)
-    {
-        on_actionRenameInstance_triggered();
-    }
+  void on_actionExportInstance_triggered();
 
-    void on_actionEditInstance_triggered();
+  void on_actionRenameInstance_triggered();
+  void on_renameButton_clicked(bool) { on_actionRenameInstance_triggered(); }
 
-    void on_actionEditInstNotes_triggered();
+  void on_actionEditInstance_triggered();
 
-    void on_actionMods_triggered();
+  void on_actionEditInstNotes_triggered();
 
-    void on_actionWorlds_triggered();
+  void on_actionMods_triggered();
 
-    void on_actionScreenshots_triggered();
+  void on_actionWorlds_triggered();
 
-    void on_actionCreateShortcut_triggered();
+  void on_actionScreenshots_triggered();
 
-    void taskEnd();
+  void on_actionCreateShortcut_triggered();
 
-    /**
-     * called when an icon is changed in the icon model.
-     */
-    void iconUpdated(QString);
+  void taskEnd();
 
-    void showInstanceContextMenu(const QPoint &);
+  /**
+   * called when an icon is changed in the icon model.
+   */
+  void iconUpdated(QString);
 
-    void updateToolsMenu();
+  void showInstanceContextMenu(const QPoint &);
 
-    void instanceActivated(QModelIndex);
+  void updateToolsMenu();
 
-    void instanceChanged(const QModelIndex &current, const QModelIndex &previous);
+  void instanceActivated(QModelIndex);
 
-    void instanceSelectRequest(QString id);
+  void instanceChanged(const QModelIndex &current, const QModelIndex &previous);
 
-    void instanceDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
+  void instanceSelectRequest(QString id);
 
-    void selectionBad();
+  void instanceDataChanged(const QModelIndex &topLeft,
+                           const QModelIndex &bottomRight);
 
-    void startTask(Task *task);
+  void selectionBad();
 
-    void updateAvailable(GoUpdate::Status status);
+  void startTask(Task *task);
 
-    void updateNotAvailable();
+  void updateAvailable(GoUpdate::Status status);
 
-    void notificationsChanged();
+  void updateNotAvailable();
 
-    void defaultAccountChanged();
+  void notificationsChanged();
 
-    void changeActiveAccount();
+  void defaultAccountChanged();
 
-    void repopulateAccountsMenu();
+  void changeActiveAccount();
 
-    void updateNewsLabel();
+  void searchTextChanged(const QString &text);
+  void sortModeChanged(int index);
+  void droppedURLsOnIndex(QList<QUrl> urls, QModelIndex index);
 
-    /*!
-     * Runs the DownloadTask and installs updates.
-     */
-    void downloadUpdates(GoUpdate::Status status);
+  void repopulateAccountsMenu();
 
-    void konamiTriggered();
+  void updateNewsLabel();
 
-    void globalSettingsClosed();
+  /*!
+   * Runs the DownloadTask and installs updates.
+   */
+  void downloadUpdates(GoUpdate::Status status);
 
-private:
-    void retranslateUi();
+  void konamiTriggered();
 
-    void addInstance(QString url = QString());
-    void activateInstance(InstancePtr instance);
-    void setCatBackground(bool enabled);
-    void updateInstanceToolIcon(QString new_icon);
-    void setSelectedInstanceById(const QString &id);
-    void updateStatusCenter();
-
-    void runModalTask(Task *task);
-    void instanceFromInstanceTask(InstanceTask *task);
-    void finalizeInstance(InstancePtr inst);
+  void globalSettingsClosed();
 
 private:
-    std::unique_ptr<Ui> ui;
+  void retranslateUi();
 
-    // these are managed by Qt's memory management model!
-    InstanceView *view = nullptr;
-    InstanceProxyModel *proxymodel = nullptr;
-    QToolButton *newsLabel = nullptr;
-    QLabel *m_statusLeft = nullptr;
-    QLabel *m_statusCenter = nullptr;
-    QMenu *accountMenu = nullptr;
-    QToolButton *accountMenuButton = nullptr;
-    KonamiCode * secretEventFilter = nullptr;
+  void addInstance(QString url = QString());
+  void activateInstance(InstancePtr instance);
+  void setCatBackground(bool enabled);
+  void updateInstanceToolIcon(QString new_icon);
+  void setSelectedInstanceById(const QString &id);
+  void updateStatusCenter();
 
-    unique_qobject_ptr<NewsChecker> m_newsChecker;
-    unique_qobject_ptr<NotificationChecker> m_notificationChecker;
+  void runModalTask(Task *task);
+  void instanceFromInstanceTask(InstanceTask *task);
+  void finalizeInstance(InstancePtr inst);
 
-    InstancePtr m_selectedInstance;
-    QString m_currentInstIcon;
+private:
+  std::unique_ptr<Ui> ui;
 
-    // managed by the application object
-    Task *m_versionLoadTask = nullptr;
+  // these are managed by Qt's memory management model!
+  InstanceView *view = nullptr;
+  InstanceProxyModel *proxymodel = nullptr;
+  QToolButton *newsLabel = nullptr;
+  QLabel *m_statusLeft = nullptr;
+  QLabel *m_statusCenter = nullptr;
+  QMenu *accountMenu = nullptr;
+  QToolButton *accountMenuButton = nullptr;
+  KonamiCode *secretEventFilter = nullptr;
+
+  CustomTitleBar *m_titleBar = nullptr;
+  QLineEdit *m_searchBar = nullptr;
+  QComboBox *m_sortBox = nullptr;
+  QSystemTrayIcon *m_trayIcon = nullptr;
+
+  unique_qobject_ptr<NewsChecker> m_newsChecker;
+  unique_qobject_ptr<NotificationChecker> m_notificationChecker;
+
+  InstancePtr m_selectedInstance;
+  QString m_currentInstIcon;
+
+  // managed by the application object
+  Task *m_versionLoadTask = nullptr;
 };

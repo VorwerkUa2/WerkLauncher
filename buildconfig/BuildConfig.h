@@ -98,6 +98,7 @@ public:
     QString DISCORD_URL;
     QString SUBREDDIT_URL;
     QString PATREON_URL;
+    QString TELEGRAM_URL;
 
     QString RESOURCE_BASE = "https://resources.download.minecraft.net/";
     QString LIBRARY_BASE = "https://libraries.minecraft.net/";

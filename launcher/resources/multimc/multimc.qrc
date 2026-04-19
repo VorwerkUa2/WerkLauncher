@@ -57,6 +57,7 @@
         <file>16x16/about.png</file>
         <file>22x22/about.png</file>
         <file>32x32/about.png</file>
+        <file>32x32/microsoft.png</file>
         <file>48x48/about.png</file>
         <file>64x64/about.png</file>
 
@@ -157,6 +158,7 @@
         <file>48x48/status-good.png</file>
         <file>64x64/status-good.png</file>
 
+        <file>scalable/status-good.svg</file>
         <!-- Yellow status. Whatever that means... Our own. -->
         <file>16x16/status-yellow.png</file>
         <file>24x24/status-yellow.png</file>
@@ -259,6 +261,9 @@
 
         <!-- discord logo icon thing. from discord. traced from bitmap -->
         <file>scalable/discord.svg</file>
+
+        <!-- telegram logo icon -->
+        <file>scalable/telegram.svg</file>
 
         <!-- instance icons -->
         <file>32x32/instances/chicken.png</file>

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=WerkLauncher
+Comment=Minecraft Launcher
+Exec=WerkLauncher
+Icon=werklauncher
+Type=Application
+Categories=Game;
+Terminal=false
+StartupWMClass=WerkLauncher

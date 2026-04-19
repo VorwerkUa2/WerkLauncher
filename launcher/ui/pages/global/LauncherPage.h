@@ -15,81 +15,75 @@
 
 #pragma once
 
-#include <memory>
 #include <QDialog>
+#include <memory>
 
 #include "java/JavaChecker.h"
+#include "ui/ColorCache.h"
 #include "ui/pages/BasePage.h"
 #include <Application.h>
-#include "ui/ColorCache.h"
 #include <translations/TranslationsModel.h>
 
 class QTextCharFormat;
 class SettingsObject;
 
-namespace Ui
-{
+namespace Ui {
 class LauncherPage;
 }
 
-class LauncherPage : public QWidget, public BasePage
-{
-    Q_OBJECT
+class LauncherPage : public QWidget, public BasePage {
+  Q_OBJECT
 
 public:
-    explicit LauncherPage(QWidget *parent = 0);
-    ~LauncherPage();
+  explicit LauncherPage(QWidget *parent = 0);
+  ~LauncherPage();
 
-    QString displayName() const override
-    {
-        return "Launcher";
-    }
-    QIcon icon() const override
-    {
-        return APPLICATION->getThemedIcon("launcher");
-    }
-    QString id() const override
-    {
-        return "launcher-settings";
-    }
-    QString helpPage() const override
-    {
-        return "Launcher-settings";
-    }
-    bool apply() override;
+  QString displayName() const override { return "Launcher"; }
+  QIcon icon() const override { return APPLICATION->getThemedIcon("launcher"); }
+  QString id() const override { return "launcher-settings"; }
+  QString helpPage() const override { return "Launcher-settings"; }
+  bool apply() override;
 
 private:
-    void applySettings();
-    void loadSettings();
+  void applySettings();
+  void loadSettings();
 
-private
-slots:
-    void on_instDirBrowseBtn_clicked();
-    void on_instDirOpenBtn_clicked();
+private slots:
+  void on_instDirBrowseBtn_clicked();
+  void on_instDirOpenBtn_clicked();
 
-    void on_modsDirBrowseBtn_clicked();
-    void on_modsDirOpenBtn_clicked();
+  void on_modsDirBrowseBtn_clicked();
+  void on_modsDirOpenBtn_clicked();
 
-    void on_iconsDirBrowseBtn_clicked();
-    void on_iconsDirOpenBtn_clicked();
+  void on_iconsDirBrowseBtn_clicked();
+  void on_iconsDirOpenBtn_clicked();
 
-    void on_skinsDirBrowseBtn_clicked();
-    void on_skinsDirOpenBtn_clicked();
+  void on_skinsDirBrowseBtn_clicked();
+  void on_skinsDirOpenBtn_clicked();
 
-    void on_migrateDataFolderMacBtn_clicked();
+  void on_migrateDataFolderMacBtn_clicked();
 
-    /*!
-     * Updates the font preview
-     */
-    void refreshFontPreview();
+  /*!
+   * Updates the font preview
+   */
+  void refreshFontPreview();
+
+  void on_accentColorButton_clicked();
+  void on_themeComboBox_currentIndexChanged(int index);
+  void on_themeComboBoxColors_currentIndexChanged(int index);
 
 private:
-    Ui::LauncherPage *ui;
+  Ui::LauncherPage *ui;
 
-    // default format for the font preview...
-    QTextCharFormat *defaultFormat;
+  // default format for the font preview...
+  QTextCharFormat *defaultFormat;
 
-    std::unique_ptr<LogColorCache> m_colors;
+  std::unique_ptr<LogColorCache> m_colors;
 
-    std::shared_ptr<TranslationsModel> m_languageModel;
+  std::shared_ptr<TranslationsModel> m_languageModel;
+  QTimer m_themeTimer;
+  QString m_pendingTheme;
+
+private slots:
+  void applyPendingTheme();
 };

@@ -18,6 +18,9 @@ set(XZ_SOURCES
 add_library(xz-embedded STATIC ${XZ_SOURCES})
 target_include_directories(xz-embedded PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set_property(TARGET xz-embedded PROPERTY C_STANDARD 99)
+if(MSVC)
+    target_compile_options(xz-embedded PRIVATE /wd4244 /wd4267)
+endif()
 
 if(${XZ_BUILD_MINIDEC})
     add_executable(xzminidec xzminidec.c)

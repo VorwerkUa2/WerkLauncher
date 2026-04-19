@@ -15,21 +15,27 @@
 
 #pragma once
 
-#include <QSortFilterProxyModel>
 #include <QCollator>
+#include <QSortFilterProxyModel>
 
-class InstanceProxyModel : public QSortFilterProxyModel
-{
-    Q_OBJECT
+class InstanceProxyModel : public QSortFilterProxyModel {
+  Q_OBJECT
 
 public:
-    InstanceProxyModel(QObject *parent = 0);
+  InstanceProxyModel(QObject *parent = 0);
+
+  void setSearchFilter(const QString &filter);
+  QStringList getGroups() const;
 
 protected:
-    QVariant data(const QModelIndex & index, int role) const override;
-    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
-    bool subSortLessThan(const QModelIndex &left, const QModelIndex &right) const;
+  bool filterAcceptsRow(int sourceRow,
+                        const QModelIndex &sourceParent) const override;
+  QVariant data(const QModelIndex &index, int role) const override;
+  bool lessThan(const QModelIndex &left,
+                const QModelIndex &right) const override;
+  bool subSortLessThan(const QModelIndex &left, const QModelIndex &right) const;
 
 private:
-    QCollator m_naturalSort;
+  QCollator m_naturalSort;
+  QString m_searchFilter;
 };

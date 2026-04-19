@@ -20,56 +20,56 @@
  * THE SOFTWARE.
  */
 
+#include <QDebug>
+#include <QPainter>
+#include <QSvgRenderer>
+#include <QTextStream>
 #include <sstream>
 #include <string>
-#include <QPainter>
-#include <QTextStream>
-#include <QSvgRenderer>
 
 #include "QrCodeGenerator.h"
 #include "qrcodegen.h"
 
 namespace {
-QString toSvgString(const qrcodegen::QrCode &qr, quint16 border)
-{
-    QString str;
-    QTextStream sb(&str);
+QString toSvgString(const qrcodegen::QrCode &qr, quint16 border) {
+  QString str;
+  QTextStream sb(&str);
 
-    sb << R"(<?xml version="1.0" encoding="UTF-8"?>)"
-       << R"(<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">)"
-       << R"(<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 )"
-       << (qr.getSize() + border * 2) << " " << (qr.getSize() + border * 2)
-       << R"(" stroke="none"><rect width="100%" height="100%" fill="#FFFFFF"/><path d=")";
+  sb << R"(<?xml version="1.0" encoding="UTF-8"?>)"
+     << R"(<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">)"
+     << R"(<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 )"
+     << (qr.getSize() + border * 2) << " " << (qr.getSize() + border * 2)
+     << R"(" stroke="none"><rect width="100%" height="100%" fill="#FFFFFF"/><path d=")";
 
-    for (int y = 0; y < qr.getSize(); y++)
-    {
-        for (int x = 0; x < qr.getSize(); x++)
-        {
-            if (qr.getModule(x, y))
-            {
-                sb << (x == 0 && y == 0 ? "" : " ") << "M" << (x + border) << "," << (y + border)
-                   << "h1v1h-1z";
-            }
-        }
+  for (int y = 0; y < qr.getSize(); y++) {
+    for (int x = 0; x < qr.getSize(); x++) {
+      if (qr.getModule(x, y)) {
+        sb << (x == 0 && y == 0 ? "" : " ") << "M" << (x + border) << ","
+           << (y + border) << "h1v1h-1z";
+      }
     }
+  }
 
-    sb << R"(" fill="#000000"/></svg>)";
-    return str;
+  sb << R"(" fill="#000000"/></svg>)";
+  return str;
 }
-}
+} // namespace
 
-QImage qrCodeToImage(const qrcodegen::QrCode &qrCode, quint16 border, quint16 size)
-{
-    QString svg = toSvgString(qrCode, border);
-    QSvgRenderer render(svg.toUtf8());
-    QImage image(size, size, QImage::Format_Mono);
-    image.fill(Qt::white);
-    QPainter painter(&image);
-    painter.setRenderHint(QPainter::Antialiasing);
-    render.render(&painter);
-    return image;
+QImage qrCodeToImage(const qrcodegen::QrCode &qrCode, quint16 border,
+                     quint16 size) {
+  QString svg = toSvgString(qrCode, border);
+  QSvgRenderer render(svg.toUtf8());
+  if (!render.isValid()) {
+    qWarning() << "QR Code SVG renderer is invalid for content!";
+    return QImage();
+  }
+  QImage image(size, size, QImage::Format_ARGB32_Premultiplied);
+  image.fill(Qt::white);
+  QPainter painter(&image);
+  painter.setRenderHint(QPainter::Antialiasing);
+  render.render(&painter);
+  return image;
 }
-
 
 namespace qrcode {
 /**
@@ -80,15 +80,12 @@ namespace qrcode {
  * @param errorCorrection The level of error correction to apply.
  * @return QImage representing the generated QR code.
  */
-QImage generateQr(
-    const QString &data,
-    quint16 size,
-    quint16 borderSize,
-    ErrorCorrection errorCorrection
-) {
-    auto b = data.toUtf8();
-    const auto qrCode = qrcodegen::QrCode::encodeText(b.constData(), qrcodegen::QrCode::Ecc(errorCorrection));
-    return qrCodeToImage(qrCode, borderSize, size);
+QImage generateQr(const QString &data, quint16 size, quint16 borderSize,
+                  ErrorCorrection errorCorrection) {
+  auto b = data.toUtf8();
+  const auto qrCode = qrcodegen::QrCode::encodeText(
+      b.constData(), qrcodegen::QrCode::Ecc(errorCorrection));
+  return qrCodeToImage(qrCode, borderSize, size);
 }
 
 /**
@@ -98,10 +95,11 @@ QImage generateQr(
  * @param errorCorrection The level of error correction to apply.
  * @return QString containing the SVG representation of the QR code.
  */
-QString generateSvgQr(const QString &data, quint16 borderSize, ErrorCorrection errorCorrection)
-{
-    auto b = data.toUtf8();
-    const auto qrCode = qrcodegen::QrCode::encodeText(b.constData(), qrcodegen::QrCode::Ecc(errorCorrection));
-    return toSvgString(qrCode, borderSize);
+QString generateSvgQr(const QString &data, quint16 borderSize,
+                      ErrorCorrection errorCorrection) {
+  auto b = data.toUtf8();
+  const auto qrCode = qrcodegen::QrCode::encodeText(
+      b.constData(), qrcodegen::QrCode::Ecc(errorCorrection));
+  return toSvgString(qrCode, borderSize);
 }
-}
+} // namespace qrcode

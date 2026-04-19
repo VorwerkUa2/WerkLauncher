@@ -13,14 +13,56 @@
  * limitations under the License.
  */
 
-#pragma once
-
+#include <QDialog>
 #include <QMessageBox>
+#include <QPushButton>
 
-namespace CustomMessageBox
-{
-QMessageBox *selectable(QWidget *parent, const QString &title, const QString &text,
-                        QMessageBox::Icon icon = QMessageBox::NoIcon,
-                        QMessageBox::StandardButtons buttons = QMessageBox::Ok,
-                        QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
-}
+class ThemedMessageBox : public QDialog {
+  Q_OBJECT
+public:
+  ThemedMessageBox(
+      QWidget *parent, const QString &title, const QString &text,
+      QMessageBox::Icon icon = QMessageBox::NoIcon,
+      QMessageBox::StandardButtons buttons = QMessageBox::Ok,
+      QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
+  virtual ~ThemedMessageBox() {}
+
+  QMessageBox::StandardButton selectedButton() const {
+    return m_selectedButton;
+  }
+
+private slots:
+  void onButtonClicked(QAbstractButton *button);
+
+private:
+  QMessageBox::StandardButton m_selectedButton = QMessageBox::NoButton;
+  QMessageBox::StandardButtons m_buttons;
+};
+
+namespace CustomMessageBox {
+QMessageBox *
+selectable(QWidget *parent, const QString &title, const QString &text,
+           QMessageBox::Icon icon = QMessageBox::NoIcon,
+           QMessageBox::StandardButtons buttons = QMessageBox::Ok,
+           QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
+
+QMessageBox::StandardButton question(
+    QWidget *parent, const QString &title, const QString &text,
+    QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No,
+    QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
+
+QMessageBox::StandardButton
+information(QWidget *parent, const QString &title, const QString &text,
+            QMessageBox::StandardButtons buttons = QMessageBox::Ok,
+            QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
+
+QMessageBox::StandardButton
+warning(QWidget *parent, const QString &title, const QString &text,
+        QMessageBox::StandardButtons buttons = QMessageBox::Ok,
+        QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
+
+QMessageBox::StandardButton
+critical(QWidget *parent, const QString &title, const QString &text,
+         QMessageBox::StandardButtons buttons = QMessageBox::Ok,
+         QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
+} // namespace CustomMessageBox

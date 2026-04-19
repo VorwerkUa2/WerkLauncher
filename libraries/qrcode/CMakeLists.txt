@@ -11,7 +11,13 @@ set(CMAKE_C_STANDARD_REQUIRED true)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_C_STANDARD 11)
 
-find_package(Qt5 COMPONENTS Core Gui Svg REQUIRED)
+find_package(Qt6 QUIET COMPONENTS Core Gui Svg)
+if (NOT Qt6_FOUND)
+    find_package(Qt5 REQUIRED COMPONENTS Core Gui Svg)
+    set(QT_LIBRARIES Qt5::Core Qt5::Gui Qt5::Svg)
+else()
+    set(QT_LIBRARIES Qt6::Core Qt6::Gui Qt6::Svg)
+endif()
 
 set( qrcode_PRIVATE
     src/qrcodegen.cpp
@@ -24,7 +30,7 @@ set( qrcode_PUBLIC
 )
 
 add_library( qrcode STATIC ${qrcode_PRIVATE} ${qrcode_PUBLIC} )
-target_link_libraries(qrcode Qt5::Core Qt5::Gui Qt5::Svg)
+target_link_libraries(qrcode ${QT_LIBRARIES})
 
 # needed for statically linked qrcode in shared libs on x86_64
 set_target_properties(qrcode

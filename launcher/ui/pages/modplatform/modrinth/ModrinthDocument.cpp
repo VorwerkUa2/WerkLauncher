@@ -7,74 +7,74 @@
 
 #include "ModrinthDocument.h"
 
-#include <HoeDown.h>
-#include <QPixmapCache>
-#include <QDebug>
-#include <net/NetJob.h>
 #include <Application.h>
+#include <HoeDown.h>
+#include <QDebug>
+#include <QPixmapCache>
+#include <net/NetJob.h>
 
-Modrinth::ModrinthDocument::ModrinthDocument(const QString &markdown, QObject* parent) : QTextDocument(parent) {
-    HoeDown hoedown;
-    // 100 MiB
-    QPixmapCache::setCacheLimit(102400);
-    setHtml(hoedown.process(markdown.toUtf8()));
+Modrinth::ModrinthDocument::ModrinthDocument(const QString &markdown,
+                                             QObject *parent)
+    : QTextDocument(parent) {
+  HoeDown hoedown;
+  // 100 MiB
+  QPixmapCache::setCacheLimit(102400);
+  setHtml(hoedown.process(markdown.toUtf8()));
 }
 
-QVariant Modrinth::ModrinthDocument::loadResource(int type, const QUrl& name) {
-    if(type == QTextDocument::ResourceType::ImageResource) {
-        auto pixmap = QPixmapCache::find(name.toString());
-        if(!pixmap) {
-            requestResource(name);
-            return QVariant();
-        }
-        return QVariant(*pixmap);
+QVariant Modrinth::ModrinthDocument::loadResource(int type, const QUrl &name) {
+  if (type == QTextDocument::ResourceType::ImageResource) {
+    QPixmap pixmap;
+    if (!QPixmapCache::find(name.toString(), &pixmap)) {
+      requestResource(name);
+      return QVariant();
     }
-    return QTextDocument::loadResource(type, name);
+    return QVariant(pixmap);
+  }
+  return QTextDocument::loadResource(type, name);
 }
 
-void Modrinth::ModrinthDocument::downloadFinished(const QString& key, const QPixmap& out) {
-    m_loading.remove(key);
-    QPixmapCache::insert(key, out);
-    emit layoutUpdateRequired();
+void Modrinth::ModrinthDocument::downloadFinished(const QString &key,
+                                                  const QPixmap &out) {
+  m_loading.remove(key);
+  QPixmapCache::insert(key, out);
+  emit layoutUpdateRequired();
 }
 
-void Modrinth::ModrinthDocument::downloadFailed(const QString& key) {
-    m_failed.append(key);
-    m_loading.remove(key);
+void Modrinth::ModrinthDocument::downloadFailed(const QString &key) {
+  m_failed.append(key);
+  m_loading.remove(key);
 }
 
-void Modrinth::ModrinthDocument::requestResource(const QUrl& url) {
-    QString key = url.toString();
-    if(m_loading.contains(key) || m_failed.contains(key))
-    {
-        return;
+void Modrinth::ModrinthDocument::requestResource(const QUrl &url) {
+  QString key = url.toString();
+  if (m_loading.contains(key) || m_failed.contains(key)) {
+    return;
+  }
+
+  qDebug() << "Loading resource" << key;
+
+  ImageLoad *load = new ImageLoad;
+  load->job = new NetJob(QString("Modrinth Image Download %1").arg(key),
+                         APPLICATION->network());
+  load->job->addNetAction(Net::Download::makeByteArray(url, &load->output));
+  load->key = key;
+
+  QObject::connect(load->job.get(), &NetJob::succeeded, this, [this, load] {
+    QPixmap pixmap;
+    if (!pixmap.loadFromData(load->output)) {
+      downloadFailed(load->key);
     }
+    if (pixmap.width() > 800) {
+      pixmap = pixmap.scaledToWidth(800);
+    }
+    downloadFinished(load->key, pixmap);
+  });
 
-    qDebug() << "Loading resource" << key;
+  QObject::connect(load->job.get(), &NetJob::failed, this,
+                   [this, load] { downloadFailed(load->key); });
 
-    ImageLoad *load = new ImageLoad;
-    load->job = new NetJob(QString("Modrinth Image Download %1").arg(key), APPLICATION->network());
-    load->job->addNetAction(Net::Download::makeByteArray(url, &load->output));
-    load->key = key;
+  load->job->start();
 
-    QObject::connect(load->job.get(), &NetJob::succeeded, this, [this, load] {
-        QPixmap pixmap;
-        if(!pixmap.loadFromData(load->output)) {
-            qDebug() << load->output;
-            downloadFailed(load->key);
-        }
-        if(pixmap.width() > 800) {
-            pixmap = pixmap.scaledToWidth(800);
-        }
-        downloadFinished(load->key, pixmap);
-    });
-
-    QObject::connect(load->job.get(), &NetJob::failed, this, [this, load]
-    {
-        downloadFailed(load->key);
-    });
-
-    load->job->start();
-
-    m_loading[key] = load;
+  m_loading[key] = load;
 }

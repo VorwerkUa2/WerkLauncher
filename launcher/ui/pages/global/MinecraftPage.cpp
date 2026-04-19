@@ -16,78 +16,71 @@
 #include "MinecraftPage.h"
 #include "ui_MinecraftPage.h"
 
-#include <QMessageBox>
 #include <QDir>
+#include <QMessageBox>
 #include <QTabBar>
 
-#include "settings/SettingsObject.h"
+
 #include "Application.h"
+#include "settings/SettingsObject.h"
 
-MinecraftPage::MinecraftPage(QWidget *parent) : QWidget(parent), ui(new Ui::MinecraftPage)
-{
-    ui->setupUi(this);
-    ui->tabWidget->tabBar()->hide();
-    loadSettings();
-    updateCheckboxStuff();
+
+MinecraftPage::MinecraftPage(QWidget *parent)
+    : QWidget(parent), ui(new Ui::MinecraftPage) {
+  ui->setupUi(this);
+  loadSettings();
+  updateCheckboxStuff();
 }
 
-MinecraftPage::~MinecraftPage()
-{
-    delete ui;
+MinecraftPage::~MinecraftPage() { delete ui; }
+
+bool MinecraftPage::apply() {
+  applySettings();
+  return true;
 }
 
-bool MinecraftPage::apply()
-{
-    applySettings();
-    return true;
+void MinecraftPage::updateCheckboxStuff() {
+  ui->windowWidthSpinBox->setEnabled(!ui->maximizedCheckBox->isChecked());
+  ui->windowHeightSpinBox->setEnabled(!ui->maximizedCheckBox->isChecked());
 }
 
-void MinecraftPage::updateCheckboxStuff()
-{
-    ui->windowWidthSpinBox->setEnabled(!ui->maximizedCheckBox->isChecked());
-    ui->windowHeightSpinBox->setEnabled(!ui->maximizedCheckBox->isChecked());
+void MinecraftPage::on_maximizedCheckBox_clicked(bool checked) {
+  Q_UNUSED(checked);
+  updateCheckboxStuff();
 }
 
-void MinecraftPage::on_maximizedCheckBox_clicked(bool checked)
-{
-    Q_UNUSED(checked);
-    updateCheckboxStuff();
+void MinecraftPage::applySettings() {
+  auto s = APPLICATION->settings();
+
+  // Window Size
+  s->set("LaunchMaximized", ui->maximizedCheckBox->isChecked());
+  s->set("MinecraftWinWidth", ui->windowWidthSpinBox->value());
+  s->set("MinecraftWinHeight", ui->windowHeightSpinBox->value());
+
+  // Native library workarounds
+  s->set("UseNativeOpenAL", ui->useNativeOpenALCheck->isChecked());
+  s->set("UseNativeGLFW", ui->useNativeGLFWCheck->isChecked());
+
+  // Game time
+  s->set("ShowGameTime", ui->showGameTime->isChecked());
+  s->set("ShowGlobalGameTime", ui->showGlobalGameTime->isChecked());
+  s->set("RecordGameTime", ui->recordGameTime->isChecked());
+  s->set("ShowGameTimeHours", ui->showGameTimeHours->isChecked());
 }
 
-void MinecraftPage::applySettings()
-{
-    auto s = APPLICATION->settings();
+void MinecraftPage::loadSettings() {
+  auto s = APPLICATION->settings();
 
-    // Window Size
-    s->set("LaunchMaximized", ui->maximizedCheckBox->isChecked());
-    s->set("MinecraftWinWidth", ui->windowWidthSpinBox->value());
-    s->set("MinecraftWinHeight", ui->windowHeightSpinBox->value());
+  // Window Size
+  ui->maximizedCheckBox->setChecked(s->get("LaunchMaximized").toBool());
+  ui->windowWidthSpinBox->setValue(s->get("MinecraftWinWidth").toInt());
+  ui->windowHeightSpinBox->setValue(s->get("MinecraftWinHeight").toInt());
 
-    // Native library workarounds
-    s->set("UseNativeOpenAL", ui->useNativeOpenALCheck->isChecked());
-    s->set("UseNativeGLFW", ui->useNativeGLFWCheck->isChecked());
+  ui->useNativeOpenALCheck->setChecked(s->get("UseNativeOpenAL").toBool());
+  ui->useNativeGLFWCheck->setChecked(s->get("UseNativeGLFW").toBool());
 
-    // Game time
-    s->set("ShowGameTime", ui->showGameTime->isChecked());
-    s->set("ShowGlobalGameTime", ui->showGlobalGameTime->isChecked());
-    s->set("RecordGameTime", ui->recordGameTime->isChecked());
-    s->set("ShowGameTimeHours", ui->showGameTimeHours->isChecked());
-}
-
-void MinecraftPage::loadSettings()
-{
-    auto s = APPLICATION->settings();
-
-    // Window Size
-    ui->maximizedCheckBox->setChecked(s->get("LaunchMaximized").toBool());
-    ui->windowWidthSpinBox->setValue(s->get("MinecraftWinWidth").toInt());
-    ui->windowHeightSpinBox->setValue(s->get("MinecraftWinHeight").toInt());
-
-    ui->useNativeOpenALCheck->setChecked(s->get("UseNativeOpenAL").toBool());
-    ui->useNativeGLFWCheck->setChecked(s->get("UseNativeGLFW").toBool());
-
-    ui->showGameTime->setChecked(s->get("ShowGameTime").toBool());
-    ui->showGlobalGameTime->setChecked(s->get("ShowGlobalGameTime").toBool());
-    ui->recordGameTime->setChecked(s->get("RecordGameTime").toBool());
-    ui->showGameTimeHours->setChecked(s->get("ShowGameTimeHours").toBool());
+  ui->showGameTime->setChecked(s->get("ShowGameTime").toBool());
+  ui->showGlobalGameTime->setChecked(s->get("ShowGlobalGameTime").toBool());
+  ui->recordGameTime->setChecked(s->get("RecordGameTime").toBool());
+  ui->showGameTimeHours->setChecked(s->get("ShowGameTimeHours").toBool());
 }

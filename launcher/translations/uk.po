@@ -1,0 +1,250 @@
+# Ukrainian translations for new/custom MultiMC strings
+# This .po file supplements the main .qm translation file
+
+msgctxt "AccountsDialog"
+msgid "Select Account Type"
+msgstr "Виберіть тип акаунта"
+
+msgctxt "AccountsDialog"
+msgid "Microsoft Account"
+msgstr "Акаунт Microsoft"
+
+msgctxt "AccountsDialog"
+msgid "Log in with your Microsoft account."
+msgstr "Увійдіть за допомогою акаунта Microsoft."
+
+msgctxt "AccountsDialog"
+msgid "Pirate Account"
+msgstr "Піратський акаунт"
+
+msgctxt "AccountsDialog"
+msgid "Play Minecraft using a pirate account."
+msgstr "Грайте в Minecraft через піратський акаунт."
+
+msgctxt "AccountsDialog"
+msgid "Add Pirate Account"
+msgstr "Додати піратський акаунт"
+
+msgctxt "AccountsDialog"
+msgid "Enter your nickname to play Minecraft."
+msgstr "Введіть свій нікнейм для гри в Minecraft."
+
+msgctxt "AccountsDialog"
+msgid "Email / Username"
+msgstr "Електронна пошта / Нікнейм"
+
+msgctxt "AccountsDialog"
+msgid "Required Password (for security)"
+msgstr "Пароль (обов'язково для безпеки)"
+
+msgctxt "AccountsDialog"
+msgid "The first password you use will lock this nickname to your account on the server."
+msgstr "Перший введений пароль прив'яже цей нікнейм до вашого акаунта на сервері."
+
+msgctxt "AccountsDialog"
+msgid "Log In"
+msgstr "Увійти"
+
+msgctxt "AccountsDialog"
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgctxt "AccountsDialog"
+msgid "Refresh Account"
+msgstr "Оновити акаунт"
+
+msgctxt "AccountsDialog"
+msgid "Sign Out"
+msgstr "Вийти"
+
+msgctxt "AccountsDialog"
+msgid "Open Skins Folder"
+msgstr "Відкрити папку зі скінами"
+
+msgctxt "AccountsDialog"
+msgid "Save Skin To File"
+msgstr "Зберегти скін у файл"
+
+msgctxt "AccountsDialog"
+msgid "Apply Changes"
+msgstr "Застосувати зміни"
+
+msgctxt "AccountsDialog"
+msgid "Reset Changes"
+msgstr "Скасувати зміни"
+
+msgctxt "AccountsDialog"
+msgid "Model"
+msgstr "Модель"
+
+msgctxt "AccountsDialog"
+msgid "Classic"
+msgstr "Класична"
+
+msgctxt "AccountsDialog"
+msgid "Slim"
+msgstr "Тонка"
+
+msgctxt "AccountsDialog"
+msgid "Skins"
+msgstr "Скіни"
+
+msgctxt "AccountsDialog"
+msgid "Capes"
+msgstr "Плащі"
+
+msgctxt "AccountsDialog"
+msgid "Create Profile"
+msgstr "Створити профіль"
+
+msgctxt "AccountsDialog"
+msgid "You just need to take one more step to be able to play Minecraft on this account.\n\nChoose your name carefully:"
+msgstr "Залишився лише один крок, щоб почати грати з цього акаунта.\n\nУважно виберіть своє ім'я:"
+
+msgctxt "AccountsDialog"
+msgid "Account / Profile Name Here"
+msgstr "Ім'я акаунта / профілю"
+
+msgctxt "AccountsDialog"
+msgid "Account Name Here"
+msgstr "Ім'я акаунта"
+
+msgctxt "JavaSettingsWidget"
+msgid "Memory"
+msgstr "Пам'ять"
+
+msgctxt "JavaSettingsWidget"
+msgid "The maximum amount of memory Minecraft is allowed to use."
+msgstr "Максимальний обсяг пам'яті, який дозволено використовувати грі."
+
+msgctxt "JavaSettingsWidget"
+msgid "Minimum memory allocation:"
+msgstr "Мінімальний обсяг пам'яті:"
+
+msgctxt "JavaSettingsWidget"
+msgid "Maximum memory allocation:"
+msgstr "Максимальний обсяг пам'яті:"
+
+msgctxt "JavaSettingsWidget"
+msgid "The amount of memory Minecraft is started with."
+msgstr "Обсяг оперативної пам'яті, що виділяється під час запуску."
+
+msgctxt "JavaSettingsWidget"
+msgid "The amount of memory available to store loaded Java classes."
+msgstr "Обсяг пам'яті, доступний для зберігання завантажених Java-класів."
+
+msgctxt "JavaSettingsWidget"
+msgid "Browse"
+msgstr "Огляд"
+
+msgctxt "JavaSettingsWidget"
+msgid "No Java version selected"
+msgstr "Версію Java не вибрано"
+
+msgctxt "JavaSettingsWidget"
+msgid "Find Java executable"
+msgstr "Знайти виконуваний файл Java"
+
+msgctxt "JavaWizardPage"
+msgid "Java"
+msgstr "Java"
+
+msgctxt "JavaWizardPage"
+msgid "You do not have a working Java set up yet or it went missing.\nPlease select one of the following or browse for a java executable."
+msgstr "На вашому комп'ютері не знайдено робочої версії Java.\nБудь ласка, виберіть одну з наведених нижче або вкажіть шлях до виконуваного файлу Java."
+
+msgctxt "LanguageSelectionWidget"
+msgid "Don't see your language or the quality is poor?<br/><a href=\"%1\">Help us with translations!</a>"
+msgstr "Не знайшли свою мову або якість перекладу вас не влаштовує?<br/><a href=\"%1\">Допоможіть нам його покращити!</a>"
+
+msgctxt "MinecraftAccount"
+msgid "Unchecked"
+msgstr "Не перевірено"
+
+msgctxt "MinecraftAccount"
+msgid "Offline"
+msgstr "Офлайн"
+
+msgctxt "MinecraftAccount"
+msgid "Online"
+msgstr "Онлайн"
+
+msgctxt "MinecraftAccount"
+msgid "Working"
+msgstr "Працює"
+
+msgctxt "MinecraftAccount"
+msgid "Errored"
+msgstr "Помилка"
+
+msgctxt "MinecraftAccount"
+msgid "Expired"
+msgstr "Застарів"
+
+msgctxt "MinecraftAccount"
+msgid "Gone"
+msgstr "Більше не існує"
+
+msgctxt "MinecraftAccount"
+msgid "Must Migrate"
+msgstr "Потребує міграції"
+
+msgctxt "MinecraftAccount"
+msgid "Unknown"
+msgstr "Невідомо"
+
+msgctxt "TranslationsModel"
+msgid "Language"
+msgstr "Мова"
+
+msgctxt "TranslationsModel"
+msgid "Completeness"
+msgstr "Повнота"
+
+msgctxt "AccountsDialog"
+msgid "Accounts"
+msgstr "Акаунти"
+
+msgctxt "AccountsDialog"
+msgid "Login Failed"
+msgstr "Помилка входу"
+
+msgctxt "YggdrasilLoginStep"
+msgid "Logging in to skin synchronization service..."
+msgstr "Авторизація на сервері синхронізації скінів..."
+
+msgctxt "YggdrasilLoginStep"
+msgid "Invalid nickname or password."
+msgstr "Неправильний нікнейм або пароль."
+
+msgctxt "YggdrasilLoginStep"
+msgid "Failed to authenticate with skin service: %1"
+msgstr "Не вдалося авторизуватися на сервері скінів: %1"
+
+msgctxt "YggdrasilLoginStep"
+msgid "Invalid nickname or password. Please check your credentials and try again."
+msgstr "Неправильний нікнейм або пароль. Перевірте свої дані та спробуйте ще раз."
+
+msgctxt "YggdrasilSetSkinStep"
+msgid "Uploading skin to synchronization service..."
+msgstr "Завантаження скіна на сервер синхронізації..."
+
+msgctxt "YggdrasilSetSkinStep"
+msgid "Failed to upload skin: %1"
+msgstr "Не вдалося завантажити скін: %1"
+
+msgctxt "LaunchController"
+msgid "No Accounts"
+msgstr "Немає акаунтів"
+
+msgctxt "LaunchController"
+msgid "In order to play Minecraft, you must have at least one Mojang or Minecraft account logged in.Would you like to open the account manager to add an account now?"
+msgstr "Щоб грати в Minecraft, ви повинні увійти принаймні в один акаунт Mojang або Microsoft. Бажаєте відкрити менеджер акаунтів, щоб додати його зараз?"
+
+msgctxt "LaunchController"
+msgid "Which account would you like to use?"
+msgstr "Який акаунт ви бажаєте використати?"
+
+msgctxt "AccountList"
+msgid "Add New Account"
+msgstr "Додати новий акаунт"

@@ -4,10 +4,10 @@
 #include <windows.h>
 
 IDI_ICON1               ICON    DISCARDABLE     "MultiMC.ico"
-1 RT_MANIFEST "MultiMC.manifest"
+//1 RT_MANIFEST "MultiMC.manifest"
 
 VS_VERSION_INFO VERSIONINFO
-FILEVERSION     1,0,0,0
+FILEVERSION     1,0,1,0
 FILEOS          VOS_NT_WINDOWS32
 FILETYPE        VFT_APP
 BEGIN
@@ -15,10 +15,10 @@ BEGIN
         BEGIN
                 BLOCK "000004b0"
                 BEGIN
-                        VALUE "CompanyName", "MultiMC Contributors"
-                        VALUE "FileDescription", "MultiMC Launcher"
-                        VALUE "FileVersion", "1.0.0.0"
-                        VALUE "ProductName", "MultiMC"
+                        VALUE "CompanyName", "Vorwerkua Studio"
+                        VALUE "FileDescription", "WerkLauncher Launcher"
+                        VALUE "FileVersion", "1.0.1.0"
+                        VALUE "ProductName", "WerkLauncher"
                         VALUE "ProductVersion", "5"
                 END
         END

@@ -15,20 +15,20 @@
 
 #pragma once
 
-#include <QObject>
-#include <QString>
-#include <QList>
 #include <QJsonObject>
-#include <QPair>
+#include <QList>
 #include <QMap>
+#include <QObject>
+#include <QPair>
 #include <QPixmap>
+#include <QString>
 
 #include <memory>
 
-#include "AuthSession.h"
-#include "Usable.h"
 #include "AccountData.h"
+#include "AuthSession.h"
 #include "QObjectPtr.h"
+#include "Usable.h"
 #include "skins/SkinTypes.h"
 
 class Task;
@@ -45,138 +45,118 @@ Q_DECLARE_METATYPE(MinecraftAccountPtr)
  * but we might as well add some things for it in MultiMC right now so
  * we don't have to rip the code to pieces to add it later.
  */
-struct AccountProfile
-{
-    QString id;
-    QString name;
-    bool legacy;
+struct AccountProfile {
+  QString id;
+  QString name;
+  bool legacy;
 };
 
 /**
  * Object that stores information about a certain Mojang account.
  *
- * Said information may include things such as that account's username, client token, and access
- * token if the user chose to stay logged in.
+ * Said information may include things such as that account's username, client
+ * token, and access token if the user chose to stay logged in.
  */
-class MinecraftAccount :
-    public QObject,
-    public Usable
-{
-    Q_OBJECT
+class MinecraftAccount : public QObject, public Usable {
+  Q_OBJECT
 public: /* construction */
-    //! Do not copy accounts. ever.
-    explicit MinecraftAccount(const MinecraftAccount &other, QObject *parent) = delete;
+  //! Do not copy accounts. ever.
+  explicit MinecraftAccount(const MinecraftAccount &other,
+                            QObject *parent) = delete;
 
-    //! Default constructor
-    explicit MinecraftAccount(QObject *parent = 0);
+  //! Default constructor
+  explicit MinecraftAccount(QObject *parent = 0);
 
-    static MinecraftAccountPtr createBlankMSA();
+  static MinecraftAccountPtr createBlankMSA();
+  static MinecraftAccountPtr createLocal(const QString &username,
+                                         const QString &syncUrl = QString(),
+                                         const QString &syncUser = QString(),
+                                         const QString &syncPass = QString());
+  static MinecraftAccountPtr createLittleSkin(const QString &email,
+                                              const QString &password);
 
-    static MinecraftAccountPtr loadFromJsonV3(const QJsonObject &json);
+  static MinecraftAccountPtr loadFromJsonV3(const QJsonObject &json);
 
-    //! Saves a MinecraftAccount to a JSON object and returns it.
-    QJsonObject saveToJson() const;
+  //! Saves a MinecraftAccount to a JSON object and returns it.
+  QJsonObject saveToJson() const;
 
 public: /* manipulation */
+  shared_qobject_ptr<AccountTask> loginMSA();
 
-    shared_qobject_ptr<AccountTask> loginMSA();
+  shared_qobject_ptr<AccountTask> refresh();
 
-    shared_qobject_ptr<AccountTask> refresh();
+  shared_qobject_ptr<AccountTask>
+  createMinecraftProfile(const QString &profileName);
 
-    shared_qobject_ptr<AccountTask> createMinecraftProfile(const QString& profileName);
+  shared_qobject_ptr<AccountTask>
+  setSkin(Skins::Model model, QByteArray texture, const QString &capeUUID);
 
-    shared_qobject_ptr<AccountTask> setSkin(Skins::Model model, QByteArray texture, const QString& capeUUID);
-
-    shared_qobject_ptr<AccountTask> currentTask();
+  shared_qobject_ptr<AccountTask> currentTask();
 
 public: /* queries */
-    QString internalId() const {
-        return data.internalId;
-    }
+  QString internalId() const { return data.internalId; }
 
-    QString gamerTag() const {
-        return data.gamerTag();
-    }
+  QString gamerTag() const { return data.gamerTag(); }
 
-    QString accessToken() const {
-        return data.accessToken();
-    }
+  QString accessToken() const { return data.accessToken(); }
 
-    QString profileId() const {
-        return data.profileId();
-    }
+  QString profileId() const { return data.profileId(); }
 
-    QString profileName() const {
-        return data.profileName();
-    }
+  QString profileName() const { return data.profileName(); }
 
-    QString xid() const {
-        return data.xid();
-    }
+  QString xid() const { return data.xid(); }
 
-    bool isActive() const;
+  bool isActive() const;
 
-    bool ownsMinecraft() const {
-        return data.minecraftEntitlement.ownsMinecraft;
-    }
+  bool ownsMinecraft() const { return data.minecraftEntitlement.ownsMinecraft; }
 
-    bool hasProfile() const {
-        return data.profileId().size() != 0;
-    }
+  bool hasProfile() const { return data.profileId().size() != 0; }
 
-    QString typeString() const {
-        return "msa";
-    }
+  QString typeString() const;
 
-    QPixmap getFace() const;
+  QPixmap getFace() const;
 
-    QByteArray getSkin() const;
-    QString getCurrentCape() const;
-    Skins::Model getSkinModel() const;
+  QByteArray getSkin() const;
+  QString getCurrentCape() const;
+  Skins::Model getSkinModel() const;
 
+  //! Returns the current state of the account
+  AccountState accountState() const;
+  QString accountStateText() const;
 
-    //! Returns the current state of the account
-    AccountState accountState() const;
-    QString accountStateText() const;
+  AccountData *accountData() { return &data; }
 
-    AccountData * accountData() {
-        return &data;
-    }
+  bool shouldRefresh() const;
 
-    bool shouldRefresh() const;
+  void fillSession(AuthSessionPtr session);
 
-    void fillSession(AuthSessionPtr session);
+  QString lastError() const { return data.lastError(); }
 
-    QString lastError() const {
-        return data.lastError();
-    }
+  void updateCapeCache() const;
 
-    void updateCapeCache() const;
-
-    void replaceDataWith(MinecraftAccountPtr other);
+  void replaceDataWith(MinecraftAccountPtr other);
 signals:
-    /**
-     * This signal is emitted when the account changes
-     */
-    void changed();
+  /**
+   * This signal is emitted when the account changes
+   */
+  void changed();
 
-    void activityChanged(bool active);
+  void activityChanged(bool active);
 
-    // TODO: better signalling for the various possible state changes - especially errors
+  // TODO: better signalling for the various possible state changes - especially
+  // errors
 
 protected: /* variables */
-    AccountData data;
+  AccountData data;
 
-    // current task we are executing here
-    shared_qobject_ptr<AccountTask> m_currentTask;
+  // current task we are executing here
+  shared_qobject_ptr<AccountTask> m_currentTask;
 
 protected: /* methods */
+  void incrementUses() override;
+  void decrementUses() override;
 
-    void incrementUses() override;
-    void decrementUses() override;
-
-private
-slots:
-    void authSucceeded();
-    void authFailed(QString reason);
+private slots:
+  void authSucceeded();
+  void authFailed(QString reason);
 };

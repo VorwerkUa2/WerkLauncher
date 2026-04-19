@@ -1,4 +1,4 @@
-find_package(Qt5Test REQUIRED)
+find_package(Qt6Test REQUIRED)
 
 set(TEST_RESOURCE_PATH ${CMAKE_CURRENT_LIST_DIR})
 
@@ -18,7 +18,11 @@ function(add_unit_test name)
     endif()
 
     if(NOT "${OPT_DATA}" STREQUAL "")
-        set(TEST_DATA_PATH "${CMAKE_CURRENT_BINARY_DIR}/data")
+        if(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
+            set(TEST_DATA_PATH "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/data")
+        else()
+            set(TEST_DATA_PATH "${CMAKE_CURRENT_BINARY_DIR}/data")
+        endif()
         set(TEST_DATA_PATH_SRC "${CMAKE_CURRENT_SOURCE_DIR}/${OPT_DATA}")
         message("From ${TEST_DATA_PATH_SRC} to ${TEST_DATA_PATH}")
         string(REGEX REPLACE "[/\\:]" "_" DATA_TARGET_NAME "${TEST_DATA_PATH_SRC}")
@@ -41,9 +45,18 @@ function(add_unit_test name)
         endif()
     endif()
 
-    target_link_libraries(${name}_test Qt5::Test ${OPT_LIBS})
+    target_link_libraries(${name}_test Qt6::Test ${OPT_LIBS})
+
+    if(TARGET DeployCommonDependencies)
+        add_dependencies(${name}_test DeployCommonDependencies)
+    endif()
 
     target_include_directories(${name}_test PRIVATE "${TEST_RESOURCE_PATH}/UnitTest/")
 
-    add_test(NAME ${name} COMMAND ${name}_test WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+    if(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
+        set(TEST_WORKING_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+    else()
+        set(TEST_WORKING_DIR ${CMAKE_CURRENT_BINARY_DIR})
+    endif()
+    add_test(NAME ${name} COMMAND ${name}_test WORKING_DIRECTORY ${TEST_WORKING_DIR})
 endfunction()

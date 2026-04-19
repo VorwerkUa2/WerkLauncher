@@ -1,18 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
 project(rainbow)
 
-find_package(Qt5Core REQUIRED QUIET)
-find_package(Qt5Gui REQUIRED QUIET)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui QUIET)
 
-set(RAINBOW_SOURCES
-src/rainbow.cpp
+add_library(Launcher_rainbow STATIC
+    src/rainbow.cpp
 )
-
-add_definitions(-DRAINBOW_LIBRARY)
-add_library(Launcher_rainbow SHARED ${RAINBOW_SOURCES})
 target_include_directories(Launcher_rainbow PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
-target_link_libraries(Launcher_rainbow Qt5::Core Qt5::Gui)
+target_compile_definitions(Launcher_rainbow PUBLIC RAINBOW_STATIC)
+target_link_libraries(Launcher_rainbow Qt6::Core Qt6::Gui)
 
 # Install it
 install(

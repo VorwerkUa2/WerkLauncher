@@ -1,53 +1,43 @@
-<p align="center">
-  <img src="https://avatars2.githubusercontent.com/u/5411890" alt="MultiMC logo"/>
-</p>
+# WerkLauncher
 
-MultiMC
-=======
+`WerkLauncher` — це сучасний, оптимізований та кастомний форк лаунчера [MultiMC](https://multimc.org/). 
+Він створювався для забезпечення зручнішого інтерфейсу, додавання власних фіч та глибокої інтеграції з нашою власною системою скінів та авторизації.
 
-MultiMC is a custom launcher for Minecraft that focuses on predictability, long term stability and simplicity.
+## 🚀 Ключові зміни (порівняно з MultiMC)
 
-## Development
-If you want to contribute, talk to us on [Discord](https://discord.gg/multimc) first.
+- **Оновлений та спрощений інтерфейс:**
+  - **Custom Title Bar:** Кастомна рамка вікна (замість стандартної системної), яка підлаштовується під активну тему лаунчера (Dark, Bright, Fusion). Повністю підтримує Windows Aero Snap та масштабування.
+  - **Прибрано SidePanel:** Оптимізовано простір у меню інстансу. Весь функціонал керування збірками тепер виведено у зручний нативний `instanceToolBar`, який розумно ховається, коли жодна збірка не обрана.
+- **Власна екосистема акаунтів (MSSS):**
+  - Лаунчер налаштовано на роботу з нашим локальним бекендом **Minecraft Skin System Server**.
+  - Абсолютна підтримка *Yggdrasil API*, робота з RSA ключами, обробка завантаження кастомних скінів (`/api/yggdrasil`) безпосередньо в лаунчері.
+- **Полірування та виправлення:**
+  - Прискорені алгоритми рендерингу сітки інстансів (виправлено накладання тексту "Last Played").
+  - Більш точні стартові розміри діалогових вікон (наприклад, вікна アкаунтів).
+- **Зручне компілювання та CI/CD:**
+  - Налаштовано `.github/workflows` для автоматичного збирання лаунчера під `Windows`, `macOS` та `Linux`.
+  - Додано автоматичний скрипт (`installer.iss`) для швидкого компонування релізних файлів у єдиний `.exe` інсталятор.
 
-While blindly submitting PRs is definitely possible, they're not necessarily going to get accepted.
+## 🛠 Збирання проєкту
 
-We aren't looking for flashy features, but expanding upon the existing feature set without disruption or endangering the future viability of the project is OK.
+### Для Windows (Рекомендовано локально)
+Проєкт налаштовано на швидке збирання через `Ninja` та пакетний менеджер `Vcpkg`.
 
-### Building
-If you want to build the launcher yourself, check [BUILD.md](BUILD.md) for build instructions.
+```bash
+# Debug:
+build_multimc.bat
 
-### Code formatting
-Just follow the existing formatting.
+# Release:
+build_release.bat
+```
 
-In general, in order of importance:
-* Make sure your IDE is not messing up line endings or whitespace and avoid using linters.
-* Prefer readability over dogma.
-* Keep to the existing formatting.
-* Indent with 4 space unless it's in a submodule.
-* Keep lists (of arguments, parameters, initializers...) as lists, not paragraphs. It should either read from top to bottom, or left to right. Not both.
+### Для Linux / macOS
+Ви можете збирати лаунчер автоматично через вкладку **Actions** на GitHub, або локально стандартним способом CMake:
 
-## Translations
-Translations can be done [on crowdin](https://translate.multimc.org). Please avoid making direct pull requests to the translations repository.
+```bash
+cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+```
 
-## License
-Copyright &copy; 2013-2022 MultiMC Contributors
-
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this program except in compliance with the License. You may obtain a copy of the License at [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
-
-## Forking/Redistributing/Custom builds policy
-We keep Launcher open source because we think it's important to be able to see the source code for a project like this, and we do so using the Apache license.
-
-The license gives you access to the source MultiMC is built from, but not:
-- The name, logo and other branding.
-- The API tokens required to talk to services that the launcher depends on.
-
-Because of the nature of the agreements required to interact with the Microsoft identity platform, it's impossible for us to continue allowing everyone to build the code as 'MultiMC'. The source code has been debranded and now builds as `DevLauncher` by default.
-
-You must provide your own branding if you want to distribute your own builds.
-
-You will also have to register your own app on Azure to be able to handle Microsoft account logins.
-
-If you decide to fork the project, a mention of its origins in the About dialog and the license is acceptable. However, it should be abundantly clear that the project is a fork *without* implying that you have our blessing.
+## 📝 Ліцензія
+Так само як і оригінальний MultiMC, цей форк розповсюджується під відкритою ліцензією (Apache 2.0). Див. `COPYING.md` для деталей.

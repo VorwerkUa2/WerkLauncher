@@ -9,84 +9,88 @@
 #include <QtGui/QOpenGLFunctions>
 
 #include <QVector3D>
-#include <vector>
 #include <memory>
+#include <vector>
 
-#include <QOpenGLTexture>
-#include <QOpenGLShaderProgram>
-#include <QOpenGLVertexArrayObject>
+
 #include <QOpenGLBuffer>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLTexture>
+#include <QOpenGLVertexArrayObject>
+
 
 #include "SkinTypes.h"
 
 namespace Skins {
 
-#pragma pack(push, 0)
+#pragma pack(push, 1)
 
 struct Vertex {
-    Vertex(const QVector3D & position, float u, float v, GLuint texture, bool transparency)
-    {
-        m_position[0] = position.x();
-        m_position[1] = position.y();
-        m_position[2] = position.z();
-        m_uv[0] = u;
-        m_uv[1] = v;
-        m_texture = texture;
-        m_transparency = transparency;
-    }
+  Vertex(const QVector3D &position, float u, float v, GLuint texture,
+         bool transparency) {
+    m_position[0] = position.x();
+    m_position[1] = position.y();
+    m_position[2] = position.z();
+    m_uv[0] = u;
+    m_uv[1] = v;
+    m_texture = texture;
+    m_transparency = transparency;
+  }
 
-    GLfloat m_position[3];
-    GLfloat m_uv[2];
-    GLint m_texture; // 0 = skin, 1 = cape
-    GLint m_transparency; // 0 = opaque, 1 = transparent
+  GLfloat m_position[3];
+  GLfloat m_uv[2];
+  GLint m_texture;      // 0 = skin, 1 = cape
+  GLint m_transparency; // 0 = opaque, 1 = transparent
 };
 #pragma pack(pop)
 
-class Uniform
-{
+class Uniform {
 public:
-    Uniform(QString name): name(name) {}
-    QString name;
-    int id = -1;
+  Uniform(QString name) : name(name) {}
+  QString name;
+  int id = -1;
 };
 
-class RenderContext : public QObject
-{
-    Q_OBJECT
+class RenderContext : public QObject {
+  Q_OBJECT
 public:
-    explicit RenderContext(QOpenGLFunctions& GL, QObject* parent);
-    void init();
-    void deinit();
+  explicit RenderContext(QOpenGLFunctions &GL, QObject *parent);
+  void init();
+  void deinit();
 
-    void setTextures(const QImage& skin, const QImage& cape);
+  void setTextures(const QImage &skin, const QImage &cape);
 
-    void regenerateGeometry(int skinVersion, Model skinModel);
-    void render(QMatrix4x4 viewMatrix, QVector3D baseColor, QVector3D alternateColor, float devicePixelRatio);
+  void regenerateGeometry(int skinVersion, Model skinModel);
+  void render(QMatrix4x4 viewMatrix, QVector3D baseColor,
+              QVector3D alternateColor, float devicePixelRatio);
 
-    QOpenGLTexture* m_skinTexture = nullptr;
-    QOpenGLTexture* m_capeTexture = nullptr;
+  QOpenGLTexture *m_skinTexture = nullptr;
+  QOpenGLTexture *m_capeTexture = nullptr;
 
-    std::vector<Vertex> m_vertexBuffer;
-    std::vector<GLuint> m_elementBuffer;
-    unsigned int m_elementStartIndex;
+  std::vector<Vertex> m_vertexBuffer;
+  std::vector<GLuint> m_elementBuffer;
+  unsigned int m_elementStartIndex;
 
-    QOpenGLVertexArrayObject *m_vao = nullptr;
-    QOpenGLBuffer* m_vbo = nullptr;
-    QOpenGLBuffer* m_ebo = nullptr;
+  QOpenGLVertexArrayObject *m_vao = nullptr;
+  QOpenGLBuffer *m_vbo = nullptr;
+  QOpenGLBuffer *m_ebo = nullptr;
 
-    QOpenGLVertexArrayObject *m_bgvao = nullptr;
-    QOpenGLBuffer* m_bgvbo = nullptr;
-    QOpenGLBuffer* m_bgebo = nullptr;
+  QOpenGLVertexArrayObject *m_bgvao = nullptr;
+  QOpenGLBuffer *m_bgvbo = nullptr;
+  QOpenGLBuffer *m_bgebo = nullptr;
 
-    QOpenGLShaderProgram* m_skinShader = nullptr;
-    QList<Uniform> m_uniforms;
+  QOpenGLShaderProgram *m_skinShader = nullptr;
+  QList<Uniform> m_uniforms;
 
-    QOpenGLShaderProgram* m_bgShader = nullptr;
-    QList<Uniform> m_bgUniforms;
+  QOpenGLShaderProgram *m_bgShader = nullptr;
+  QList<Uniform> m_bgUniforms;
 
-    QOpenGLFunctions& GL;
+  QOpenGLFunctions &GL;
+
 private:
-    bool initShader(QOpenGLShaderProgram* program, QList<Uniform>& uniforms, const QString& vertexShaderPath, const QString& fragmentShaderPath);
+  bool initShader(QOpenGLShaderProgram *program, QList<Uniform> &uniforms,
+                  const QString &vertexShaderPath,
+                  const QString &fragmentShaderPath);
 };
 
-}
+} // namespace Skins

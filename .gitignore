@@ -36,3 +36,12 @@ tags
 .DS_Store
 
 run/
+
+# Custom ignores
+MCL.rar
+.vs/
+.vscode/
+out/
+*.exe
+*.log
+make_bmps.py

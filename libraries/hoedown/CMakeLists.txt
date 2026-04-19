@@ -24,3 +24,6 @@ src/version.c
 add_library(hoedown STATIC ${HOEDOWN_SOURCES})
 
 target_include_directories(hoedown PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+if(MSVC)
+    target_compile_definitions(hoedown PRIVATE _CRT_SECURE_NO_WARNINGS)
+endif()
