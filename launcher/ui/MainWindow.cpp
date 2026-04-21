@@ -1108,11 +1108,18 @@ public:
 MainWindow::MainWindow(QWidget *parent)
 
     : QMainWindow(parent), ui(new MainWindow::Ui) {
+#ifdef Q_OS_WIN
+  // On Windows, we don't use FramelessWindowHint because it breaks Aero Snap,
+  // Taskbar integration, and standard maximize behavior.
+  // Instead, we use a standard window and remove the frame in NCCALCSIZE.
+#else
   setWindowFlags(Qt::FramelessWindowHint | windowFlags());
+#endif
 
 #ifdef Q_OS_WIN
   HWND hwnd = (HWND)winId();
   LONG style = GetWindowLong(hwnd, GWL_STYLE);
+  // WS_THICKFRAME and WS_CAPTION are required for native Aero Snap / Shadow
   SetWindowLong(hwnd, GWL_STYLE,
                 style | WS_THICKFRAME | WS_CAPTION | WS_MAXIMIZEBOX |
                     WS_MINIMIZEBOX);
@@ -3133,15 +3140,47 @@ void MainWindow::updateStatusCenter() {
   }
 }
 
+void MainWindow::showEvent(QShowEvent *event) {
+  QMainWindow::showEvent(event);
+  if (m_titleBar) {
+    m_titleBar->updateMaximizeIcon();
+  }
+}
+
 bool MainWindow::nativeEvent(const QByteArray &eventType, void *message,
                              qintptr *result) {
 #ifdef Q_OS_WIN
   MSG *msg = static_cast<MSG *>(message);
-  if (msg->message == WM_NCCALCSIZE) {
-    // Return 0 to indicate that we handle the non-client area calculation
-    // This removes the standard window frame while keeping Aero Snap and
-    // resizing.
+  if (msg->message == WM_NCCALCSIZE && msg->wParam) {
+    if (IsZoomed(msg->hwnd)) {
+      NCCALCSIZE_PARAMS *params = (NCCALCSIZE_PARAMS *)msg->lParam;
+      // Get the system metric for the border width.
+      // Usually 8px on Win10/11 at 100% DPI.
+      int borderWidth = GetSystemMetrics(SM_CXPADDEDBORDER) + GetSystemMetrics(SM_CXSIZEFRAME);
+      
+      params->rgrc[0].top += borderWidth;
+      params->rgrc[0].left += borderWidth;
+      params->rgrc[0].right -= borderWidth;
+      params->rgrc[0].bottom -= borderWidth;
+    }
     *result = 0;
+    return true;
+  }
+
+  if (msg->message == WM_GETMINMAXINFO) {
+    MINMAXINFO *mmi = (MINMAXINFO *)msg->lParam;
+    HMONITOR monitor = MonitorFromWindow(msg->hwnd, MONITOR_DEFAULTTONEAREST);
+    if (monitor) {
+      MONITORINFO monitorInfo;
+      monitorInfo.cbSize = sizeof(MONITORINFO);
+      if (GetMonitorInfo(monitor, &monitorInfo)) {
+        // Limit the maximized size to the work area (excluding taskbar)
+        mmi->ptMaxPosition.x = monitorInfo.rcWork.left - monitorInfo.rcMonitor.left;
+        mmi->ptMaxPosition.y = monitorInfo.rcWork.top - monitorInfo.rcMonitor.top;
+        mmi->ptMaxSize.x = monitorInfo.rcWork.right - monitorInfo.rcWork.left;
+        mmi->ptMaxSize.y = monitorInfo.rcWork.bottom - monitorInfo.rcWork.top;
+      }
+    }
     return true;
   }
 

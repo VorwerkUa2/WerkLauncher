@@ -56,7 +56,13 @@ void CustomTitleBar::setupUi() {
   });
   connect(m_maxButton, &QPushButton::clicked, [this]() {
     if (auto win = window()) {
-      if (win->isMaximized()) {
+      bool isMax = false;
+#ifdef Q_OS_WIN
+      isMax = IsZoomed((HWND)win->winId());
+#else
+      isMax = win->isMaximized();
+#endif
+      if (isMax) {
         setMaximizedState(false);
         win->showNormal();
       } else {

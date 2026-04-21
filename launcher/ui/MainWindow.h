@@ -57,6 +57,7 @@ public:
   bool eventFilter(QObject *obj, QEvent *ev) override;
   void closeEvent(QCloseEvent *event) override;
   void changeEvent(QEvent *event) override;
+  void showEvent(QShowEvent *event) override;
   void handleTrayIconActivation(QSystemTrayIcon::ActivationReason reason);
 
 protected:
