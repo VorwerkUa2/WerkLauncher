@@ -3175,26 +3175,33 @@ bool MainWindow::nativeEvent(const QByteArray &eventType, void *message,
     const int title_bar_height = qRound(32 * this->devicePixelRatioF());
     const int button_area_width = qRound(120 * this->devicePixelRatioF());
 
-    if (local_x < border_width && local_y < border_width)
-      *result = HTTOPLEFT;
-    else if (local_x >= w - border_width && local_y < border_width)
-      *result = HTTOPRIGHT;
-    else if (local_x < border_width && local_y >= h - border_width)
-      *result = HTBOTTOMLEFT;
-    else if (local_x >= w - border_width && local_y >= h - border_width)
-      *result = HTBOTTOMRIGHT;
-    else if (local_x < border_width)
-      *result = HTLEFT;
-    else if (local_x >= w - border_width)
-      *result = HTRIGHT;
-    else if (local_y < border_width)
-      *result = HTTOP;
-    else if (local_y >= h - border_width)
-      *result = HTBOTTOM;
-    else if (local_y < title_bar_height && local_x < w - button_area_width)
-      *result = HTCAPTION;
-    else
-      return QMainWindow::nativeEvent(eventType, message, result);
+    if (!isMaximized()) {
+      if (local_x < border_width && local_y < border_width)
+        *result = HTTOPLEFT;
+      else if (local_x >= w - border_width && local_y < border_width)
+        *result = HTTOPRIGHT;
+      else if (local_x < border_width && local_y >= h - border_width)
+        *result = HTBOTTOMLEFT;
+      else if (local_x >= w - border_width && local_y >= h - border_width)
+        *result = HTBOTTOMRIGHT;
+      else if (local_x < border_width)
+        *result = HTLEFT;
+      else if (local_x >= w - border_width)
+        *result = HTRIGHT;
+      else if (local_y < border_width)
+        *result = HTTOP;
+      else if (local_y >= h - border_width)
+        *result = HTBOTTOM;
+      else if (local_y < title_bar_height && local_x < w - button_area_width)
+        *result = HTCAPTION;
+      else
+        return QMainWindow::nativeEvent(eventType, message, result);
+    } else {
+      if (local_y < title_bar_height && local_x < w - button_area_width)
+        *result = HTCAPTION;
+      else
+        return QMainWindow::nativeEvent(eventType, message, result);
+    }
 
     return true;
   }

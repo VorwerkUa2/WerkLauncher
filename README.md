@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="branding/banner.png" alt="WerkLauncher Banner" width="100%">
   <br>
   <img src="branding/logo.svg" alt="WerkLauncher Logo" width="128">
   <h1>WerkLauncher</h1>
