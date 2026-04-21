@@ -933,6 +933,7 @@ target_link_libraries(Launcher_logic
     Qt6::Core
     Qt6::Xml
     Qt6::Network
+    Qt6::NetworkAuth
     Qt6::Concurrent
     Qt6::Gui
     Qt6::OpenGL

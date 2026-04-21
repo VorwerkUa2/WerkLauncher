@@ -1,43 +1,77 @@
-# WerkLauncher
+<div align="center">
+  <img src="branding/banner.png" alt="WerkLauncher Banner" width="100%">
+  <br>
+  <img src="branding/logo.svg" alt="WerkLauncher Logo" width="128">
+  <h1>WerkLauncher</h1>
+  <p><i>A Modern, High-Performance, and Heavily Customized Minecraft Launcher</i></p>
 
-`WerkLauncher` — це сучасний, оптимізований та кастомний форк лаунчера [MultiMC](https://multimc.org/). 
-Він створювався для забезпечення зручнішого інтерфейсу, додавання власних фіч та глибокої інтеграції з нашою власною системою скінів та авторизації.
+  [![Build](https://github.com/WerkLauncher/Launcher/actions/workflows/build.yml/badge.svg)](https://github.com/WerkLauncher/Launcher/actions)
+  [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+  [![Discord](https://img.shields.io/discord/123456789?label=Discord&logo=discord&logoColor=white)](https://discord.gg/PmkmWHRW8G)
+</div>
 
-## 🚀 Ключові зміни (порівняно з MultiMC)
+<hr>
 
-- **Оновлений та спрощений інтерфейс:**
-  - **Custom Title Bar:** Кастомна рамка вікна (замість стандартної системної), яка підлаштовується під активну тему лаунчера (Dark, Bright, Fusion). Повністю підтримує Windows Aero Snap та масштабування.
-  - **Прибрано SidePanel:** Оптимізовано простір у меню інстансу. Весь функціонал керування збірками тепер виведено у зручний нативний `instanceToolBar`, який розумно ховається, коли жодна збірка не обрана.
-- **Власна екосистема акаунтів (MSSS):**
-  - Лаунчер налаштовано на роботу з нашим локальним бекендом **Minecraft Skin System Server**.
-  - Абсолютна підтримка *Yggdrasil API*, робота з RSA ключами, обробка завантаження кастомних скінів (`/api/yggdrasil`) безпосередньо в лаунчері.
-- **Полірування та виправлення:**
-  - Прискорені алгоритми рендерингу сітки інстансів (виправлено накладання тексту "Last Played").
-  - Більш точні стартові розміри діалогових вікон (наприклад, вікна アкаунтів).
-- **Зручне компілювання та CI/CD:**
-  - Налаштовано `.github/workflows` для автоматичного збирання лаунчера під `Windows`, `macOS` та `Linux`.
-  - Додано автоматичний скрипт (`installer.iss`) для швидкого компонування релізних файлів у єдиний `.exe` інсталятор.
+## 🌐 Language / Мова
+[English](#-english-description) | [Українська](#-український-опис)
 
-## 🛠 Збирання проєкту
+<hr>
 
-### Для Windows (Рекомендовано локально)
-Проєкт налаштовано на швидке збирання через `Ninja` та пакетний менеджер `Vcpkg`.
+## 🇺🇸 English Description
 
+**WerkLauncher** is a sophisticated, performance-oriented fork of the [MultiMC](https://multimc.org/) project. Designed for power users who demand a sleeker interface, native OS integration, and seamless support for custom authentication systems.
+
+### ✨ Key Features
+- **Premium UI Experience**:
+  - **Native Custom Title Bar**: Supports Windows **Aero Snap**, high-DPI scaling, and native dragging on Linux/macOS.
+  - **Dynamic Theming**: Interface automatically adapts to Dark, Fusion, and Bright modes with consistent branding.
+  - **Optimized Layout**: Replaced the bulky SidePanel with a smart `instanceToolBar` that only appears when needed.
+- **Advanced Authentication**:
+  - **Modern MSA Flow**: Fully utilizes the Browser-based Authorization Code flow for Microsoft Accounts (migrated from outdated Device Flow).
+  - **Custom Ecosystem**: Built-in support for **Minecraft Skin System Server (MSSS)** with Yggdrasil API and RSA key handling.
+- **Technical Excellence**:
+  - Accelerated instance grid rendering.
+  - Native installer support via Inno Setup.
+  - Fully automated CI/CD for Windows, Linux, and macOS.
+
+### 🛠️ Building from Source
+#### Windows (Recommended)
+Uses `Ninja` and `Vcpkg` for ultra-fast builds.
 ```bash
-# Debug:
-build_multimc.bat
-
-# Release:
-build_release.bat
-```
-
-### Для Linux / macOS
-Ви можете збирати лаунчер автоматично через вкладку **Actions** на GitHub, або локально стандартним способом CMake:
-
-```bash
-cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
+cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=[path/to/vcpkg.cmake]
 cmake --build build
 ```
 
-## 📝 Ліцензія
-Так само як і оригінальний MultiMC, цей форк розповсюджується під відкритою ліцензією (Apache 2.0). Див. `COPYING.md` для деталей.
+<hr>
+
+## 🇺🇦 Український опис
+
+**WerkLauncher** — це сучасний, оптимізований та кастомний форк лаунчера [MultiMC](https://multimc.org/). Він поєднує в собі потужність оригіналу з преміальним дизайном та глибокою інтеграцією в екосистему кастомних серверів.
+
+### ✨ Ключові зміни
+- **Преміальний інтерфейс**:
+  - **Кастомний заголовок вікна**: Повна підтримка **Windows Aero Snap**, нативного перетягування та коректного масштабування на 4K моніторах.
+  - **Розумна панель інструментів**: Прибрано застарілу бічну панель; натомість додано `instanceToolBar`, який автоматично ховається, коли не вибрано жодної збірки.
+- **Безпечна та сучасна авторизація**:
+  - **Microsoft Accounts**: Перехід на сучасний браузерний метод авторизації (Authorization Code Flow), що забезпечує максимальну безпеку.
+  - **MSSS Інтеграція**: Повна підтримка власної системи скінів через Yggdrasil API.
+- **Стабільність та швидкість**:
+  - Оптимізовано рендеринг списку ігор.
+  - Автоматизована збірка (CI/CD) для всіх популярних ОС.
+
+### 🛠️ Як зібрати проєкт
+#### Windows
+```bash
+# Debug версія:
+build_multimc.bat
+
+# Релізна версія:
+build_release.bat
+```
+
+<hr>
+
+<div align="center">
+  <p>Made with ❤️ by the WerkLauncher Team</p>
+  <p><i>Licensed under Apache 2.0. See COPYING.md for more details.</i></p>
+</div>

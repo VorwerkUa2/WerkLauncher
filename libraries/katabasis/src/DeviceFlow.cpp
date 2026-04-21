@@ -230,6 +230,20 @@ void DeviceFlow::onDeviceAuthReplyFinished()
             qWarning() << "DeviceFlow::onDeviceAuthReplyFinished: Mandatory parameters missing from response";
             updateActivity(Activity::FailedHard);
         }
+    } else {
+        // Report the error instead of silently swallowing it
+        auto networkError = tokenReply->error();
+        qWarning() << "DeviceFlow::onDeviceAuthReplyFinished: Network error" << (int)networkError << tokenReply->errorString();
+        qWarning() << "DeviceFlow::onDeviceAuthReplyFinished: Response body:" << tokenReply->readAll();
+        if (networkError == QNetworkReply::TimeoutError ||
+            networkError == QNetworkReply::OperationCanceledError ||
+            networkError == QNetworkReply::SslHandshakeFailedError ||
+            networkError == QNetworkReply::UnknownNetworkError ||
+            networkError == QNetworkReply::TemporaryNetworkFailureError) {
+            updateActivity(Activity::FailedSoft);
+        } else {
+            updateActivity(Activity::FailedHard);
+        }
     }
     tokenReply->deleteLater();
 }

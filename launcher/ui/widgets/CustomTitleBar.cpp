@@ -7,11 +7,22 @@
 #include <QPainter>
 #include <QStyle>
 #include <QTimer>
+#include <QWindow>
 #include <XdgIcon.h>
+
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
 
 CustomTitleBar::CustomTitleBar(QWidget *parent) : QWidget(parent) {
   setFixedHeight(32);
   setupUi();
+
+  // Debounce timer for maximize icon updates during rapid state changes (e.g., Aero Snap)
+  m_maxIconTimer.setSingleShot(true);
+  m_maxIconTimer.setInterval(100);
+  connect(&m_maxIconTimer, &QTimer::timeout, this,
+          &CustomTitleBar::applyMaximizeIcon);
 }
 
 void CustomTitleBar::setupUi() {
@@ -20,7 +31,7 @@ void CustomTitleBar::setupUi() {
   layout->setSpacing(0);
 
   m_iconLabel = new QLabel(this);
-  m_iconLabel->setPixmap(XdgIcon::fromTheme("multimc").pixmap(16, 16));
+  m_iconLabel->setPixmap(QIcon(":/logo.svg").pixmap(16, 16));
 
   m_titleLabel = new QLabel(BuildConfig.LAUNCHER_NAME, this);
 
@@ -46,8 +57,10 @@ void CustomTitleBar::setupUi() {
   connect(m_maxButton, &QPushButton::clicked, [this]() {
     if (auto win = window()) {
       if (win->isMaximized()) {
+        setMaximizedState(false);
         win->showNormal();
       } else {
+        setMaximizedState(true);
         win->showMaximized();
       }
       updateMaximizeIcon();
@@ -78,41 +91,63 @@ void CustomTitleBar::updateStyles() {
   m_maxButton->setStyleSheet(btnStyle);
   m_closeButton->setStyleSheet(btnStyle);
 
-  updateMaximizeIcon();
-}
-
-void CustomTitleBar::updateMaximizeIcon() {
-  bool maximized = window() ? window()->isMaximized() : false;
+  // Draw static icons for minimize and close (they never change shape)
   auto color = palette().color(QPalette::WindowText);
-
-  auto setIcon = [&](QPushButton *btn, const QString &type,
-                     bool isMax = false) {
+  auto drawIcon = [&](QPushButton *btn, auto drawFunc) {
     QPixmap pix(32, 32);
     pix.fill(Qt::transparent);
     QPainter p(&pix);
     p.setRenderHint(QPainter::Antialiasing);
     p.setPen(QPen(color, 1.5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-
-    if (type == "min") {
-      p.drawLine(10, 16, 22, 16);
-    } else if (type == "max") {
-      if (isMax) {
-        p.drawRect(12, 10, 8, 8);
-        p.drawRect(10, 12, 8, 8); // Double square look for restore
-      } else {
-        p.drawRect(10, 10, 12, 12);
-      }
-    } else if (type == "close") {
-      p.drawLine(10, 10, 22, 22);
-      p.drawLine(22, 10, 10, 22);
-    }
+    drawFunc(p);
+    p.end();
     btn->setIcon(QIcon(pix));
     btn->setIconSize(QSize(32, 32));
   };
 
-  setIcon(m_minButton, "min");
-  setIcon(m_maxButton, "max", maximized);
-  setIcon(m_closeButton, "close");
+  drawIcon(m_minButton, [](QPainter &p) { p.drawLine(10, 16, 22, 16); });
+  drawIcon(m_closeButton, [](QPainter &p) {
+    p.drawLine(10, 10, 22, 22);
+    p.drawLine(22, 10, 10, 22);
+  });
+
+  updateMaximizeIcon();
+}
+
+void CustomTitleBar::updateMaximizeIcon() {
+  // Restart the debounce timer — only the final state will be drawn
+  m_maxIconTimer.start();
+}
+
+void CustomTitleBar::setMaximizedState(bool maximized) {
+  m_isMaximized = maximized;
+}
+
+void CustomTitleBar::applyMaximizeIcon() {
+  if (!window())
+    return;
+
+  // Final check of the state after debounce
+  // m_isMaximized is set by MainWindow during native WM_SIZE events
+  auto color = palette().color(QPalette::WindowText);
+
+  QPixmap pix(32, 32);
+  pix.fill(Qt::transparent);
+  QPainter p(&pix);
+  p.setRenderHint(QPainter::Antialiasing);
+  p.setPen(QPen(color, 1.5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+
+  if (m_isMaximized) {
+    // Restore icon (double square)
+    p.drawRect(12, 10, 8, 8);
+    p.drawRect(10, 12, 8, 8);
+  } else {
+    // Maximize icon (single square)
+    p.drawRect(10, 10, 12, 12);
+  }
+  p.end();
+  m_maxButton->setIcon(QIcon(pix));
+  m_maxButton->setIconSize(QSize(32, 32));
 }
 
 void CustomTitleBar::setTitle(const QString &title) {
@@ -128,34 +163,28 @@ void CustomTitleBar::changeEvent(QEvent *event) {
 
 void CustomTitleBar::mousePressEvent(QMouseEvent *event) {
   if (event->button() == Qt::LeftButton) {
+#ifndef Q_OS_WIN
     if (auto win = window()) {
-      m_dragPos =
-          event->globalPosition().toPoint() - win->frameGeometry().topLeft();
-      event->accept();
+      if (auto handle = win->windowHandle()) {
+        handle->startSystemMove();
+        event->accept();
+        return;
+      }
     }
+#endif
   }
+  QWidget::mousePressEvent(event);
 }
 
 void CustomTitleBar::mouseMoveEvent(QMouseEvent *event) {
-  if (event->buttons() & Qt::LeftButton) {
-    if (auto win = window()) {
-      if (win->isMaximized()) {
-        int oldWidth = win->width();
-        win->showNormal();
-        int newWidth = win->width();
-        m_dragPos.setX(newWidth * ((float)m_dragPos.x() / oldWidth));
-        updateMaximizeIcon();
-      }
-      win->move(event->globalPosition().toPoint() - m_dragPos);
-      event->accept();
-    }
-  }
+  // Logic removed: native dragging is now handled by HTCAPTION in MainWindow (Windows)
+  // or startSystemMove() in mousePressEvent (cross-platform).
+  QWidget::mouseMoveEvent(event);
 }
 
 void CustomTitleBar::mouseDoubleClickEvent(QMouseEvent *event) {
   if (event->button() == Qt::LeftButton) {
     m_maxButton->click();
-    event->accept();
   }
 }
 

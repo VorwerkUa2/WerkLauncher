@@ -1108,6 +1108,8 @@ public:
 MainWindow::MainWindow(QWidget *parent)
 
     : QMainWindow(parent), ui(new MainWindow::Ui) {
+  setWindowFlags(Qt::FramelessWindowHint | windowFlags());
+
 #ifdef Q_OS_WIN
   HWND hwnd = (HWND)winId();
   LONG style = GetWindowLong(hwnd, GWL_STYLE);
@@ -1115,8 +1117,6 @@ MainWindow::MainWindow(QWidget *parent)
                 style | WS_THICKFRAME | WS_CAPTION | WS_MAXIMIZEBOX |
                     WS_MINIMIZEBOX);
 #endif
-
-  setWindowFlags(Qt::FramelessWindowHint | windowFlags());
 
   ui->setupUi(this);
 
@@ -3145,34 +3145,54 @@ bool MainWindow::nativeEvent(const QByteArray &eventType, void *message,
     return true;
   }
 
+  // Catch WM_SIZE to reliably detect maximize/restore during Aero Snap.
+  // changeEvent(WindowStateChange) may fire too early or not at all when
+  // WM_NCCALCSIZE returns 0.
+  if (msg->message == WM_SIZE) {
+    auto titleBar = findChild<CustomTitleBar *>();
+    if (titleBar) {
+      // wParam tells us the exact new state:
+      // SIZE_MAXIMIZED = 2, SIZE_RESTORED = 0
+      titleBar->setMaximizedState(msg->wParam == SIZE_MAXIMIZED);
+      titleBar->updateMaximizeIcon();
+    }
+  }
+
   if (msg->message == WM_NCHITTEST) {
-    const int border_width = 8;
     long x = GET_X_LPARAM(msg->lParam);
     long y = GET_Y_LPARAM(msg->lParam);
 
-    // Convert to local coordinates
-    POINT pt = {x, y};
-    ScreenToClient((HWND)winId(), &pt);
+    RECT rw;
+    GetWindowRect((HWND)winId(), &rw);
+    int w = rw.right - rw.left;
+    int h = rw.bottom - rw.top;
+    
+    int local_x = x - rw.left;
+    int local_y = y - rw.top;
 
-    int w = width();
-    int h = height();
+    // Calculate border width based on DPI
+    const int border_width = qRound(8 * this->devicePixelRatioF());
+    const int title_bar_height = qRound(32 * this->devicePixelRatioF());
+    const int button_area_width = qRound(120 * this->devicePixelRatioF());
 
-    if (pt.x < border_width && pt.y < border_width)
+    if (local_x < border_width && local_y < border_width)
       *result = HTTOPLEFT;
-    else if (pt.x > w - border_width && pt.y < border_width)
+    else if (local_x >= w - border_width && local_y < border_width)
       *result = HTTOPRIGHT;
-    else if (pt.x < border_width && pt.y > h - border_width)
+    else if (local_x < border_width && local_y >= h - border_width)
       *result = HTBOTTOMLEFT;
-    else if (pt.x > w - border_width && pt.y > h - border_width)
+    else if (local_x >= w - border_width && local_y >= h - border_width)
       *result = HTBOTTOMRIGHT;
-    else if (pt.x < border_width)
+    else if (local_x < border_width)
       *result = HTLEFT;
-    else if (pt.x > w - border_width)
+    else if (local_x >= w - border_width)
       *result = HTRIGHT;
-    else if (pt.y < border_width)
+    else if (local_y < border_width)
       *result = HTTOP;
-    else if (pt.y > h - border_width)
+    else if (local_y >= h - border_width)
       *result = HTBOTTOM;
+    else if (local_y < title_bar_height && local_x < w - button_area_width)
+      *result = HTCAPTION;
     else
       return QMainWindow::nativeEvent(eventType, message, result);
 

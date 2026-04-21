@@ -7,6 +7,7 @@
 #include <QPaintEvent>
 #include <QPoint>
 #include <QPushButton>
+#include <QTimer>
 #include <QWidget>
 
 class CustomTitleBar : public QWidget {
@@ -15,6 +16,7 @@ public:
   explicit CustomTitleBar(QWidget *parent = nullptr);
   void setTitle(const QString &title);
   void updateMaximizeIcon();
+  void setMaximizedState(bool maximized);
 
 protected:
   void mousePressEvent(QMouseEvent *event) override;
@@ -22,6 +24,9 @@ protected:
   void mouseDoubleClickEvent(QMouseEvent *event) override;
   void changeEvent(QEvent *event) override;
   void paintEvent(QPaintEvent *event) override;
+
+private slots:
+  void applyMaximizeIcon();
 
 private:
   void setupUi();
@@ -33,5 +38,7 @@ private:
   QPushButton *m_maxButton;
   QPushButton *m_closeButton;
 
+  QTimer m_maxIconTimer;
+  bool m_isMaximized = false;
   QPoint m_dragPos;
 };

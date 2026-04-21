@@ -110,7 +110,7 @@ add_custom_target(tcversion echo "\\#\\#teamcity[setParameter name=\\'env.LAUNCH
 # Find the required Qt parts
 list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.10.2/msvc2022_64")
 list(APPEND CMAKE_PREFIX_PATH "$ENV{USERPROFILE}/vcpkg/installed/x64-windows")
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets Concurrent Network Test Xml Svg OpenGL)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Concurrent Network NetworkAuth Test Xml Svg OpenGL)
 
 if(WIN32)
     set(VCPKG_ROOT "$ENV{USERPROFILE}/vcpkg/installed/x64-windows")
@@ -192,7 +192,7 @@ set(Launcher_Branding_LogoQRC "${PROJECT_SOURCE_DIR}/branding/logo.qrc")
 
 set(Launcher_META_URL "https://meta.multimc.org/v1/")
 set(Launcher_PASTE_EE_API_KEY "")
-set(Launcher_MSA_CLIENT_ID "9284c925-0043-473a-9d4e-0a9ad57f56bf")
+set(Launcher_MSA_CLIENT_ID "c36a9fb6-4f2a-41ff-90bd-ae7cc92031eb")
 set(Launcher_IMGUR_CLIENT_ID "")
 set(Launcher_BUG_TRACKER_URL "https://github.com/WerkLauncher/Launcher/issues")
 set(Launcher_DISCORD_URL "https://discord.gg/PmkmWHRW8G")

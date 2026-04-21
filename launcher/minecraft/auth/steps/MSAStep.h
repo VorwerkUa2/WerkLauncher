@@ -1,11 +1,11 @@
-
 #pragma once
 #include <QObject>
 
 #include "QObjectPtr.h"
 #include "minecraft/auth/AuthStep.h"
 
-#include <katabasis/DeviceFlow.h>
+#include <QtNetworkAuth/QOAuth2AuthorizationCodeFlow>
+#include <QtNetworkAuth/QOAuthHttpServerReplyHandler>
 
 class MSAStep : public AuthStep {
     Q_OBJECT
@@ -16,16 +16,17 @@ public:
     };
 public:
     explicit MSAStep(AccountData *data, Action action);
-    virtual ~MSAStep() noexcept;
+    virtual ~MSAStep() noexcept = default;
 
     void perform() override;
 
     QString describe() override;
 
 private slots:
-    void onOAuthActivityChanged(Katabasis::Activity activity);
+    void authorizeWithBrowser(const QUrl &url);
 
 private:
-    Katabasis::DeviceFlow *m_oauth2 = nullptr;
+    QOAuth2AuthorizationCodeFlow m_oauth2;
     Action m_action;
+    QString m_clientId;
 };

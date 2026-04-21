@@ -1,99 +1,87 @@
 #include "MSAStep.h"
 
 #include <QNetworkRequest>
+#include <QDesktopServices>
 
 #include "minecraft/auth/AuthRequest.h"
 #include "minecraft/auth/Parsers.h"
 
 #include "Application.h"
 
-using OAuth2 = Katabasis::DeviceFlow;
-using Activity = Katabasis::Activity;
-
 MSAStep::MSAStep(AccountData *data, Action action)
     : AuthStep(data), m_action(action) {
-  OAuth2::Options opts;
-  opts.scope = "XboxLive.signin offline_access";
-  opts.clientIdentifier = APPLICATION->msaClientId();
-  opts.authorizationUrl =
-      "https://login.microsoftonline.com/consumers/oauth2/v2.0/devicecode";
-  opts.accessTokenUrl =
-      "https://login.microsoftonline.com/consumers/oauth2/v2.0/token";
+  
+  m_clientId = APPLICATION->msaClientId();
+  
+  auto replyHandler = new QOAuthHttpServerReplyHandler(0, this);
+  replyHandler->setCallbackText("Login successful! You can close this window and return to the launcher.");
+  m_oauth2.setReplyHandler(replyHandler);
 
-  // FIXME: OAuth2 is not aware of our fancy shared pointers
-  m_oauth2 =
-      new OAuth2(opts, m_data->msaToken, this, APPLICATION->network().get());
+  m_oauth2.setAuthorizationUrl(QUrl("https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize"));
+  m_oauth2.setAccessTokenUrl(QUrl("https://login.microsoftonline.com/consumers/oauth2/v2.0/token"));
+  m_oauth2.setScope("XboxLive.SignIn XboxLive.offline_access");
+  m_oauth2.setClientIdentifier(m_clientId);
+  m_oauth2.setNetworkAccessManager(APPLICATION->network().get());
 
-  connect(m_oauth2, &OAuth2::activityChanged, this,
-          &MSAStep::onOAuthActivityChanged);
-  connect(m_oauth2, &OAuth2::showVerificationUriAndCode, this,
-          &MSAStep::showVerificationUriAndCode);
+  connect(&m_oauth2, &QOAuth2AuthorizationCodeFlow::granted, this, [this] {
+      m_data->msaToken.issueInstant = QDateTime::currentDateTimeUtc();
+      m_data->msaToken.notAfter = m_oauth2.expirationAt();
+      m_data->msaToken.extra = m_oauth2.extraTokens();
+      m_data->msaToken.refresh_token = m_oauth2.refreshToken();
+      m_data->msaToken.token = m_oauth2.token();
+      emit finished(AccountTaskState::STATE_WORKING, tr("Got MSA token"));
+  });
+
+  connect(&m_oauth2, &QOAuth2AuthorizationCodeFlow::authorizeWithBrowser, this, &MSAStep::authorizeWithBrowser);
+
+  connect(&m_oauth2, &QOAuth2AuthorizationCodeFlow::requestFailed, this, [this](const QAbstractOAuth2::Error err) {
+      auto state = AccountTaskState::STATE_FAILED_HARD;
+      if (err == QAbstractOAuth2::Error::NetworkError) {
+          state = AccountTaskState::STATE_OFFLINE;
+      }
+      auto message = tr("Microsoft user authentication failed.");
+      qWarning() << message;
+      emit finished(state, message);
+  });
+
+  connect(&m_oauth2, &QOAuth2AuthorizationCodeFlow::error, this,
+          [this](const QString& error, const QString& errorDescription, const QUrl& uri) {
+              qWarning() << "Failed to login because" << error << errorDescription;
+              emit finished(AccountTaskState::STATE_FAILED_HARD, errorDescription);
+          });
+
+  connect(&m_oauth2, &QOAuth2AuthorizationCodeFlow::extraTokensChanged, this,
+          [this](const QVariantMap& tokens) { m_data->msaToken.extra = tokens; });
 }
-
-MSAStep::~MSAStep() noexcept = default;
 
 QString MSAStep::describe() { return tr("Logging in with Microsoft account."); }
 
 void MSAStep::perform() {
   switch (m_action) {
   case Refresh: {
-    m_oauth2->refresh();
+    if (m_data->msaToken.refresh_token.isEmpty()) {
+        emit finished(AccountTaskState::STATE_FAILED_HARD, tr("Microsoft user authentication failed - refresh token is empty."));
+        return;
+    }
+    m_oauth2.setRefreshToken(m_data->msaToken.refresh_token);
+    m_oauth2.refreshAccessToken();
     return;
   }
   case Login: {
-    QVariantMap extraOpts;
-    extraOpts["prompt"] = "select_account";
-    m_oauth2->setExtraRequestParams(extraOpts);
+    m_oauth2.setModifyParametersFunction(
+        [](QAbstractOAuth::Stage stage, QMultiMap<QString, QVariant> *map) { 
+            if (stage == QAbstractOAuth::Stage::RequestingAuthorization) {
+                map->insert("prompt", "select_account"); 
+            }
+        });
 
     *m_data = AccountData();
-    m_oauth2->login();
+    m_oauth2.grant();
     return;
   }
   }
 }
 
-void MSAStep::onOAuthActivityChanged(Katabasis::Activity activity) {
-  switch (activity) {
-  case Katabasis::Activity::Idle:
-  case Katabasis::Activity::LoggingIn:
-  case Katabasis::Activity::Refreshing:
-  case Katabasis::Activity::LoggingOut: {
-    // We asked it to do something, it's doing it. Nothing to act upon.
-    return;
-  }
-  case Katabasis::Activity::Succeeded: {
-    // Succeeded or did not invalidate tokens
-    emit hideVerificationUriAndCode();
-    emit finished(AccountTaskState::STATE_WORKING, tr("Got "));
-    return;
-  }
-  case Katabasis::Activity::FailedSoft: {
-    // NOTE: soft error in the first step means 'offline'
-    emit hideVerificationUriAndCode();
-    emit finished(
-        AccountTaskState::STATE_OFFLINE,
-        tr("Microsoft user authentication ended with a network error."));
-    return;
-  }
-  case Katabasis::Activity::FailedGone: {
-    emit hideVerificationUriAndCode();
-    emit finished(
-        AccountTaskState::STATE_FAILED_GONE,
-        tr("Microsoft user authentication failed - user no longer exists."));
-    return;
-  }
-  case Katabasis::Activity::FailedHard: {
-    emit hideVerificationUriAndCode();
-    emit finished(AccountTaskState::STATE_FAILED_HARD,
-                  tr("Microsoft user authentication failed."));
-    return;
-  }
-  default: {
-    emit hideVerificationUriAndCode();
-    emit finished(AccountTaskState::STATE_FAILED_HARD,
-                  tr("Microsoft user authentication completed with an "
-                     "unrecognized result."));
-    return;
-  }
-  }
+void MSAStep::authorizeWithBrowser(const QUrl &url) {
+    QDesktopServices::openUrl(url);
 }
