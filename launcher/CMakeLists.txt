@@ -692,6 +692,8 @@ SET(LAUNCHER_SOURCES
     ui/pages/instance/LogPage.h
     ui/pages/instance/InstanceSettingsPage.cpp
     ui/pages/instance/InstanceSettingsPage.h
+    ui/pages/instance/InstanceJavaPage.cpp
+    ui/pages/instance/InstanceJavaPage.h
     ui/pages/instance/ScreenshotsPage.cpp
     ui/pages/instance/ScreenshotsPage.h
     ui/pages/instance/OtherLogsPage.cpp
@@ -737,6 +739,12 @@ SET(LAUNCHER_SOURCES
     ui/pages/modplatform/import_ftb/Model.h
     ui/pages/modplatform/import_ftb/FTBAPage.cpp
     ui/pages/modplatform/import_ftb/FTBAPage.h
+
+    ui/pages/modplatform/curseforge/CurseForgeData.h
+    ui/pages/modplatform/curseforge/CurseForgeModel.cpp
+    ui/pages/modplatform/curseforge/CurseForgeModel.h
+    ui/pages/modplatform/curseforge/CurseForgePage.cpp
+    ui/pages/modplatform/curseforge/CurseForgePage.h
 
     ui/pages/modplatform/modrinth/ModrinthData.h
     ui/pages/modplatform/modrinth/ModrinthModel.cpp
@@ -888,6 +896,7 @@ qt6_wrap_ui(LAUNCHER_UI
     ui/pages/modplatform/atlauncher/AtlPage.ui
     ui/pages/modplatform/import_ftb/FTBAPage.ui
     ui/pages/modplatform/legacy_ftb/Page.ui
+    ui/pages/modplatform/curseforge/CurseForgePage.ui
     ui/pages/modplatform/modrinth/ModrinthPage.ui
     ui/pages/modplatform/technic/TechnicPage.ui
     ui/widgets/CustomCommands.ui
@@ -900,11 +909,10 @@ qt6_wrap_ui(LAUNCHER_UI
 
 qt6_add_resources(LAUNCHER_RESOURCES
     resources/backgrounds/backgrounds.qrc
-    resources/multimc/multimc.qrc
-    resources/pe_dark/pe_dark.qrc
-    resources/pe_light/pe_light.qrc
-    resources/pe_colored/pe_colored.qrc
-    resources/flat/flat.qrc
+    resources/themes/flat/flat.qrc
+    resources/themes/white/white.qrc
+    resources/themes/colored/colored.qrc
+    resources/builtin/builtin.qrc
     resources/documents/documents.qrc
     resources/skins/skins.qrc
     ${Launcher_Branding_LogoQRC}

@@ -395,11 +395,25 @@ public:
 
     mainToolBar->setMovable(false);
 
-    mainToolBar->setAllowedAreas(Qt::TopToolBarArea);
+    mainToolBar->setAllowedAreas(Qt::LeftToolBarArea);
 
-    mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    mainToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
 
     mainToolBar->setFloatable(false);
+
+    mainToolBar->setStyleSheet(
+        "QToolButton { "
+        "   min-width: 48px; max-width: 48px; "
+        "   min-height: 48px; max-height: 48px; "
+        "   padding: 0px; margin: 2px; border-radius: 8px; "
+        "}"
+        "QToolButton::menu-indicator { image: none; width: 0px; }"
+        "QToolTip { "
+        "   background-color: #2b2b2b; color: #ffffff; "
+        "   border: 1px solid #4a4a4a; border-radius: 6px; "
+        "   padding: 4px 8px; "
+        "}"
+    );
 
     mainToolBar.setWindowTitleId(
 
@@ -420,6 +434,10 @@ public:
         QT_TRANSLATE_NOOP("MainWindow", "Add a new instance."));
 
     all_actions.append(&actionAddInstance);
+
+    QWidget *topSpacer = new QWidget(MainWindow);
+    topSpacer->setFixedSize(1, 30);
+    mainToolBar->addWidget(topSpacer);
 
     mainToolBar->addAction(actionAddInstance);
 
@@ -483,7 +501,7 @@ public:
 
     foldersMenuButton->setPopupMode(QToolButton::InstantPopup);
 
-    foldersMenuButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    foldersMenuButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 
     foldersMenuButton->setIcon(APPLICATION->getThemedIcon("viewfolder"));
 
@@ -607,7 +625,7 @@ public:
 
     helpMenuButton->setPopupMode(QToolButton::InstantPopup);
 
-    helpMenuButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    helpMenuButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 
     helpMenuButton->setIcon(APPLICATION->getThemedIcon("help"));
 
@@ -662,7 +680,7 @@ public:
 
     all_toolbars.append(&mainToolBar);
 
-    MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
+    MainWindow->addToolBar(Qt::LeftToolBarArea, mainToolBar);
   }
 
   void createStatusBar(QMainWindow *MainWindow) {
@@ -1012,7 +1030,7 @@ public:
 
     all_toolbars.append(&instanceToolBar);
 
-    MainWindow->addToolBar(Qt::LeftToolBarArea, instanceToolBar);
+    // MainWindow->addToolBar(Qt::LeftToolBarArea, instanceToolBar);
   }
 
   void setupUi(QMainWindow *MainWindow) {
@@ -1223,7 +1241,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     // FIXME: leaks ListViewDelegate
 
-    view->setItemDelegate(new ListViewDelegate(this));
+    ListViewDelegate *delegate = new ListViewDelegate(this);
+
+    view->setItemDelegate(delegate);
+
+    connect(delegate, &ListViewDelegate::launchRequested, this, [this](QModelIndex index) {
+      view->selectionModel()->setCurrentIndex(index, QItemSelectionModel::ClearAndSelect);
+      instanceActivated(index);
+    });
+
+    connect(delegate, &ListViewDelegate::configRequested, this, [this](QModelIndex index) {
+      view->selectionModel()->setCurrentIndex(index, QItemSelectionModel::ClearAndSelect);
+      on_actionEditInstance_triggered();
+    });
 
     view->setFrameShape(QFrame::NoFrame);
 
@@ -1356,9 +1386,10 @@ MainWindow::MainWindow(QWidget *parent)
 
   accountMenuButton->setPopupMode(QToolButton::InstantPopup);
 
-  accountMenuButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  accountMenuButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+  accountMenuButton->setIconSize(QSize(32, 32));
 
-  accountMenuButton->setIcon(APPLICATION->getThemedIcon("noaccount"));
+  accountMenuButton->setIcon(APPLICATION->getThemedIcon("accounts"));
 
   QWidgetAction *accountMenuButtonAction = new QWidgetAction(this);
 
@@ -1366,6 +1397,9 @@ MainWindow::MainWindow(QWidget *parent)
 
   ui->mainToolBar->addAction(accountMenuButtonAction);
 
+  QWidget *bottomSpacer = new QWidget(this);
+  bottomSpacer->setFixedSize(1, 15);
+  ui->mainToolBar->addWidget(bottomSpacer);
   // Update the menu when the active account changes.
 
   connect(APPLICATION->accounts().get(), &AccountList::defaultAccountChanged,
@@ -1507,11 +1541,11 @@ void MainWindow::retranslateUi() {
 
                                            defaultAccount->isInUse());
 
-    accountMenuButton->setText(profileLabel);
+    accountMenuButton->setToolTip(profileLabel);
 
   } else {
 
-    accountMenuButton->setText(tr("Accounts"));
+    accountMenuButton->setToolTip(tr("Accounts"));
   }
 
   if (m_selectedInstance) {
@@ -1816,7 +1850,7 @@ void MainWindow::repopulateAccountsMenu() {
 
                                              defaultAccount->isInUse());
 
-      accountMenuButton->setText(profileLabel);
+      accountMenuButton->setToolTip(profileLabel);
     }
   }
 
@@ -1953,9 +1987,9 @@ void MainWindow::defaultAccountChanged() {
 
   if (!account) {
 
-    accountMenuButton->setIcon(APPLICATION->getThemedIcon("noaccount"));
+    accountMenuButton->setIcon(APPLICATION->getThemedIcon("accounts"));
 
-    accountMenuButton->setText(tr("Accounts"));
+    accountMenuButton->setToolTip(tr("Accounts"));
 
     return;
   }
@@ -1970,13 +2004,13 @@ void MainWindow::defaultAccountChanged() {
 
       account->profileName(), account->gamerTag(), account->isInUse());
 
-  accountMenuButton->setText(profileLabel);
+  accountMenuButton->setToolTip(profileLabel);
 
   auto face = account->getFace();
 
   if (face.isNull()) {
 
-    accountMenuButton->setIcon(APPLICATION->getThemedIcon("noaccount"));
+    accountMenuButton->setIcon(APPLICATION->getThemedIcon("accounts"));
 
   } else {
 
@@ -2956,8 +2990,8 @@ void MainWindow::instanceChanged(const QModelIndex &current,
 
   if (m_selectedInstance) {
 
-    ui->instanceToolBar->setEnabled(true);
-    ui->instanceToolBar->setVisible(true);
+    // ui->instanceToolBar->setEnabled(true);
+    // ui->instanceToolBar->setVisible(true);
 
     if (m_selectedInstance->isRunning()) {
 
@@ -2976,7 +3010,12 @@ void MainWindow::instanceChanged(const QModelIndex &current,
 
     ui->renameButton->setText(m_selectedInstance->name());
 
-    m_statusLeft->setText(m_selectedInstance->getStatusbarDescription());
+    try {
+      m_statusLeft->setText(m_selectedInstance->getStatusbarDescription());
+    } catch (...) {
+      qWarning() << "Failed to get instance status description for" << id;
+      m_statusLeft->setText(tr("Instance: %1").arg(id));
+    }
 
     updateStatusCenter();
 
@@ -2988,8 +3027,8 @@ void MainWindow::instanceChanged(const QModelIndex &current,
 
   } else {
 
-    ui->instanceToolBar->setEnabled(false);
-    ui->instanceToolBar->setVisible(false);
+    // ui->instanceToolBar->setEnabled(false);
+    // ui->instanceToolBar->setVisible(false);
 
     APPLICATION->settings()->set("SelectedInstance", QString());
 
@@ -3114,29 +3153,35 @@ void MainWindow::checkInstancePathForProblems() {
 }
 
 void MainWindow::updateStatusCenter() {
+  if (!m_statusCenter)
+    return;
 
   m_statusCenter->setVisible(
 
       APPLICATION->settings()->get("ShowGlobalGameTime").toBool());
 
-  int timePlayed = APPLICATION->instances()->getTotalPlayTime();
+  try {
+    int timePlayed = APPLICATION->instances()->getTotalPlayTime();
 
-  if (timePlayed > 0) {
+    if (timePlayed > 0) {
 
-    if (APPLICATION->settings()->get("ShowGameTimeHours").toBool()) {
+      if (APPLICATION->settings()->get("ShowGameTimeHours").toBool()) {
 
-      m_statusCenter->setText(
+        m_statusCenter->setText(
 
-          tr("Total playtime: %1 hours")
+            tr("Total playtime: %1 hours")
 
-              .arg(Time::prettifyDurationHours(timePlayed)));
+                .arg(Time::prettifyDurationHours(timePlayed)));
 
-    } else {
+      } else {
 
-      m_statusCenter->setText(
+        m_statusCenter->setText(
 
-          tr("Total playtime: %1").arg(Time::prettifyDuration(timePlayed)));
+            tr("Total playtime: %1").arg(Time::prettifyDuration(timePlayed)));
+      }
     }
+  } catch (...) {
+    qWarning() << "Failed to calculate total play time";
   }
 }
 

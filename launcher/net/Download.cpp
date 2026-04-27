@@ -88,6 +88,9 @@ void Download::startImpl() {
   }
 
   request.setHeader(QNetworkRequest::UserAgentHeader, BuildConfig.USER_AGENT);
+  for(auto &header : m_customHeaders) {
+      request.setRawHeader(header.first, header.second);
+  }
   request.setAttribute(QNetworkRequest::Http2AllowedAttribute, false);
 
   QNetworkReply *rep = m_network->get(request);
@@ -202,6 +205,8 @@ bool Download::handleRedirect() {
   if (m_reply) {
     m_reply->disconnect(this);
     m_reply->abort();
+    m_reply->deleteLater();
+    m_reply = nullptr;
   }
   start(m_network);
   return true;

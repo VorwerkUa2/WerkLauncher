@@ -324,12 +324,12 @@ void ListViewDelegate::paint(QPainter *painter,
                  QIcon::Normal);
     };
 
-    // Play button (top right of icon)
-    QRect playRect(iconbox.right() - 20, iconbox.top(), 20, 20);
+    // Play button (bottom left of icon)
+    QRect playRect(iconbox.left() + 4, iconbox.bottom() - 24, 24, 24);
     drawButton(playRect, "media-playback-start", QColor(46, 204, 113)); // Green
 
     // Config button (bottom right of icon)
-    QRect configRect(iconbox.right() - 20, iconbox.top() + 32, 20, 20);
+    QRect configRect(iconbox.right() - 28, iconbox.bottom() - 24, 24, 24);
     drawButton(configRect, "configure", QColor(52, 152, 219)); // Blue
 
     painter->restore();
@@ -552,6 +552,33 @@ public:
 signals:
   void editingDone();
 };
+
+bool ListViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
+                                   const QStyleOptionViewItem &option,
+                                   const QModelIndex &index) {
+  if (event->type() == QEvent::MouseButtonRelease) {
+    QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+    if (mouseEvent->button() == Qt::LeftButton) {
+      static const int iconSize = 52;
+      QRect iconbox = option.rect;
+      iconbox.setHeight(iconSize);
+
+      // Play button (bottom left of icon)
+      QRect playRect(iconbox.left() + 4, iconbox.bottom() - 24, 24, 24);
+      // Config button (bottom right of icon)
+      QRect configRect(iconbox.right() - 28, iconbox.bottom() - 24, 24, 24);
+
+      if (playRect.contains(mouseEvent->pos())) {
+        emit launchRequested(index);
+        return true;
+      } else if (configRect.contains(mouseEvent->pos())) {
+        emit configRequested(index);
+        return true;
+      }
+    }
+  }
+  return QStyledItemDelegate::editorEvent(event, model, option, index);
+}
 
 void ListViewDelegate::updateEditorGeometry(QWidget *editor,
                                             const QStyleOptionViewItem &option,

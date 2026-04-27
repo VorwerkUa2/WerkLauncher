@@ -766,16 +766,25 @@ IPathMatcher::Ptr MinecraftInstance::getLogFileMatcher() {
 QString MinecraftInstance::getLogFileRoot() { return gameRoot(); }
 
 QString MinecraftInstance::getStatusbarDescription() {
+  qDebug() << "MinecraftInstance: getStatusbarDescription starting for" << id();
   QStringList traits;
   if (hasVersionBroken()) {
     traits.append(tr("broken"));
   }
 
   QString description;
-  description.append(
-      tr("Minecraft %1 (%2)")
-          .arg(m_components->getComponentVersion("net.minecraft"))
-          .arg(typeName()));
+  try {
+    QString mcVersion = m_components->getComponentVersion("net.minecraft");
+    qDebug() << "MinecraftInstance: MC version is" << mcVersion;
+    description.append(
+        tr("Minecraft %1 (%2)")
+            .arg(mcVersion)
+            .arg(typeName()));
+  } catch (...) {
+    qWarning() << "MinecraftInstance: Failed to get MC version string";
+    description.append(tr("Minecraft (Unknown version)"));
+  }
+  qDebug() << "MinecraftInstance: base description is" << description;
   if (m_settings->get("ShowGameTime").toBool()) {
     if (lastTimePlayed() > 0) {
       if (APPLICATION->settings()->get("ShowGameTimeHours").toBool()) {

@@ -40,15 +40,14 @@ int main(int argc, char *argv[]) {
   switch (app.status()) {
   case Application::StartingUp:
   case Application::Initialized: {
-    Q_INIT_RESOURCE(multimc);
     Q_INIT_RESOURCE(backgrounds);
     Q_INIT_RESOURCE(documents);
     Q_INIT_RESOURCE(logo);
 
-    Q_INIT_RESOURCE(pe_dark);
-    Q_INIT_RESOURCE(pe_light);
-    Q_INIT_RESOURCE(pe_colored);
     Q_INIT_RESOURCE(flat);
+    Q_INIT_RESOURCE(colored);
+    Q_INIT_RESOURCE(white);
+    Q_INIT_RESOURCE(builtin);
 
     Q_INIT_RESOURCE(skins);
     return app.exec();

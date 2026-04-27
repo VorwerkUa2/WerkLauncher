@@ -15,7 +15,7 @@
 #endif
 
 CustomTitleBar::CustomTitleBar(QWidget *parent) : QWidget(parent) {
-  setFixedHeight(32);
+  setFixedHeight(38);
   setupUi();
 
   // Debounce timer for maximize icon updates during rapid state changes (e.g., Aero Snap)
@@ -51,8 +51,13 @@ void CustomTitleBar::setupUi() {
   layout->addWidget(m_closeButton);
 
   connect(m_minButton, &QPushButton::clicked, [this]() {
-    if (auto win = window())
+    if (auto win = window()) {
+#ifdef Q_OS_WIN
+      PostMessage((HWND)win->winId(), WM_SYSCOMMAND, SC_MINIMIZE, 0);
+#else
       win->showMinimized();
+#endif
+    }
   });
   connect(m_maxButton, &QPushButton::clicked, [this]() {
     if (auto win = window()) {
@@ -88,33 +93,38 @@ void CustomTitleBar::updateStyles() {
       QString("color: %1; font-size: 12px; font-weight: 500; margin-left: 5px;")
           .arg(textColor));
 
-  auto btnStyle = QString("QPushButton { border: none; background: "
-                          "transparent; width: 32px; height: 32px; } "
-                          "QPushButton:hover { background: %1; }")
+  auto btnStyle = QString("QPushButton { border: none; background: transparent; } "
+                          "QPushButton:hover { background: %1; } "
+                          "QPushButton:pressed { background: rgba(255, 255, 255, 0.1); }")
                       .arg(hoverBg);
 
   m_minButton->setStyleSheet(btnStyle);
   m_maxButton->setStyleSheet(btnStyle);
   m_closeButton->setStyleSheet(btnStyle);
 
+  m_minButton->setFixedSize(48, 38);
+  m_maxButton->setFixedSize(48, 38);
+  m_closeButton->setFixedSize(48, 38);
+
   // Draw static icons for minimize and close (they never change shape)
   auto color = palette().color(QPalette::WindowText);
+  color.setAlpha(120);
   auto drawIcon = [&](QPushButton *btn, auto drawFunc) {
-    QPixmap pix(32, 32);
+    QPixmap pix(48, 38);
     pix.fill(Qt::transparent);
     QPainter p(&pix);
     p.setRenderHint(QPainter::Antialiasing);
-    p.setPen(QPen(color, 1.5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setPen(QPen(color, 1.8, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     drawFunc(p);
     p.end();
     btn->setIcon(QIcon(pix));
-    btn->setIconSize(QSize(32, 32));
+    btn->setIconSize(QSize(48, 38));
   };
 
-  drawIcon(m_minButton, [](QPainter &p) { p.drawLine(10, 16, 22, 16); });
+  drawIcon(m_minButton, [](QPainter &p) { p.drawLine(19, 19, 29, 19); });
   drawIcon(m_closeButton, [](QPainter &p) {
-    p.drawLine(10, 10, 22, 22);
-    p.drawLine(22, 10, 10, 22);
+    p.drawLine(19, 14, 29, 24);
+    p.drawLine(29, 14, 19, 24);
   });
 
   updateMaximizeIcon();
@@ -136,24 +146,25 @@ void CustomTitleBar::applyMaximizeIcon() {
   // Final check of the state after debounce
   // m_isMaximized is set by MainWindow during native WM_SIZE events
   auto color = palette().color(QPalette::WindowText);
+  color.setAlpha(120);
 
-  QPixmap pix(32, 32);
+  QPixmap pix(48, 38);
   pix.fill(Qt::transparent);
   QPainter p(&pix);
   p.setRenderHint(QPainter::Antialiasing);
-  p.setPen(QPen(color, 1.5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+  p.setPen(QPen(color, 1.8, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
   if (m_isMaximized) {
     // Restore icon (double square)
-    p.drawRect(12, 10, 8, 8);
-    p.drawRect(10, 12, 8, 8);
+    p.drawRect(21, 14, 8, 8);
+    p.drawRect(19, 16, 8, 8);
   } else {
     // Maximize icon (single square)
-    p.drawRect(10, 10, 12, 12);
+    p.drawRect(19, 13, 11, 11);
   }
   p.end();
   m_maxButton->setIcon(QIcon(pix));
-  m_maxButton->setIconSize(QSize(32, 32));
+  m_maxButton->setIconSize(QSize(48, 38));
 }
 
 void CustomTitleBar::setTitle(const QString &title) {

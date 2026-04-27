@@ -240,10 +240,10 @@ void InstanceView::mousePressEvent(QMouseEvent *event) {
     QRect iconRect = visualRect(index);
     iconRect.setHeight(52); // Icon size from delegate
 
-    // Play button area (top right of icon)
-    QRect playRect(iconRect.right() - 20, iconRect.top(), 20, 20);
+    // Play button area (bottom left of icon)
+    QRect playRect(iconRect.left() + 4, iconRect.bottom() - 24, 24, 24);
     // Config button area (bottom right of icon)
-    QRect configRect(iconRect.right() - 20, iconRect.top() + 32, 20, 20);
+    QRect configRect(iconRect.right() - 28, iconRect.bottom() - 24, 24, 24);
 
     if (playRect.contains(visualPos)) {
       emit requestLaunch(index);
@@ -491,6 +491,11 @@ void InstanceView::paintEvent(QPaintEvent *event) {
     }
     option.state |=
         (index == currentIndex()) ? QStyle::State_HasFocus : QStyle::State_None;
+    if (index == m_hoveredIndex) {
+      option.state |= QStyle::State_MouseOver;
+    } else {
+      option.state &= ~QStyle::State_MouseOver;
+    }
     if (!(flags & Qt::ItemIsEnabled)) {
       option.state &= ~QStyle::State_Enabled;
     }

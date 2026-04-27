@@ -367,9 +367,12 @@ QList<InstanceId> InstanceList::discoverInstances() {
                     QDirIterator::FollowSymlinks);
   while (iter.hasNext()) {
     QString subDir = iter.next();
+    qDebug() << "Checking folder:" << subDir;
     QFileInfo dirInfo(subDir);
-    if (!QFileInfo(FS::PathCombine(subDir, "instance.cfg")).exists())
+    if (!QFileInfo(FS::PathCombine(subDir, "instance.cfg")).exists()) {
+      qDebug() << "No instance.cfg in" << subDir;
       continue;
+    }
     // if it is a symlink, ignore it if it goes to the instance folder
     if (dirInfo.isSymLink()) {
       QFileInfo targetInfo(dirInfo.symLinkTarget());
@@ -473,7 +476,9 @@ InstanceList::InstListError InstanceList::loadList() {
 void InstanceList::updateTotalPlayTime() {
   totalPlayTime = 0;
   for (auto const &itr : m_instances) {
-    totalPlayTime += itr.get()->totalTimePlayed();
+    if (itr) {
+      totalPlayTime += itr->totalTimePlayed();
+    }
   }
 }
 
@@ -551,18 +556,21 @@ void InstanceList::propertiesChanged(BaseInstance *inst) {
 }
 
 InstancePtr InstanceList::loadInstance(const InstanceId &id) {
+  qDebug() << "Loading instance with ID:" << id;
   if (!m_groupsLoaded) {
     loadGroupList();
   }
 
   auto instanceRoot = FS::PathCombine(m_instDir, id);
-  auto instanceSettings = std::make_shared<INISettingsObject>(
-      FS::PathCombine(instanceRoot, "instance.cfg"));
+  qDebug() << "Instance root path:" << instanceRoot;
+  auto configPath = FS::PathCombine(instanceRoot, "instance.cfg");
+  auto instanceSettings = std::make_shared<INISettingsObject>(configPath);
   InstancePtr inst;
 
   instanceSettings->registerSetting("InstanceType", "Legacy");
 
   QString inst_type = instanceSettings->get("InstanceType").toString();
+  qDebug() << "Instance type:" << inst_type;
 
   if (inst_type == "OneSix" || inst_type == "Nostalgia") {
     inst.reset(new MinecraftInstance(m_globalSettings, instanceSettings,

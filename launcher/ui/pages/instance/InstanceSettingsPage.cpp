@@ -26,8 +26,6 @@ InstanceSettingsPage::InstanceSettingsPage(BaseInstance *inst, QWidget *parent)
 {
     m_settings = inst->settings();
     ui->setupUi(this);
-    auto sysMB = Sys::getSystemRam() / Sys::mebibyte;
-    ui->maxMemSpinBox->setMaximum(sysMB);
     connect(ui->openGlobalJavaSettingsButton, &QCommandLinkButton::clicked, this, &InstanceSettingsPage::globalSettingsButtonClicked);
     connect(APPLICATION, &Application::globalSettingsAboutToOpen, this, &InstanceSettingsPage::applySettings);
     connect(APPLICATION, &Application::globalSettingsClosed, this, &InstanceSettingsPage::loadSettings);
@@ -76,12 +74,9 @@ void InstanceSettingsPage::globalSettingsButtonClicked(bool)
 {
     switch(ui->settingsTabs->currentIndex()) {
         case 0:
-            APPLICATION->ShowGlobalSettings(this, "java-settings");
-            return;
-        case 1:
             APPLICATION->ShowGlobalSettings(this, "minecraft-settings");
             return;
-        case 2:
+        case 1:
             APPLICATION->ShowGlobalSettings(this, "custom-commands");
             return;
     }
@@ -128,59 +123,6 @@ void InstanceSettingsPage::applySettings()
         m_settings->reset("MinecraftWinWidth");
         m_settings->reset("MinecraftWinHeight");
     }
-
-    // Memory
-    bool memory = ui->memoryGroupBox->isChecked();
-    m_settings->set("OverrideMemory", memory);
-    if (memory)
-    {
-        int min = ui->minMemSpinBox->value();
-        int max = ui->maxMemSpinBox->value();
-        if(min < max)
-        {
-            m_settings->set("MinMemAlloc", min);
-            m_settings->set("MaxMemAlloc", max);
-        }
-        else
-        {
-            m_settings->set("MinMemAlloc", max);
-            m_settings->set("MaxMemAlloc", min);
-        }
-        m_settings->set("PermGen", ui->permGenSpinBox->value());
-    }
-    else
-    {
-        m_settings->reset("MinMemAlloc");
-        m_settings->reset("MaxMemAlloc");
-        m_settings->reset("PermGen");
-    }
-
-    // Java Install Settings
-    bool javaInstall = ui->javaSettingsGroupBox->isChecked();
-    m_settings->set("OverrideJavaLocation", javaInstall);
-    if (javaInstall)
-    {
-        m_settings->set("JavaPath", ui->javaPathTextBox->text());
-    }
-    else
-    {
-        m_settings->reset("JavaPath");
-    }
-
-    // Java arguments
-    bool javaArgs = ui->javaArgumentsGroupBox->isChecked();
-    m_settings->set("OverrideJavaArgs", javaArgs);
-    if(javaArgs)
-    {
-        m_settings->set("JvmArgs", ui->jvmArgsTextBox->toPlainText().replace("\n", " "));
-    }
-    else
-    {
-        m_settings->reset("JvmArgs");
-    }
-
-    // old generic 'override both' is removed.
-    m_settings->reset("OverrideJava");
 
     // Custom Commands
     bool custcmd = ui->customCommands->checked();
@@ -269,38 +211,6 @@ void InstanceSettingsPage::loadSettings()
     ui->windowWidthSpinBox->setValue(m_settings->get("MinecraftWinWidth").toInt());
     ui->windowHeightSpinBox->setValue(m_settings->get("MinecraftWinHeight").toInt());
 
-    // Memory
-    ui->memoryGroupBox->setChecked(m_settings->get("OverrideMemory").toBool());
-    int min = m_settings->get("MinMemAlloc").toInt();
-    int max = m_settings->get("MaxMemAlloc").toInt();
-    if(min < max)
-    {
-        ui->minMemSpinBox->setValue(min);
-        ui->maxMemSpinBox->setValue(max);
-    }
-    else
-    {
-        ui->minMemSpinBox->setValue(max);
-        ui->maxMemSpinBox->setValue(min);
-    }
-    ui->permGenSpinBox->setValue(m_settings->get("PermGen").toInt());
-    bool permGenVisible = m_settings->get("PermGenVisible").toBool();
-    ui->permGenSpinBox->setVisible(permGenVisible);
-    ui->labelPermGen->setVisible(permGenVisible);
-    ui->labelPermgenNote->setVisible(permGenVisible);
-
-
-    // Java Settings
-    bool overrideJava = m_settings->get("OverrideJava").toBool();
-    bool overrideLocation = m_settings->get("OverrideJavaLocation").toBool() || overrideJava;
-    bool overrideArgs = m_settings->get("OverrideJavaArgs").toBool() || overrideJava;
-
-    ui->javaSettingsGroupBox->setChecked(overrideLocation);
-    ui->javaPathTextBox->setText(m_settings->get("JavaPath").toString());
-
-    ui->javaArgumentsGroupBox->setChecked(overrideArgs);
-    ui->jvmArgsTextBox->setPlainText(m_settings->get("JvmArgs").toString());
-
     // Custom commands
     ui->customCommands->initialize(
         true,
@@ -339,64 +249,6 @@ void InstanceSettingsPage::loadSettings()
 
 }
 
-void InstanceSettingsPage::on_javaDetectBtn_clicked()
-{
-    JavaInstallPtr java;
-
-    VersionSelectDialog vselect(APPLICATION->javalist().get(), tr("Select a Java version"), this, true);
-    vselect.setResizeOn(2);
-    vselect.exec();
-
-    if (vselect.result() == QDialog::Accepted && vselect.selectedVersion())
-    {
-        java = std::dynamic_pointer_cast<JavaInstall>(vselect.selectedVersion());
-        ui->javaPathTextBox->setText(java->path);
-        bool visible = java->id.requiresPermGen() && m_settings->get("OverrideMemory").toBool();
-        ui->permGenSpinBox->setVisible(visible);
-        ui->labelPermGen->setVisible(visible);
-        ui->labelPermgenNote->setVisible(visible);
-        m_settings->set("PermGenVisible", visible);
-    }
-}
-
-void InstanceSettingsPage::on_javaBrowseBtn_clicked()
-{
-    QString raw_path = QFileDialog::getOpenFileName(this, tr("Find Java executable"));
-
-    // do not allow current dir - it's dirty. Do not allow dirs that don't exist
-    if(raw_path.isEmpty())
-    {
-        return;
-    }
-    QString cooked_path = FS::NormalizePath(raw_path);
-
-    QFileInfo javaInfo(cooked_path);
-    if(!javaInfo.exists() || !javaInfo.isExecutable())
-    {
-        return;
-    }
-    ui->javaPathTextBox->setText(cooked_path);
-
-    // custom Java could be anything... enable perm gen option
-    ui->permGenSpinBox->setVisible(true);
-    ui->labelPermGen->setVisible(true);
-    ui->labelPermgenNote->setVisible(true);
-    m_settings->set("PermGenVisible", true);
-}
-
-void InstanceSettingsPage::on_javaTestBtn_clicked()
-{
-    if(checker)
-    {
-        return;
-    }
-    checker.reset(new JavaCommon::TestCheck(
-        this, ui->javaPathTextBox->text(), ui->jvmArgsTextBox->toPlainText().replace("\n", " "),
-        ui->minMemSpinBox->value(), ui->maxMemSpinBox->value(), ui->permGenSpinBox->value()));
-    connect(checker.get(), SIGNAL(finished()), SLOT(checkerFinished()));
-    checker->run();
-}
-
 void InstanceSettingsPage::on_serverAddressRadioButton_toggled(bool checked)
 {
     ui->serverJoinAddress->setEnabled(checked);
@@ -407,7 +259,3 @@ void InstanceSettingsPage::on_worldRadioButton_toggled(bool checked)
     ui->worldsComboBox->setEnabled(checked);
 }
 
-void InstanceSettingsPage::checkerFinished()
-{
-    checker.reset();
-}

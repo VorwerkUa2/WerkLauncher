@@ -34,6 +34,12 @@ public:
     void setEditorData(QWidget * editor, const QModelIndex & index) const override;
     void setModelData(QWidget * editor, QAbstractItemModel * model, const QModelIndex & index) const override;
 
+    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
+
+signals:
+    void launchRequested(const QModelIndex &index);
+    void configRequested(const QModelIndex &index);
+
 private slots:
     void editingDone();
 };

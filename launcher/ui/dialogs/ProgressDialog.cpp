@@ -20,12 +20,22 @@
 #include <QDebug>
 #include <QKeyEvent>
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
+
 #include "tasks/Task.h"
 
 ProgressDialog::ProgressDialog(QWidget *parent)
     : QDialog(parent), ui(new Ui::ProgressDialog) {
   setWindowFlags(Qt::FramelessWindowHint | windowFlags());
   ui->setupUi(this);
+
+#ifdef Q_OS_WIN
+  HWND hwnd = (HWND)winId();
+  LONG style = GetWindowLong(hwnd, GWL_STYLE);
+  SetWindowLong(hwnd, GWL_STYLE, style | WS_THICKFRAME | WS_CAPTION | WS_MINIMIZEBOX);
+#endif
 
   auto titleBar = new CustomTitleBar(this);
   titleBar->setTitle(tr("Progress"));
@@ -62,9 +72,8 @@ void ProgressDialog::on_skipButton_clicked(bool checked) {
 ProgressDialog::~ProgressDialog() { delete ui; }
 
 void ProgressDialog::updateSize() {
-  QSize qSize = QSize(480, minimumSizeHint().height());
-  resize(qSize);
-  setFixedSize(qSize);
+  setFixedWidth(480);
+  adjustSize();
 }
 
 int ProgressDialog::execWithTask(Task *task) {

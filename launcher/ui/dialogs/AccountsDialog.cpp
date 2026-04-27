@@ -140,6 +140,9 @@ AccountsDialog::AccountsDialog(QWidget *parent, const QString &internalId)
           &AccountsDialog::onGetFreshCodeButtonClicked);
 
   // New Account Selection + Login forms
+  ui->btnSelectMicrosoft->setIcon(APPLICATION->getThemedIcon("microsoft"));
+  ui->btnSelectLittleSkin->setIcon(APPLICATION->getThemedIcon("minecraft"));
+
   connect(ui->btnSelectMicrosoft, &QCommandLinkButton::clicked, this,
           &AccountsDialog::onSelectMicrosoftClicked);
   connect(ui->btnSelectLittleSkin, &QCommandLinkButton::clicked, this,

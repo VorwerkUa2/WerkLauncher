@@ -40,6 +40,7 @@
 #include "ui/pages/modplatform/legacy_ftb/Page.h"
 #include "ui/pages/modplatform/modrinth/ModrinthPage.h"
 #include "ui/pages/modplatform/technic/TechnicPage.h"
+#include "ui/pages/modplatform/curseforge/CurseForgePage.h"
 #include "ui/widgets/PageContainer.h"
 
 NewInstanceDialog::NewInstanceDialog(const QString &initialGroup,
@@ -154,6 +155,7 @@ QList<BasePage *> NewInstanceDialog::getPages() {
   auto technicPage = new TechnicPage(this);
   return {new VanillaPage(this),
           importPage,
+          new CurseForgePage(this),
           new ModrinthPage(this),
           new AtlPage(this),
           new ImportFTB::FTBAPage(this),

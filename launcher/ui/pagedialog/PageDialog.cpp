@@ -5,6 +5,10 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
+
 #include "Application.h"
 #include "settings/SettingsObject.h"
 
@@ -17,6 +21,12 @@ PageDialog::PageDialog(BasePageProvider *pageProvider, QString defaultId,
                        QWidget *parent)
     : QDialog(parent) {
   setWindowFlags(Qt::FramelessWindowHint | windowFlags());
+
+#ifdef Q_OS_WIN
+  HWND hwnd = (HWND)winId();
+  LONG style = GetWindowLong(hwnd, GWL_STYLE);
+  SetWindowLong(hwnd, GWL_STYLE, style | WS_THICKFRAME | WS_CAPTION | WS_MINIMIZEBOX);
+#endif
   setWindowTitle(pageProvider->dialogTitle());
 
   m_container = new PageContainer(pageProvider, defaultId, this);

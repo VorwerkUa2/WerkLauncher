@@ -66,11 +66,16 @@ protected slots:
 public slots:
     void startImpl() override;
 
+    void setHeader(const QByteArray &name, const QByteArray &value) {
+        m_customHeaders.append({name, value});
+    }
+
 private: /* data */
     // FIXME: remove this, it has no business being here.
     QString m_target_path;
     std::unique_ptr<Sink> m_sink;
     Options m_options;
+    QList<QPair<QByteArray, QByteArray>> m_customHeaders;
 };
 }
 

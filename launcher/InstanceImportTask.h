@@ -47,6 +47,8 @@ private:
     void processTechnic();
     void processFlame();
     void processModrinth();
+    void processCurseForge();
+    void startCurseForgeDownload(QByteArray responseData);
 
 private slots:
     void downloadSucceeded();
@@ -69,5 +71,6 @@ private: /* data */
         MultiMC,
         Technic,
         Modrinth,
+        CurseForge,
     } m_modpackType = ModpackType::Unknown;
 };

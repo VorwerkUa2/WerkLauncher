@@ -175,15 +175,14 @@ void LauncherPage::on_themeComboBox_currentIndexChanged(int index) {
   QString themeName;
   switch (index) {
   case 0:
-    themeName = "pe_dark";
+    themeName = "flat";
     break;
   case 1:
-    themeName = "pe_light";
+    themeName = "colored";
     break;
   case 2:
-    themeName = "pe_colored";
+    themeName = "white";
     break;
-  case 3:
   default:
     themeName = "flat";
     break;
@@ -269,15 +268,14 @@ void LauncherPage::applySettings() {
   // FIXME: make generic
   switch (ui->themeComboBox->currentIndex()) {
   case 0:
-    s->set("IconTheme", "pe_dark");
+    s->set("IconTheme", "flat");
     break;
   case 1:
-    s->set("IconTheme", "pe_light");
+    s->set("IconTheme", "colored");
     break;
   case 2:
-    s->set("IconTheme", "pe_colored");
+    s->set("IconTheme", "white");
     break;
-  case 3:
   default:
     s->set("IconTheme", "flat");
     break;
@@ -340,15 +338,15 @@ void LauncherPage::loadSettings() {
 
   // FIXME: make generic
   auto theme = s->get("IconTheme").toString();
-  if (theme == "pe_dark") {
+  if (theme == "flat") {
     ui->themeComboBox->setCurrentIndex(0);
-  } else if (theme == "pe_light") {
+  } else if (theme == "colored") {
     ui->themeComboBox->setCurrentIndex(1);
-  } else if (theme == "pe_colored") {
+  } else if (theme == "white") {
     ui->themeComboBox->setCurrentIndex(2);
   } else {
     // default to flat
-    ui->themeComboBox->setCurrentIndex(3);
+    ui->themeComboBox->setCurrentIndex(0);
   }
 
   {

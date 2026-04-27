@@ -432,8 +432,8 @@
                  <string>Log in with your Microsoft account.</string>
                 </property>
                 <property name="icon">
-                 <iconset resource="../../resources/multimc/multimc.qrc">
-                  <normaloff>:/icons/multimc/32x32/microsoft.png</normaloff>:/icons/multimc/32x32/microsoft.png</iconset>
+                 <iconset resource="../../resources/builtin/builtin.qrc">
+                  <normaloff>:/icons/builtin/32x32/microsoft.png</normaloff>:/icons/builtin/32x32/microsoft.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>

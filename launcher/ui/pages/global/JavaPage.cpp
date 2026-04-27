@@ -38,7 +38,14 @@ JavaPage::JavaPage(QWidget *parent) : QWidget(parent), ui(new Ui::JavaPage) {
   ui->setupUi(this);
 
   auto sysMiB = Sys::getSystemRam() / Sys::mebibyte;
-  ui->maxMemSpinBox->setMaximum(sysMiB);
+  if (sysMiB > 0) {
+    ui->maxMemSpinBox->setMaximum(sysMiB);
+    ui->minMemSpinBox->setMaximum(sysMiB);
+  } else {
+    // Fallback if detection fails (e.g. 64GB)
+    ui->maxMemSpinBox->setMaximum(65536);
+    ui->minMemSpinBox->setMaximum(65536);
+  }
   loadSettings();
 }
 

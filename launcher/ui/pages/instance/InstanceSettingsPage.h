@@ -17,11 +17,7 @@
 
 #include <QWidget>
 
-#include "java/JavaChecker.h"
-#include "BaseInstance.h"
-#include <QObjectPtr.h>
 #include "ui/pages/BasePage.h"
-#include "JavaCommon.h"
 #include "minecraft/WorldList.h"
 #include "Application.h"
 
@@ -58,16 +54,11 @@ public:
     virtual bool shouldDisplay() const override;
 
 private slots:
-    void on_javaDetectBtn_clicked();
-    void on_javaTestBtn_clicked();
-    void on_javaBrowseBtn_clicked();
     void on_serverAddressRadioButton_toggled(bool checked);
     void on_worldRadioButton_toggled(bool checked);
 
     void applySettings();
     void loadSettings();
-
-    void checkerFinished();
 
     void globalSettingsButtonClicked(bool checked);
 
@@ -75,5 +66,4 @@ private:
     Ui::InstanceSettingsPage *ui;
     BaseInstance *m_instance;
     SettingsObjectPtr m_settings;
-    unique_qobject_ptr<JavaCommon::TestCheck> checker;
 };

@@ -301,22 +301,17 @@
             </property>
             <item>
              <property name="text">
-              <string>Simple (Dark Icons)</string>
+              <string>Flat</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Simple (Light Icons)</string>
+              <string>Colored</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Simple (Colored Icons)</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">Flat</string>
+              <string>White</string>
              </property>
             </item>
            </widget>

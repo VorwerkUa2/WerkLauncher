@@ -197,7 +197,11 @@ void LocalPeer::receiveConnection() {
   }
 
   while (socket->bytesAvailable() < (int)sizeof(quint32)) {
-    socket->waitForReadyRead();
+    if (!socket->waitForReadyRead(2000)) {
+      qWarning("LocalPeer: Timeout waiting for message header from client.");
+      delete socket;
+      return;
+    }
   }
   QDataStream ds(socket);
   QByteArray uMsg;
