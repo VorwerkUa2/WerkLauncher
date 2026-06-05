@@ -3,13 +3,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Language: uk_UA\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Language: en_GB\n"
 "X-Qt-Contexts: true\n"
 
 msgctxt "ExternalToolsPage|"
 msgid "OK"
-msgstr "ОК"
+msgstr "OK"
 
 msgctxt "AccountTask|"
 msgid "..."
@@ -17,15 +17,15 @@ msgstr "..."
 
 msgctxt "ServersPage|"
 msgid "Add"
-msgstr "Додати"
+msgstr "Add"
 
 msgctxt "WorldListPage|"
 msgid "Add"
-msgstr "Додати"
+msgstr "Add"
 
 msgctxt "GameOptions|"
 msgid "Key"
-msgstr "Ключ"
+msgstr "Key"
 
 msgctxt "NewComponentDialog|"
 msgid "uid"
@@ -34,59 +34,59 @@ msgstr "uid"
 #, qt-format
 msgctxt "MainWindow|"
 msgid "Check for new updates for %1."
-msgstr "Перевірити наявність нових оновлень для %1."
+msgstr "Check for new updates for %1."
 
 msgctxt "TechnicPage|"
 msgid " by "
-msgstr " від "
+msgstr " by "
 
 msgctxt "ModFolderPage|"
 msgid "&Add"
-msgstr "&Додати"
+msgstr "&Add"
 
 msgctxt "WorldListPage|"
 msgid "Copy"
-msgstr "Копіювати"
+msgstr "Copy"
 
 msgctxt "QObject|"
 msgid "Dark"
-msgstr "Темний"
+msgstr "Dark"
 
 msgctxt "VersionPage|"
 msgid "Edit"
-msgstr "Редагувати"
+msgstr "Edit"
 
 msgctxt "ModFolderModel|"
 msgid "File"
-msgstr "Файл"
+msgstr "File"
 
 msgctxt "ModrinthExportDialog|"
 msgid "File"
-msgstr "Файл"
+msgstr "File"
 
 msgctxt "LogPage|"
 msgid "Find"
-msgstr "Знайти"
+msgstr "Find"
 
 msgctxt "OtherLogsPage|"
 msgid "Find"
-msgstr "Пошук"
+msgstr "Find"
 
 msgctxt "MinecraftAccount|"
 msgid "Gone"
-msgstr "Втрачено"
+msgstr "Gone"
 
 msgctxt "MSAStep|"
 msgid "Got "
-msgstr "Готово "
+msgstr "Got "
 
 msgctxt "InstanceWindow|"
 msgid "Help"
-msgstr "Допомога"
+msgstr "Help"
 
 msgctxt "MainWindow|"
 msgid "Help"
-msgstr "Допомога"
+msgstr "Help"
 
 msgctxt "JavaPage|"
 msgid "Java"
@@ -98,144 +98,144 @@ msgstr "Java"
 
 msgctxt "ServersPage|"
 msgid "Join"
-msgstr "Приєднатись"
+msgstr "Join"
 
 msgctxt "WorldListPage|"
 msgid "Join"
-msgstr "Приєднатись"
+msgstr "Join"
 
 msgctxt "InstanceWindow|"
 msgid "Kill"
-msgstr "Зупинити"
+msgstr "Kill"
 
 msgctxt "MainWindow|"
 msgid "Kill"
-msgstr "Зупинити"
+msgstr "Kill"
 
 msgctxt "MainWindow|"
 msgid "Meow"
-msgstr "Мяу"
+msgstr "Meow"
 
 msgctxt "CopyInstanceDialog|"
 msgid "Name"
-msgstr "Ім’я"
+msgstr "Name"
 
 msgctxt "Index|"
 msgid "Name"
-msgstr "Ім’я"
+msgstr "Name"
 
 msgctxt "ModFolderModel|"
 msgid "Name"
-msgstr "Назва"
+msgstr "Name"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Name"
-msgstr "Назва"
+msgstr "Name"
 
 msgctxt "NewComponentDialog|"
 msgid "Name"
-msgstr "Назва"
+msgstr "Name"
 
 msgctxt "PackProfile|"
 msgid "Name"
-msgstr "Ім’я"
+msgstr "Name"
 
 msgctxt "ProfileSelectDialog|"
 msgid "Name"
-msgstr "Назва"
+msgstr "Name"
 
 msgctxt "ServersModel|"
 msgid "Name"
-msgstr "Назва"
+msgstr "Name"
 
 msgctxt "WorldList|"
 msgid "Name"
-msgstr "Назва"
+msgstr "Name"
 
 msgctxt "LauncherPage|"
 msgid "Open"
-msgstr "Відкрити"
+msgstr "Open"
 
 msgctxt "VersionProxyModel|"
 msgid "Path"
-msgstr "Шлях"
+msgstr "Path"
 
 msgctxt "ProgressDialog|"
 msgid "Skip"
-msgstr "Пропустити"
+msgstr "Skip"
 
 msgctxt "AccountsDialog|"
 msgid "Slim"
-msgstr "Струнка"
+msgstr "Slim"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Test"
-msgstr "Перевірка"
+msgstr "Test"
 
 msgctxt "JavaPage|"
 msgid "Test"
-msgstr "Перевірити"
+msgstr "Test"
 
 msgctxt "ProxyPage|"
 msgid "Type"
-msgstr "Тип"
+msgstr "Type"
 
 msgctxt "VersionProxyModel|"
 msgid "Type"
-msgstr "Тип"
+msgstr "Type"
 
 msgctxt "LaunchController|"
 msgid "Open Accounts"
-msgstr "Відкрити облікові записи"
+msgstr "Open Accounts"
 
 #, qt-format
 msgctxt "LoggedProcess|"
 msgid "System exit code description: %1"
-msgstr "Опис коду виходу системи: %1"
+msgstr "System exit code description: %1"
 
 msgctxt "QuaGzipFile|"
 msgid "Opening gzip for both reading and writing is not supported"
-msgstr "Відкриття gzip для читання і запису не підтримується"
+msgstr "Opening gzip for both reading and writing is not supported"
 
 msgctxt "ProgressDialog|"
 msgid "Task Status..."
-msgstr "Стан завдання..."
+msgstr "Task Status..."
 
 msgctxt "LegacyFTB::ListModel|"
 msgid "Third Party Modpack"
-msgstr "Сторонній мод-пак"
+msgstr "Third Party Modpack"
 
 msgctxt "AccountsDialog|"
 msgid ""
 "This account doesn't own Minecraft yet. Without purchasing the game, you can "
 "only play the demo."
 msgstr ""
-"Цей обліковий запис ще не має власного Minecraft. Без придбання гри ви "
-"можете грати тільки демо."
+"This account doesn't own Minecraft yet. Without purchasing the game, you can "
+"only play the demo."
 
 msgctxt "XboxProfileStep|"
 msgid "Fetching Xbox profile."
-msgstr "Отримання профілю Xbox."
+msgstr "Fetching Xbox profile."
 
 msgctxt "LogPage|"
 msgid "&Copy"
-msgstr "&Копіювати"
+msgstr "&Copy"
 
 msgctxt "OtherLogsPage|"
 msgid "&Copy"
-msgstr "&Копіювати"
+msgstr "&Copy"
 
 msgctxt "MainWindow|"
 msgid "News Toolbar"
-msgstr "Панель новин"
+msgstr "News Toolbar"
 
 msgctxt "ServersPage|"
 msgid "&Name"
-msgstr "&Назва"
+msgstr "&Name"
 
 msgctxt "ProxyPage|"
 msgid "&None"
-msgstr "&Немає"
+msgstr "&None"
 
 msgctxt "AboutDialog|"
 msgid ""
@@ -243,87 +243,87 @@ msgid ""
 "by allowing you to have multiple instances of Minecraft at "
 "once.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>MultiMC - це неофіційний лаунчер, який спрощує "
-"керування Minecraft, дозволяючи мати кілька збірок Minecraft "
-"одночасно.</p></body></html>"
+"<html><head/><body><p>A custom launcher that makes managing Minecraft easier "
+"by allowing you to have multiple instances of Minecraft at "
+"once.</p></body></html>"
 
 msgctxt "LegacyFTB::PackFetchTask|"
 msgid "Public Packs"
-msgstr "Публічні збірки"
+msgstr "Public Packs"
 
 #, qt-format
 msgctxt "ProfileSelectDialog|"
 msgid "%1 (in use)"
-msgstr "%1 (використовується)"
+msgstr "%1 (in use)"
 
 #, qt-format
 msgctxt "QObject|"
 msgid "%1 (in use)"
-msgstr "%1 (використовується)"
+msgstr "%1 (in use)"
 
 msgctxt "ImportPage|"
 msgid "Import from zip"
-msgstr "Імпортування із zip архіву"
+msgstr "Import from zip"
 
 msgctxt "MainWindow|"
 msgid "Copy the selected instance."
-msgstr "Копіювати обрану збірку."
+msgstr "Copy the selected instance."
 
 msgctxt "MSAStep|"
 msgid "Microsoft user authentication failed."
-msgstr "Помилка аутентифікації користувача Microsoft."
+msgstr "Microsoft user authentication failed."
 
 msgctxt "LaunchController|"
 msgid "Abort"
-msgstr "Перервати"
+msgstr "Abort"
 
 msgctxt "LegacyUpgradePage|"
 msgid "Abort"
-msgstr "Скасувати"
+msgstr "Abort"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Abort"
-msgstr "Перервати"
+msgstr "Abort"
 
 msgctxt "AboutDialog|"
 msgid "About"
-msgstr "Про програму"
+msgstr "About"
 
 msgctxt "VanillaPage|"
 msgid "Betas"
-msgstr "Бети"
+msgstr "Betas"
 
 msgctxt "AccountsDialog|"
 msgid "Capes"
-msgstr "Плащі"
+msgstr "Capes"
 
 msgctxt "ExternalToolsPage|"
 msgid "Check"
-msgstr "Перевірити"
+msgstr "Check"
 
 msgctxt "OtherLogsPage|"
 msgid "Clean"
-msgstr "Очистити"
+msgstr "Clean"
 
 msgctxt "LogPage|"
 msgid "Clear"
-msgstr "Очистити"
+msgstr "Clear"
 
 msgctxt "AboutDialog|"
 msgid "Close"
-msgstr "Закрити"
+msgstr "Close"
 
 msgctxt "InstanceWindow|"
 msgid "Close"
-msgstr "Закрити"
+msgstr "Close"
 
 msgctxt "NotificationDialog|"
 msgid "Close"
-msgstr "Закрити"
+msgstr "Close"
 
 msgctxt "UpdateDialog|"
 msgid "Close"
-msgstr "Закрити"
+msgstr "Close"
 
 msgctxt "ProxyPage|"
 msgid "H&TTP"
@@ -331,96 +331,96 @@ msgstr "H&TTP"
 
 msgctxt "ExportInstanceDialog|"
 msgid "Error"
-msgstr "Помилка"
+msgstr "Error"
 
 msgctxt "ExternalToolsPage|"
 msgid "Error"
-msgstr "Помилка"
+msgstr "Error"
 
 msgctxt "LaunchController|"
 msgid "Error"
-msgstr "Помилка"
+msgstr "Error"
 
 msgctxt "LegacyUpgradePage|"
 msgid "Error"
-msgstr "Помилка"
+msgstr "Error"
 
 msgctxt "MainWindow|"
 msgid "Error"
-msgstr "Помилка"
+msgstr "Error"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Error"
-msgstr "Помилка"
+msgstr "Error"
 
 msgctxt "OtherLogsPage|"
 msgid "Error"
-msgstr "Помилка"
+msgstr "Error"
 
 msgctxt "VersionPage|"
 msgid "Error"
-msgstr "Помилка"
+msgstr "Error"
 
 msgctxt "VersionSelectWidget|"
 msgid "Error"
-msgstr "Помилка"
+msgstr "Error"
 
 msgctxt "LoggedProcess|"
 msgid "Process was killed by user."
-msgstr "Процес був зупинений користувачем."
+msgstr "Process was killed by user."
 
 msgctxt "LauncherPage|"
 msgid "Icons Folder"
-msgstr "Тека значків"
+msgstr "Icons Folder"
 
 msgctxt "VersionPage|"
 msgid "Install the Quilt Loader package."
-msgstr "Встановити пакет Quilt Loader."
+msgstr "Install the Quilt Loader package."
 
 msgctxt "AccountsDialog|"
 msgid "Model"
-msgstr "Модель"
+msgstr "Model"
 
 msgctxt "NotesPage|"
 msgid "Notes"
-msgstr "Нотатки"
+msgstr "Notes"
 
 msgctxt "ProxyPage|"
 msgid "Proxy"
-msgstr "Проксі"
+msgstr "Proxy"
 
 msgctxt "NewInstanceDialog|"
 msgid "Reset"
-msgstr "Скинути"
+msgstr "Reset"
 
 msgctxt "AccountsDialog|"
 msgid "Skins"
-msgstr "Скіни"
+msgstr "Skins"
 
 msgctxt "AtlOptionalModDialog|"
 msgid "Install"
-msgstr "Встановити"
+msgstr "Install"
 
 msgctxt "LauncherPage|"
 msgid "Theme"
-msgstr "Тема"
+msgstr "Theme"
 
 msgctxt "ExternalToolsPage|"
 msgid "Invalid"
-msgstr "Недійсний"
+msgstr "Invalid"
 
 msgctxt "GameOptions|"
 msgid "Value"
-msgstr "Значення"
+msgstr "Value"
 
 msgctxt "MainWindow|"
 msgid "View the mods of this instance."
-msgstr "Переглянути список модифікацій для цієї збірки."
+msgstr "View the mods of this instance."
 
 #, qt-format
 msgctxt "AccountsDialog|"
 msgid "Unhandled profile name status: %1"
-msgstr "Статус імені профілю без обробки: %1"
+msgstr "Unhandled profile name status: %1"
 
 msgctxt "AboutDialog|"
 msgid ""
@@ -437,138 +437,136 @@ msgid ""
 "However, it should be abundantly clear that the project is a fork "
 "<b>without</b> implying that you have our blessing.</p>"
 msgstr ""
-"<p>Ми зберігаємо MultiMC із відкритим вихідним кодом, оскільки ми вважаємо "
-"важливо бачити вихідний код подібного проєкту як цей, і робимо це, "
-"використовуючи ліцензію Apache.</p>\n"
-"<p>Одна із причин використовування ліцензію Apache полягає в тому, що ми не "
-"хочемо, щоб люди використовували назву &quot;MultiMC&quot; розповсюджуючи "
-"проєкт. Це значить, що люди повинні витратити час, щоб переглянути вихідний "
-"код і видалити всі посилання на &quot;MultiMC&quot;, включаючи, зокрема, "
-"іконку проєкту і заголовки вікон (але не <b>форк MultiMC</b> у "
-"заголовку).</p>\n"
-"<p>Ліцензія Apache охоплює розумне використання імені - згадка про "
-"походження проєкту в діалоговому вікні «Про програму» і ліцензія допустимі. "
-"Однак, повинно бути абсолютно зрозуміло, що проєкт є форком, <b>без</b> "
-"передбачення, що у вас є наше благословіння.</p>"
+"<p>We keep MultiMC open source because we think it's important to be able to "
+"see the source code for a project like this, and we do so using the Apache "
+"license.</p>\n"
+"<p>Part of the reason for using the Apache licence is we don't want people "
+"using the &quot;MultiMC&quot; name when redistributing the project. This "
+"means people must take the time to go through the source code and remove all "
+"references to &quot;MultiMC&quot;, including but not limited to the project "
+"icon and the title of windows, (no <b>MultiMC-fork</b> in the title).</p>\n"
+"<p>The Apache license covers reasonable use for the name - a mention of the "
+"project's origins in the About dialogue and the licence is acceptable. "
+"However, it should be abundantly clear that the project is a fork "
+"<b>without</b> implying that you have our blessing.</p>"
 
 msgctxt "FMLLibrariesTask|"
 msgid "Downloading FML libraries..."
-msgstr "Завантаження бібліотек FML..."
+msgstr "Downloading FML libraries..."
 
 msgctxt "MainWindow|"
 msgid "Main Toolbar"
-msgstr "Головна панель інструментів"
+msgstr "Main Toolbar"
 
 msgctxt "MainWindow|"
 msgid "Edit the notes for the selected instance."
-msgstr "Редагувати нотатки для обраної збірки."
+msgstr "Edit the notes for the selected instance."
 
 msgctxt "InstanceWindow|"
 msgid "Launch the instance"
-msgstr "Запустити вибрану збірку"
+msgstr "Launch the instance"
 
 msgctxt "VerifyJavaInstall|"
 msgid "Minecraft 21w19a and above require the use of Java 16"
-msgstr "Minecraft 21w19a та вище потребує Java версії 16"
+msgstr "Minecraft 21w19a and above require the use of Java 16"
 
 msgctxt "ExternalToolsPage|"
 msgid "External Editors (leave empty for system default)"
-msgstr ""
-"Зовнішній редактор (залиште пустим, щоб використовувати системний редактор)"
+msgstr "External Editors (leave empty for system default)"
 
 #, qt-format
 msgctxt "PostLaunchCommand|"
 msgid "Running Post-Launch command: %1"
-msgstr "Запуск команди після запуску: %1"
+msgstr "Running Post-Launch command: %1"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Custom commands"
-msgstr "Користувацькі команди"
+msgstr "Custom commands"
 
 msgctxt "CustomCommandsPage|"
 msgid "Custom Commands"
-msgstr "Користувацькі команди"
+msgstr "Custom Commands"
 
 msgctxt "JavaListLoadTask|"
 msgid "Detecting Java installations..."
-msgstr "Пошук встановлених Java інсталяцій..."
+msgstr "Detecting Java installations..."
 
 msgctxt "VerifyJavaInstall|"
 msgid "Minecraft 24w14a and above require the use of Java 21"
-msgstr "Minecraft 24w14a та вище потребує Java версії 21"
+msgstr "Minecraft 24w14a and above require the use of Java 21"
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Downloading mods..."
-msgstr "Завантаження модів..."
+msgstr "Downloading mods..."
 
 msgctxt "InstanceImportTask|"
 msgid "Downloading mods..."
-msgstr "Завантаження модів..."
+msgstr "Downloading mods..."
 
 msgctxt "Technic::SolderPackInstallTask|"
 msgid "Downloading modpack"
-msgstr "Завантаження мод-паку"
+msgstr "Downloading modpack"
 
 msgctxt "Modrinth::InstanceExportTask|"
 msgid "Failed to create zip file"
-msgstr "Не вдалося створити zip-файл"
+msgstr "Failed to create zip file"
 
 msgctxt "SetCapeStep|"
 msgid "Setting cape."
-msgstr "Налаштування накидки."
+msgstr "Setting cape."
 
 msgctxt "AccountsDialog|"
 msgid "Failed to apply skin"
-msgstr "Не вдалося застосувати скін"
+msgstr "Failed to apply skin"
 
 msgctxt "AtlOptionalModDialog|"
 msgid "Select Mods To Install"
-msgstr "Оберіть модифікації для встановлення"
+msgstr "Select Mods To Install"
 
 msgctxt "LegacyFTB::Page|"
 msgid "FTB private packs"
-msgstr "Приватні збірки FTB"
+msgstr "FTB private packs"
 
 msgctxt "XboxUserStep|"
 msgid "XBox user authentication response could not be understood."
-msgstr "Не вдалося розпізнати відповідь автентифікації Xbox."
+msgstr "XBox user authentication response could not be understood."
 
 msgctxt "InstanceImportTask|"
 msgid "Modpack download"
-msgstr "Завантаження мод-паку"
+msgstr "Modpack download"
 
 msgctxt "Technic::SingleZipPackInstallTask|"
 msgid "Modpack download"
-msgstr "Завантажити мод-пак"
+msgstr "Modpack download"
 
 msgctxt "MainWindow|"
 msgid "Create a shortcut that launches the selected instance"
-msgstr "Створити ярлик, який запускає обраний екземпляр"
+msgstr "Create a shortcut that launches the selected instance"
 
 msgctxt "LaunchController|"
 msgid "Play Offline"
-msgstr "Грати офлайн"
+msgstr "Play Offline"
 
 #, qt-format
 msgctxt "QObject|"
 msgid "Invalid component file version, expected %1"
-msgstr "Некоректна версія файлу компонента, очікувалось %1"
+msgstr "Invalid component file version, expected %1"
 
 msgctxt "AuthFlow|"
 msgid "Finished all authentication steps"
-msgstr "Завершено всі кроки автентифікації"
+msgstr "Finished all authentication steps"
 
 msgctxt "AccountsDialog|"
 msgid "Save Skin To File"
-msgstr "Зберегти скін у файл"
+msgstr "Save Skin To File"
 
 msgctxt "LogPage|"
 msgid "Clear the log"
-msgstr "Очистити журнал"
+msgstr "Clear the log"
 
 msgctxt "OtherLogsPage|"
 msgid "Clear the log"
-msgstr "Очистити журнал"
+msgstr "Clear the log"
 
 msgctxt "LaunchController|"
 msgid ""
@@ -576,21 +574,21 @@ msgid ""
 "account logged in.Would you like to open the account manager to add an "
 "account now?"
 msgstr ""
-"Для того, щоб грати Minecraft, ви повинні увійти, як мінімум, в один "
-"обліковий запис Mojang, або Minecraft. Відкрити керування обліковими "
-"записами аби його додати?"
+"In order to play Minecraft, you must have at least one Mojang or Minecraft "
+"account logged in to MultiMC. Would you like to open the account manager to "
+"add an account now?"
 
 msgctxt "TranslationsModel|"
 msgid "The native language name."
-msgstr "Назва рідної мови."
+msgstr "The native language name."
 
 msgctxt "LaunchController|"
 msgid "No instance specified!"
-msgstr "Немає вказаної збірки!"
+msgstr "No instance specified!"
 
 msgctxt "WorldListPage|"
 msgid "Join offline"
-msgstr "Приєднатися офлайн"
+msgstr "Join offline"
 
 #, qt-format
 msgctxt "LanguageSelectionWidget|"
@@ -598,12 +596,12 @@ msgid ""
 "Don't see your language or the quality is poor?<br/><a href=\"%1\">Help us "
 "with translations!</a>"
 msgstr ""
-"Немає вашої мови, або незадоволені якістю перекладу?<br/><a "
-"href=\"%1\">Допоможіть нам із перекладом!</a>"
+"Don't see your language or the quality is poor?<br/><a href=\"%1\">Help us "
+"with translations!</a>"
 
 msgctxt "NewInstanceDialog|"
 msgid "New Instance"
-msgstr "Нова збірка"
+msgstr "New Instance"
 
 #, qt-format
 msgctxt "QObject|"
@@ -611,20 +609,20 @@ msgid ""
 "Couldn't replace file %1. Changes will be reverted.\n"
 "See the %2 log file for details."
 msgstr ""
-"Не вдалося замінити файл %1. Зміни будуть змінені.\n"
-"Детальніше у файлі звіту %2."
+"Couldn't replace file %1. Changes will be reverted.\n"
+"See the %2 log file for details."
 
 msgctxt "VersionPage|"
 msgid "Select Quilt Loader version"
-msgstr "Виберіть версію Завантажувача Quilt"
+msgstr "Select Quilt Loader version"
 
 msgctxt "CreateShortcutDialog|"
 msgid "Join world on launch:"
-msgstr "Приєднатися до серверу після запуску:"
+msgstr "Join world on launch:"
 
 msgctxt "Modrinth::InstanceExportTask|"
 msgid "Failed to create temporary directory"
-msgstr "Не вдається створити тимчасовий каталог"
+msgstr "Failed to create temporary directory"
 
 #, qt-format
 msgctxt "XboxAuthorizationStep|"
@@ -633,21 +631,21 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
-"Автентифікація XSTS закінчилася з нерозпізнаними помилками:\n"
+"XSTS authentication ended with unrecognised error(s):\n"
 "\n"
 "%1"
 
 msgctxt "TexturePackFolderModel|"
 msgid "The date and time this texture pack was last changed (or added)."
-msgstr "Дата і час останньої зміни (або додавання) цього пакунка текстур."
+msgstr "The date and time this texture pack was last changed (or added)."
 
 msgctxt "AtlOptionalModDialog|"
 msgid "Use Share Code"
-msgstr "Використати спільний код"
+msgstr "Use Share Code"
 
 msgctxt "GoUpdate::DownloadTask|"
 msgid "Downloading one update file."
-msgstr "Завантаження файлу оновлення."
+msgstr "Downloading one update file."
 
 msgctxt "MinecraftInstance|"
 msgid "<ACCESS TOKEN>"
@@ -655,103 +653,103 @@ msgstr "<ACCESS TOKEN>"
 
 msgctxt "VersionPage|"
 msgid "Customize selected package."
-msgstr "Налаштуйте вибраний пакет."
+msgstr "Customise selected package."
 
 msgctxt "VersionProxyModel|"
 msgid "The version's branch"
-msgstr "Гілка версії"
+msgstr "The version's branch"
 
 msgctxt "AccountTask|"
 msgid "Failed to authenticate. The session has expired."
-msgstr "Не вдалося виконати автентифікацію. Термін дії сесії закінчився."
+msgstr "Failed to authenticate. The session has expired."
 
 msgctxt "ExternalToolsPage|"
 msgid "JProfiler Folder"
-msgstr "Тека JProfiler"
+msgstr "JProfiler Folder"
 
 msgctxt "ImportPage|"
 msgid "Local file or link to a direct download:"
-msgstr "Локальний файл, або пряме посилання для завантаження:"
+msgstr "Local file or link to a direct download:"
 
 msgctxt "LaunchController|"
 msgid "Account gone"
-msgstr "Обліковий запис зник"
+msgstr "Account gone"
 
 msgctxt "VersionSelectDialog|"
 msgid "Reloads the version list."
-msgstr "Перезавантажує список версій."
+msgstr "Reloads the version list."
 
 msgctxt "AccountsDialog|"
 msgid "Open Skins Folder"
-msgstr "Відкрити теку зі скінами"
+msgstr "Open Skins Folder"
 
 msgctxt "LegacyFTB::Page|"
 msgid "Enter pack code:"
-msgstr "Введіть код мод-паку:"
+msgstr "Enter pack code:"
 
 msgctxt "AccountsDialog|"
 msgid "Reset Changes"
-msgstr "Скинути зміни"
+msgstr "Reset Changes"
 
 msgctxt "VersionPage|"
 msgid "Open the instance's .minecraft folder."
-msgstr "Відкрити теку .minecraft збірки."
+msgstr "Open the instance's .minecraft folder."
 
 msgctxt "QObject|"
 msgid "Invalid path to JVisualVM"
-msgstr "Неправильний шлях до JVisualVM"
+msgstr "Invalid path to JVisualVM"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Show console when the game crashes?"
-msgstr "Показувати вікно консолі після аварії гри?"
+msgstr "Show console when the game crashes?"
 
 msgctxt "LauncherPage|"
 msgid "Show console when the game crashes?"
-msgstr "Показувати вікно консолі після аварійного завершення гри?"
+msgstr "Show console when the game crashes?"
 
 msgctxt "VersionPage|"
 msgid "Couldn't load or download the Forge version lists!"
-msgstr "Не вдалося завантажити або скачати список версій Forg!"
+msgstr "Couldn't load or download the Forge version lists!"
 
 msgctxt "LoggedProcess|"
 msgid "Process crashed."
-msgstr "Процес зазнав краху."
+msgstr "Process crashed."
 
 msgctxt "WorldListPage|"
 msgid "Minecraft World Zip File (*.zip)"
-msgstr "Zip-файл світу Minecraft (*.zip)"
+msgstr "Minecraft World Zip File (*.zip)"
 
 msgctxt "XboxProfileStep|"
 msgid "Failed to retrieve the Xbox profile."
-msgstr "Не вдалося отримати профіль Xbox."
+msgstr "Failed to retrieve the Xbox profile."
 
 msgctxt "QObject|"
 msgid "JVM arguments warning"
-msgstr "Попередження про JVM аргументи"
+msgstr "JVM arguments warning"
 
 msgctxt "UpdateDialog|"
 msgid "No updates found. You are running the latest version."
-msgstr "Оновлень не знайдено. Ви використовуєте найновішу версію."
+msgstr "No updates found. You are running the latest version."
 
 msgctxt "VersionPage|"
 msgid "Install Fabric"
-msgstr "Встановити Fabric"
+msgstr "Install Fabric"
 
 msgctxt "CopyInstanceDialog|"
 msgid "No group"
-msgstr "Без групи"
+msgstr "No group"
 
 msgctxt "NewInstanceDialog|"
 msgid "No group"
-msgstr "Без групи"
+msgstr "No group"
 
 msgctxt "QObject|"
 msgid "The specified file either doesn't exist or is not a proper executable."
-msgstr "Зазначений файл або не існує або не є виконуваним."
+msgstr "The specified file either doesn't exist or is not a proper executable."
 
 msgctxt "LauncherPage|"
 msgid "Skins Folder"
-msgstr "Папка скінів"
+msgstr "Skins Folder"
 
 #, qt-format
 msgctxt "LegacyFTB::Page|"
@@ -759,12 +757,12 @@ msgid ""
 "Failed to download pack information for code %1.\n"
 "Should it be removed now?"
 msgstr ""
-"Не вдалося завантажити інформацію мод-паку для коду %1.\n"
-"Видалити його зараз?"
+"Failed to download pack information for code %1.\n"
+"Should it be removed now?"
 
 msgctxt "MainWindow|"
 msgid "More news..."
-msgstr "Більше новин..."
+msgstr "More news..."
 
 #, qt-format
 msgctxt "XboxAuthorizationStep|"
@@ -772,16 +770,16 @@ msgid ""
 "This Microsoft account requires proof of age to play. Please login to %1 to "
 "provide proof of age."
 msgstr ""
-"Цей обліковий запис Microsoft вимагає підтвердження віку. Будь ласка, "
-"увійдіть в %1, щоб забезпечити підтвердження віку."
+"This Microsoft account requires proof of age to play. Please login to %1 to "
+"provide proof of age."
 
 msgctxt "AccountsDialog|"
 msgid "Apply Changes"
-msgstr "Застосувати зміни"
+msgstr "Apply Changes"
 
 msgctxt "LibrariesTask|"
 msgid "Null jar is specified in the metadata, aborting."
-msgstr "В метаданих вказаний нульовий jar, відміна."
+msgstr "Null jar is specified in the metadata, aborting."
 
 #, qt-format
 msgctxt "TranslationsModel|"
@@ -792,17 +790,17 @@ msgid ""
 "%4 total"
 msgstr ""
 "%1:\n"
-"%2 перекладено\n"
-"%3 неточно\n"
-"%4 загалом"
+"%2 translated\n"
+"%3 fuzzy\n"
+"%4 total"
 
 msgctxt "NewsEntry|"
 msgid "Unknown Author"
-msgstr "Невідомий автор"
+msgstr "Unknown Author"
 
 msgctxt "AssetUpdateTask|"
 msgid "Getting the assets files from Mojang..."
-msgstr "Отримання файлів ресурсів із Mojang..."
+msgstr "Getting the assets files from Mojang..."
 
 msgctxt "LaunchController|"
 msgid ""
@@ -811,46 +809,46 @@ msgid ""
 "\n"
 "Do you want to play the demo?"
 msgstr ""
-"На цьому обліковому записі не придбаний Minecraft.\n"
-"Ви повинні придбати Minecraft для того, щоб грати.\n"
+"This account does not own Minecraft.\n"
+"You need to purchase the game first to play it.\n"
 "\n"
-"Хочете зіграти пробну версію Minecraft?"
+"Do you want to play the demo?"
 
 msgctxt "MainWindow|"
 msgid "View Instance Folder"
-msgstr "Глянути теку збірки"
+msgstr "View Instance Folder"
 
 msgctxt "VersionPage|"
 msgid "Download All"
-msgstr "Завантажити все"
+msgstr "Download All"
 
 msgctxt "LauncherPage|"
 msgid "Instance view sorting mode"
-msgstr "Режим сортування збірок"
+msgstr "Instance view sorting mode"
 
 msgctxt "AboutDialog|"
 msgid "Build Number"
-msgstr "Номер збірки"
+msgstr "Build Number"
 
 msgctxt "AccountList|"
 msgid "Add New Account"
-msgstr "Додати новий обліковий запис"
+msgstr "Add New Account"
 
 msgctxt "MainWindow|"
 msgid "Add Instance"
-msgstr "Додати збірку"
+msgstr "Add Instance"
 
 msgctxt "LauncherPage|"
 msgid "Reset hidden notifications"
-msgstr "Скинути приховані сповіщення"
+msgstr "Reset hidden notifications"
 
 msgctxt "ServersPage|"
 msgid "Reso&urces"
-msgstr "Рес&урс-пак"
+msgstr "Reso&urces"
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "No loader version set for modpack!"
-msgstr "Не встановлено версію завантажувача для модпаку!"
+msgstr "No loader version set for modpack!"
 
 msgctxt "QObject|"
 msgid ""
@@ -860,179 +858,177 @@ msgid ""
 "group at the top).\n"
 "This message will be displayed until you remove them from the JVM arguments."
 msgstr ""
-"Ви намагалися вручну встановити JVM параметри пам'яті (використовуючи "
-"\"-XX:PermSize\", \"-XX-MaxHeapSize\", \"-XX:InitialHeapSize\", \"-Xmx\" or "
-"\"-Xms\").\n"
-"У верхній частині сторінки існують виділені поля для них (Java вкладка, у "
-"групі пам'яті вгорі).\n"
-"Це повідомлення буде показано, поки ви не видалите його з аргументів JVM."
+"You tried to manually set a JVM memory option (using \"-XX:PermSize\", "
+"\"-XX-MaxHeapSize\", \"-XX:InitialHeapSize\",  \"-Xmx\" or \"-Xms\").\n"
+"There are dedicated boxes for these in the settings (Java tab, in the Memory "
+"group at the top).\n"
+"This message will be displayed until you remove them from the JVM arguments."
 
 msgctxt "MainWindow|"
 msgid "Instance Toolbar"
-msgstr "Панель інструментів збірки"
+msgstr "Instance Toolbar"
 
 msgctxt "JVisualVM|"
 msgid "JVisualVM started"
-msgstr "JVisualVM запущений"
+msgstr "JVisualVM started"
 
 msgctxt "ShaderPackPage|"
 msgid "Shader packs"
-msgstr "Пакунки шейдерів"
+msgstr "Shader packs"
 
 msgctxt "CreateShortcutDialog|"
 msgid "Use specific profile:"
-msgstr "Використовувати конкретний профіль:"
+msgstr "Use specific profile:"
 
 #, qt-format
 msgctxt "MinecraftProfileCreateStep|"
 msgid "Creating the Minecraft profile '%1'."
-msgstr "Створення профілю Minecraft «%1»."
+msgstr "Creating the Minecraft profile '%1'."
 
 msgctxt "WorldListPage|"
 msgid "Launch the instance in offline mode directly into the selected world"
-msgstr ""
-"Запустіть екземпляр в автономному режимі безпосередньо у вибраному світі"
+msgstr "Launch the instance in offline mode directly into the selected world"
 
 #, qt-format
 msgctxt "VersionPage|"
 msgid "Change %1 version"
-msgstr "Змінити версію %1"
+msgstr "Change %1 version"
 
 #, qt-format
 msgctxt "XboxAuthorizationStep|"
 msgid "Failed to get authorization for %1 services. Error %2."
-msgstr "Не вдалося отримати авторизацію для %1 сервісів. Помилка %2."
+msgstr "Failed to get authorisation for %1 services. Error %2."
 
 msgctxt "ExternalToolsPage|"
 msgid "External Tools"
-msgstr "Зовнішні інструменти"
+msgstr "External Tools"
 
 msgctxt "TexturePackFolderModel|"
 msgid "The name of the texture pack."
-msgstr "Назва пакунка текстур."
+msgstr "The name of the texture pack."
 
 msgctxt "AtlOptionalModDialog|"
 msgid "Select Recommended"
-msgstr "Виберіть Рекомендовані"
+msgstr "Select Recommended"
 
 msgctxt "AuthFlow|"
 msgid "Working..."
-msgstr "Обробка..."
+msgstr "Working..."
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid "Open the bug tracker to report a bug with %1."
-msgstr "Відкрийте баг-трекер, щоб повідомити про помилку в %1."
+msgstr "Open the bug tracker to report a bug with %1."
 
 #, qt-format
 msgctxt "AccountsDialog|"
 msgid "Minecraft profile with name %1 already exists."
-msgstr "Профіль Minecraft з іменем «%1» вже існує."
+msgstr "Minecraft profile with name %1 already exists."
 
 msgctxt "GoUpdate::DownloadTask|"
 msgid "Failed to download version info files."
-msgstr "Не вдалося завантажити файли інформації про версію."
+msgstr "Failed to download version info files."
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Config download"
-msgstr "Завантаження конфігурації"
+msgstr "Config download"
 
 msgctxt "MinecraftPage|"
 msgid "Show time spent playing in hours only"
-msgstr "Показувати час, витрачений на гру, лише в годинах"
+msgstr "Show time spent playing in hours only"
 
 msgctxt "LaunchController|"
 msgid "Launch cancelled - account does not own Minecraft."
-msgstr "Запуск скасовано - обліковий запис не володіє Minecraft."
+msgstr "Launch cancelled - account does not own Minecraft."
 
 msgctxt "VersionPage|"
 msgid "Minecraft.jar replacement (*.jar)"
-msgstr "Заміна Minecraft.jar (*.jar)"
+msgstr "Minecraft.jar replacement (*.jar)"
 
 msgctxt "ResourcePackFolderModel|"
 msgid "The date and time this resource pack was last changed (or added)."
-msgstr "Дата і час останньої зміни (або додавання) цього пакунка ресурсів."
+msgstr "The date and time this resource pack was last changed (or added)."
 
 msgctxt "LoggedProcess|"
 msgid ""
 "Below is an analysis of the exit code. THIS MAY BE INCORRECT AND SHOULD BE "
 "TAKEN WITH A GRAIN OF SALT!"
 msgstr ""
-"Нижче наведено аналіз вихідного коду. ЦЕ МОЖЕ БУТИ НЕВІРНО. ТОМУ БУДЬТЕ "
-"УВАЖНІ!"
+"Below is an analysis of the exit code. THIS MAY BE INCORRECT AND SHOULD BE "
+"TAKEN WITH A PINCH OF SALT!"
 
 msgctxt "VersionPage|"
 msgid "Change version"
-msgstr "Змінити версію"
+msgstr "Change version"
 
 msgctxt "TexturePackFolderModel|"
 msgid "The version of the texture pack."
-msgstr "Версія пакунка текстур."
+msgstr "The version of the texture pack."
 
 msgctxt "ModrinthPage|"
 msgid "Failed to get Modrinth modpack details..."
-msgstr "Не вдалося отримати деталі збірки Modrinth..."
+msgstr "Failed to get Modrinth modpack details..."
 
 msgctxt "MainWindow|"
 msgid "Open the instance's config folder."
-msgstr "Відкрити теку конфігурації для збірки."
+msgstr "Open the instance's config folder."
 
 msgctxt "ModrinthExportDialog|"
 msgid "Include Minecraft config"
-msgstr "Включити конфігурацію Minecraft"
+msgstr "Include Minecraft config"
 
 msgctxt "WorldListPage|"
 msgid "World name"
-msgstr "Назва світу"
+msgstr "World name"
 
 msgctxt "LauncherPage|"
 msgid " lines"
-msgstr " рядків"
+msgstr " lines"
 
 msgctxt "AccountTask|"
 msgid "Failed to authenticate. The account no longer exists."
-msgstr "Помилка аутентифікації. Обліковий запис більше не існує."
+msgstr "Failed to authenticate. The account no longer exists."
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid " on %1"
-msgstr " на %1"
+msgstr " on %1"
 
 msgctxt "LogPage|"
 msgid "Wrap lines"
-msgstr "Переносити рядки"
+msgstr "Wrap lines"
 
 msgctxt "XboxProfileStep|"
 msgid "Got Xbox profile"
-msgstr "Маю профіль Xbox"
+msgstr "Got Xbox profile"
 
 msgctxt "PasteUpload|"
 msgid "Uploading to paste.ee"
-msgstr "Завантаження до paste.ee"
+msgstr "Uploading to paste.ee"
 
 msgctxt "ServersModel|"
 msgid "Latency"
-msgstr "Затримка"
+msgstr "Latency"
 
 msgctxt "AboutDialog|"
 msgid "Platform"
-msgstr "Платформа"
+msgstr "Platform"
 
 msgctxt "Technic::TechnicPackProcessor|"
 msgid "Unable to find a \"version.json\"!"
-msgstr "Не вдалося знайти \"version.json\"!"
+msgstr "Unable to find a \"version.json\"!"
 
 msgctxt "LauncherPage|"
 msgid "Check for updates on start?"
-msgstr "Перевіряти наявність оновлень при запуску?"
+msgstr "Check for updates on start?"
 
 msgctxt "LauncherLoginStep|"
 msgid "Accessing Mojang services."
-msgstr "Отримання доступу до сервісів Mojang."
+msgstr "Accessing Mojang services."
 
 msgctxt "ExternalToolsPage|"
 msgid "JVisualVM setup seems to be OK"
-msgstr "Налаштування JVisualVM здається виконано успішно"
+msgstr "JVisualVM setup seems to be OK"
 
 #, qt-format
 msgctxt "QObject|"
@@ -1040,98 +1036,98 @@ msgid ""
 "The 'minimumLauncherVersion' value of this version (%1) is higher than "
 "supported by %3 (%2). It might not work properly!"
 msgstr ""
-"Значення «minimumLauncherVersion» цієї версії (%1) вище, ніж підтримується у "
-"%3 (%2). Це може працювати некоректно!"
+"The 'minimumLauncherVersion' value of this version (%1) is higher than "
+"supported by %3 (%2). It might not work properly!"
 
 msgctxt "GameOptionsPage|"
 msgid "Game Options"
-msgstr "Опції гри"
+msgstr "Game Options"
 
 msgctxt "AtlPage|"
 msgid "Version selected:"
-msgstr "Вибрана версія:"
+msgstr "Version selected:"
 
 msgctxt "LegacyFTB::Page|"
 msgid "Version selected:"
-msgstr "Вибрана версія:"
+msgstr "Version selected:"
 
 msgctxt "ModrinthPage|"
 msgid "Version selected:"
-msgstr "Обрано версію:"
+msgstr "Version selected:"
 
 msgctxt "TechnicPage|"
 msgid "Version selected:"
-msgstr "Обрана версія:"
+msgstr "Version selected:"
 
 msgctxt "CopyInstanceDialog|"
 msgid "&Group"
-msgstr "&Група"
+msgstr "&Group"
 
 msgctxt "LauncherPage|"
 msgid "&Icons"
-msgstr "&Значки"
+msgstr "&Icons"
 
 #, qt-format
 msgctxt "QObject|"
 msgid "Unable to open the version file %1: %2."
-msgstr "Не вдалося відкрити файл версії %1: %2."
+msgstr "Unable to open the version file %1: %2."
 
 msgctxt "LauncherPage|"
 msgid "&Mods:"
-msgstr "&Модифікації:"
+msgstr "&Mods:"
 
 msgctxt "InstanceCardWidget|"
 msgid "&Name:"
-msgstr "&Назва:"
+msgstr "&Name:"
 
 msgctxt "NewInstanceDialog|"
 msgid "&Name:"
-msgstr "&Iм'я:"
+msgstr "&Name:"
 
 msgctxt "InstanceSettingsPage|"
 msgid "The amount of memory Minecraft is started with."
-msgstr "Мінімальний обсяг пам'яті для завантаження Minecraft."
+msgstr "The amount of memory Minecraft is started with."
 
 msgctxt "JavaPage|"
 msgid "The amount of memory Minecraft is started with."
-msgstr "Мінімальний обсяг пам'яті для завантаження Minecraft."
+msgstr "The amount of memory Minecraft is started with."
 
 msgctxt "JavaSettingsWidget|"
 msgid "The amount of memory Minecraft is started with."
-msgstr "Мінімальний обсяг пам'яті для завантаження Minecraft."
+msgstr "The amount of memory Minecraft is started with."
 
 msgctxt "OtherLogsPage|"
 msgid "Clean up"
-msgstr "Очистити"
+msgstr "Clean up"
 
 #, qt-format
 msgctxt "ModFolderPage|"
 msgid "Select %1"
-msgstr "Обрати %1"
+msgstr "Select %1"
 
 msgctxt "VersionPage|"
 msgid "Install NeoForge"
-msgstr "Встановити NeoForge"
+msgstr "Install NeoForge"
 
 msgctxt "ExportInstanceDialog|"
 msgid "Export Instance"
-msgstr "Експортування збірки"
+msgstr "Export Instance"
 
 msgctxt "MainWindow|"
 msgid "Export Instance"
-msgstr "Експортувати збірку"
+msgstr "Export Instance"
 
 msgctxt "JavaPage|"
 msgid "JVM arguments:"
-msgstr "Аргументи JVM:"
+msgstr "JVM arguments:"
 
 msgctxt "Modrinth::InstanceExportTask|"
 msgid "Finding files to look up on Modrinth..."
-msgstr "Пошук файлів для пошуку по Modrinth..."
+msgstr "Finding files to look up on Modrinth..."
 
 msgctxt "MinecraftUpdate|"
 msgid "Aborted by user."
-msgstr "Зупинено користувачем."
+msgstr "Aborted by user."
 
 #, qt-format
 msgctxt "QObject|"
@@ -1139,8 +1135,8 @@ msgid ""
 "Couldn't remove file %1. Changes will be reverted.\n"
 "See the %2 log file for details."
 msgstr ""
-"Не вдалося видалити файл %1. Зміни будуть змінені.\n"
-"Детальніше у файлі звіту %2."
+"Couldn't remove file %1. Changes will be reverted.\n"
+"See the %2 log file for details."
 
 #, qt-format
 msgctxt "MinecraftInstance|"
@@ -1150,11 +1146,11 @@ msgstr "Minecraft %1 (%2)"
 #, qt-format
 msgctxt "ScreenshotsPage|"
 msgid "Upload %1 screenshots to imgur.com?"
-msgstr "Завантажити знімок екрану %1 на imgur.com?"
+msgstr "Upload %1 screenshots to imgur.com?"
 
 msgctxt "OfflineNameDialog|"
 msgid "Retry Online"
-msgstr "Повторити спробу онлайн"
+msgstr "Retry Online"
 
 #, qt-format
 msgctxt "QObject|"
@@ -1162,29 +1158,29 @@ msgid ""
 "Java test succeeded!<br />Platform reported: %1<br />Java version reported: "
 "%2<br />"
 msgstr ""
-"Тестування Java завершено успішно!<br />Повідомлено про платформу: %1<br "
-"/>Повідомлено про версію Java: %2 <br />"
+"Java test succeeded!<br />Platform reported: %1<br />Java version reported: "
+"%2<br />"
 
 msgctxt "QObject|"
 msgid "Version file contains unsupported element '-minecraftArguments'"
-msgstr "Версійний файл містить непідтримуваний елемент '-minecraftArguments'"
+msgstr "Version file contains unsupported element '-minecraftArguments'"
 
 msgctxt "QObject|"
 msgid "Version file contains unsupported element '+minecraftArguments'"
-msgstr "Версійний файл містить непідтримуваний елемент '+minecraftArguments'"
+msgstr "Version file contains unsupported element '+minecraftArguments'"
 
 msgctxt "MinecraftProfileStep|"
 msgid "Account has no Minecraft profile."
-msgstr "Обліковий запис не має профілю Minecraft."
+msgstr "Account has no Minecraft profile."
 
 msgctxt "AboutDialog|"
 msgid "License"
-msgstr "Ліцензія"
+msgstr "Licence"
 
 #, qt-format
 msgctxt "LanguageWizardPage|"
 msgid "Select the language to use in %1"
-msgstr "Виберіть мову інтерфейсу %1"
+msgstr "Select the language to use in %1"
 
 #, qt-format
 msgctxt "ModrinthExportDialog|"
@@ -1193,53 +1189,52 @@ msgid ""
 "This cannot be exported to a Modrinth pack; the exported pack may not work "
 "correctly!"
 msgstr ""
-"Екземпляр містить користувацький компонент: %1\n"
-"Він не може бути експортований до пакету Modrin; експортований пакет може "
-"працювати некоректно!"
+"Instance contains a custom component: %1\n"
+"This cannot be exported to a Modrinth pack; the exported pack may not work "
+"correctly!"
 
 msgctxt "ModFolderModel|"
 msgid "Is the mod enabled?"
-msgstr "Мод увімкнено?"
+msgstr "Is the mod enabled?"
 
 msgctxt "LauncherPage|"
 msgid "User Interface"
-msgstr "Інтерфейс користувача"
+msgstr "User Interface"
 
 msgctxt "ModrinthPage|"
 msgid "Sort by total downloads"
-msgstr "Впорядкувати за кількістю завантажень"
+msgstr "Sort by total downloads"
 
 msgctxt "ModFolderPage|"
 msgid "Open the 'config' folder in the system file manager."
-msgstr "Відкрити теку 'config' в файловому менеджері системи."
+msgstr "Open the 'config' folder in the system file manager."
 
 msgctxt "PasteUpload|"
 msgid ""
 "paste.ee returned an error. Please consult the logs for more information"
 msgstr ""
-"paste.ee повернув помилку. Будь ласка, зверніться до журналів для отримання "
-"додаткової інформації"
+"paste.ee returned an error. Please consult the logs for more information"
 
 msgctxt "AuthFlow|"
 msgid "Initializing"
-msgstr "Ініціалізація"
+msgstr "Initialising"
 
 msgctxt "VersionPage|"
 msgid "Replace Minecraft.jar"
-msgstr "Замінити Minecraft.jar"
+msgstr "Replace Minecraft.jar"
 
 msgctxt "ProxyPage|"
 msgid "Authentication"
-msgstr "Аутентифікація"
+msgstr "Authentication"
 
 msgctxt "QObject|"
 msgid "Unknown format version!"
-msgstr "Невідома версія формату!"
+msgstr "Unknown format version!"
 
 #, qt-format
 msgctxt "ExtractNatives|"
 msgid "Couldn't extract native jar '%1' to destination '%2'"
-msgstr "Не вдалося витягти нативний jar-файл '%1' у вказане місце '%2'"
+msgstr "Couldn't extract native jar '%1' to destination '%2'"
 
 #, qt-format
 msgctxt "LibrariesTask|"
@@ -1248,77 +1243,77 @@ msgid ""
 "Reason:\n"
 "%1"
 msgstr ""
-"Не вдалося оновити гру: Не було можливості отримати необхідні бібліотеки.\n"
-"Причина:\n"
+"Game update failed: it was impossible to fetch the required libraries.\n"
+"Reason:\n"
 "%1"
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Failed to create pack component"
-msgstr "Не вдалося створити компонент пакета"
+msgstr "Failed to create pack component"
 
 msgctxt "LogPage|"
 msgid "Are you sure you want to upload this log file?"
-msgstr "Ви дійсно бажаєте вивантажити файл журналу?"
+msgstr "Are you sure you want to upload this log file?"
 
 msgctxt "OtherLogsPage|"
 msgid "Are you sure you want to upload this log file?"
-msgstr "Ви дійсно бажаєте вивантажити файл журналу?"
+msgstr "Are you sure you want to upload this log file?"
 
 msgctxt "ProfileSelectDialog|"
 msgid "Select a profile."
-msgstr "Виберіть профіль."
+msgstr "Select a profile."
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Failed to create libraries component"
-msgstr "Не вдалося створити компонент бібліотек"
+msgstr "Failed to create libraries component"
 
 msgctxt "MainWindow|"
 msgid "Open the central mods folder in a file browser."
-msgstr "Відкрити теку основних модів в файловому менеджері."
+msgstr "Open the central mods folder in a file browser."
 
 msgctxt "AccountsDialog|"
 msgid "Failed to check name availability."
-msgstr "Не вдалося перевірити наявність імені."
+msgstr "Failed to check name availability."
 
 msgctxt "CustomCommands|"
 msgid "Wrapper command:"
-msgstr "Команда обгортки:"
+msgstr "Wrapper command:"
 
 msgctxt "LogPage|"
 msgid "Scroll all the way to bottom"
-msgstr "Прокрутити до кінця вниз"
+msgstr "Scroll all the way to bottom"
 
 msgctxt "ModFolderModel|"
 msgid "The version of the mod."
-msgstr "Версія моду."
+msgstr "The version of the mod."
 
 msgctxt "JavaPage|"
 msgid "Java path:"
-msgstr "Шлях до Java:"
+msgstr "Java path:"
 
 msgctxt "MinecraftPage|"
 msgid "Show time spent playing instances"
-msgstr "Показувати час, витрачений на екземпляр"
+msgstr "Show time spent playing instances"
 
 msgctxt "CreateShortcutDialog|"
 msgid "Server address:"
-msgstr "Адреса сервера:"
+msgstr "Server address:"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Server address:"
-msgstr "Адреса сервера:"
+msgstr "Server address:"
 
 msgctxt "WorldList|"
 msgid "Game Mode"
-msgstr "Режим Гри"
+msgstr "Game Mode"
 
 msgctxt "CopyInstanceDialog|"
 msgid "Keep play time"
-msgstr "Перенести час гри"
+msgstr "Keep play time"
 
 msgctxt "MinecraftPage|"
 msgid "Game time"
-msgstr "Час гри"
+msgstr "Game time"
 
 #, qt-format
 msgctxt "XboxAuthorizationStep|"
@@ -1326,138 +1321,138 @@ msgid ""
 "This Microsoft account does not have an XBox Live profile. Buy the game on "
 "%1 first."
 msgstr ""
-"Цей обліковий запис Microsoft не має профілю XBox Live. Купить спочатку гру "
-"на %1."
+"This Microsoft account does not have an XBox Live profile. Buy the game on "
+"%1 first."
 
 msgctxt "PasteEEPage|"
 msgid "&Your own key - 12MB upload limit:"
-msgstr "&Ваш власний ключ - 12 Мб ліміт вивантаження:"
+msgstr "&Your own key - 12MB upload limit:"
 
 msgctxt "MainWindow|"
 msgid "Loading news..."
-msgstr "Завантаження новин..."
+msgstr "Loading news..."
 
 #, qt-format
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Failed to open pack configs %1!"
-msgstr "Не вдалося відкрити пакет конфігурацій %1!"
+msgstr "Failed to open pack configs %1!"
 
 msgctxt "XboxAuthorizationStep|"
 msgid ""
 "This Microsoft account is linked to a family and your parent or guardian has "
 "not given you permission to play online."
 msgstr ""
-"Цей обліковий запис Microsoft пов'язаний з сім'єю, а ваші батьки або опікуни "
-"не надали дозволу грати в онлайн."
+"This Microsoft account is linked to a family and your parent or guardian has "
+"not given you permission to play online."
 
 msgctxt "FoldersTask|"
 msgid "Failed to create folder for minecraft binaries."
-msgstr "Не вдалося створити теку для виконавчих файлів minecraft."
+msgstr "Failed to create folder for minecraft binaries."
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Mod download"
-msgstr "Завантажити мод"
+msgstr "Mod download"
 
 msgctxt "InstanceImportTask|"
 msgid "Mod download"
-msgstr "Завантажити мод"
+msgstr "Mod download"
 
 msgctxt "SetSkinStep|"
 msgid "Uploading skin"
-msgstr "Вивантаження скіну"
+msgstr "Uploading skin"
 
 #, qt-format
 msgctxt "LoggedProcess|"
 msgid "System exit code name: %1"
-msgstr "Назва коду системного виходу: %1"
+msgstr "System exit code name: %1"
 
 msgctxt "VersionSelectDialog|"
 msgid "Choose Version"
-msgstr "Виберіть версію"
+msgstr "Choose Version"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Export Modrinth modpack"
-msgstr "Експортувати модпака Modrinth"
+msgstr "Export Modrinth modpack"
 
 #, qt-format
 msgctxt "VersionPage|"
 msgid "%1 has issues!"
-msgstr "%1 має проблеми!"
+msgstr "%1 has issues!"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Memor&y"
-msgstr "Налаштування пам'яті"
+msgstr "Memor&y"
 
 msgctxt "VersionPage|"
 msgid "Make the selected package apply later."
-msgstr "Вибраний пакет буде застосовано пізніше."
+msgstr "Make the selected package apply later."
 
 #, qt-format
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Unknown or unsupported download type: %1"
-msgstr "Невідомий або не підтримуваний тип завантаження: %1"
+msgstr "Unknown or unsupported download type: %1"
 
 msgctxt "MainWindow|"
 msgid "Change Group"
-msgstr "Змінити групу"
+msgstr "Change Group"
 
 msgctxt "LogPage|"
 msgid "Minecraft Log"
-msgstr "Журнал Minecraft"
+msgstr "Minecraft Log"
 
 msgctxt "IconPickerDialog|"
 msgid "Select Icons"
-msgstr "Вибрати іконки"
+msgstr "Select icons"
 
 msgctxt "PasteEEPage|"
 msgid "MultiMC key - 12MB &upload limit"
-msgstr "Ключ MultiMC - 12 Мб &ліміт вивантаження"
+msgstr "MultiMC key - 12MB &upload limit"
 
 msgctxt "VersionPage|"
 msgid "Revert the selected package to default."
-msgstr "Відновити вибраний пакунок за замовчуванням."
+msgstr "Revert the selected package to default."
 
 msgctxt "Update|"
 msgid "Task aborted."
-msgstr "Завдання скасовано."
+msgstr "Task aborted."
 
 msgctxt "QObject|"
 msgid "Path is empty"
-msgstr "Порожній шлях"
+msgstr "Path is empty"
 
 msgctxt "MainWindow|"
 msgid "Report a Bug"
-msgstr "Повідомити про помилку"
+msgstr "Report a Bug"
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Extracting configs..."
-msgstr "Розпакування конфігурацій..."
+msgstr "Extracting configs..."
 
 msgctxt "ComponentUpdateTask|"
 msgid "Conflicting requirements detected during dependency checking!"
-msgstr "Виявлені конфліктні вимоги під час перевірки залежностей!"
+msgstr "Conflicting requirements detected during dependency checking!"
 
 msgctxt "QuaGzipFile|"
 msgid "Could not gzopen() file"
-msgstr "Не вдалося виконати gzopen() на файлі"
+msgstr "Could not gzopen() file"
 
 msgctxt "ModrinthPage|"
 msgid "Sort by relevance"
-msgstr "Впорядкувати за релевантністю"
+msgstr "Sort by relevance"
 
 msgctxt "UpdateDialog|"
 msgid "<center><h1>Loading changelog...</h1></center>"
-msgstr "<center><h1>Завантаження журналу змін...</h1></center>"
+msgstr "<center><h1>Loading changelog...</h1></center>"
 
 #, qt-format
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Unsupported download type: %1"
-msgstr "Непідтримуваний тип завантаження: %1"
+msgstr "Unsupported download type: %1"
 
 #, qt-format
 msgctxt "QObject|"
 msgid "Download of meta file %1"
-msgstr "Завантаження мета-файлу %1"
+msgstr "Download of meta file %1"
 
 #, qt-format
 msgctxt "ExternalToolsPage|"
@@ -1465,17 +1460,17 @@ msgid ""
 "Error while checking JVisualVM install:\n"
 "%1"
 msgstr ""
-"Помилка під час перевірки встановлення JVisualVM:\n"
+"Error while checking JVisualVM install:\n"
 "%1"
 
 #, qt-format
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Unknown mod type: %1"
-msgstr "Невідомий тип моду: %1"
+msgstr "Unknown mod type: %1"
 
 msgctxt "LauncherLoginStep|"
 msgid "Failed to parse the Minecraft access token response."
-msgstr "Не вдалося обробити відповідь токену доступу Minecraft."
+msgstr "Failed to parse the Minecraft access token response."
 
 msgctxt "ModrinthExportDialog|"
 msgid ""
@@ -1484,175 +1479,175 @@ msgid ""
 "are unavailable on Modrinth will simply retain the \".disabled\" extension "
 "as Modrinth packs don't support optional overrides."
 msgstr ""
-"Якщо ввімкнено, усі моди, шейдери та пакети ресурсів, доступні на Modrinth, "
-"розглядатимуться як додаткові як на клієнті, так і на сервері. Файли, які "
-"недоступні в Modrinth, просто збережуть розширення «.disabled», оскільки "
-"пакети Modrinth не підтримують додаткові зміни."
+"If enabled, all mods, shaders and resource packs that are available on "
+"Modrinth will be treated as optional on both client and server. Files that "
+"are unavailable on Modrinth will simply retain the \".disabled\" extension "
+"as Modrinth packs don't support optional overrides."
 
 #, qt-format
 msgctxt "XboxAuthorizationStep|"
 msgid "XErr element is missing from %1 authorization error response."
-msgstr "Елемент XErr відсутній у %1 відповіді на помилку авторизації."
+msgstr "XErr element is missing from %1 authorisation error response."
 
 #, qt-format
 msgctxt "AssetUpdateTask|"
 msgid "Asset index for %1"
-msgstr "Індекс ресурсу для %1"
+msgstr "Asset index for %1"
 
 msgctxt "VersionPage|"
 msgid "Couldn't load or download the Fabric Loader version lists!"
-msgstr "Не вдалося завантажити або скачати список версій Fabric!"
+msgstr "Couldn't load or download the Fabric Loader version lists!"
 
 #, qt-format
 msgctxt "LegacyFTB::PackInstallTask|"
 msgid "Downloading zip for %1 (%2%)"
-msgstr "Завантаження zip для %1 (%2%)"
+msgstr "Downloading zip for %1 (%2%)"
 
 msgctxt "InstanceSettingsPage|"
 msgid "The settings here are overrides for global settings."
-msgstr "Налаштування тут перевизначають глобальні налаштування."
+msgstr "The settings here are overrides for global settings."
 
 msgctxt "VersionProxyModel|"
 msgid "Recommended"
-msgstr "Рекомендовано"
+msgstr "Recommended"
 
 msgctxt "VersionProxyModel|"
 msgid "Filesystem path to this version"
-msgstr "Шлях до цієї версії"
+msgstr "Filesystem path to this version"
 
 #, qt-format
 msgctxt "LoggedProcess|"
 msgid "Process crashed with exit code %1 (0x%2)."
-msgstr "Процес завершився помилкою з кодом %1 (0x%2)."
+msgstr "Process crashed with exit code %1 (0x%2)."
 
 msgctxt "ServersPage|"
 msgid "Move Up"
-msgstr "Перемістити вгору"
+msgstr "Move Up"
 
 msgctxt "VersionPage|"
 msgid "Move up"
-msgstr "Перемістити вгору"
+msgstr "Move up"
 
 msgctxt "LauncherPage|"
 msgid "History limit"
-msgstr "Ліміт журналу"
+msgstr "History limit"
 
 msgctxt "EntitlementsStep|"
 msgid "Got entitlements"
-msgstr "Отримав права"
+msgstr "Got entitlements"
 
 msgctxt "VanillaPage|"
 msgid "Alphas"
-msgstr "Альфи"
+msgstr "Alphas"
 
 msgctxt "NewComponentDialog|"
 msgid "Add Empty Component"
-msgstr "Додати порожній компонент"
+msgstr "Add Empty Component"
 
 #, qt-format
 msgctxt "ModMinecraftJar|"
 msgid "Couldn't remove stale jar file: %1"
-msgstr "Не вдалося видалити старий jar-файл: %1"
+msgstr "Couldn't remove stale jar file: %1"
 
 msgctxt "LegacyFTB::ListModel|"
 msgid "Private Modpack"
-msgstr "Приватний мод-пак"
+msgstr "Private Modpack"
 
 msgctxt "LogPage|"
 msgid "Bottom"
-msgstr "Низ"
+msgstr "Bottom"
 
 msgctxt "LauncherPage|"
 msgid "Move the data to new location (will restart the launcher)"
-msgstr "Перемістити дані в нове місце (лаунчер буде перезавантажений)"
+msgstr "Move the data to new location (will restart the launcher)"
 
 msgctxt "InstanceSettingsPage|"
 msgid "The maximum amount of memory Minecraft is allowed to use."
-msgstr "Максимальний дозволений для використання обсяг пам'яті Minecraft."
+msgstr "The maximum amount of memory Minecraft is allowed to use."
 
 msgctxt "JavaPage|"
 msgid "The maximum amount of memory Minecraft is allowed to use."
-msgstr "Максимальний дозволений для використання обсяг пам'яті Minecraft."
+msgstr "The maximum amount of memory Minecraft is allowed to use."
 
 msgctxt "JavaSettingsWidget|"
 msgid "The maximum amount of memory Minecraft is allowed to use."
-msgstr "Максимальний дозволений для використання обсяг пам'яті Minecraft."
+msgstr "The maximum amount of memory Minecraft is allowed to use."
 
 msgctxt "LaunchController|"
 msgid "Cancel"
-msgstr "Скасувати"
+msgstr "Cancel"
 
 msgctxt "VersionProxyModel|"
 msgid "Branch"
-msgstr "Гілка"
+msgstr "Branch"
 
 msgctxt "QObject|"
 msgid "Bright"
-msgstr "Яскравий"
+msgstr "Bright"
 
 msgctxt "CreateShortcutDialog|"
 msgid "Browse"
-msgstr "Перегляд"
+msgstr "Browse"
 
 msgctxt "ImportPage|"
 msgid "Browse"
-msgstr "Огляд"
+msgstr "Browse"
 
 msgctxt "JavaSettingsWidget|"
 msgid "Browse"
-msgstr "Огляд"
+msgstr "Browse"
 
 msgctxt "LauncherPage|"
 msgid "Mods Folder"
-msgstr "Тека модифікацій"
+msgstr "Mods Folder"
 
 msgctxt "IconPickerDialog|"
 msgid "Open Folder"
-msgstr "Відкрити теку"
+msgstr "Open Folder"
 
 msgctxt "MainWindow|"
 msgid "Rename the selected instance."
-msgstr "Перейменувати обрану збірку."
+msgstr "Rename the selected instance."
 
 msgctxt "VersionPage|"
 msgid "Minecraft.jar mods (*.zip *.jar)"
-msgstr "Моди Minecraft.jar (*.zip *.jar)"
+msgstr "Minecraft.jar mods (*.zip *.jar)"
 
 msgctxt "LauncherPage|"
 msgid "Colors"
-msgstr "Кольори"
+msgstr "Colours"
 
 msgctxt "ScreenshotsPage|"
 msgid "View Folder"
-msgstr "Відкрити теку"
+msgstr "View Folder"
 
 msgctxt "WorldListPage|"
 msgid "View Folder"
-msgstr "Відкрити теку"
+msgstr "View Folder"
 
 msgctxt "VersionPage|"
 msgid "No Quilt Loader versions are currently available."
-msgstr "На даний момент немає доступних версій для завантаження Quilt."
+msgstr "No Quilt Loader versions are currently available."
 
 msgctxt "MainWindow|"
 msgid "Delete"
-msgstr "Видалити"
+msgstr "Delete"
 
 msgctxt "OtherLogsPage|"
 msgid "Delete"
-msgstr "Видалити"
+msgstr "Delete"
 
 msgctxt "ScreenshotsPage|"
 msgid "Delete"
-msgstr "Видалити"
+msgstr "Delete"
 
 msgctxt "LauncherPage|"
 msgid "Custom"
-msgstr "Власний"
+msgstr "Custom"
 
 msgctxt "GetSkinStep|"
 msgid "Getting skin."
-msgstr "Отримання скіну."
+msgstr "Getting skin."
 
 msgctxt "VersionPage|"
 msgid ""
@@ -1660,9 +1655,9 @@ msgid ""
 "least one account added.\n"
 "Please add your Mojang or Minecraft account."
 msgstr ""
-"MultiMC не може завантажити Minecraft або оновити екземпляри, поки ви не "
-"додали принаймні один обліковий запис.\n"
-"Будь ласка, додайте свій обліковий запис Mojang або Minecraft."
+"MultiMC cannot download Minecraft or update instances unless you have at "
+"least one account added.\n"
+"Please add your Mojang or Minecraft account."
 
 msgctxt "MinecraftPage|"
 msgid "Minecraft"
@@ -1674,89 +1669,89 @@ msgstr "Minecraft"
 
 msgctxt "AccountsDialog|"
 msgid "Minecraft Accounts"
-msgstr "Облікові записи Minecraft"
+msgstr "Minecraft Accounts"
 
 msgctxt "LaunchController|"
 msgid "Error!"
-msgstr "Помилка!"
+msgstr "Error!"
 
 msgctxt "VanillaPage|"
 msgid "Filter"
-msgstr "Фільтр"
+msgstr "Filter"
 
 msgctxt "ScreenshotsPage|"
 msgid "This will delete all selected screenshots."
-msgstr "Буде видалено всі вибрані знімки екрану."
+msgstr "This will delete all selected screenshots."
 
 msgctxt "WorldListPage|"
 msgid ""
 "You do not have MCEdit set up or it was moved.\n"
 "You can set it up in the global settings."
 msgstr ""
-"Ви не маєте встановленого MCEdit або його було переміщено.\n"
-"Ви можете налаштувати його в глобальних налаштуваннях."
+"You do not have MCEdit set up or it was moved.\n"
+"You can set it up in the global settings."
 
 #, qt-format
 msgctxt "MinecraftInstance|"
 msgid ", last played for %1"
-msgstr ", остання гра: %1"
+msgstr ", last played for %1"
 
 msgctxt "ModFolderModel|"
 msgid "Folder"
-msgstr "Тека"
+msgstr "Folder"
 
 msgctxt "MainWindow|"
 msgid "Format"
-msgstr "Формат"
+msgstr "Format"
 
 msgctxt "LegacyUpgradePage|"
 msgid "Upgrade the instance"
-msgstr "Оновити збірку"
+msgstr "Upgrade the instance"
 
 msgctxt "InstanceImportTask|"
 msgid "Failed to extract modpack"
-msgstr "Не вдалося розпакувати мод-пак"
+msgstr "Failed to extract modpack"
 
 msgctxt "Technic::SingleZipPackInstallTask|"
 msgid "Failed to extract modpack"
-msgstr "Не вдалося розпакувати мод-пак"
+msgstr "Failed to extract modpack"
 
 msgctxt "Technic::SolderPackInstallTask|"
 msgid "Failed to extract modpack"
-msgstr "Не вдалося розпакувати мод-пак"
+msgstr "Failed to extract modpack"
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Failed to extract mods..."
-msgstr "Не вдалося розпакувати моди..."
+msgstr "Failed to extract mods..."
 
 msgctxt "ExternalToolsPage|"
 msgid "JSON Editor"
-msgstr "Редактор JSON"
+msgstr "JSON Editor"
 
 msgctxt "Modrinth::InstanceExportTask|"
 msgid "Zipping modpack..."
-msgstr "Архівування модпака..."
+msgstr "Zipping modpack..."
 
 msgctxt "DirectJavaLaunch|"
 msgid "Game crashed."
-msgstr "Гра зазнала краху."
+msgstr "Game crashed."
 
 msgctxt "LauncherPartLaunch|"
 msgid "Game crashed."
-msgstr "Гра зазнала краху."
+msgstr "Game crashed."
 
 msgctxt "QuaGzipFile|"
 msgid "QIODevice::Append is not supported for GZIP"
-msgstr "QIODevice::Append не підтримується для GZIP"
+msgstr "QIODevice::Append is not supported for GZIP"
 
 #, qt-format
 msgctxt "QObject|"
 msgid "No profile (%1)"
-msgstr "Немає профілю (%1)"
+msgstr "No profile (%1)"
 
 msgctxt "Technic::TechnicPackProcessor|"
 msgid "Invalid \"forgeversion.properties\"!"
-msgstr "Невірний \"forgeversion.properties\"!"
+msgstr "Invalid \"forgeversion.properties\"!"
 
 #, qt-format
 msgctxt "UpdateDialog|"
@@ -1764,20 +1759,20 @@ msgid ""
 "<p align=\"center\" <span style=\"font-size:22pt;\">Failed to fetch "
 "changelog... Error: %1</span></p>"
 msgstr ""
-"<p align=\"center\" <span style=\"font-size:22pt;\">Не вдалося отримати "
-"журнал змін... Помилка: %1</span></p>"
+"<p align=\"center\" <span style=\"font-size:22pt;\">Failed to fetch "
+"changelog... Error: %1</span></p>"
 
 msgctxt "QObject|"
 msgid "Version file contains unsupported element '-libraries'"
-msgstr "Версійний файл містить непідтримуваний елемент '-libraries'"
+msgstr "Version file contains unsupported element '-libraries'"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Override global game time settings"
-msgstr "Перевизначити глобальні налаштування часу гри"
+msgstr "Override global game time settings"
 
 msgctxt "GoUpdate::DownloadTask|"
 msgid "Reading file list for new version..."
-msgstr "Читання списку файлів для нової версії..."
+msgstr "Reading file list for new version..."
 
 msgctxt "WorldListPage|"
 msgid "MCEdit"
@@ -1785,146 +1780,144 @@ msgstr "MCEdit"
 
 msgctxt "MainWindow|"
 msgid "No news available."
-msgstr "Немає доступних новин."
+msgstr "No news available."
 
 msgctxt "WorldList|"
 msgid "The name of the world."
-msgstr "Назва світу."
+msgstr "The name of the world."
 
 msgctxt "QObject|"
 msgid "Path does not exist"
-msgstr "Шлях не існує"
+msgstr "Path does not exist"
 
 msgctxt "XboxAuthorizationStep|"
 msgid "XBox Live is not available in your country. You've been blocked."
-msgstr "XBox Live недоступний у вашій країні. Ви заблоковані."
+msgstr "XBox Live is not available in your country. You've been blocked."
 
 msgctxt "VersionProxyModel|"
 msgid "Latest"
-msgstr "Останній"
+msgstr "Latest"
 
 msgctxt "InstanceWindow|"
 msgid "Launch"
-msgstr "Запуск"
+msgstr "Launch"
 
 msgctxt "LaunchController|"
 msgid "Launch"
-msgstr "Запуск"
+msgstr "Launch"
 
 msgctxt "MainWindow|"
 msgid "Launch"
-msgstr "Запуск"
+msgstr "Launch"
 
 msgctxt "AccountsDialog|"
 msgid ""
 "You can scan the QR code and complete the login process on a separate "
 "device, or you can open the link and login on this machine."
 msgstr ""
-"Ви можете сканувати QR-код і завершити процес авторизації на окремому "
-"пристрої. або ж ви можете відкрити посилання та увійти на цій машині."
+"You can scan the QR code and complete the login process on a separate "
+"device, or you can open the link and login on this machine."
 
 msgctxt "WorldListPage|"
 msgid "MCEdit failed to start!"
-msgstr "Не вдалося запустити MCEdit!"
+msgstr "MCEdit failed to start!"
 
 #, qt-format
 msgctxt "InstanceCreationTask|"
 msgid "Creating instance from version %1"
-msgstr "Створення збірки на основі версії %1"
+msgstr "Creating instance from version %1"
 
 msgctxt "LegacyInstance|"
 msgid "Legacy"
-msgstr "Застаріла"
+msgstr "Legacy"
 
 msgctxt "PostLaunchCommand|"
 msgid ""
 "Post-Launch command ran successfully.\n"
 "\n"
 msgstr ""
-"Команда після-запуску успішно виконана.\n"
+"Post-Launch command ran successfully.\n"
 "\n"
 
 msgctxt "LegacyFTB::Page|"
 msgid "FTB Legacy"
-msgstr "Застарівший FTB"
+msgstr "FTB Legacy"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Note: Permgen is set automatically by Java 8 and later"
-msgstr ""
-"Примітка: Permgen встановлюється автоматично для Java 8 і для більш пізніх "
-"версій"
+msgstr "Note: Permgen is set automatically by Java 8 and later"
 
 msgctxt "JavaPage|"
 msgid "Memory"
-msgstr "Пам'ять"
+msgstr "Memory"
 
 msgctxt "JavaSettingsWidget|"
 msgid "Memory"
-msgstr "Пам'ять"
+msgstr "Memory"
 
 msgctxt "WorldList|"
 msgid "Last Played"
-msgstr "Востаннє зіграно"
+msgstr "Last Played"
 
 #, qt-format
 msgctxt "InstanceCopyTask|"
 msgid "Copying instance %1"
-msgstr "Копіювання збірки %1"
+msgstr "Copying instance %1"
 
 #, qt-format
 msgctxt "LegacyUpgradeTask|"
 msgid "Copying instance %1"
-msgstr "Копіювання збірки %1"
+msgstr "Copying instance %1"
 
 msgctxt "ExportInstanceDialog|"
 msgid "This file already exists. Do you want to overwrite it?"
-msgstr "Цей файл уже існує. Ви хочете перезаписати його?"
+msgstr "This file already exists. Do you want to overwrite it?"
 
 #, qt-format
 msgctxt "JProfiler|"
 msgid "Listening on port: %1"
-msgstr "Слухаємо порт: %1"
+msgstr "Listening on port: %1"
 
 msgctxt "MainWindow|"
 msgid "Open one of the folders shared between instances."
-msgstr "Відкрийте одну із тек, спільно використовуваних збірками."
+msgstr "Open one of the folders shared between instances."
 
 msgctxt "ScreenshotsPage|"
 msgid "Failed to upload screenshots!"
-msgstr "Не вдалося вивантажити знімок екрану!"
+msgstr "Failed to upload screenshots!"
 
 msgctxt "ResourcePackFolderModel|"
 msgid "The version of the resource pack."
-msgstr "Версія пакунка ресурсів."
+msgstr "The version of the resource pack."
 
 msgctxt "MinecraftAccount|"
 msgid "Online"
-msgstr "В мережі"
+msgstr "Online"
 
 msgctxt "CapesModel|"
 msgid "Nothing"
-msgstr "Нічого немає"
+msgstr "Nothing"
 
 msgctxt "LegacyFTB::Page|"
 msgid "Public"
-msgstr "Публічний"
+msgstr "Public"
 
 #, qt-format
 msgctxt "InstanceList|"
 msgid "%1 Instance"
-msgstr "Збірка %1"
+msgstr "%1 Instance"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Minimum memory allocation:"
-msgstr "Мінімальний обсяг виділеної пам'яті:"
+msgstr "Minimum memory allocation:"
 
 msgctxt "JavaPage|"
 msgid "Minimum memory allocation:"
-msgstr "Мінімальний обсяг виділеної пам'яті:"
+msgstr "Minimum memory allocation:"
 
 msgctxt "JavaSettingsWidget|"
 msgid "Minimum memory allocation:"
-msgstr "Мінімальний обсяг виділеної пам'яті:"
+msgstr "Minimum memory allocation:"
 
 msgctxt "MainWindow|"
 msgid "Reddit"
@@ -1932,96 +1925,96 @@ msgstr "Reddit"
 
 msgctxt "OtherLogsPage|"
 msgid "Reload"
-msgstr "Перезавантажити"
+msgstr "Reload"
 
 msgctxt "VersionPage|"
 msgid "Reload"
-msgstr "Перезавантажити"
+msgstr "Reload"
 
 msgctxt "ServersPage|"
 msgid "Remove"
-msgstr "Видалити"
+msgstr "Remove"
 
 msgctxt "VersionPage|"
 msgid "Remove"
-msgstr "Видалити"
+msgstr "Remove"
 
 msgctxt "WorldListPage|"
 msgid "Remove"
-msgstr "Видалити"
+msgstr "Remove"
 
 msgctxt "MainWindow|"
 msgid "Rename"
-msgstr "Перейменувати"
+msgstr "Rename"
 
 msgctxt "ScreenshotsPage|"
 msgid "Rename"
-msgstr "Перейменувати"
+msgstr "Rename"
 
 msgctxt "WorldListPage|"
 msgid "Rename"
-msgstr "Перейменувати"
+msgstr "Rename"
 
 msgctxt "VersionPage|"
 msgid "Revert"
-msgstr "Відновити"
+msgstr "Revert"
 
 msgctxt "GoUpdate::DownloadTask|"
 msgid "Reading file list for current version..."
-msgstr "Читання списку файлів для поточної версії..."
+msgstr "Reading file list for current version..."
 
 #, qt-format
 msgctxt "InstancePageProvider|"
 msgid "Edit Instance (%1)"
-msgstr "Редагувати збірку (%1)"
+msgstr "Edit Instance (%1)"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Game Window"
-msgstr "Налаштування вікна гри"
+msgstr "Game Window"
 
 msgctxt "MainWindow|"
 msgid "View Worlds"
-msgstr "Переглянути світи"
+msgstr "View Worlds"
 
 msgctxt "ModrinthPage|"
 msgid "Search"
-msgstr "Пошук"
+msgstr "Search"
 
 msgctxt "TechnicPage|"
 msgid "Search"
-msgstr "Пошук"
+msgstr "Search"
 
 msgctxt "QObject|"
 msgid "Maintainer"
-msgstr "Супроводжувач"
+msgstr "Maintainer"
 
 msgctxt "WorldListPage|"
 msgid "Launch the instance directly into the selected world"
-msgstr "Запустити екземпляр безпосередньо у вибраний світ"
+msgstr "Launch the instance directly into the selected world"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Start Minecraft maximized?"
-msgstr "Запускати Minecraft в повноекранному режимі?"
+msgstr "Start Minecraft maximised?"
 
 msgctxt "MinecraftPage|"
 msgid "Start Minecraft maximized?"
-msgstr "Запускати Minecraft в повноекранному режимі?"
+msgstr "Start Minecraft maximised?"
 
 msgctxt "WorldListPage|"
 msgid "Manage datapacks inside the world."
-msgstr "Керування пакетами даних у світі."
+msgstr "Manage datapacks inside the world."
 
 msgctxt "QObject|"
 msgid "System"
-msgstr "Системний"
+msgstr "System"
 
 msgctxt "NewsEntry|"
 msgid "Untitled"
-msgstr "Без назви"
+msgstr "Untitled"
 
 msgctxt "MinecraftProfileStep|"
 msgid "Minecraft Java profile acquisition succeeded."
-msgstr "Отримання профілю Java успішне."
+msgstr "Minecraft Java profile acquisition succeeded."
 
 msgctxt "ImportPage|"
 msgid "Zip (*.zip *.mrpack)"
@@ -2033,35 +2026,35 @@ msgstr "Modrinth"
 
 msgctxt "PasteEEPage|"
 msgid "Log Upload"
-msgstr "Вивантаження журналу"
+msgstr "Log Upload"
 
 msgctxt "Technic::TechnicPackProcessor|"
 msgid "Unable to open \"fmlversion.properties\"!"
-msgstr "Не вдалося відкрити \"fmlversion.properties\"!"
+msgstr "Unable to open \"fmlversion.properties\"!"
 
 msgctxt "MainWindow|"
 msgid "Update"
-msgstr "Оновити"
+msgstr "Update"
 
 msgctxt "LogPage|"
 msgid "Upload"
-msgstr "Відвантажити"
+msgstr "Upload"
 
 msgctxt "OtherLogsPage|"
 msgid "Upload"
-msgstr "Завантажити"
+msgstr "Upload"
 
 msgctxt "ScreenshotsPage|"
 msgid "Upload"
-msgstr "Вивантаження"
+msgstr "Upload"
 
 msgctxt "MinecraftAccount|"
 msgid "Offline"
-msgstr "Не в мережі"
+msgstr "Offline"
 
 msgctxt "ExternalToolsPage|"
 msgid "MCEdit Folder"
-msgstr "Тека MCEdit"
+msgstr "MCEdit Folder"
 
 msgctxt "LegacyUpgradePage|"
 msgid ""
@@ -2077,52 +2070,51 @@ msgid ""
 "href=\"https://discord.gg/GtPmv93\">discord channel for testing "
 "here</a>.</p></body></html>"
 msgstr ""
-"<html><body><h1>Вимагається оновлення</h1><p>MultiMC тепер підтримує старі "
-"версії Minecraft і всі необхідні можливості в новому (OneSix) форматі "
-"збірок. Внаслідок цього старий (Legacy) формат був повністю виключений і "
-"старі збірки потребують оновлення.</p><p>Оновлення створить нову збірку із "
-"таким самим вмістом, що і раніше, але в новому форматі. Стару збірку не буде "
-"порушено, на випадок якщо щось піде не так.</p><p>Будь ласка, при появі "
-"проблем повідомте про них на <a "
-"href=\"https://github.com/MultiMC/Launcher/issues\">сторінці проблем "
-"GitHub</a>.</p><p>Також у нас є <a href=\"https://discord.gg/GtPmv93\">канал "
-"в Discord</a>.</p></body></html>"
+"<html><body><h1>Upgrade is required</h1><p>MultiMC now supports old "
+"Minecraft versions and all the required features in the new (OneSix) "
+"instance format. As a consequence, the old (Legacy) format has been entirely "
+"disabled and old instances need to be upgraded.</p><p>The upgrade will "
+"create a new instance with the same contents as the current one, in the new "
+"format. The original instance will remain untouched, in case anything goes "
+"wrong in the process.</p><p>Please report any issues on our <a "
+"href=\"https://github.com/MultiMC/Launcher/issues\">github issues "
+"page</a>.</p><p>There is also a <a "
+"href=\"https://discord.gg/GtPmv93\">discord channel for testing "
+"here</a>.</p></body></html>"
 
 msgctxt "MainWindow|"
 msgid "Profilers"
-msgstr "Профайлери"
+msgstr "Profilers"
 
 msgctxt "LaunchController|"
 msgid "Couldn't instantiate a launcher."
-msgstr "Не вдалося запустити лаунчер."
+msgstr "Couldn't instantiate a launcher."
 
 msgctxt "WorldListPage|"
 msgid "Worlds"
-msgstr "Світи"
+msgstr "Worlds"
 
 msgctxt "MainWindow|"
 msgid "Profiler not setup correctly. Go into settings, \"External Tools\"."
-msgstr ""
-"Профайлер не налаштовано правильно. Перейдіть в налаштування, \"Зовнішні "
-"інструменти\"."
+msgstr "Profiler not setup correctly. Go into settings, \"External Tools\"."
 
 msgctxt "WorldList|"
 msgid "Game mode of the world."
-msgstr "Режим гри в світі."
+msgstr "Game mode of the world."
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid "Open %1 subreddit."
-msgstr "Відкрити %1 сабреддіт."
+msgstr "Open %1 subreddit."
 
 msgctxt "VersionPage|"
 msgid "Download the files needed to launch the instance now."
-msgstr "Завантажте файли, необхідні для запуску екземпляра."
+msgstr "Download the files needed to launch the instance now."
 
 #, qt-format
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Failed to get local metadata index for %1"
-msgstr "Не вдалося отримати локальний індекс метаданих для %1"
+msgstr "Failed to get local metadata index for %1"
 
 msgctxt "XboxAuthorizationStep|"
 msgid ""
@@ -2130,130 +2122,131 @@ msgid ""
 "Community Standards.\n"
 "This may happen if your account was shared or resold."
 msgstr ""
-"Ваш обліковий запис XBox Live заблокований Microsoft за порушення стандартів "
-"спільноти XBox.\n"
-"Це може статися, якщо ваш обліковий запис був переданий або перепроданий."
+"Your Xbox Live account has been banned by Microsoft for violating the Xbox "
+"Community Standards.\n"
+"This may happen if your account was shared or resold."
 
 msgctxt "InstanceSettingsPage|"
 msgid "Auto-detect..."
-msgstr "Автоматичне виявлення..."
+msgstr "Auto-detect..."
 
 msgctxt "JavaPage|"
 msgid "Auto-detect..."
-msgstr "Автоматичне виявлення..."
+msgstr "Auto-detect..."
 
 msgctxt "VersionPage|"
 msgid "Reload all packages."
-msgstr "Перезавантажити всі пакети."
+msgstr "Reload all packages."
 
 msgctxt "NewsEntry|"
 msgid "No content."
-msgstr "Контент відсутній."
+msgstr "No content."
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid "Open %1 discord voice chat."
-msgstr "Відкрити голосовий чат %1 в discord."
+msgstr "Open %1 discord voice chat."
 
 msgctxt "VersionProxyModel|"
 msgid "Minecraft version"
-msgstr "Версія Minecraft"
+msgstr "Minecraft version"
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid "Delete group '%1'"
-msgstr "Видалити групу '%1'"
+msgstr "Delete group '%1'"
 
 msgctxt "AtlPage|"
 msgid "Search and filter ..."
-msgstr "Пошук і фільтрування..."
+msgstr "Search and filter ..."
 
 msgctxt "ModrinthPage|"
 msgid "Search and filter ..."
-msgstr "Пошук та фільтрація ..."
+msgstr "Search and filter ..."
 
 msgctxt "TechnicPage|"
 msgid "Search and filter ..."
-msgstr "Пошук і фільтр ..."
+msgstr "Search and filter ..."
 
 msgctxt "AboutDialog|"
 msgid "Forking/Redistribution"
-msgstr "Форки/Розповсюдження"
+msgstr "Forking/Redistribution"
 
 msgctxt "MainWindow|"
 msgid "View Central Mods Folder"
-msgstr "Відкрити загальну теку модів"
+msgstr "View Central Mods Folder"
 
 msgctxt "LauncherPage|"
 msgid "Update Settings"
-msgstr "Оновити налаштування"
+msgstr "Update Settings"
 
 msgctxt "VersionPage|"
 msgid "No intermediary mappings versions are currently available."
-msgstr "На даний момент немає версій intermediary mappings."
+msgstr "No intermediary mappings versions are currently available."
 
 msgctxt "VersionPage|"
 msgid "No Forge versions are currently available for Minecraft "
-msgstr "На даний момент немає доступних версій Forge для Minecraft "
+msgstr "No Forge versions are currently available for Minecraft "
 
 msgctxt "InstanceCopyTask|"
 msgid "Instance folder copy has been aborted."
-msgstr "Копіювання теки збірки було скасовано."
+msgstr "Instance folder copy has been aborted."
 
 msgctxt "LegacyUpgradeTask|"
 msgid "Instance folder copy has been aborted."
-msgstr "Копіювання теки збірки було скасовано."
+msgstr "Instance folder copy has been aborted."
 
 #, qt-format
 msgctxt "Modrinth::InstanceExportTask|"
 msgid "Failed to copy file %1 to overrides"
-msgstr "Не вдалося скопіювати файл %1 для заміщення"
+msgstr "Failed to copy file %1 to overrides"
 
 msgctxt "VersionPage|"
 msgid "Add Empty"
-msgstr "Додати порожній"
+msgstr "Add Empty"
 
 #, qt-format
 msgctxt "QObject|"
 msgid "Library %1 name is broken and cannot be processed."
-msgstr "Ім'я бібліотеки %1 пошкоджене і не може бути оброблене."
+msgstr "Library %1 name is broken and cannot be processed."
 
 msgctxt "MainWindow|"
 msgid "Edit Notes"
-msgstr "Редагувати нотатки"
+msgstr "Edit Notes"
 
 msgctxt "MainWindow|"
 msgid "Change the instance settings, mods and versions."
-msgstr "Змінити налаштування, моди і версію збірки."
+msgstr "Change the instance settings, mods and versions."
 
 msgctxt "AccountTask|"
 msgid "Sending request to auth servers..."
-msgstr "Надсилання запиту до серверів авторизації..."
+msgstr "Sending request to auth servers..."
 
 msgctxt "LegacyFTB::Page|"
 msgid "3rd Party"
-msgstr "Сторонні"
+msgstr "3rd Party"
 
 msgctxt "MainWindow|"
 msgid "Export the selected instance as a zip file."
-msgstr "Експортувати обрану збірку у zip-файл."
+msgstr "Export the selected instance as a zip file."
 
 msgctxt "GoUpdate::DownloadTask|"
 msgid "Loading version information..."
-msgstr "Завантаження інформації про версію..."
+msgstr "Loading version information..."
 
 msgctxt "GetSkinStep|"
 msgid "Got skin"
-msgstr "Скін успішно отримано"
+msgstr "Got skin"
 
 msgctxt "AccountsDialog|"
 msgid "Account / Profile Name Here"
-msgstr "Обліковий запис / профіль тут"
+msgstr "Account / Profile Name Here"
 
 msgctxt "QObject|"
 msgid ""
 "The specified java binary didn't work with the arguments you provided:<br />"
-msgstr "Зазначений двійковий файл java не працює з наданими аргументами:<br />"
+msgstr ""
+"The specified java binary didn't work with the arguments you provided:<br />"
 
 msgctxt "PasteEEPage|"
 msgid ""
@@ -2262,15 +2255,14 @@ msgid ""
 "href=\"https://paste.ee\">paste.ee</a> account, you can add your API key "
 "here and have your uploaded logs paired with your account.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>MultiMC використовує <a "
-"href=\"https://paste.ee\">paste.ee</a> для завантаження логів. Якщо у вас є "
-"аккаунт в <a href=\"https://paste.ee\">paste.ee</a>, ви можете вставити "
-"API-ключ тут і і нехай ваші завантажені журнали поєднуються з вашим "
-"обліковим записом.</p></body></html>"
+"<html><head/><body><p><a href=\"https://paste.ee\">paste.ee</a> is used by "
+"MultiMC for log uploads. If you have a <a "
+"href=\"https://paste.ee\">paste.ee</a> account, you can add your API key "
+"here and have your uploaded logs paired with your account.</p></body></html>"
 
 msgctxt "Modrinth::InstanceExportTask|"
 msgid "Copying files to modpack..."
-msgstr "Копіювання файлів до модпаку..."
+msgstr "Copying files to modpack..."
 
 #, qt-format
 msgctxt "OtherLogsPage|"
@@ -2278,137 +2270,139 @@ msgid ""
 "Couldn't delete some files:\n"
 "%1"
 msgstr ""
-"Не вдалося видалити деякі файли:\n"
+"Couldn't delete some files:\n"
 "%1"
 
 msgctxt "QObject|"
 msgid "Patrons"
-msgstr "Меценати"
+msgstr "Patrons"
 
 msgctxt "MainWindow|"
 msgid "Open the selected instance's root folder in a file browser."
-msgstr "Відкрити кореневу теку обраної збірки в файловому менеджері."
+msgstr "Open the selected instance's root folder in a file browser."
 
 msgctxt "InstanceSettingsPage|"
 msgid "Miscellaneous"
-msgstr "Інше"
+msgstr "Miscellaneous"
 
 msgctxt "AccountsDialog|"
 msgid ""
 "This account's authentication tokens have expired and it needs to be signed "
 "in into again."
 msgstr ""
-"Закінчився термін дії токенів для автентифікації цього облікового запису і "
-"потрібно увійти знову."
+"This account's authentication tokens have expired, and it needs to be signed "
+"in again."
 
 msgctxt "MinecraftInstance|"
 msgid "broken"
-msgstr "пошкоджено"
+msgstr "broken"
 
 msgctxt "MinecraftPage|"
 msgid "Show time spent playing across all instances"
-msgstr "Показувати час, витрачений на гру, у всіх екземплярах"
+msgstr "Show time spent playing across all instances"
 
 msgctxt "QObject|"
 msgid "Invalid JProfiler install"
-msgstr "Невірне встановлення JProfiler"
+msgstr "Invalid JProfiler install"
 
 msgctxt "MinecraftAccount|"
 msgid "Must Migrate"
-msgstr "Треба Мігрувати"
+msgstr "Must Migrate"
 
 msgctxt "InstanceStaging|"
 msgid ""
 "Failed to commit instance, even after multiple retries. It is being blocked "
 "by something."
-msgstr "Не вдалося створити збірку навіть після декількох спроб. Щось заважає."
+msgstr ""
+"Failed to commit instance, even after multiple retries. It is being blocked "
+"by something."
 
 msgctxt "ModFolderPage|"
 msgid "View &Configs"
-msgstr "Відкрити теку конфігурацій"
+msgstr "View &Configs"
 
 #, qt-format
 msgctxt "LegacyUpgradePage|"
 msgid "%1 (Migrated)"
-msgstr "%1 (Переміщено)"
+msgstr "%1 (Migrated)"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Find Java executable"
-msgstr "Пошук виконуваного файлу Java"
+msgstr "Find Java executable"
 
 msgctxt "JavaPage|"
 msgid "Find Java executable"
-msgstr "Пошук виконуваного файлу Java"
+msgstr "Find Java executable"
 
 msgctxt "JavaSettingsWidget|"
 msgid "Find Java executable"
-msgstr "Пошук виконуваного файлу Java"
+msgstr "Find Java executable"
 
 msgctxt "OtherLogsPage|"
 msgid "Do you really want to delete all log files?"
-msgstr "Ви дійсно хочете видалити всі файли журналу?"
+msgstr "Do you really want to delete all log files?"
 
 msgctxt "ModFolderPage|"
 msgid "Enable selected mods"
-msgstr "Увімкнути вибрані моди"
+msgstr "Enable selected mods"
 
 #, qt-format
 msgctxt "XboxAuthorizationStep|"
 msgid "Got authorization to access %1"
-msgstr "Отримано авторизацію для доступу до %1"
+msgstr "Got authorisation to access %1"
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Unknown loader type: "
-msgstr "Невідомий тип завантажувача: "
+msgstr "Unknown loader type: "
 
 msgctxt "UpdateDialog|"
 msgid "Don't update yet"
-msgstr "Ще не оновлювати"
+msgstr "Don't update yet"
 
 msgctxt "MinecraftPage|"
 msgid "Window Size"
-msgstr "Розмір вікна"
+msgstr "Window Size"
 
 #, qt-format
 msgctxt "QObject|"
 msgid "Unable to process the version file %1: %2 at line %3 column %4."
-msgstr "Неможливо обробити файл версії %1: %2 в рядку %3 стовпець %4."
+msgstr "Unable to process the version file %1: %2 at line %3 column %4."
 
 msgctxt "LauncherPage|"
 msgid "Console font"
-msgstr "Шрифт консолі"
+msgstr "Console font"
 
 msgctxt "Technic::TechnicPackProcessor|"
 msgid "Unable to open \"bin/modpack.jar\" file!"
-msgstr "Не вдалося відкрити файл \"bin/modpack.jar\"!"
+msgstr "Unable to open \"bin/modpack.jar\" file!"
 
 msgctxt "LauncherPage|"
 msgid "Console Settings"
-msgstr "Налаштування консолі"
+msgstr "Console Settings"
 
 msgctxt "QObject|"
 msgid ""
 "Version file has both '+libraries' and 'libraries'. This is no longer "
 "supported."
 msgstr ""
-"Файл версії має одночасно '+libraries' і 'libraries'. Це більше не "
-"підтримується."
+"Version file has both '+libraries' and 'libraries'. This is no longer "
+"supported."
 
 msgctxt "XboxAuthorizationStep|"
 msgid ""
 "This account has not accepted the XBox Terms of Service. Please log in "
 "online and accept them."
 msgstr ""
-"Цей обліковий запис не прийняв умови використання Xbox. Будь ласка, увійдіть "
-"до мережі та прийміть їх."
+"This account has not accepted the Xbox Terms of Service. Please log in "
+"online and accept them."
 
 msgctxt "CreateShortcutDialog|"
 msgid "Create Shortcut"
-msgstr "Створити ярлик"
+msgstr "Create Shortcut"
 
 msgctxt "MainWindow|"
 msgid "Create Shortcut"
-msgstr "Створити ярлик"
+msgstr "Create Shortcut"
 
 msgctxt "QObject|"
 msgid ""
@@ -2416,37 +2410,37 @@ msgid ""
 "\"-version=xxx\"). This is not safe and will not be allowed.\n"
 "This message will be displayed until you remove this from the JVM arguments."
 msgstr ""
-"Ви намагалися передати аргумент Java версії у JVM (використовуючи "
-"\"-version=xxx\"). Це небезпечно та недозволенно.\n"
-"Це повідомлення буде показано, поки ви не видалите це з аргументів JVM."
+"You tried to pass required java version argument to the JVM (using "
+"\"-version=xxx\"). This is not safe and will not be allowed.\n"
+"This message will be displayed until you remove this from the JVM arguments."
 
 msgctxt "AssetUpdateTask|"
 msgid "Updating assets index..."
-msgstr "Оновлення індексу ресурсів..."
+msgstr "Updating assets index..."
 
 msgctxt "InstanceSettingsPage|"
 msgid "Browse..."
-msgstr "Огляд..."
+msgstr "Browse..."
 
 msgctxt "ModrinthExportDialog|"
 msgid "Browse..."
-msgstr "Перегляд..."
+msgstr "Browse..."
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Could not understand pack manifest:\n"
-msgstr "Не вдалося зрозуміти маніфест пакету:\n"
+msgstr "Could not understand pack manifest:\n"
 
 msgctxt "Technic::SolderPackInstallTask|"
 msgid "Could not understand pack manifest:\n"
-msgstr "Не вдалося зрозуміти маніфест пакету:\n"
+msgstr "Could not understand pack manifest:\n"
 
 msgctxt "NotificationDialog|"
 msgid "Don't show again"
-msgstr "Не показувати знову"
+msgstr "Don't show again"
 
 msgctxt "AccountsDialog|"
 msgid "Name is too short - must be between 3 and 16 characters long."
-msgstr "Ім'я закоротке - довжина імені має становити від 3 до 16 символів."
+msgstr "Name is too short - must be between 3 and 16 characters long."
 
 #, qt-format
 msgctxt "OtherLogsPage|"
@@ -2454,24 +2448,24 @@ msgid ""
 "Do you really want to delete these files?\n"
 "%1"
 msgstr ""
-"Ви дійсно хочете видалити ці файли?\n"
+"Do you really want to delete these files?\n"
 "%1"
 
 msgctxt "LogPage|"
 msgid "Keep updating"
-msgstr "Продовжувати оновлювати"
+msgstr "Keep updating"
 
 msgctxt "CreateGameFolders|"
 msgid "Couldn't create the main game folder"
-msgstr "Не вдалося створити головну теку гри"
+msgstr "Couldn't create the main game folder"
 
 msgctxt "InstanceImportTask|"
 msgid "Could not merge the overrides folder:\n"
-msgstr "Не вдалося об'єднати папку заміщення:\n"
+msgstr "Could not merge the overrides folder:\n"
 
 msgctxt "VersionPage|"
 msgid "Select LiteLoader version"
-msgstr "Виберіть версію LiteLoader"
+msgstr "Select LiteLoader version"
 
 #, qt-format
 msgctxt "LaunchTask|"
@@ -2481,54 +2475,53 @@ msgid ""
 "You may have to fix your mods because the game is still logging to files and "
 "likely wasting harddrive space at an alarming rate!"
 msgstr ""
-"MultiMC припинив спостерігати за журналом гри, оскільки його довжина "
-"перевищила %1 рядків.\n"
-"Вам, можливо, потрібно виправити модифікації, оскільки гра продовжує "
-"записувати журнал у файли й, ймовірно, витрачає вільне місце на диску із "
-"величезною швидкістю!"
+"MultiMC stopped watching the game log because the log length surpassed %1 "
+"lines.\n"
+"You may have to fix your mods because the game is still logging to files and "
+"likely wasting hard drive space at an alarming rate!"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Include shader packs"
-msgstr "Включити пакети шейдерів"
+msgstr "Include shader packs"
 
 msgctxt "ModFolderModel|"
 msgid "The name of the mod."
-msgstr "Назва моду."
+msgstr "The name of the mod."
 
 msgctxt "LauncherPage|"
 msgid "[Something/WARN] A not so spooky warning."
-msgstr "[Що-небудь/WARN] Не таке ж і жахливе попередження."
+msgstr "[Something/WARN] A not so spooky warning."
 
 msgctxt "LaunchController|"
 msgid "Invalid Java arguments specified. Please fix this first."
-msgstr "Вказано неправильні аргументи Java. Будь ласка, виправте це спочатку."
+msgstr "Invalid Java arguments specified. Please fix this first."
 
 msgctxt "TexturePackFolderModel|"
 msgid "Is the texture pack enabled?"
-msgstr "Чи увімкнений пакет текстур?"
+msgstr "Is the texture pack enabled?"
 
 msgctxt "VersionProxyModel|"
 msgid "The version's type"
-msgstr "Тип версії"
+msgstr "The version's type"
 
 msgctxt "LauncherPage|"
 msgid "Stop logging when log overflows"
-msgstr "Припинити запис журналу при його переповненні"
+msgstr "Stop logging when log overflows"
 
 #, qt-format
 msgctxt "ExportInstanceDialog|"
 msgid "Export %1"
-msgstr "Експорт %1"
+msgstr "Export %1"
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid "Support %1"
-msgstr "Підтримка %1"
+msgstr "Support %1"
 
 #, qt-format
 msgctxt "LegacyFTB::PackInstallTask|"
 msgid "Downloading zip for %1"
-msgstr "Завантаження zip для %1"
+msgstr "Downloading zip for %1"
 
 #, qt-format
 msgctxt "QObject|"
@@ -2536,181 +2529,176 @@ msgid ""
 "Java test succeeded!<br />Platform reported: %1<br />Java version reported: "
 "%2<br />Java vendor reported: %3<br />"
 msgstr ""
-"Тестування Java завершено успішно!<br />Повідомлено про платформу: %1<br "
-"/>Повідомлено про версію Java: %2<br />Повідомлено про постачальника Java: "
-"%3<br />"
+"Java test succeeded!<br />Platform reported: %1<br />Java version reported: "
+"%2<br />Java vendor reported: %3<br />"
 
 msgctxt "NullInstance|"
 msgid "Unknown instance type"
-msgstr "Невідомий тип збірки"
+msgstr "Unknown instance type"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Set a world to join on launch"
-msgstr "Оберіть світ, до якого ви приєднаєтеся"
+msgstr "Set a world to join on launch"
 
 msgctxt "CreateShortcutDialog|"
 msgid "Set offline mode username:"
-msgstr "Встановити ім'я користувача в автономному режимі:"
+msgstr "Set offline mode username:"
 
 msgctxt "LegacyFTB::Page|"
 msgid "Private"
-msgstr "Приватні"
+msgstr "Private"
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid "Get help with %1 or Minecraft."
-msgstr "Отримати допомогу з %1 або Minecraft."
+msgstr "Get help with %1 or Minecraft."
 
 msgctxt "VersionPage|"
 msgid "Couldn't load or download the NeoForge version lists!"
-msgstr "Не вдалося завантажити або скачати список версій NeoForge!"
+msgstr "Couldn't load or download the NeoForge version lists!"
 
 msgctxt "ModFolderPage|"
 msgid "Actions"
-msgstr "Дії"
+msgstr "Actions"
 
 msgctxt "ScreenshotsPage|"
 msgid "Actions"
-msgstr "Дії"
+msgstr "Actions"
 
 msgctxt "ServersPage|"
 msgid "Actions"
-msgstr "Дії"
+msgstr "Actions"
 
 msgctxt "VersionPage|"
 msgid "Actions"
-msgstr "Дії"
+msgstr "Actions"
 
 msgctxt "WorldListPage|"
 msgid "Actions"
-msgstr "Дії"
+msgstr "Actions"
 
 msgctxt "ServersModel|"
 msgid "Address"
-msgstr "Адреса"
+msgstr "Address"
 
 msgctxt "ServersPage|"
 msgid "Address"
-msgstr "Адреса"
+msgstr "Address"
 
 msgctxt "WorldListPage|"
 msgid "Copy Seed"
-msgstr "Копіювати сід"
+msgstr "Copy Seed"
 
 msgctxt "CreateShortcutDialog|"
 msgid "Launch in offline mode"
-msgstr "Запустити в автономному режимі"
+msgstr "Launch in Offline Mode"
 
 #, qt-format
 msgctxt "MinecraftInstance|"
 msgid ", last played for %1 hours"
-msgstr ", остання гра: %1 годин"
+msgstr ", last played for %1 hours"
 
 msgctxt "QObject|"
 msgid "Version file contains unsupported element '-tweakers'"
-msgstr "Версійний файл містить непідтримуваний елемент «-tweakers'"
+msgstr "Version file contains unsupported element '-tweakers'"
 
 msgctxt "WorldListPage|"
 msgid "Remove world icon to make the game re-generate it on next load."
-msgstr ""
-"Видалення значка світу, щоб гра знову згенерувала її при наступному "
-"завантаженні."
+msgstr "Remove world icon to make the game re-generate it on next load."
 
 msgctxt "LogPage|"
 msgid "Log upload"
-msgstr "Завантажити звіт"
+msgstr "Log upload"
 
 msgctxt "OtherLogsPage|"
 msgid "Log upload"
-msgstr "Вивантаження журналу"
+msgstr "Log upload"
 
 msgctxt "WorldListPage|"
 msgid ""
 "Changing a world while Minecraft is running is potentially unsafe.\n"
 "Do you wish to proceed?"
 msgstr ""
-"Зміна світу, в той час, як Minecraft працює, потенційно небезпечно.\n"
-"Бажаєте продовжити?"
+"Changing a world while Minecraft is running is potentially unsafe.\n"
+"Do you wish to proceed?"
 
 msgctxt "ModFolderModel|"
 msgid "The date and time this mod was last changed (or added)."
-msgstr "Дата і час останньої зміни (або додавання) цього моду."
+msgstr "The date and time this mod was last changed (or added)."
 
 msgctxt "AtlPage|"
 msgid "Couldn't load or download the version lists!"
-msgstr "Не вдалося завантажити списки версій!"
+msgstr "Couldn't load or download the version lists!"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Include global datapacks folder:"
-msgstr "Включати глобальну папку датапаків:"
+msgstr "Include global datapacks folder:"
 
 msgctxt "GoUpdate::DownloadTask|"
 msgid "Failed to process update lists..."
-msgstr "Не вдалося обробити список оновлень..."
+msgstr "Failed to process update lists..."
 
 msgctxt "VersionPage|"
 msgid "Install mods"
-msgstr "Встановити моди"
+msgstr "Install mods"
 
 msgctxt "ModrinthPage|"
 msgid "Sort by creation date"
-msgstr "Впорядкувати за датою створення"
+msgstr "Sort by creation date"
 
 msgctxt "LauncherPage|"
 msgid "Simple (Colored Icons)"
-msgstr "Проста (Кольорові значки)"
+msgstr "Simple (Coloured Icons)"
 
 #, qt-format
 msgctxt "XboxAuthorizationStep|"
 msgid "Cannot parse %1 authorization error response as JSON: %2"
-msgstr "Не вдалося розібрати помилку авторизації %1 у вигляді JSON: %2"
+msgstr "Cannot parse %1 authorisation error response as JSON: %2"
 
 msgctxt "ModMinecraftJar|"
 msgid "Couldn't create the bin folder for Minecraft.jar"
-msgstr "Не вдалося створити теку bin для Minecraft.jar"
+msgstr "Couldn't create the bin folder for Minecraft.jar"
 
 #, qt-format
 msgctxt "AccountsDialog|"
 msgid "The name %1 is not allowed."
-msgstr "Ім’я %1 не допускається."
+msgstr "The name %1 is not allowed."
 
 msgctxt "FMLLibrariesTask|"
 msgid "Failed creating FML library folder inside the instance."
-msgstr "Не вдалося створити теку бібліотеки FML в збірці."
+msgstr "Failed creating FML library folder inside the instance."
 
 msgctxt "AtlPage|"
 msgid ""
 "Warning: This is still a work in progress. If you run into issues with the "
 "imported modpack, it may be a bug."
 msgstr ""
-"Попередження: це ще триває. Якщо у вас виникнуть проблеми з імпортованим "
-"модулем, це може бути помилкою."
+"Warning: This is still a work in progress. If you run into issues with the "
+"imported modpack, it may be a bug."
 
 msgctxt "LaunchController|"
 msgid "Waiting."
-msgstr "Чекаємо."
+msgstr "Waiting."
 
 msgctxt "TranslationsModel|"
 msgid "Completeness"
-msgstr "Повнота"
+msgstr "Completeness"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Java argumen&ts"
-msgstr "Аргументи Java"
+msgstr "Java argumen&ts"
 
 msgctxt "MSAStep|"
 msgid "Microsoft user authentication failed - user no longer exists."
-msgstr ""
-"Аутентифікація Microsoft користувача не вдалася - користувача більше не "
-"існує."
+msgstr "Microsoft user authentication failed - user no longer exists."
 
 msgctxt "LaunchController|"
 msgid "The account must be migrated to a Microsoft account."
-msgstr "Обліковий запис необхідно мігрувати на обліковий запис Microsoft."
+msgstr "The account must be migrated to a Microsoft account."
 
 msgctxt "LoggedProcess|"
 msgid "The process failed to start."
-msgstr "Не вдалося запустити процес."
+msgstr "The process failed to start."
 
 msgctxt "ProxyPage|"
 msgid "SOC&KS5"
@@ -2718,184 +2706,183 @@ msgstr "SOC&KS5"
 
 msgctxt "QuaZIODevice|"
 msgid "QIODevice::ReadWrite is not supported for QuaZIODevice"
-msgstr "QIODevice::ReadWrite не підтримується для QuaZIODevice"
+msgstr "QIODevice::ReadWrite is not supported for QuaZIODevice"
 
 msgctxt "Atl::FilterModel|"
 msgid "Sort by popularity"
-msgstr "Сортувати за популярністю"
+msgstr "Sort by popularity"
 
 msgctxt "LaunchController|"
 msgid "Couldn't load the instance profile."
-msgstr "Не вдалося завантажити профіль збірки."
+msgstr "Couldn't load the instance profile."
 
 msgctxt "VersionPage|"
 msgid "Couldn't load the instance profile."
-msgstr "Не вдалося завантажити профіль збірки."
+msgstr "Couldn't load the instance profile."
 
 msgctxt "LanguagePage|"
 msgid "Language"
-msgstr "Мова"
+msgstr "Language"
 
 msgctxt "LanguageWizardPage|"
 msgid "Language"
-msgstr "Мова"
+msgstr "Language"
 
 msgctxt "TranslationsModel|"
 msgid "Language"
-msgstr "Мова"
+msgstr "Language"
 
 msgctxt "VersionProxyModel|"
 msgid "Release date of this version"
-msgstr "Дата релізу цієї версії"
+msgstr "Release date of this version"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Include resource packs"
-msgstr "Включити пакети ресурсів"
+msgstr "Include resource packs"
 
 msgctxt "InstanceSettingsPage|"
 msgid "The amount of memory available to store loaded Java classes."
-msgstr "Обсяг доступної пам'яті для зберігання завантажених класів Java."
+msgstr "The amount of memory available to store loaded Java classes."
 
 msgctxt "JavaPage|"
 msgid "The amount of memory available to store loaded Java classes."
-msgstr "Обсяг доступної пам'яті для зберігання завантажених класів Java."
+msgstr "The amount of memory available to store loaded Java classes."
 
 msgctxt "JavaSettingsWidget|"
 msgid "The amount of memory available to store loaded Java classes."
-msgstr "Обсяг доступної пам'яті для зберігання завантажених класів Java."
+msgstr "The amount of memory available to store loaded Java classes."
 
 msgctxt "DirectJavaLaunch|"
 msgid "Could not launch minecraft!"
-msgstr "Не вдалося запустити minecraft!"
+msgstr "Could not launch minecraft!"
 
 msgctxt "LauncherPartLaunch|"
 msgid "Could not launch minecraft!"
-msgstr "Не вдалося запустити minecraft!"
+msgstr "Could not launch minecraft!"
 
 msgctxt "CreateShortcutDialog|"
 msgid "Create script instead of shortcut"
-msgstr "Створити скрипт замість ярлика"
+msgstr "Create script instead of shortcut"
 
 msgctxt "ScreenshotsPage|"
 msgid "Copy File(s)"
-msgstr "Копіювати файл(и)"
+msgstr "Copy File(s)"
 
 msgctxt "LaunchController|"
 msgid "Account requires migration"
-msgstr "Обліковий запис вимагає міграції"
+msgstr "Account requires migration"
 
 msgctxt "LegacyFTB::PackInstallTask|"
 msgid "No installation method found!"
-msgstr "Не знайдено метод встановлення!"
+msgstr "No installation method found!"
 
 msgctxt "QObject|"
 msgid "<p>Following commits were added since last update:</p>"
-msgstr "<p>Після останнього оновлення були додані такі коміти:</p>"
+msgstr "<p>Following commits were added since last update:</p>"
 
 msgctxt "InstancePageProvider|"
 msgid "Core mods"
-msgstr "Модифікації"
+msgstr "Core mods"
 
 msgctxt "VanillaPage|"
 msgid "Snapshots"
-msgstr "Знімки"
+msgstr "Snapshots"
 
 #, qt-format
 msgctxt "QObject|"
 msgid "%1h %2m"
-msgstr "%1 год %2 хв"
+msgstr "%1h %2m"
 
 msgctxt "LauncherPage|"
 msgid "Launcher notifications"
-msgstr "Сповіщення програми"
+msgstr "Launcher notifications"
 
 msgctxt "VersionPage|"
 msgid "Make the selected package apply sooner."
-msgstr "Вибраний пакет буде застосовано раніше."
+msgstr "Make the selected package apply sooner."
 
 #, qt-format
 msgctxt "QObject|"
 msgid "%1m %2s"
-msgstr "%1 хв %2 сек"
+msgstr "%1m %2s"
 
 #, qt-format
 msgctxt "MinecraftInstance|"
 msgid ", total played for %1"
-msgstr ", награно: %1"
+msgstr ", total played for %1"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Warnings"
-msgstr "Попередження"
+msgstr "Warnings"
 
 msgctxt "WorldListPage|"
 msgid "Select a Minecraft world zip"
-msgstr "Виберіть zip-архів світу Minecraft"
+msgstr "Select a Minecraft world zip"
 
 msgctxt "ComponentUpdateTask|"
 msgid "Instance has conflicting dependencies."
-msgstr "Збірка має конфліктні залежності."
+msgstr "Instance has conflicting dependencies."
 
 #, qt-format
 msgctxt "QObject|"
 msgid "%1d %2h %3m"
-msgstr "%1 д %2 год %3 хв"
+msgstr "%1d %2h %3m"
 
 msgctxt "UpdateDialog|"
 msgid "Update now"
-msgstr "Оновити зараз"
+msgstr "Update now"
 
 msgctxt "AboutDialog|"
 msgid "Platform:"
-msgstr "Платформа:"
+msgstr "Platform:"
 
 msgctxt "VersionProxyModel|"
 msgid "The name of the version."
-msgstr "Назва версії."
+msgstr "The name of the version."
 
 msgctxt "AccountTask|"
 msgid ""
 "Failed to authenticate. The account must be migrated to a Microsoft account "
 "to be usable."
 msgstr ""
-"Не вдалося здійснити автентифікацію. Треба мігрувати обліковий запис Mojang "
-"до Microsoft."
+"Failed to authenticate. The account must be migrated to a Microsoft account "
+"to be usable."
 
 msgctxt "LaunchController|"
 msgid "Play Demo"
-msgstr "Зіграти в пробну версію"
+msgstr "Play Demo"
 
 msgctxt "GameType|"
 msgid "Creative"
-msgstr "Творчість"
+msgstr "Creative"
 
 msgctxt "QObject|"
 msgid ""
 "The specified java binary didn't work.<br />You should use the auto-detect "
 "feature, or set the path to the java executable.<br />"
 msgstr ""
-"Вказаний двійковий файл Java не працює. <br /> Вам слід скористатися "
-"функцією автоматичного виявлення або встановити шлях до виконуваного файлу "
-"Java. <br />"
+"The specified java binary didn't work.<br />You should use the auto-detect "
+"feature, or set the path to the java executable.<br />"
 
 msgctxt "VersionPage|"
 msgid "Open .minecraft"
-msgstr "Відкрити .minecraft"
+msgstr "Open .minecraft"
 
 msgctxt "VanillaPage|"
 msgid "Refresh"
-msgstr "Обновити"
+msgstr "Refresh"
 
 msgctxt "WorldListPage|"
 msgid "Refresh"
-msgstr "Оновити"
+msgstr "Refresh"
 
 msgctxt "SetupWizard|"
 msgid "&Refresh"
-msgstr "&Оновити"
+msgstr "&Refresh"
 
 msgctxt "VersionSelectDialog|"
 msgid "&Refresh"
-msgstr "&Оновити"
+msgstr "&Refresh"
 
 #, qt-format
 msgctxt "OtherLogsPage|"
@@ -2903,8 +2890,8 @@ msgid ""
 "The file (%1) is too big. You may want to open it in a viewer optimized for "
 "large files."
 msgstr ""
-"Файл (%1) занадто великий. Ви можете відкрити його в оптимізованій для "
-"перегляду великих файлів програмі."
+"The file (%1) is too big. You may want to open it in a viewer optimised for "
+"large files."
 
 msgctxt "AtlPage|"
 msgid "ATLauncher"
@@ -2913,29 +2900,28 @@ msgstr "ATLauncher"
 #, qt-format
 msgctxt "LoggedProcess|"
 msgid "Process exited with exit code %1 (0x%2)."
-msgstr "Процес завершився з кодом %1 (0x%2)."
+msgstr "Process exited with exit code %1 (0x%2)."
 
 msgctxt "VersionPage|"
 msgid "Couldn't load or download the intermediary mappings version lists!"
-msgstr ""
-"Не вдалося завантажити або скачати список версій intermediary mappings!"
+msgstr "Couldn't load or download the intermediary mappings version lists!"
 
 msgctxt "VanillaPage|"
 msgid "Experiments"
-msgstr "Експериментальні"
+msgstr "Experiments"
 
 #, qt-format
 msgctxt "LaunchController|"
 msgid "Couldn't start the profiler: %1"
-msgstr "Не вдалося запустити профайлер: %1"
+msgstr "Couldn't start the profiler: %1"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Select modpack file"
-msgstr "Виберіть файл modpack"
+msgstr "Select modpack file"
 
 msgctxt "AccountTask|"
 msgid "Failed to contact the authentication server."
-msgstr "Не вдалося зв'язатися з сервером автентифікації."
+msgstr "Failed to contact the authentication server."
 
 #, qt-format
 msgctxt "ExternalToolsPage|"
@@ -2943,7 +2929,7 @@ msgid ""
 "Error while checking JProfiler install:\n"
 "%1"
 msgstr ""
-"Помилка під час перевірки встановлення JProfile:\n"
+"Error while checking JProfiler install:\n"
 "%1"
 
 #, qt-format
@@ -2955,15 +2941,15 @@ msgid ""
 "\n"
 "You can change the Java version in the settings later.\n"
 msgstr ""
-"Ви не вибрали версію Java, або вибрали щось що не працює.\n"
-"%1 неспроможний запустити Minecraft.\n"
-"Ви бажаєте продовжити без Java?\n"
+"You didn't select a Java version or selected something that doesn't work.\n"
+"%1 will not be able to start Minecraft.\n"
+"Do you wish to proceed without any Java?\n"
 "\n"
-"Ви можете змінити версію Java в налаштуваннях пізніше.\n"
+"You can change the Java version in the settings later.\n"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Workarounds"
-msgstr "Обхідні шляхи"
+msgstr "Workarounds"
 
 #, qt-format
 msgctxt "XboxAuthorizationStep|"
@@ -2972,141 +2958,140 @@ msgid ""
 "\n"
 "Please set up your account according to %1."
 msgstr ""
-"Цей обліковий запис Microsoft замолодий і не пов'язаний зі сімейством.\n"
+"This Microsoft account is underaged and is not linked to a family.\n"
 "\n"
-"Налаштуйте свій обліковий запис згідно з %1."
+"Please set up your account according to %1."
 
 msgctxt "Modrinth::InstanceExportTask|"
 msgid "Modrinth pack export"
-msgstr "Експорт набору з Modrinth"
+msgstr "Modrinth pack export"
 
 msgctxt "MinecraftProfileStep|"
 msgid "Minecraft Java profile response could not be parsed"
-msgstr "Не вдалося проаналізувати відповідь від профілю Java Minecraft'у"
+msgstr "Minecraft Java profile response could not be parsed"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Export Options"
-msgstr "Параметри експорту"
+msgstr "Export Options"
 
 msgctxt "ModrinthPage|"
 msgid "Sort by follow count"
-msgstr "Впорядкувати за кількістю підписників"
+msgstr "Sort by follow count"
 
 msgctxt "CreateShortcutDialog|"
 msgid "Shortcut path:"
-msgstr "Шлях для ярлика:"
+msgstr "Shortcut Path:"
 
 msgctxt "QObject|"
 msgid "Path does not seem to be a MCEdit path"
-msgstr "Шлях, здається, не є шляхом MCEdit"
+msgstr "Path does not seem to be a MCEdit path"
 
 #, qt-format
 msgctxt "ClaimAccount|"
 msgid "Failed to claim account by profile: %1 was not found."
-msgstr "Не вдалося запросити обліковий запис за профілем: %1 не знайдено."
+msgstr "Failed to claim account by profile: %1 was not found."
 
 msgctxt "ScreenshotsPage|"
 msgid "Upload screenshot to imgur.com?"
-msgstr "Завантажити знімок екрану на imgur.com?"
+msgstr "Upload screenshot to imgur.com?"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Game windows"
-msgstr "Ігрові вікна"
+msgstr "Game windows"
 
 #, qt-format
 msgctxt "OtherLogsPage|"
 msgid "Do you really want to delete %1?"
-msgstr "Ви дійсно хочете видалити %1?"
+msgstr "Do you really want to delete %1?"
 
 msgctxt "VersionPage|"
 msgid "Remove selected package from the instance."
-msgstr "Видалити вибраний пакунок із збірки."
+msgstr "Remove selected package from the instance."
 
 msgctxt "QObject|"
 msgid "Patch is not loaded yet."
-msgstr "Латку ще не завантажено."
+msgstr "Patch is not loaded yet."
 
 msgctxt "InstanceSettingsPage|"
 msgid "Native libraries"
-msgstr "Нативні бібліотеки"
+msgstr "Native libraries"
 
 msgctxt "LaunchController|"
 msgid "Kill Minecraft?"
-msgstr "Зупинити Minecraft?"
+msgstr "Kill Minecraft?"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Description"
-msgstr "Опис"
+msgstr "Description"
 
 msgctxt "VersionPage|"
 msgid "Warning: "
-msgstr "Увага: "
+msgstr "Warning: "
 
 msgctxt "VersionPage|"
 msgid "No NeoForge versions are currently available for Minecraft "
-msgstr "Наразі для Minecraft немає доступних версій NeoForge "
+msgstr "No NeoForge versions are currently available for Minecraft "
 
 #, qt-format
 msgctxt "QuaZipFile|"
 msgid "ZIP/UNZIP API error %1"
-msgstr "Помилка ZIP/UNZIP API %1"
+msgstr "ZIP/UNZIP API error %1"
 
 #, qt-format
 msgctxt "LegacyFTB::PackInstallTask|"
 msgid "Failed to open modpack file %1!"
-msgstr "Не вдалося відкрити файл мод-паку %1!"
+msgstr "Failed to open modpack file %1!"
 
 msgctxt "AboutDialog|"
 msgid "About Qt"
-msgstr "Про Qt"
+msgstr "About Qt"
 
 #, qt-format
 msgctxt "AboutDialog|"
 msgid "About %1"
-msgstr "Про %1"
+msgstr "About %1"
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid "About %1"
-msgstr "Про %1"
+msgstr "About %1"
 
 #, qt-format
 msgctxt "VersionProxyModel|"
 msgid "%1 (installed)"
-msgstr "%1 (встановлено)"
+msgstr "%1 (installed)"
 
 msgctxt "EntitlementsStep|"
 msgid "Determining game ownership."
-msgstr "Перевірка наявності ліцензії гри в вашому обліковому записі."
+msgstr "Determining game ownership."
 
 msgctxt "JavaWizardPage|"
 msgid ""
 "You do not have a working Java set up yet or it went missing.\n"
 "Please select one of the following or browse for a java executable."
 msgstr ""
-"У вас немає встановленої робочої версії Java, або щось було втрачено.\n"
-"Будь ласка, виберіть одну із назначених, або найдіть виконуваний файл Java, "
-"нажавши на кнопку 'Огляд'."
+"You do not have a working Java set up yet or it went missing.\n"
+"Please select one of the following or browse for a java executable."
 
 msgctxt "AccountsDialog|"
 msgid "Get Minecraft"
-msgstr "Отримати Minecraft"
+msgstr "Get Minecraft"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Record time spent playing this instance"
-msgstr "Записати час, витрачений на цей екземпляр"
+msgstr "Record time spent playing this instance"
 
 msgctxt "CustomCommands|"
 msgid "Cus&tom Commands"
-msgstr "Користувацькі команди"
+msgstr "Cus&tom Commands"
 
 msgctxt "LauncherPage|"
 msgid "Simple (Light Icons)"
-msgstr "Проста (Світлі значки)"
+msgstr "Simple (Light Icons)"
 
 msgctxt "Technic::TechnicPackProcessor|"
 msgid "Unable to open \"forgeversion.properties\""
-msgstr "Не вдалося відкрити \"forgeversion.properties\""
+msgstr "Unable to open \"forgeversion.properties\""
 
 #, qt-format
 msgctxt "AssetUpdateTask|"
@@ -3114,20 +3099,20 @@ msgid ""
 "Failed to download assets:\n"
 "%1"
 msgstr ""
-"Не вдалося завантажити ресурс:\n"
+"Failed to download assets:\n"
 "%1"
 
 msgctxt "LaunchController|"
 msgid "Failed to launch."
-msgstr "Не вдалося запустити."
+msgstr "Failed to launch."
 
 msgctxt "AccountsDialog|"
 msgid "Accounts"
-msgstr "Облікові записи"
+msgstr "Accounts"
 
 msgctxt "MainWindow|"
 msgid "Accounts"
-msgstr "Облікові записи"
+msgstr "Accounts"
 
 #, qt-format
 msgctxt "ExternalToolsPage|"
@@ -3135,95 +3120,95 @@ msgid ""
 "Error while checking MCEdit install:\n"
 "%1"
 msgstr ""
-"Помилка під час перевірки встановлення MCEdit:\n"
+"Error while checking MCEdit install:\n"
 "%1"
 
 msgctxt "QuaZIODevice|"
 msgid "QIODevice::Append is not supported for QuaZIODevice"
-msgstr "QIODevice:Append не підтримується для QuaZIODevice"
+msgstr "QIODevice::Append is not supported for QuaZIODevice"
 
 msgctxt "LogPage|"
 msgid "Search:"
-msgstr "Пошук:"
+msgstr "Search:"
 
 msgctxt "OtherLogsPage|"
 msgid "Search:"
-msgstr "Пошук:"
+msgstr "Search:"
 
 msgctxt "CreateShortcutDialog|"
 msgid "Select shortcut path"
-msgstr "Виберіть шлях до ярлика"
+msgstr "Select shortcut path"
 
 msgctxt "Technic::TechnicPackProcessor|"
 msgid "Could not understand \"version.json\":\n"
-msgstr "Не вдалося зрозуміти \"version.json\":\n"
+msgstr "Could not understand \"version.json\":\n"
 
 msgctxt "MinecraftPage|"
 msgid "Native library workarounds"
-msgstr "Альтернативні рішення для рідних бібліотек"
+msgstr "Native library workarounds"
 
 #, qt-format
 msgctxt "GameType|"
 msgid "Unknown (%1)"
-msgstr "Невідомо (%1)"
+msgstr "Unknown (%1)"
 
 msgctxt "MainWindow|"
 msgid "Add a new instance."
-msgstr "Додати нову збірку."
+msgstr "Add a new instance."
 
 msgctxt "LegacyFTB::ListModel|"
 msgid "Public Modpack"
-msgstr "Публічний мод-пак"
+msgstr "Public Modpack"
 
 msgctxt "ServersPage|"
 msgid "Servers"
-msgstr "Сервера"
+msgstr "Servers"
 
 msgctxt "LaunchController|"
 msgid "No Accounts"
-msgstr "Немає облікового запису"
+msgstr "No Accounts"
 
 msgctxt "IconPickerDialog|"
 msgid "Pick icon"
-msgstr "Вибір іконки"
+msgstr "Pick an icon"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Window width:"
-msgstr "Ширина вікна:"
+msgstr "Window width:"
 
 msgctxt "VersionPage|"
 msgid "Change version of the selected package."
-msgstr "Змінити версію вибраного пакета."
+msgstr "Change version of the selected package."
 
 msgctxt "AboutDialog|"
 msgid "Channel"
-msgstr "Канал"
+msgstr "Channel"
 
 msgctxt "MinecraftAccount|"
 msgid "Unchecked"
-msgstr "Не перевірено"
+msgstr "Unchecked"
 
 msgctxt "ExportInstanceDialog|"
 msgid "Overwrite?"
-msgstr "Перезаписати?"
+msgstr "Overwrite?"
 
 #, qt-format
 msgctxt "AtlPage|"
 msgid "No versions are currently available for Minecraft %1"
-msgstr "На цей момент немає доступних версій для Minecraft %1"
+msgstr "No versions are currently available for Minecraft %1"
 
 msgctxt "UpdateDialog|"
 msgid "MultiMC Update"
-msgstr "MultiMC оновлення"
+msgstr "MultiMC Update"
 
 msgctxt "CustomCommands|"
 msgid "Pre-launch command:"
-msgstr "Команда перед запуском:"
+msgstr "Pre-launch command:"
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid "Open the development blog to read more news about %1."
-msgstr "Відкрити блог розробників, щоб прочитати більше новин про %1."
+msgstr "Open the development blog to read more news about %1."
 
 msgctxt "MinecraftInstance|"
 msgid "<PROFILE ID>"
@@ -3231,7 +3216,7 @@ msgstr "<PROFILE ID>"
 
 msgctxt "AccountsDialog|"
 msgid "Refresh Account"
-msgstr "Оновити обліковий запис"
+msgstr "Refresh Account"
 
 #, qt-format
 msgctxt "PostLaunchCommand|"
@@ -3239,33 +3224,33 @@ msgid ""
 "Post-Launch command failed with code %1.\n"
 "\n"
 msgstr ""
-"Помилка команди після-запуску з кодом %1.\n"
+"Post-Launch command failed with code %1.\n"
 "\n"
 
 msgctxt "AccountsDialog|"
 msgid "Classic"
-msgstr "Класична"
+msgstr "Classic"
 
 msgctxt "ServersPage|"
 msgid "Never download"
-msgstr "Ніколи не завантажувати"
+msgstr "Never download"
 
 msgctxt "LogPage|"
 msgid "Copy the whole log into the clipboard"
-msgstr "Копіювати увесь журнал в буфер обміну"
+msgstr "Copy the whole log into the clipboard"
 
 msgctxt "OtherLogsPage|"
 msgid "Copy the whole log into the clipboard"
-msgstr "Скопіювати весь журнал в буфер обміну"
+msgstr "Copy the whole log into the clipboard"
 
 #, qt-format
 msgctxt "OtherLogsPage|"
 msgid "Unable to delete %1: %2"
-msgstr "Неможливо видалити %1: %2"
+msgstr "Unable to delete %1: %2"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Show time spent playing this instance"
-msgstr "Показувати час, витрачений на цей екземпляр"
+msgstr "Show time spent playing this instance"
 
 msgctxt "MinecraftInstance|"
 msgid "<SESSION ID>"
@@ -3273,108 +3258,107 @@ msgstr "<SESSION ID>"
 
 msgctxt "MainWindow|"
 msgid "Manage Screenshots"
-msgstr "Керування скріншотами"
+msgstr "Manage Screenshots"
 
 msgctxt "MainWindow|"
 msgid "View and upload screenshots for this instance."
-msgstr "Перегляд і завантаження в інтернет скріншотів цієї збірки."
+msgstr "View and upload screenshots for this instance."
 
 msgctxt "LauncherPage|"
 msgid "[Test/INFO] A harmless message..."
-msgstr "[Тест/INFO] Нешкідливе повідомлення..."
+msgstr "[Test/INFO] A harmless message..."
 
 msgctxt "LauncherPage|"
 msgid "I&nstances:"
-msgstr "&Збірки:"
+msgstr "I&nstances:"
 
 msgctxt "FMLLibrariesTask|"
 msgid "Checking for FML libraries..."
-msgstr "Перевірка бібліотек FML..."
+msgstr "Checking for FML libraries..."
 
 #, qt-format
 msgctxt "DirectJavaLaunch|"
 msgid "The wrapper command \"%1\" couldn't be found."
-msgstr "Команда обгортки \"%1\" не знайдена."
+msgstr "The wrapper command \"%1\" couldn't be found."
 
 #, qt-format
 msgctxt "LauncherPartLaunch|"
 msgid "The wrapper command \"%1\" couldn't be found."
-msgstr "Команда обгортки \"%1\" не знайдена."
+msgstr "The wrapper command \"%1\" couldn't be found."
 
 msgctxt "IconPickerDialog|"
 msgid "Add Icon"
-msgstr "Додати іконку"
+msgstr "Add icon"
 
 #, qt-format
 msgctxt "IconPickerDialog|"
 msgid "Icons %1"
-msgstr "Іконки %1"
+msgstr "Icons %1"
 
 msgctxt "LauncherPage|"
 msgid "Console"
-msgstr "Консоль"
+msgstr "Console"
 
 msgctxt "ModFolderPage|"
 msgid "Add mods"
-msgstr "Додати моди"
+msgstr "Add mods"
 
 msgctxt "LegacyFTB::Page|"
 msgid "Add pack"
-msgstr "Додати збірку"
+msgstr "Add pack"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Java insta&llation"
-msgstr "Встановлення Java"
+msgstr "Java insta&llation"
 
 msgctxt "LauncherPage|"
 msgid "[Something/ERROR] A spooky error!"
-msgstr "[Що-небудь/ERROR] Жахлива помилка!"
+msgstr "[Something/ERROR] A spooky error!"
 
 #, qt-format
 msgctxt "OtherLogsPage|"
 msgid "The file (%1) is not readable."
-msgstr "Файл (%1) не читається."
+msgstr "The file (%1) is not readable."
 
 msgctxt "ModrinthExportDialog|"
 msgid "Use this if your modpack contains a mod which adds global datapacks."
-msgstr ""
-"Використовуйте це, якщо ваш модпак містить мод, що додає глобальну датапаки."
+msgstr "Use this if your modpack contains a mod which adds global datapacks."
 
 msgctxt "WorldListPage|"
 msgid "Datapacks"
-msgstr "Пакети даних"
+msgstr "Datapacks"
 
 msgctxt "LauncherPage|"
 msgid "By &last launched"
-msgstr "За &часом запуску"
+msgstr "By &last launched"
 
 msgctxt "AtlPage|"
 msgid "Installing"
-msgstr "Встановлення"
+msgstr "Installing"
 
 msgctxt "AboutDialog|"
 msgid "Credits"
-msgstr "Подяка"
+msgstr "Credits"
 
 msgctxt "ExternalToolsPage|"
 msgid "JProfiler setup seems to be OK"
-msgstr "Налаштування JProfile здається виконано успішно"
+msgstr "JProfiler setup seems to be OK"
 
 msgctxt "BaseProfiler|"
 msgid "Profiler aborted"
-msgstr "Профайлер перервано"
+msgstr "Profiler aborted"
 
 msgctxt "JProfiler|"
 msgid "Profiler aborted"
-msgstr "Профайлер зупинено"
+msgstr "Profiler aborted"
 
 msgctxt "JVisualVM|"
 msgid "Profiler aborted"
-msgstr "Профайлер зупинено"
+msgstr "Profiler aborted"
 
 msgctxt "MSAStep|"
 msgid "Logging in with Microsoft account."
-msgstr "Вхід через обліковий запис Microsoft."
+msgstr "Logging in with Microsoft account."
 
 msgctxt "AccountsDialog|"
 msgid ""
@@ -3383,30 +3367,30 @@ msgid ""
 "\n"
 "Choose your name carefully:"
 msgstr ""
-"Вам потрібно зробити ще один крок, щоб мати можливість грати Minecraft на "
-"цьому обліковому записі.\n"
+"You just need to take one more step to be able to play Minecraft on this "
+"account.\n"
 "\n"
-"Обачно обирайте собі ім'я:"
+"Choose your name carefully:"
 
 msgctxt "LaunchController|"
 msgid "Which account would you like to use?"
-msgstr "Який обліковий запис Ви хочете використовувати?"
+msgstr "Which account would you like to use?"
 
 msgctxt "ProxyPage|"
 msgid "Password:"
-msgstr "Пароль:"
+msgstr "Password:"
 
 msgctxt "VersionPage|"
 msgid "Install normal mods."
-msgstr "Встановіть нормальні моди."
+msgstr "Install normal mods."
 
 msgctxt "QObject|"
 msgid "Upload failed"
-msgstr "Помилка вивантаження"
+msgstr "Upload failed"
 
 msgctxt "VersionPage|"
 msgid "Customize"
-msgstr "Налаштувати"
+msgstr "Customise"
 
 msgctxt "WorldListPage|"
 msgid ""
@@ -3415,10 +3399,10 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
-"Це призведе до видалення вибраного світу.\n"
-"Світ буде знищений назавжди (Надовго).\n"
+"This will remove the selected world permenantly.\n"
+"The world will be gone forever (A LONG TIME).\n"
 "\n"
-"Ви хочете продовжити?"
+"Do you want to continue?"
 
 msgctxt "TechnicPage|"
 msgid "Technic"
@@ -3426,51 +3410,51 @@ msgstr "Technic"
 
 msgctxt "ProxyPage|"
 msgid "&Default"
-msgstr "&За замовчуванням"
+msgstr "&Default"
 
 msgctxt "LauncherPage|"
 msgid "Default"
-msgstr "Стандартний"
+msgstr "Default"
 
 msgctxt "GameType|"
 msgid "Undefined"
-msgstr "Невизначений"
+msgstr "Undefined"
 
 msgctxt "ModFolderPage|"
 msgid "&Enable"
-msgstr "&Увімкнути"
+msgstr "&Enable"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Select global datapacks folder"
-msgstr "Оберіть загальну теку для датапаків"
+msgstr "Select global datapacks folder"
 
 msgctxt "NotificationDialog|"
 msgid "Notification"
-msgstr "Повідомлення"
+msgstr "Notification"
 
 msgctxt "SetupWizard|"
 msgid "&Finish"
-msgstr "&Готово"
+msgstr "&Finish"
 
 msgctxt "QObject|"
 msgid "Update failed!"
-msgstr "Помилка оновлення!"
+msgstr "Update failed!"
 
 msgctxt "MinecraftPage|"
 msgid "W&indow width:"
-msgstr "Ширина &вікна:"
+msgstr "W&indow width:"
 
 msgctxt "ModMinecraftJar|"
 msgid "Failed to create the custom Minecraft jar file."
-msgstr "Не вдалося створити користувацький jar-файл Minecraft."
+msgstr "Failed to create the custom Minecraft jar file."
 
 msgctxt "Modrinth::InstanceExportTask|"
 msgid "Looking up files on Modrinth..."
-msgstr "Пошук файлів на Modrinth..."
+msgstr "Looking up files on Modrinth..."
 
 msgctxt "LegacyInstance|"
 msgid "Instance from previous versions."
-msgstr "Збірка на основі попередніх версій."
+msgstr "Instance from previous versions."
 
 msgctxt "QObject|"
 msgid ""
@@ -3479,84 +3463,84 @@ msgid ""
 "\n"
 "Roll back to previous version?"
 msgstr ""
-"Нова версія не запущена або застаріла і не реагує на контроль запуску.\n"
+"The new version didn't start or is too old and doesn't respond to startup "
+"checks.\n"
 "\n"
-"Повернутися до попередньої версії?"
+"Roll back to previous version?"
 
 msgctxt "InstanceCardWidget|"
 msgid "&Group:"
-msgstr "&Група:"
+msgstr "&Group:"
 
 msgctxt "NewInstanceDialog|"
 msgid "&Group:"
-msgstr "&Група:"
+msgstr "&Group:"
 
 msgctxt "QObject|"
 msgid "Description is missing in the FTB App instance."
-msgstr "Опис відсутній в програми FTB."
+msgstr "Description is missing in the FTB App instance."
 
 msgctxt "Technic::TechnicPackProcessor|"
 msgid ""
 "Could not find \"version.json\" inside \"bin/modpack.jar\", but minecraft "
 "version is unknown"
 msgstr ""
-"Не вдалося знайти \"version.json\" всередині \"bin/modpack.jar\", але "
-"minecraft версія невідома"
+"Could not find \"version.json\" inside \"bin/modpack.jar\", but minecraft "
+"version is unknown"
 
 msgctxt "VerifyJavaInstall|"
 msgid "Minecraft 1.18 Pre Release 2 and above require the use of Java 17"
-msgstr "Minecraft 1.18 Pre Release 2 та вище потребує Java версії 17"
+msgstr "Minecraft 1.18 Pre Release 2 and above require the use of Java 17"
 
 msgctxt "ResourcePackFolderModel|"
 msgid "Is the resource pack enabled?"
-msgstr "Чи увімкнений пакет ресурсів?"
+msgstr "Is the resource pack enabled?"
 
 msgctxt "LauncherPage|"
 msgid "&Icons:"
-msgstr "&Значки:"
+msgstr "&Icons:"
 
 msgctxt "VersionPage|"
 msgid "Select jar mods"
-msgstr "Виберіть jar моди"
+msgstr "Select jar mods"
 
 msgctxt "ModrinthPage|"
 msgid "Loading..."
-msgstr "Завантаження..."
+msgstr "Loading..."
 
 #, qt-format
 msgctxt "GoUpdate::DownloadTask|"
 msgid "Downloading %1 update files."
-msgstr "Завантаження %1 файлів оновлення."
+msgstr "Downloading %1 update files."
 
 msgctxt "ProxyPage|"
 msgid "Uses your system's default proxy settings."
-msgstr ""
-"Використовувати стандартні налаштування проксі-сервера для вашої системи."
+msgstr "Uses your system's default proxy settings."
 
 msgctxt "ModFolderPage|"
 msgid "&Disable"
-msgstr "&Вимкнути"
+msgstr "&Disable"
 
 msgctxt "MainWindow|"
 msgid "Discord"
-msgstr "Дискорд"
+msgstr "Discord"
 
 msgctxt "FMLLibrariesTask|"
 msgid "Copying FML libraries into the instance..."
-msgstr "Копіювання бібліотек FML в збірку..."
+msgstr "Copying FML libraries into the instance..."
 
 msgctxt "CreateShortcutDialog|"
 msgid "Singleplayer world:"
-msgstr "Світ одиночної гри:"
+msgstr "Singleplayer world:"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Singleplayer world:"
-msgstr "Світ одиночної гри:"
+msgstr "Singleplayer world:"
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid "%1 - Version %2"
-msgstr "%1, версія %2"
+msgstr "%1 - Version %2"
 
 #, qt-format
 msgctxt "QObject|"
@@ -3564,193 +3548,194 @@ msgid ""
 "The <a href=\"%1\">link to the uploaded log</a> has been placed in your "
 "clipboard."
 msgstr ""
-"<a href=\"%1\">посилання на завантажений журнал</a> було додано в буфер "
-"обміну."
+"The <a href=\"%1\">link to the uploaded log</a> has been placed in your "
+"clipboard."
 
 msgctxt "LauncherPage|"
 msgid "By &name"
-msgstr "За &назвою"
+msgstr "By &name"
 
 msgctxt "Modrinth::InstanceExportTask|"
 msgid "Creating modpack metadata..."
-msgstr "Створення метаданих modpack..."
+msgstr "Creating modpack metadata..."
 
 msgctxt "MSAStep|"
 msgid "Microsoft user authentication completed with an unrecognized result."
-msgstr ""
-"Аутентифікація Microsoft користувача завершена з нерозпізнаним результатом."
+msgstr "Microsoft user authentication completed with an unrecognised result."
 
 msgctxt "ExportInstanceDialog|"
 msgid "Unable to export instance"
-msgstr "Не вдалося експортувати збірку"
+msgstr "Unable to export instance"
 
 msgctxt "OtherLogsPage|"
 msgid "Couldn't delete some files!"
-msgstr "Не вдалося видалити деякі файли!"
+msgstr "Couldn't delete some files!"
 
 msgctxt "VersionPage|"
 msgid "No LiteLoader versions are currently available for Minecraft "
-msgstr "Наразі для Minecraft немає доступних версій LiteLoader "
+msgstr "No LiteLoader versions are currently available for Minecraft "
 
 #, qt-format
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Failed to find version for %1 loader"
-msgstr "Помилка пошуку версії для завантажувача %1"
+msgstr "Failed to find version for %1 loader"
 
 msgctxt "MainWindow|"
 msgid "No accounts added!"
-msgstr "Облікових записів не додано!"
+msgstr "No accounts added!"
 
 msgctxt "AssetUpdateTask|"
 msgid "Failed to read the assets index!"
-msgstr "Не вдалося прочитати індекс ресурсу!"
+msgstr "Failed to read the assets index!"
 
 msgctxt "WorldListPage|"
 msgid "Enter a new world name."
-msgstr "Введіть нове ім'я світу."
+msgstr "Enter a new world name."
 
 msgctxt "MinecraftProfileStep|"
 msgid "Minecraft Java profile acquisition failed."
-msgstr "Не вдалося виконати придбання профілю Minecraft Java."
+msgstr "Minecraft Java profile acquisition failed."
 
 msgctxt "ScreenshotsPage|"
 msgid "Copy Image"
-msgstr "Копіювати зображення"
+msgstr "Copy Image"
 
 msgctxt "SetupWizard|"
 msgid "&Next >"
-msgstr "&Далі >"
+msgstr "&Next >"
 
 #, qt-format
 msgctxt "NewsChecker|"
 msgid ""
 "Failed to load news RSS feed:\n"
 "%1"
-msgstr "Не вдалося завантажити RSS-стрічку новин:%1"
+msgstr ""
+"Failed to load news RSS feed:\n"
+"%1"
 
 msgctxt "AtlOptionalModListModel|"
 msgid "Are you sure that you want to enable this mod?"
-msgstr "Ви дійсно бажаєте увімкнути цей мод?"
+msgstr "Are you sure you want to enable this mod?"
 
 msgctxt "ServersPage|"
 msgid "Always download"
-msgstr "Завжди завантажувати"
+msgstr "Always download"
 
 msgctxt "AccountsDialog|"
 msgid "Remove and Sign In Again"
-msgstr "Видалити та знову ввійти"
+msgstr "Remove and Sign In Again"
 
 msgctxt "VersionPage|"
 msgid "Edit selected package."
-msgstr "Редагувати вибраний пакет."
+msgstr "Edit selected package."
 
 msgctxt "WorldListPage|"
 msgid "Copy World"
-msgstr "Копіювати світ"
+msgstr "Copy World"
 
 msgctxt "QObject|"
 msgid "Original Author"
-msgstr "Оригінальний автор"
+msgstr "Original Author"
 
 msgctxt "LaunchController|"
 msgid "Play demo?"
-msgstr "Зіграти в пробну версію?"
+msgstr "Play demo?"
 
 msgctxt "VersionListView|"
 msgid "No versions are currently available."
-msgstr "Наразі немає доступних оновлень."
+msgstr "No versions are currently available."
 
 msgctxt "InstanceSettingsPage|"
 msgid "Select a Java version"
-msgstr "Виберіть версію Java"
+msgstr "Select a Java version"
 
 msgctxt "JavaPage|"
 msgid "Select a Java version"
-msgstr "Виберіть версію Java"
+msgstr "Select a Java version"
 
 msgctxt "CopyInstanceDialog|"
 msgid "Copy saves"
-msgstr "Копіювати збереження"
+msgstr "Copy saves"
 
 msgctxt "VersionPage|"
 msgid "Error updating instance"
-msgstr "Помилка оновлення збірки"
+msgstr "Error updating instance"
 
 msgctxt "AtlOptionalModDialog|"
 msgid "Clear All"
-msgstr "Очистити все"
+msgstr "Clear All"
 
 msgctxt "QObject|"
 msgid "Java test failure"
-msgstr "Помилка тесту Java"
+msgstr "Java test failure"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Treat disabled mods, shaders and resource packs as optional"
-msgstr "Вважати відключені моди, тіні та пакети ресурсів необов'язковими"
+msgstr "Treat disabled mods, shaders and resource packs as optional"
 
 msgctxt "LauncherPage|"
 msgid "Features"
-msgstr "Можливості"
+msgstr "Features"
 
 msgctxt "ModFolderPage|"
 msgid "&Remove"
-msgstr "&Видалити"
+msgstr "&Remove"
 
 msgctxt "InstanceWindow|"
 msgid "Console window for "
-msgstr "Вікно консолі для "
+msgstr "Console window for "
 
 #, qt-format
 msgctxt "XboxAuthorizationStep|"
 msgid "Getting authorization to access %1 services."
-msgstr "Отримання авторизації для доступу до служб %1."
+msgstr "Getting authorisation to access %1 services."
 
 msgctxt "InstanceImportTask|"
 msgid "Unable to open supplied modpack zip file."
-msgstr "Не вдалося відкрити вибраний zip-файл мод-паку."
+msgstr "Unable to open supplied modpack zip file."
 
 msgctxt "Technic::SingleZipPackInstallTask|"
 msgid "Unable to open supplied modpack zip file."
-msgstr "Не вдалося відкрити вибраний zip-файл мод-паку."
+msgstr "Unable to open supplied modpack zip file."
 
 msgctxt "VersionPage|"
 msgid "Select NeoForge version"
-msgstr "Виберіть версію NeoForge"
+msgstr "Select NeoForge version"
 
 msgctxt "VersionPage|"
 msgid "Select Fabric Loader version"
-msgstr "Виберіть версію завантажувача Fabric"
+msgstr "Select Fabric Loader version"
 
 msgctxt "LauncherPage|"
 msgid "&Skins:"
-msgstr "&Скіни:"
+msgstr "&Skins:"
 
 msgctxt "VersionPage|"
 msgid "Select jar"
-msgstr "Виберіть jar"
+msgstr "Select jar"
 
 msgctxt "GameType|"
 msgid "Spectator"
-msgstr "Глядач"
+msgstr "Spectator"
 
 #, qt-format
 msgctxt "InstanceImportTask|"
 msgid "Could not fix permissions for %1"
-msgstr "Не вдалося вирішити дозволи для %1"
+msgstr "Could not fix permissions for %1"
 
 #, qt-format
 msgctxt "Technic::SingleZipPackInstallTask|"
 msgid "Could not fix permissions for %1"
-msgstr "Не вдалося вирішити дозволи для %1"
+msgstr "Could not fix permissions for %1"
 
 #, qt-format
 msgctxt "Technic::SolderPackInstallTask|"
 msgid "Could not fix permissions for %1"
-msgstr "Не вдалося вирішити дозволи для %1"
+msgstr "Could not fix permissions for %1"
 
 msgctxt "QObject|"
 msgid "Empty path"
-msgstr "Порожній шлях"
+msgstr "Empty path"
 
 #, qt-format
 msgctxt "ComponentUpdateTask|"
@@ -3758,140 +3743,139 @@ msgid ""
 "Component metadata update task failed while downloading from remote server:\n"
 "%1"
 msgstr ""
-"Помилка задачі оновлення метаданих компоненту під час завантаження з "
-"віддаленого серверу:\n"
+"Component metadata update task failed while downloading from remote server:\n"
 "%1"
 
 msgctxt "ModFolderPage|"
 msgid "Disable selected mods"
-msgstr "Вимкнути вибрані моди"
+msgstr "Disable selected mods"
 
 msgctxt "LaunchController|"
 msgid "Account doesn't have a Minecraft profile"
-msgstr "Обліковий запис не має профілю Minecraft"
+msgstr "Account doesn't have a Minecraft profile"
 
 msgctxt "ServersPage|"
 msgid "Ask to download"
-msgstr "Запитати перед завантаження"
+msgstr "Ask to download"
 
 msgctxt "ModFolderPage|"
 msgid "Context menu"
-msgstr "Контекстне меню"
+msgstr "Context menu"
 
 msgctxt "ScreenshotsPage|"
 msgid "Context menu"
-msgstr "Контекстне меню"
+msgstr "Context menu"
 
 msgctxt "ServersPage|"
 msgid "Context menu"
-msgstr "Контекстне меню"
+msgstr "Context menu"
 
 msgctxt "VersionPage|"
 msgid "Context menu"
-msgstr "Контекстне меню"
+msgstr "Context menu"
 
 msgctxt "WorldListPage|"
 msgid "Context menu"
-msgstr "Контекстне меню"
+msgstr "Context menu"
 
 msgctxt "InstanceImportTask|"
 msgid "Could not rename the overrides folder:\n"
-msgstr "Не вдалося перейменувати теку перевизначення:\n"
+msgstr "Could not rename the overrides folder:\n"
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid "View information about %1."
-msgstr "Переглянути інформацію про %1."
+msgstr "View information about %1."
 
 msgctxt "QObject|"
 msgid "Version file contains unsupported element 'tweakers'"
-msgstr "Версійний файл містить непідтримуваний елемент «tweakers'"
+msgstr "Version file contains unsupported element 'tweakers'"
 
 msgctxt "MSAStep|"
 msgid "Microsoft user authentication ended with a network error."
-msgstr "Автентифікація Microsoft користувача закінчилася через помилку мережі."
+msgstr "Microsoft user authentication ended with a network error."
 
 msgctxt "ResourcePackPage|"
 msgid "Resource packs"
-msgstr "Пакети ресурсів"
+msgstr "Resource packs"
 
 msgctxt "InstanceImportTask|"
 msgid "Instance import has been aborted."
-msgstr "Імпорт збірки було скасовано."
+msgstr "Instance import has been aborted."
 
 msgctxt "Technic::SingleZipPackInstallTask|"
 msgid "Instance import has been aborted."
-msgstr "Імпорт збірки було скасовано."
+msgstr "Instance import has been aborted."
 
 msgctxt "Technic::SolderPackInstallTask|"
 msgid "Instance import has been aborted."
-msgstr "Імпорт збірки було скасовано."
+msgstr "Instance import has been aborted."
 
 msgctxt "LaunchController|"
 msgid "Account refresh failed"
-msgstr "Помилка оновлення облікового запису"
+msgstr "Account refresh failed"
 
 msgctxt "MainWindow|"
 msgid "View the worlds of this instance."
-msgstr "Переглянути список світів для цієї збірки."
+msgstr "View the worlds of this instance."
 
 #, qt-format
 msgctxt "QObject|"
 msgid "<p>The update removes %1 commits and adds the following %2:</p>"
-msgstr "<p>Оновлення видаляє %1 комітів і додає наступний %2:</p>"
+msgstr "<p>The update removes %1 commits and adds the following %2:</p>"
 
 #, qt-format
 msgctxt "MinecraftInstance|"
 msgid ", total played for %1 hours"
-msgstr ", всього зіграно %1 годин"
+msgstr ", total played for %1 hours"
 
 msgctxt "XboxAuthorizationStep|"
 msgid ""
 "This Microsoft account has reached its playtime limit and has been blocked "
 "from logging in."
 msgstr ""
-"Цей обліковий запис Microsoft досяг ліміту часу відтворення і заблоковано "
-"вхід до облікового запису."
+"This Microsoft account has reached its playtime limit and has been blocked "
+"from logging in."
 
 msgctxt "PreLaunchCommand|"
 msgid ""
 "Pre-Launch command ran successfully.\n"
 "\n"
 msgstr ""
-"Команда попереднього запуску успішно виконана.\n"
+"Pre-Launch command ran successfully.\n"
 "\n"
 
 msgctxt "ScreenshotsPage|"
 msgid "Screenshots"
-msgstr "Знімок екрану"
+msgstr "Screenshots"
 
 msgctxt "LaunchController|"
 msgid ""
 "The account no longer exists on the servers. It may have been migrated, in "
 "which case please add the new account you migrated this one to."
 msgstr ""
-"Обліковий запис більше не існує на серверах. Можливо, він був перенесений, у "
-"такому випадку додайте новий обліковий запис на який ви перенесли поточний."
+"The account no longer exists on the servers. It may have been migrated, in "
+"which case please add the new account you migrated this one to."
 
 msgctxt "QuaGzipFile|"
 msgid "You can open a gzip either for reading or for writing. Which is it?"
-msgstr "Ви можете відкрити gzip або для читання, або для запису. Що це?"
+msgstr "You can open a gzip either for reading or for writing. Which is it?"
 
 msgctxt "Atl::FilterModel|"
 msgid "Sort by name"
-msgstr "Сортувати за назвою"
+msgstr "Sort by name"
 
 msgctxt "LegacyFTB::FilterModel|"
 msgid "Sort by name"
-msgstr "Сортувати за назвою"
+msgstr "Sort by name"
 
 msgctxt "OfflineNameDialog|"
 msgid "Player name"
-msgstr "Ім’я гравця"
+msgstr "Player name"
 
 msgctxt "InstancePageProvider|"
 msgid "Loader mods"
-msgstr "Модифікації"
+msgstr "Loader mods"
 
 #, qt-format
 msgctxt "AssetUpdateTask|"
@@ -3899,110 +3883,110 @@ msgid ""
 "Failed to download the assets index:\n"
 "%1"
 msgstr ""
-"Не вдалося завантажити індекс ресурсів:\n"
+"Failed to download the assets index:\n"
 "%1"
 
 msgctxt "MainWindow|"
 msgid "Launch the selected instance in offline mode."
-msgstr "Запустити вибрану збірку в офлайн режимі."
+msgstr "Launch the selected instance in offline mode."
 
 msgctxt "VersionProxyModel|"
 msgid "Released"
-msgstr "Реліз"
+msgstr "Released"
 
 msgctxt "VanillaPage|"
 msgid "Releases"
-msgstr "Релізи"
+msgstr "Releases"
 
 msgctxt "IconPickerDialog|"
 msgid "Remove Icon"
-msgstr "Видалити іконку"
+msgstr "Remove icon"
 
 msgctxt "LegacyFTB::Page|"
 msgid "Remove pack"
-msgstr "Видалити мод-пак"
+msgstr "Remove pack"
 
 msgctxt "LauncherPage|"
 msgid "Simple (Blue Icons)"
-msgstr "Проста (Сині значки)"
+msgstr "Simple (Blue Icons)"
 
 msgctxt "LauncherPage|"
 msgid "Simple (Dark Icons)"
-msgstr "Проста (Темні значки)"
+msgstr "Simple (Dark Icons)"
 
 msgctxt "LegacyFTB::Page|"
 msgid "Add FTB pack"
-msgstr "Додати мод-пак FTB"
+msgstr "Add FTB pack"
 
 msgctxt "VerifyJavaInstall|"
 msgid "Minecraft 17w13a and above require the use of Java 8"
-msgstr "Minecraft 17w13a та вище потребує Java версії 8"
+msgstr "Minecraft 17w13a and above require the use of Java 8"
 
 msgctxt "ScreenshotsPage|"
 msgid "Unknown error"
-msgstr "Невідома помилка"
+msgstr "Unknown error"
 
 msgctxt "OtherLogsPage|"
 msgid "Other logs"
-msgstr "Інші журнали"
+msgstr "Other logs"
 
 msgctxt "VersionPage|"
 msgid "Install the Fabric Loader package."
-msgstr "Встановіть пакет Fabric Loader."
+msgstr "Install the Fabric Loader package."
 
 msgctxt "VersionPage|"
 msgid "Add an empty custom package."
-msgstr "Додати порожній користувацький пакунок."
+msgstr "Add an empty custom package."
 
 msgctxt "MinecraftAccount|"
 msgid "Unknown"
-msgstr "Невідомо"
+msgstr "Unknown"
 
 msgctxt "WorldListPage|"
 msgid "Reset Icon"
-msgstr "Скинути іконки"
+msgstr "Reset Icon"
 
 msgctxt "WorldListPage|"
 msgid ""
 "MCEdit failed to start.\n"
 "It may be necessary to reinstall it."
 msgstr ""
-"Не вдалося запустити MCEdit\n"
-"Можливо, треба буде перевстановити його."
+"MCEdit failed to start.\n"
+"It may be necessary to reinstall it."
 
 #, qt-format
 msgctxt "QObject|"
 msgid "<p>You can <a href=\"%1\">look at the changes on github</a>.</p>"
-msgstr "<p> Ви можете <a href=\"%1\"> переглянути зміни на github </a>. </p>"
+msgstr "<p>You can <a href=\"%1\">look at the changes on github</a>.</p>"
 
 #, qt-format
 msgctxt "LauncherLoginStep|"
 msgid "Failed to get Minecraft access token: %1"
-msgstr "Не вдалося отримати токен доступу до Minecraft: %1"
+msgstr "Failed to get Minecraft access token: %1"
 
 msgctxt "LegacyUpgradePage|"
 msgid "Upgrade"
-msgstr "Оновити"
+msgstr "Upgrade"
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Installing modpack"
-msgstr "Встановлення мод-паку"
+msgstr "Installing modpack"
 
 msgctxt "LegacyFTB::PackInstallTask|"
 msgid "Installing modpack"
-msgstr "Встановлення мод-паку"
+msgstr "Installing modpack"
 
 msgctxt "ScreenshotsPage|"
 msgid "Upload?"
-msgstr "Відвантажити?"
+msgstr "Upload?"
 
 msgctxt "ServersPage|"
 msgid "Move Down"
-msgstr "Перемістити вниз"
+msgstr "Move Down"
 
 msgctxt "VersionPage|"
 msgid "Move down"
-msgstr "Перемістити вниз"
+msgstr "Move down"
 
 #, qt-format
 msgctxt "Update|"
@@ -4010,52 +3994,52 @@ msgid ""
 "Instance update failed because: %1\n"
 "\n"
 msgstr ""
-"Не вдалося оновити збірку, тому що: %1\n"
+"Instance update failed because: %1\n"
 "\n"
 
 msgctxt "AboutDialog|"
 msgid "Build Number:"
-msgstr "Номер збірки:"
+msgstr "Build Number:"
 
 msgctxt "VanillaPage|"
 msgid "Vanilla"
-msgstr "Стандартний"
+msgstr "Vanilla"
 
 msgctxt "Atl::FilterModel|"
 msgid "Sort by game version"
-msgstr "Сортувати за версією гри"
+msgstr "Sort by game version"
 
 msgctxt "LegacyFTB::FilterModel|"
 msgid "Sort by game version"
-msgstr "Сортувати за версією гри"
+msgstr "Sort by game version"
 
 msgctxt "JavaSettingsWidget|"
 msgid "No Java version selected"
-msgstr "Не вибрано версії Java"
+msgstr "No Java version selected"
 
 msgctxt "ProxyPage|"
 msgid "Username:"
-msgstr "Ім'я:"
+msgstr "Username:"
 
 msgctxt "WorldListPage|"
 msgid "No MCEdit found or set up!"
-msgstr "MCEdit не знайдено або не встановлено!"
+msgstr "No MCEdit found or set up!"
 
 msgctxt "MainWindow|"
 msgid "View Mods"
-msgstr "Переглянути моди"
+msgstr "View Mods"
 
 msgctxt "VersionPage|"
 msgid "Error: "
-msgstr "Помилка: "
+msgstr "Error: "
 
 msgctxt "MinecraftAccount|"
 msgid "Errored"
-msgstr "Помилка"
+msgstr "Errored"
 
 msgctxt "AboutDialog|"
 msgid "Version:"
-msgstr "Версія:"
+msgstr "Version:"
 
 #, qt-format
 msgctxt "LaunchController|"
@@ -4065,127 +4049,127 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
-"Запуск гри призупинено до тих пір, поки ви не натиснете кнопку. Це добрий "
-"час, щоб налаштувати профайлер, оскільки сервер профайлеру зараз працює.\n"
+"The game launch is delayed until you press the button. This is the right "
+"time to setup the profiler, as the profiler server is running now.\n"
 "\n"
 "%1"
 
 msgctxt "GameType|"
 msgid "Survival"
-msgstr "Виживання"
+msgstr "Survival"
 
 msgctxt "ProfileSelectDialog|"
 msgid "Use as default?"
-msgstr "Використовувати за замовчуванням?"
+msgstr "Use as default?"
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Selecting optional mods..."
-msgstr "Вибір необов'язкових модів..."
+msgstr "Selecting optional mods..."
 
 #, qt-format
 msgctxt "QObject|"
 msgid "<br />Warnings:<br /><font color=\"orange\">%1</font>"
-msgstr "<br />Попередження:<br /><font color=\"orange\">%1</font>"
+msgstr "<br />Warnings:<br /><font color=\"orange\">%1</font>"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Metadata"
-msgstr "Метаданні"
+msgstr "Metadata"
 
 msgctxt "ProxyPage|"
 msgid "Address and Port"
-msgstr "Адреса та порт"
+msgstr "Address and Port"
 
 msgctxt "Technic::SolderPackInstallTask|"
 msgid "Resolving modpack files"
-msgstr "Розв’язання файлів мод-паків"
+msgstr "Resolving modpack files"
 
 msgctxt "Application|"
 msgid "Settings"
-msgstr "Налаштування"
+msgstr "Settings"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Settings"
-msgstr "Налаштування"
+msgstr "Settings"
 
 msgctxt "MainWindow|"
 msgid "Settings"
-msgstr "Налаштування"
+msgstr "Settings"
 
 msgctxt "XboxUserStep|"
 msgid "Got Xbox user token"
-msgstr "Маю токен користувача Xbox"
+msgstr "Got Xbox user token"
 
 msgctxt "ImportFTB::FTBAPage|"
 msgid "FTB App Import"
-msgstr "Імпорт з FTB App"
+msgstr "FTB App Import"
 
 msgctxt "VersionPage|"
 msgid "No Fabric Loader versions are currently available."
-msgstr "На даний момент немає доступних версій Fabric."
+msgstr "No Fabric Loader versions are currently available."
 
 msgctxt "GameType|"
 msgid "Adventure"
-msgstr "Пригода"
+msgstr "Adventure"
 
 msgctxt "ExternalToolsPage|"
 msgid "MCEdit Application"
-msgstr "Застосунок MCEdit"
+msgstr "MCEdit Application"
 
 msgctxt "PasteEEPage|"
 msgid "paste.ee API key"
-msgstr "paste.ee API ключ"
+msgstr "paste.ee API key"
 
 msgctxt "AboutDialog|"
 msgid "Version"
-msgstr "Версія"
+msgstr "Version"
 
 msgctxt "ModFolderModel|"
 msgid "Version"
-msgstr "Версія"
+msgstr "Version"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Version"
-msgstr "Версія"
+msgstr "Version"
 
 msgctxt "PackProfile|"
 msgid "Version"
-msgstr "Версія"
+msgstr "Version"
 
 msgctxt "VersionPage|"
 msgid "Version"
-msgstr "Версія"
+msgstr "Version"
 
 msgctxt "VersionProxyModel|"
 msgid "Version"
-msgstr "Версія"
+msgstr "Version"
 
 msgctxt "VersionPage|"
 msgid "Couldn't remove file"
-msgstr "Не вдалося видалити файл"
+msgstr "Couldn't remove file"
 
 msgctxt "JavaPage|"
 msgid "Java Runtime"
-msgstr "Середовище виконання Java"
+msgstr "Java Runtime"
 
 msgctxt "ModFolderModel|"
 msgid "Last changed"
-msgstr "Востаннє змінено"
+msgstr "Last changed"
 
 msgctxt "InstanceImportTask|"
 msgid "Could not understand pack index:\n"
-msgstr "Не вдалося розпізнати індекс пакунку:\n"
+msgstr "Could not understand pack index:\n"
 
 msgctxt "TranslationsModel|"
 msgid ""
 "Completeness is the percentage of fully translated strings, not counting "
 "automatically guessed ones."
 msgstr ""
-"Повнота - це відсоток повністю перекладених рядків, не враховуючи "
-"автоматично вгаданих."
+"Completeness is the percentage of fully translated strings, not counting "
+"automatically guessed ones."
 
 msgctxt "MinecraftAccount|"
 msgid "Expired"
-msgstr "Протерміновано"
+msgstr "Expired"
 
 #, qt-format
 msgctxt "MainWindow|"
@@ -4193,47 +4177,46 @@ msgid ""
 "Couldn't create folder for update downloads:\n"
 "%1"
 msgstr ""
-"Не вдалося створити теку для завантаження оновлень:\n"
+"Couldn't create folder for update downloads:\n"
 "%1"
 
 #, qt-format
 msgctxt "XboxAuthorizationStep|"
 msgid "Could not parse authorization response for access to %1 services."
-msgstr ""
-"Не вдалося проаналізувати відповідь авторизації для доступу до служб %1."
+msgstr "Could not parse authorisation response for access to %1 services."
 
 msgctxt "LoggedProcess|"
 msgid ""
 "Please note that usually neither the exit code, nor its description are "
 "enough to diagnose issues!"
 msgstr ""
-"Зверніть увагу, що інколи ні код виходу, ні його опису не вистачає, щоб "
-"діагностувати проблеми!"
+"Please note that usually neither the exit code, nor its description are "
+"enough to diagnose issues!"
 
 msgctxt "ModFolderPage|"
 msgid "Filter:"
-msgstr "Фільтр:"
+msgstr "Filter:"
 
 msgctxt "VersionPage|"
 msgid "Filter:"
-msgstr "Фільтр:"
+msgstr "Filter:"
 
 msgctxt "LibrariesTask|"
 msgid "Getting the library files from Mojang..."
-msgstr "Отримання файлів бібліотеки із Mojang..."
+msgstr "Getting the library files from Mojang..."
 
 msgctxt "InstanceWindow|"
 msgid "Launch Offline"
-msgstr "Запустити в офлайн режимі"
+msgstr "Launch Offline"
 
 msgctxt "MainWindow|"
 msgid "Launch Offline"
-msgstr "Запустити в офлайн режимі"
+msgstr "Launch Offline"
 
 #, qt-format
 msgctxt "PreLaunchCommand|"
 msgid "Running Pre-Launch command: %1"
-msgstr "Запуск команди попереднього запуску: %1"
+msgstr "Running Pre-Launch command: %1"
 
 #, qt-format
 msgctxt "InstanceImportTask|"
@@ -4241,7 +4224,7 @@ msgid ""
 "Downloading modpack:\n"
 "%1"
 msgstr ""
-"Завантаження мод-паку:\n"
+"Downloading modpack:\n"
 "%1"
 
 #, qt-format
@@ -4250,49 +4233,49 @@ msgid ""
 "Downloading modpack:\n"
 "%1"
 msgstr ""
-"Завантаження мод-паку:\n"
+"Downloading modpack:\n"
 "%1"
 
 msgctxt "MainWindow|"
 msgid "No instance selected"
-msgstr "Не обрана збірка"
+msgstr "No instance selected"
 
 #, qt-format
 msgctxt "QObject|"
 msgid "processArguments is set to unknown value '%1'"
-msgstr "в processArguments задано невідоме значення '%1"
+msgstr "processArguments is set to unknown value '%1'"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Conso&le Settings"
-msgstr "Налаштування консолі"
+msgstr "Conso&le Settings"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Maximum memory allocation:"
-msgstr "Максимальний обсяг виділеної пам'яті:"
+msgstr "Maximum memory allocation:"
 
 msgctxt "JavaPage|"
 msgid "Maximum memory allocation:"
-msgstr "Максимальний обсяг виділеної пам'яті:"
+msgstr "Maximum memory allocation:"
 
 msgctxt "JavaSettingsWidget|"
 msgid "Maximum memory allocation:"
-msgstr "Максимальний обсяг виділеної пам'яті:"
+msgstr "Maximum memory allocation:"
 
 msgctxt "QObject|"
 msgid "Upload finished"
-msgstr "Вивантаження закінчено"
+msgstr "Upload finished"
 
 msgctxt "ScreenshotsPage|"
 msgid "Upload finished"
-msgstr "Вивантаження закінчено"
+msgstr "Upload finished"
 
 msgctxt "VersionPage|"
 msgid "Install the LiteLoader package."
-msgstr "Встановити пакет LiteLoader."
+msgstr "Install the LiteLoader package."
 
 msgctxt "ExternalToolsPage|"
 msgid "The file chosen does not seem to be an executable"
-msgstr "Вибраний файл не є виконуваним"
+msgstr "The file chosen does not seem to be an executable"
 
 msgctxt "CustomCommands|"
 msgid ""
@@ -4307,126 +4290,125 @@ msgid ""
 "launch</li></ul><p>Wrapper command allows launching using an extra wrapper "
 "program (like 'optirun' on Linux)</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Команда перед запуском виконується перед стартом "
-"збірки, а після завершення процесу гри виконується команда після виходу. "
-"</p><p>Обидві команди будуть виконуватись в робочій теці лаунчера з "
-"додатковими змінними середовища:</p><ul><li>$INST_NAME - Ім'я "
-"збірки</li><li>$INST_ID - ID збірки (назва її каталогу)</li><li>$INST_DIR - "
-"абсолютний шлях збірки</li><li>$INST_MC_DIR - абсолютний шлях "
-"Minecraft</li><li>$INST_JAVA - програма java, використовувана при "
-"запускові</li><li>$INST_JAVA_ARGS - аргументи командного рядка, "
-"використовувані при запускові</li></ul><p>Команда обгортки дозволяє "
-"запускати Java, використовуючи зовнішню програму-обгортку (наприклад "
-"'optirun' на Linux)</p></body></html>"
+"<html><head/><body><p>Pre-launch command runs before the instance launches "
+"and post-exit command runs after it exits.</p><p>Both will be run in the "
+"launcher's working folder with extra environment "
+"variables:</p><ul><li>$INST_NAME - Name of the instance</li><li>$INST_ID - "
+"ID of the instance (its folder name)</li><li>$INST_DIR - absolute path of "
+"the instance</li><li>$INST_MC_DIR - absolute path of "
+"Minecraft</li><li>$INST_JAVA - java binary used for "
+"launch</li><li>$INST_JAVA_ARGS - command-line parameters used for "
+"launch</li></ul><p>Wrapper command allows launching using an extra wrapper "
+"program (like 'optirun' on Linux)</p></body></html>"
 
 msgctxt "ExternalToolsPage|"
 msgid "JVisualVM Executable"
-msgstr "Виконуваний файл JVisualVM"
+msgstr "JVisualVM Executable"
 
 msgctxt "InstanceWindow|"
 msgid "Kill the running instance"
-msgstr "Зупинити дану збірку"
+msgstr "Kill the running instance"
 
 msgctxt "MainWindow|"
 msgid "Kill the running instance"
-msgstr "Зупинити запущену збірку"
+msgstr "Kill the running instance"
 
 msgctxt "MainWindow|"
 msgid "Change Icon"
-msgstr "Змінити піктограму"
+msgstr "Change Icon"
 
 msgctxt "ImportPage|"
 msgid "Choose modpack"
-msgstr "Виберіть мод-пак"
+msgstr "Choose modpack"
 
 msgctxt "QObject|"
 msgid "Java test success"
-msgstr "Перевірка Java пройшла успішно"
+msgstr "Java test success"
 
 #, qt-format
 msgctxt "VersionPage|"
 msgid "%1 possibly has issues."
-msgstr "%1, можливо має проблеми."
+msgstr "%1 possibly has issues."
 
 msgctxt "QObject|"
 msgid ""
 "URL for the main jar could not be determined - Mojang removed the server "
 "that we used as fallback."
 msgstr ""
-"URL для основних jar не вдалося визначити - Mojang видалив сервер, який ми "
-"використовували як резервний."
+"URL for the main jar could not be determined - Mojang removed the server "
+"that we used as fallback."
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Downloading configs..."
-msgstr "Завантаження конфігурацій..."
+msgstr "Downloading configs..."
 
 msgctxt "LegacyFTB::PackFetchTask|"
 msgid "Third Party Packs"
-msgstr "Сторонні збірки"
+msgstr "Third Party Packs"
 
 msgctxt "LegacyUpgradeTask|"
 msgid "Could not decide Minecraft version."
-msgstr "Не вдалося вибрати версію Minecraft."
+msgstr "Could not decide Minecraft version."
 
 msgctxt "LauncherPage|"
 msgid "Folders"
-msgstr "Теки"
+msgstr "Folders"
 
 msgctxt "MainWindow|"
 msgid "Folders"
-msgstr "Теки"
+msgstr "Folders"
 
 msgctxt "Technic::TechnicPackProcessor|"
 msgid ""
 "Could not understand \"version.json\":\n"
 "inheritsFrom is missing"
 msgstr ""
-"Не вдалося розпізнати \"version.json\":\n"
-"inheritsFrom відсутній"
+"Could not understand \"version.json\":\n"
+"inheritsFrom is missing"
 
 msgctxt "LegacyFTB::Page|"
 msgid "Remove selected pack"
-msgstr "Видалити вибрану збірку"
+msgstr "Remove selected pack"
 
 msgctxt "ModFolderPage|"
 msgid "Remove selected mods"
-msgstr "Видалити вибрані моди"
+msgstr "Remove selected mods"
 
 msgctxt "InstanceImportTask|"
 msgid "Archive does not contain a recognized modpack type."
-msgstr "Архів не містить розпізнаний тип мод-паку."
+msgstr "Archive does not contain a recognised modpack type."
 
 msgctxt "LaunchController|"
 msgid "No account selected for launch."
-msgstr "Не вибрано акаунту для запуску."
+msgstr "No account selected for launch."
 
 msgctxt "InstanceSettingsPage|"
 msgid "Show console while the game is running?"
-msgstr "Показувати консоль під час гри?"
+msgstr "Show console while the game is running?"
 
 msgctxt "LauncherPage|"
 msgid "Show console while the game is running?"
-msgstr "Показувати консоль під час гри?"
+msgstr "Show console while the game is running?"
 
 msgctxt "AtlOptionalModListModel|"
 msgid "Warning"
-msgstr "Попередження"
+msgstr "Warning"
 
 msgctxt "ModrinthExportDialog|"
 msgid "Warning"
-msgstr "Увага"
+msgstr "Warning"
 
 msgctxt "VersionPage|"
 msgid "Select Forge version"
-msgstr "Виберіть версію Forge"
+msgstr "Select Forge version"
 
 msgctxt "LaunchController|"
 msgid ""
 "The account has expired and needs to be logged into manually. Press OK to "
 "open the accounts window."
 msgstr ""
-"Термін дії облікового запису сплив і слід увійти вручну. Натисніть OK, щоб "
-"увійти в систему знову."
+"The account has expired and needs to be logged into manually. Press OK to "
+"open the accounts window."
 
 msgctxt "MinecraftInstance|"
 msgid "<CLIENT TOKEN>"
@@ -4434,23 +4416,23 @@ msgstr "<CLIENT TOKEN>"
 
 msgctxt "ExternalToolsPage|"
 msgid "MCEdit setup seems to be OK"
-msgstr "Налаштування MCEdit здається виконано успішно"
+msgstr "MCEdit setup seems to be OK"
 
 msgctxt "Technic::TechnicPackProcessor|"
 msgid "Unable to open \"version.json\"!"
-msgstr "Не вдалося відкрити \"version.json\"!"
+msgstr "Unable to open \"version.json\"!"
 
 msgctxt "CustomCommands|"
 msgid "Post-exit command:"
-msgstr "Команда після виходу:"
+msgstr "Post-exit command:"
 
 msgctxt "ProfileSelectDialog|"
 msgid "Select an Account"
-msgstr "Виберіть профіль"
+msgstr "Select an Account"
 
 msgctxt "ProfileSelectDialog|"
 msgid "Use as default for this instance only?"
-msgstr "Використовувати за замовчуванням тільки для цієї збірки?"
+msgstr "Use as default for this instance only?"
 
 #, qt-format
 msgctxt "QObject|"
@@ -4459,259 +4441,257 @@ msgid ""
 "You will have to repair %1 manually.\n"
 "Please let us know why and how this happened."
 msgstr ""
-"Не вдалося повернутися назад.\n"
-"Вам доведеться відновити %1 вручну.\n"
-"Будь ласка, повідомте нам про те, чому це сталося."
+"The rollback failed too.\n"
+"You will have to repair %1 manually.\n"
+"Please let us know why and how this happened."
 
 msgctxt "AtlPage|"
 msgid "No versions are currently available"
-msgstr "Наразі оновлення відсутні"
+msgstr "No versions are currently available"
 
 msgctxt "MainWindow|"
 msgid "Delete the selected instance."
-msgstr "Видалити обрану збірку."
+msgstr "Delete the selected instance."
 
 msgctxt "TexturePackPage|"
 msgid "Texture packs"
-msgstr "Пакети текстур"
+msgstr "Texture packs"
 
 msgctxt "WorldListPage|"
 msgid "Enter a new name for the copy."
-msgstr "Введіть нове ім'я для копії."
+msgstr "Enter a new name for the copy."
 
 #, qt-format
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Failed to get local metadata index for '%1' v%2"
-msgstr "Не вдалося отримати локальний індекс метаданих для '%1' v'%2'"
+msgstr "Failed to get local metadata index for '%1' v%2"
 
 msgctxt "VersionPage|"
 msgid "Install the Minecraft Forge package."
-msgstr "Встановіть пакет Minecraft Forge."
+msgstr "Install the Minecraft Forge package."
 
 msgctxt "ModrinthPage|"
 msgid "Sort by last updated"
-msgstr "Впорядкувати за останнім оновленням"
+msgstr "Sort by last updated"
 
 msgctxt "MinecraftPage|"
 msgid "Record time spent playing instances"
-msgstr "Записати час, витрачений на екземпляри"
+msgstr "Record time spent playing instances"
 
 msgctxt "ComponentUpdateTask|"
 msgid "Some component metadata load tasks failed."
-msgstr "Не вдалося виконати деякі задачі завантаження метаданих компонентів."
+msgstr "Some component metadata load tasks failed."
 
 msgctxt "VersionPage|"
 msgid "Couldn't load or download the LiteLoader version lists!"
-msgstr "Не вдалося завантажити або скачати список версій LiteLoader!"
+msgstr "Couldn't load or download the LiteLoader version lists!"
 
 msgctxt "InstanceCopyTask|"
 msgid "Instance folder copy failed."
-msgstr "Не вдалося скопіювати теку збірки."
+msgstr "Instance folder copy failed."
 
 msgctxt "LegacyUpgradeTask|"
 msgid "Instance folder copy failed."
-msgstr "Не вдалося скопіювати теку збірки."
+msgstr "Instance folder copy failed."
 
 msgctxt "MainWindow|"
 msgid "Manage Accounts"
-msgstr "Керування обліковими записами"
+msgstr "Manage Accounts"
 
 #, qt-format
 msgctxt "SetupWizard|"
 msgid "%1 Quick Setup"
-msgstr "%1 Швидке налаштування"
+msgstr "%1 Quick Setup"
 
 msgctxt "VersionPage|"
 msgid "Install Quilt"
-msgstr "Встановити Quilt"
+msgstr "Install Quilt"
 
 msgctxt "MainWindow|"
 msgid "It's a fluffy kitty :3"
-msgstr "Це пухнасте кошеня :3"
+msgstr "It's a fluffy kitty :3"
 
 msgctxt "VersionPage|"
 msgid "Install Forge"
-msgstr "Встановити Forge"
+msgstr "Install Forge"
 
 msgctxt "MainWindow|"
 msgid "Edit Instance"
-msgstr "Редагувати збірку"
+msgstr "Edit Instance"
 
 msgctxt "ExternalToolsPage|"
 msgid "Text Editor:"
-msgstr "Текстовий редактор:"
+msgstr "Text Editor:"
 
 msgctxt "LauncherPage|"
 msgid ""
 "Do you really want to use this path? Selecting \"No\" will close this and "
 "not alter your instance path."
 msgstr ""
-"Ви дійсно хочете використовувати цей шлях? При виборі \"Ні\", ви закриєте це "
-"вікно і не зміните шлях вашої збірки."
+"Do you really want to use this path? Selecting \"No\" will close this and "
+"not alter your instance path."
 
 msgctxt "MainWindow|"
 msgid "Create instance"
-msgstr "Створити збірку"
+msgstr "Create instance"
 
 msgctxt "VersionPage|"
 msgid "Add a mod into the Minecraft jar file."
-msgstr "Додати мод в jar-файл Minecraft."
+msgstr "Add a mod into the Minecraft jar file."
 
 msgctxt "SetupWizard|"
 msgid "< &Back"
-msgstr "< &Назад"
+msgstr "< &Back"
 
 msgctxt "QObject|"
 msgid "Minecraft Server"
-msgstr "Сервери Minecraft"
+msgstr "Minecraft Server"
 
 msgctxt "VersionProxyModel|"
 msgid "Architecture"
-msgstr "Архітектура"
+msgstr "Architecture"
 
 msgctxt "VersionProxyModel|"
 msgid "CPU Architecture"
-msgstr "Архітектура процесора"
+msgstr "CPU Architecture"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Use system installation of OpenAL"
-msgstr "Використовувати системне встановлення OpenAL"
+msgstr "Use system installation of OpenAL"
 
 msgctxt "MinecraftPage|"
 msgid "Use system installation of OpenAL"
-msgstr "Використовувати системне встановлення OpenAL"
+msgstr "Use system installation of OpenAL"
 
 msgctxt "InstanceImportTask|"
 msgid "Extracting modpack"
-msgstr "Розпакування мод-паку"
+msgstr "Extracting modpack"
 
 msgctxt "LegacyFTB::PackInstallTask|"
 msgid "Extracting modpack"
-msgstr "Розпакування мод-паку"
+msgstr "Extracting modpack"
 
 msgctxt "Technic::SingleZipPackInstallTask|"
 msgid "Extracting modpack"
-msgstr "Розпакування мод-паку"
+msgstr "Extracting modpack"
 
 msgctxt "Technic::SolderPackInstallTask|"
 msgid "Extracting modpack"
-msgstr "Розпакування мод-паку"
+msgstr "Extracting modpack"
 
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Extracting mods..."
-msgstr "Розпакування модів..."
+msgstr "Extracting mods..."
 
 #, qt-format
 msgctxt "LaunchController|"
 msgid "Couldn't start profiler: %1"
-msgstr "Не вдалося запустити профайлер: %1"
+msgstr "Couldn't start profiler: %1"
 
 msgctxt "MinecraftProfileStep|"
 msgid "Fetching the Minecraft profile."
-msgstr "Отримання профілю Minecraft."
+msgstr "Fetching the Minecraft profile."
 
 msgctxt "MainWindow|"
 msgid "No Default Account"
-msgstr "Немає облікового запису за замовчуванням"
+msgstr "No Default Account"
 
 msgctxt "ProxyPage|"
 msgid ""
 "Note: Proxy username and password are stored in plain text inside the "
 "launcher's configuration file!"
 msgstr ""
-"Примітка: Ім'я користувача і пароль проксі-сервера зберігаються у відкритому "
-"вигляді всередині файлу конфігурації програми!"
+"Note: Proxy username and password are stored in plain text inside the "
+"launcher's configuration file!"
 
 msgctxt "MainWindow|"
 msgid "Open the instance folder in a file browser."
-msgstr "Відкрити теку збірки в файловому менеджері."
+msgstr "Open the instance folder in a file browser."
 
 msgctxt "VersionPage|"
 msgid "Couldn't load or download the Quilt Loader version lists!"
-msgstr "Не вдалося завантажити або отримати список версій Quilt Loader!"
+msgstr "Couldn't load or download the Quilt Loader version lists!"
 
 msgctxt "QObject|"
 msgid "The specified java binary returned unexpected results:<br />"
-msgstr "Зазначений файл java повернув неочікувані результати:<br />"
+msgstr "The specified java binary returned unexpected results:<br />"
 
 msgctxt "VanillaPage|"
 msgid "Old Snapshots"
-msgstr "Старі знімки"
+msgstr "Old Snapshots"
 
 msgctxt "MinecraftInstance|"
 msgid ", has crashed."
-msgstr ", вилетів."
+msgstr ", has crashed."
 
 msgctxt "VersionPage|"
 msgid "Install the NeoForge package."
-msgstr "Встановити пакет NeoForge."
+msgstr "Install the NeoForge package."
 
 msgctxt "InstanceSettingsPage|"
 msgid "Automatically close console when the game quits?"
-msgstr "Автоматично закривати консоль при виході із гри?"
+msgstr "Automatically close console when the game quits?"
 
 msgctxt "LauncherPage|"
 msgid "Automatically close console when the game quits?"
-msgstr "Автоматично закривати консоль при виході із гри?"
+msgstr "Automatically close console when the game quits?"
 
 msgctxt "MinecraftAccount|"
 msgid "Working"
-msgstr "Працює"
+msgstr "Working"
 
 msgctxt "VersionPage|"
 msgid "Add to Minecraft.jar"
-msgstr "Додати в Minecraft.jar"
+msgstr "Add to Minecraft.jar"
 
 msgctxt "LauncherPage|"
 msgid "Instance Folder"
-msgstr "Тека збірки"
+msgstr "Instance Folder"
 
 msgctxt "MainWindow|"
 msgid "Instance Folder"
-msgstr "Тека збірки"
+msgstr "Instance Folder"
 
 msgctxt "MainWindow|"
 msgid "Launch the selected instance."
-msgstr "Запустити вибрану збірку."
+msgstr "Launch the selected instance."
 
 #, qt-format
 msgctxt "QObject|"
 msgid "Assets for %1"
-msgstr "Ресурси для %1"
+msgstr "Assets for %1"
 
 msgctxt "AboutDialog|"
 msgid "Channel:"
-msgstr "Канал:"
+msgstr "Channel:"
 
 msgctxt "VersionPage|"
 msgid "Open the instance's local libraries folder."
-msgstr "Відкрити теку локальних бібліотек збірок."
+msgstr "Open the instance's local libraries folder."
 
 msgctxt "LaunchController|"
 msgid ""
 "This can cause the instance to get corrupted and should only be used if "
 "Minecraft is frozen for some reason"
 msgstr ""
-"Це може привести до зіпсуття збірки і повинно використовуватись лише якщо "
-"Minecraft завис по якійсь причині"
+"This can cause the instance to get corrupted and should only be used if "
+"Minecraft is frozen for some reason"
 
 msgctxt "QObject|"
 msgid "The specified java binary didn't start properly.<br />"
-msgstr "Зазначений двійковий файл java не запущено належним чином.<br />"
+msgstr "The specified java binary didn't start properly.<br />"
 
 msgctxt "MainWindow|"
 msgid "Change the selected instance's group."
-msgstr "Змінити групу обраної збірки."
+msgstr "Change the selected instance's group."
 
 msgctxt "LogPage|"
 msgid "Upload the log to paste.ee - it will stay online for a month"
-msgstr ""
-"Завантажити журнал на paste.ee - він буде зберігатися протягом одного місяця"
+msgstr "Upload the log to paste.ee - it will stay online for a month"
 
 msgctxt "OtherLogsPage|"
 msgid "Upload the log to paste.ee - it will stay online for a month"
-msgstr ""
-"Завантажити журнал на сайт paste.ee - він буде зберігається протягом місяця"
+msgstr "Upload the log to paste.ee - it will stay online for a month"
 
 msgctxt "LauncherPage|"
 msgid ""
@@ -4719,22 +4699,23 @@ msgid ""
 "one '!'. Java is known to cause problems if that is the case, your instances "
 "(probably) won't start!"
 msgstr ""
-"Ви намагаєтеся вказати шлях до теки, яка містить у своєму шляху принаймні "
-"один символ '!'. Це може викликати проблеми із Java, і ваші збірки "
-"(ймовірно) не запустяться!"
+"You're trying to specify an instance folder which's path contains at least "
+"one '!'. Java is known to cause problems if that is the case, your instances "
+"(probably) won't start!"
 
 msgctxt "QObject|"
 msgid ""
 "<p>There are no code changes between your current version and the latest.</p>"
-msgstr "<p>Немає змін коду між вашою поточною версією і останньою.</p>"
+msgstr ""
+"<p>There are no code changes between your current version and the latest.</p>"
 
 msgctxt "QObject|"
 msgid "The log file is too big. You'll have to upload it manually."
-msgstr "Файл журналу занадто великий. Потрібно вивантажити його вручну."
+msgstr "The log file is too big. You'll have to upload it manually."
 
 msgctxt "MainWindow|"
 msgid "Config Folder"
-msgstr "Тека конфігурацій"
+msgstr "Config Folder"
 
 #, qt-format
 msgctxt "VersionSelectWidget|"
@@ -4742,24 +4723,24 @@ msgid ""
 "List update failed:\n"
 "%1"
 msgstr ""
-"Помилка оновлення списку:\n"
+"List update failed:\n"
 "%1"
 
 msgctxt "SetSkinStep|"
 msgid "Clearing skin"
-msgstr "Очищення скіну"
+msgstr "Clearing skin"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Use system installation of GLFW"
-msgstr "Використовувати системне встановлення GLFW"
+msgstr "Use system installation of GLFW"
 
 msgctxt "MinecraftPage|"
 msgid "Use system installation of GLFW"
-msgstr "Використовувати системне встановлення GLFW"
+msgstr "Use system installation of GLFW"
 
 msgctxt "LoggedProcess|"
 msgid "Always upload the entire log and not just the exit code."
-msgstr "Завжди завантажувати весь звіт, а не просто код виходу."
+msgstr "Always upload the entire log and not just the exit code."
 
 #, qt-format
 msgctxt "NetJob|"
@@ -4767,29 +4748,29 @@ msgid ""
 "Job '%1' failed to process:\n"
 "%2"
 msgstr ""
-"Завдання '%1' не вдалося опрацювати:\n"
+"Job '%1' failed to process:\n"
 "%2"
 
 msgctxt "MainWindow|"
 msgid "Total playtime: 0s"
-msgstr "Загальна тривалість гри: 0 с"
+msgstr "Total playtime: 0s"
 
 #, qt-format
 msgctxt "MainWindow|"
 msgid "Open the %1 Patreon page."
-msgstr "Відкрити сторінку Patreon %1."
+msgstr "Open the %1 Patreon page."
 
 msgctxt "MainWindow|"
 msgid "Change the selected instance's icon."
-msgstr "Змінити піктограму обраної збірки."
+msgstr "Change the selected instance's icon."
 
 msgctxt "InstanceSettingsPage|"
 msgid "Window height:"
-msgstr "Висота вікна:"
+msgstr "Window height:"
 
 msgctxt "QObject|"
 msgid "Rollback failed!"
-msgstr "Відкат не вдався!"
+msgstr "Rollback failed!"
 
 #, qt-format
 msgctxt "PreLaunchCommand|"
@@ -4797,49 +4778,49 @@ msgid ""
 "Pre-Launch command failed with code %1.\n"
 "\n"
 msgstr ""
-"Попередня команда запуску не вдалася з кодом %1.\n"
+"Pre-Launch command failed with code %1.\n"
 "\n"
 
 #, qt-format
 msgctxt "ATLauncher::PackInstallTask|"
 msgid "Unknown download type: %1"
-msgstr "Невідомий тип завантаження: %1"
+msgstr "Unknown download type: %1"
 
 #, qt-format
 msgctxt "LegacyFTB::PackFetchTask|"
 msgid "Failed to download some pack lists: %1"
-msgstr "Не вдалося завантажити деякі списки збірок: %1"
+msgstr "Failed to download some pack lists: %1"
 
 msgctxt "MinecraftPage|"
 msgid "Window hei&ght:"
-msgstr "Висота &вікна:"
+msgstr "Window hei&ght:"
 
 msgctxt "ProxyPage|"
 msgid "This only applies to the launcher."
-msgstr "Це стосується лише лаунчера."
+msgstr "This only applies to the launcher."
 
 #, qt-format
 msgctxt "QObject|"
 msgid "Unable to process the version file %1."
-msgstr "Неможливо обробити файл версії %1."
+msgstr "Unable to process the version file %1."
 
 msgctxt "ModFolderPage|"
 msgid "View &Folder"
-msgstr "Відкрити &теку"
+msgstr "View &Folder"
 
 msgctxt "LegacyFTB::PackInstallTask|"
 msgid "Failed to move unzipped minecraft!"
-msgstr "Не вдалося перемістити розпакований minecraft!"
+msgstr "Failed to move unzipped minecraft!"
 
 #, qt-format
 msgctxt "LibrariesTask|"
 msgid "Libraries for instance %1"
-msgstr "Бібліотеки для збірки %1"
+msgstr "Libraries for instance %1"
 
 #, qt-format
 msgctxt "FMLLibrariesTask|"
 msgid "Failed copying Forge/FML library: %1."
-msgstr "Не вдалося скопіювати бібліотеку Forge/FML: %1."
+msgstr "Failed copying Forge/FML library: %1."
 
 #, qt-format
 msgctxt "FMLLibrariesTask|"
@@ -4850,57 +4831,57 @@ msgid ""
 "Reason:%2\n"
 "Please try again."
 msgstr ""
-"Не вдалося завантажити наступні файли:\n"
+"Failed to download the following files:\n"
 "%1\n"
 "\n"
-"Причина: %2\n"
-"Будь ласка, спробуйте знову."
+"Reason: %2\n"
+"Please try again."
 
 #, qt-format
 msgctxt "GoUpdate::DownloadTask|"
 msgid "Failed to download update files: %1"
-msgstr "Не вдалося завантажити файли оновлення: %1"
+msgstr "Failed to download update files: %1"
 
 msgctxt "MainWindow|"
 msgid "Open the selected instance's minecraft folder in a file browser."
-msgstr "Відкрити теку обраної збірки в файловому менеджері."
+msgstr "Open the selected instance's minecraft folder in a file browser."
 
 msgctxt "VersionPage|"
 msgid "Open libraries"
-msgstr "Відкрити бібліотеку"
+msgstr "Open libraries"
 
 msgctxt "GoUpdate::DownloadTask|"
 msgid "Processing file lists - figuring out how to install the update..."
-msgstr "Обробка списків файлів - з'ясовуємо як встановити оновлення..."
+msgstr "Processing file lists - figuring out how to install the update..."
 
 msgctxt "AccountsDialog|"
 msgid "Create Profile"
-msgstr "Створити профіль"
+msgstr "Create Profile"
 
 #, qt-format
 msgctxt "QObject|"
 msgid "Invalid order file version, expected %1"
-msgstr "Некоректний порядок версії файлу, очікувалась %1"
+msgstr "Invalid order file version, expected %1"
 
 msgctxt "AccountsDialog|"
 msgid "Account Name Here"
-msgstr "Ім'я облікового запису тут"
+msgstr "Account Name Here"
 
 msgctxt "MainWindow|"
 msgid "Minecraft Folder"
-msgstr "Тека Minecraft"
+msgstr "Minecraft Folder"
 
 msgctxt "XboxUserStep|"
 msgid "XBox user authentication failed."
-msgstr "Помилка автентифікації користувача XBox."
+msgstr "XBox user authentication failed."
 
 msgctxt "MainWindow|"
 msgid "Change settings."
-msgstr "Змінити налаштування."
+msgstr "Change settings."
 
 msgctxt "ModrinthExportDialog|"
 msgid "Include mod configs"
-msgstr "Включити конфігурації моду"
+msgstr "Include mod configs"
 
 #, qt-format
 msgctxt "LibrariesTask|"
@@ -4912,14 +4893,16 @@ msgid ""
 "them.\n"
 "You'll have to correct this problem manually."
 msgstr ""
-"Деяким артефактам, відміченим як 'local', бракує файлів: %1\n"
+"Some artifacts marked as 'local' are missing their files:\n"
+"%1\n"
 "\n"
-"Вам потрібно або додати ці файли, або видалити пакети, які їх потребують.\n"
-"Вам доведеться вручну виправити цю помилку."
+"You need to either add the files, or removed the packages that require "
+"them.\n"
+"You'll have to correct this problem manually."
 
 msgctxt "PasteEEPage|"
 msgid "Paste your API key here!"
-msgstr "Вставте ваш ключ API тут!"
+msgstr "Paste your API key here!"
 
 msgctxt "LaunchController|"
 msgid ""
@@ -4928,23 +4911,23 @@ msgid ""
 "\n"
 "Do you want to open the Accounts dialog?"
 msgstr ""
-"Обліковий запис ще не має профілю Minecraft.\n"
-"Щоб грати, вам потрібно спочатку створити профіль.\n"
+"The account doesn't have a Minecraft profile yet.\n"
+"You need to create a profile first to play.\n"
 "\n"
-"Ви хочете відкрити діалогове вікно облікові записи?"
+"Do you want to open the Accounts dialog?"
 
 msgctxt "MainWindow|"
 msgid "Modrinth (WIP)"
-msgstr "Modrinth (в процесі)"
+msgstr "Modrinth (WIP)"
 
 msgctxt "UpdateDialog|"
 msgid "A new update is available!"
-msgstr "Доступне нове оновлення!"
+msgstr "A new update is available!"
 
 #, qt-format
 msgctxt "LegacyFTB::Page|"
 msgid "Are you sure you want to remove pack %1?"
-msgstr "Ви дійсно бажаєте видалити мод-пак %1?"
+msgstr "Are you sure you want to remove pack %1?"
 
 #, qt-format
 msgctxt "ScreenshotsPage|"
@@ -4952,74 +4935,73 @@ msgid ""
 "The <a href=\"%1\">link  to the uploaded album</a> has been placed in your "
 "clipboard."
 msgstr ""
-"Посилання <a href=\"%1\">на завантажений альбом</a> було додано в буфер "
-"обміну."
+"The <a href=\"%1\">link  to the uploaded album</a> has been placed in your "
+"clipboard."
 
 msgctxt "XboxUserStep|"
 msgid "Logging in as an Xbox user."
-msgstr "Вхід в систему як користувач Xbox."
+msgstr "Logging in as an Xbox user."
 
 msgctxt "ComponentUpdateTask|"
 msgid "Instance has unresolved dependencies while loading/checking for launch."
 msgstr ""
-"Збірка має невирішені залежності під час завантаження/перевірки запуску."
+"Instance has unresolved dependencies while loading/checking for launch."
 
 #, qt-format
 msgctxt "AccountTask|"
 msgid "Unknown account task state: %1"
-msgstr "Невідомий статус завдання облікового запису: %1"
+msgstr "Unknown account task state: %1"
 
 #, qt-format
 msgctxt "OtherLogsPage|"
 msgid "Unable to open %1 for reading: %2"
-msgstr "Неможливо відкрити %1 для читання: %2"
+msgstr "Unable to open %1 for reading: %2"
 
 msgctxt "WorldList|"
 msgid "Date and time the world was last played."
-msgstr "Дата й час останньої гри в світі."
+msgstr "Date and time the world was last played."
 
 msgctxt "ResourcePackFolderModel|"
 msgid "The name of the resource pack."
-msgstr "Назва пакунка ресурсів."
+msgstr "The name of the resource pack."
 
 msgctxt "CopyInstanceDialog|"
 msgid "Copy Instance"
-msgstr "Копіювати збірку"
+msgstr "Copy Instance"
 
 msgctxt "MainWindow|"
 msgid "Copy Instance"
-msgstr "Копіювати збірку"
+msgstr "Copy Instance"
 
 msgctxt "VersionPage|"
 msgid "Install LiteLoader"
-msgstr "Встановити LiteLoader"
+msgstr "Install LiteLoader"
 
 msgctxt "ProgressDialog|"
 msgid "Please wait..."
-msgstr "Будь ласка, зачекайте..."
+msgstr "Please wait..."
 
 msgctxt "MinecraftUpdate|"
 msgid ""
 "Failed to load version components - mmc-pack.json is probably corrupted."
 msgstr ""
-"Не вдалося завантажити компоненти версії - ймовірно mmc-pack.json "
-"пошкоджений."
+"Failed to load version components - mmc-pack.json is probably corrupted."
 
 msgctxt "AccountsDialog|"
 msgid "Sign Out"
-msgstr "Вийти"
+msgstr "Sign out"
 
 msgctxt "OfflineNameDialog|"
 msgid "Choose your offline mode player name."
-msgstr "Виберіть ім’я гравця для офлайн режиму."
+msgstr "Choose your offline mode player name."
 
 msgctxt "AccountTask|"
 msgid "Encountered an error during authentication."
-msgstr "Трапилась помилка під час автентифікації."
+msgstr "Encountered an error during authentication."
 
 msgctxt "AccountTask|"
 msgid "Authentication task succeeded."
-msgstr "Завдання аутентифікації виконано успішно."
+msgstr "Authentication task succeeded."
 
 #, qt-format
 msgctxt "ScreenshotsPage|"
@@ -5027,45 +5009,26 @@ msgid ""
 "The <a href=\"%1\">link  to the uploaded screenshot</a> has been placed in "
 "your clipboard."
 msgstr ""
-"Посилання <a href=\"%1\">на завантажений скріншот</a> було додано в ваш "
-"буфер обміну."
+"The <a href=\"%1\">link  to the uploaded screenshot</a> has been placed in "
+"your clipboard."
 
 #, qt-format
 msgctxt "XboxAuthorizationStep|"
 msgid ""
 "Server has changed %1 authorization user hash in the reply. Something is "
 "wrong."
-msgstr "Сервер змінив хеш користувача авторизації %1 в відповіді. Щось не так."
+msgstr ""
+"Server has changed %1 authorisation user hash in the reply. Something is "
+"wrong."
 
 msgctxt "ScreenshotsPage|"
 msgid "Are you sure?"
-msgstr "Ви впевнені?"
+msgstr "Are you sure?"
 
 msgctxt "WorldListPage|"
 msgid "Are you sure?"
-msgstr "Ви впевнені?"
+msgstr "Are you sure?"
 
 msgctxt "InstanceSettingsPage|"
 msgid "Open Global Settings"
-msgstr "Відкрити глобальні налаштування"
-
-
-msgctxt "LanguageWizardPage"
-msgid "Welcome"
-msgstr "Ласкаво просимо"
-
-msgctxt "LanguageWizardPage"
-msgid "Select your language to continue"
-msgstr "Виберіть мову для продовження"
-
-msgctxt "MainWindow"
-msgid "Search instances..."
-msgstr "Пошук збірок..."
-
-msgctxt "MainWindow"
-msgid "Sort by Name"
-msgstr "За ім'ям"
-
-msgctxt "MainWindow"
-msgid "Sort by Last Played"
-msgstr "За останнім запуском"
+msgstr "Open Global Settings"
