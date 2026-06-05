@@ -240,13 +240,14 @@ void InstanceView::mousePressEvent(QMouseEvent *event) {
 
   // Check for quick action buttons
   if (index.isValid()) {
-    QRect iconRect = visualRect(index);
-    iconRect.setHeight(52); // Icon size from delegate
-
-    // Play button area (bottom left of icon)
-    QRect playRect(iconRect.left() + 4, iconRect.bottom() - 24, 24, 24);
-    // Config button area (bottom right of icon)
-    QRect configRect(iconRect.right() - 28, iconRect.bottom() - 24, 24, 24);
+    QRect cardRect = visualRect(index);
+    QStyle *style = this->style();
+    const int textMargin = style->pixelMetric(QStyle::PM_FocusFrameHMargin, nullptr, this) + 1;
+    cardRect.adjust(textMargin, 2, -textMargin, -2);
+    
+    int btnSize = 30;
+    QRect playRect(cardRect.left() + 8, cardRect.bottom() - btnSize - 8, btnSize, btnSize);
+    QRect configRect(cardRect.right() - btnSize - 8, cardRect.bottom() - btnSize - 8, btnSize, btnSize);
 
     if (playRect.contains(visualPos)) {
       emit requestLaunch(index);
