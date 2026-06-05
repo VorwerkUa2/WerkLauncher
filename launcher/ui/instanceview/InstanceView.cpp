@@ -51,6 +51,7 @@ InstanceView::InstanceView(QWidget *parent) : QAbstractItemView(parent) {
   setAcceptDrops(true);
   setAutoScroll(true);
   setMouseTracking(true);
+  setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 InstanceView::~InstanceView() {

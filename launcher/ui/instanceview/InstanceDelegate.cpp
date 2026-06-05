@@ -327,6 +327,7 @@ void ListViewDelegate::paint(QPainter *painter,
   QTextOption textOption;
   textOption.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
   textOption.setTextDirection(opt.direction);
+  opt.displayAlignment = Qt::AlignTop | Qt::AlignHCenter; // Force align top to prevent text from overlapping buttons at the bottom
   textOption.setAlignment(
       QStyle::visualAlignment(opt.direction, opt.displayAlignment));
   QTextLayout textLayout;
@@ -572,11 +573,17 @@ bool ListViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
 void ListViewDelegate::updateEditorGeometry(QWidget *editor,
                                             const QStyleOptionViewItem &option,
                                             const QModelIndex &index) const {
-  static const int iconSize = 48;
+  static const int iconSize = 64;
+  QStyle *style = option.widget ? option.widget->style() : QApplication::style();
+  const int textMargin = style->pixelMetric(QStyle::PM_FocusFrameHMargin, &option, option.widget) + 1;
   QRect textRect = option.rect;
-  // QStyle *style = option.widget ? option.widget->style() :
-  // QApplication::style();
-  textRect.adjust(0, iconSize + 5, 0, 0);
+  textRect.adjust(textMargin, iconSize + textMargin + 15, -textMargin, 0);
+
+  QStyleOptionViewItem opt = option;
+  initStyleOption(&opt, index);
+  QSize szz = viewItemTextSize(&opt);
+  
+  textRect.setHeight(szz.height() + 10);
   editor->setGeometry(textRect);
 }
 
