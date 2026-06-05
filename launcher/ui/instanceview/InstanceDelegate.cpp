@@ -70,13 +70,7 @@ void drawSelectionRect(QPainter *painter, const QStyleOptionViewItem &option,
   painter->setPen(Qt::NoPen);
   painter->drawRoundedRect(rect.adjusted(2, 2, -2, -2), 12, 12);
 
-  if ((option.state & QStyle::State_Selected)) {
-    QColor highlightColor = option.palette.color(QPalette::Highlight);
-    highlightColor.setAlpha(50);
-    painter->setBrush(highlightColor);
-    painter->setPen(QPen(option.palette.color(QPalette::Highlight), 1.5));
-    painter->drawRoundedRect(rect.adjusted(2, 2, -2, -2), 12, 12);
-  } else if (option.state & QStyle::State_MouseOver) {
+  if (option.state & QStyle::State_MouseOver) {
     QColor glowColor(230, 126, 34); // Orange glow (#e67e22)
     QColor hoverBg = glowColor;
     hoverBg.setAlpha(20);
@@ -317,11 +311,7 @@ void ListViewDelegate::paint(QPainter *painter,
       opt.state & QStyle::State_Enabled ? QPalette::Normal : QPalette::Disabled;
   if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active))
     cg = QPalette::Inactive;
-  if (opt.state & QStyle::State_Selected) {
-    painter->setPen(opt.palette.color(cg, QPalette::HighlightedText));
-  } else {
-    painter->setPen(opt.palette.color(cg, QPalette::Text));
-  }
+  painter->setPen(opt.palette.color(cg, QPalette::Text));
 
   // draw the text
   QTextOption textOption;
@@ -369,10 +359,6 @@ void ListViewDelegate::paint(QPainter *painter,
       painter->setFont(subFont);
       QColor subColor = opt.palette.color(cg, QPalette::Text);
       subColor.setAlphaF(0.55f);
-      if (opt.state & QStyle::State_Selected) {
-        subColor = opt.palette.color(cg, QPalette::HighlightedText);
-        subColor.setAlphaF(0.7f);
-      }
       painter->setPen(subColor);
       QRect drawRect(layoutRect.left(), currentY, layoutRect.width(), 600);
       painter->drawText(drawRect,
@@ -405,10 +391,6 @@ void ListViewDelegate::paint(QPainter *painter,
       painter->setFont(tinyFont);
       QColor tinyColor = opt.palette.color(cg, QPalette::Text);
       tinyColor.setAlphaF(0.4f);
-      if (opt.state & QStyle::State_Selected) {
-        tinyColor = opt.palette.color(cg, QPalette::HighlightedText);
-        tinyColor.setAlphaF(0.6f);
-      }
       painter->setPen(tinyColor);
 
       QString text;

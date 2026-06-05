@@ -504,36 +504,7 @@ set(META_SOURCES
     meta/Index.h
 )
 
-set(FTB_SOURCES
-    modplatform/legacy_ftb/PackFetchTask.h
-    modplatform/legacy_ftb/PackFetchTask.cpp
-    modplatform/legacy_ftb/PackInstallTask.h
-    modplatform/legacy_ftb/PackInstallTask.cpp
-    modplatform/legacy_ftb/PrivatePackManager.h
-    modplatform/legacy_ftb/PrivatePackManager.cpp
 
-    modplatform/legacy_ftb/PackHelpers.h
-)
-
-set(TECHNIC_SOURCES
-    modplatform/technic/SingleZipPackInstallTask.h
-    modplatform/technic/SingleZipPackInstallTask.cpp
-    modplatform/technic/SolderPackInstallTask.h
-    modplatform/technic/SolderPackInstallTask.cpp
-    modplatform/technic/SolderPackManifest.h
-    modplatform/technic/SolderPackManifest.cpp
-    modplatform/technic/TechnicPackProcessor.h
-    modplatform/technic/TechnicPackProcessor.cpp
-)
-
-set(ATLAUNCHER_SOURCES
-    modplatform/atlauncher/ATLPackIndex.cpp
-    modplatform/atlauncher/ATLPackIndex.h
-    modplatform/atlauncher/ATLPackInstallTask.cpp
-    modplatform/atlauncher/ATLPackInstallTask.h
-    modplatform/atlauncher/ATLPackManifest.cpp
-    modplatform/atlauncher/ATLPackManifest.h
-)
 
 set(MODRINTH_SOURCES
     modplatform/modrinth/ModrinthPackManifest.cpp
@@ -573,10 +544,7 @@ set(LOGIC_SOURCES
     ${TOOLS_SOURCES}
     ${META_SOURCES}
     ${ICONS_SOURCES}
-    ${FTB_SOURCES}
-    ${FTBA_SOURCES}
-    ${TECHNIC_SOURCES}
-    ${ATLAUNCHER_SOURCES}
+
     ${MODRINTH_SOURCES}
 )
 
@@ -719,26 +687,7 @@ SET(LAUNCHER_SOURCES
     ui/pages/modplatform/VanillaPage.cpp
     ui/pages/modplatform/VanillaPage.h
 
-    ui/pages/modplatform/atlauncher/AtlFilterModel.cpp
-    ui/pages/modplatform/atlauncher/AtlFilterModel.h
-    ui/pages/modplatform/atlauncher/AtlListModel.cpp
-    ui/pages/modplatform/atlauncher/AtlListModel.h
-    ui/pages/modplatform/atlauncher/AtlOptionalModDialog.cpp
-    ui/pages/modplatform/atlauncher/AtlOptionalModDialog.h
-    ui/pages/modplatform/atlauncher/AtlPage.cpp
-    ui/pages/modplatform/atlauncher/AtlPage.h
 
-    ui/pages/modplatform/legacy_ftb/Page.cpp
-    ui/pages/modplatform/legacy_ftb/Page.h
-    ui/pages/modplatform/legacy_ftb/ListModel.h
-    ui/pages/modplatform/legacy_ftb/ListModel.cpp
-
-    ui/pages/modplatform/import_ftb/PackInstallTask.cpp
-    ui/pages/modplatform/import_ftb/PackInstallTask.h
-    ui/pages/modplatform/import_ftb/Model.cpp
-    ui/pages/modplatform/import_ftb/Model.h
-    ui/pages/modplatform/import_ftb/FTBAPage.cpp
-    ui/pages/modplatform/import_ftb/FTBAPage.h
 
     ui/pages/modplatform/curseforge/CurseForgeData.h
     ui/pages/modplatform/curseforge/CurseForgeModel.cpp
@@ -754,10 +703,7 @@ SET(LAUNCHER_SOURCES
     ui/pages/modplatform/modrinth/ModrinthPage.cpp
     ui/pages/modplatform/modrinth/ModrinthPage.h
 
-    ui/pages/modplatform/technic/TechnicModel.cpp
-    ui/pages/modplatform/technic/TechnicModel.h
-    ui/pages/modplatform/technic/TechnicPage.cpp
-    ui/pages/modplatform/technic/TechnicPage.h
+
 
     ui/pages/modplatform/ImportPage.cpp
     ui/pages/modplatform/ImportPage.h
@@ -892,13 +838,8 @@ qt6_wrap_ui(LAUNCHER_UI
     ui/pages/instance/WorldListPage.ui
     ui/pages/modplatform/ImportPage.ui
     ui/pages/modplatform/VanillaPage.ui
-    ui/pages/modplatform/atlauncher/AtlOptionalModDialog.ui
-    ui/pages/modplatform/atlauncher/AtlPage.ui
-    ui/pages/modplatform/import_ftb/FTBAPage.ui
-    ui/pages/modplatform/legacy_ftb/Page.ui
     ui/pages/modplatform/curseforge/CurseForgePage.ui
     ui/pages/modplatform/modrinth/ModrinthPage.ui
-    ui/pages/modplatform/technic/TechnicPage.ui
     ui/widgets/CustomCommands.ui
     ui/widgets/CustomCommands.ui
     ui/widgets/InstanceCardWidget.ui

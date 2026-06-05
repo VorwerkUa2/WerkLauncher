@@ -942,11 +942,6 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv) {
                          QDir("mods/minecraftforge/libs").absolutePath());
     m_metacache->addBase("liteloader", QDir("mods/liteloader").absolutePath());
     m_metacache->addBase("general", QDir("cache").absolutePath());
-    m_metacache->addBase("ATLauncherPacks",
-                         QDir("cache/ATLauncherPacks").absolutePath());
-    m_metacache->addBase("FTBPacks", QDir("cache/FTBPacks").absolutePath());
-    m_metacache->addBase("TechnicPacks",
-                         QDir("cache/TechnicPacks").absolutePath());
     m_metacache->addBase("ModrinthPacks",
                          QDir("cache/ModrinthPacks").absolutePath());
     m_metacache->addBase("root", QDir::currentPath());
