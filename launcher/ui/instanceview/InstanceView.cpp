@@ -435,6 +435,20 @@ void InstanceView::mouseDoubleClickEvent(QMouseEvent *event) {
     mousePressEvent(&me);
     return;
   }
+  
+  // Check if click was on the text area to trigger rename
+  QRect vRect = visualRect(index);
+  int iconSize = 64; // Same as in InstanceDelegate
+  QStyle *st = style();
+  const int textMargin = st->pixelMetric(QStyle::PM_FocusFrameHMargin, nullptr, this) + 1;
+  QRect textRect = vRect;
+  textRect.adjust(textMargin, iconSize + textMargin + 15, -textMargin, 0);
+
+  if (textRect.contains(event->pos())) {
+      edit(index);
+      return;
+  }
+
   // signal handlers may change the model
   QPersistentModelIndex persistent = index;
   emit doubleClicked(persistent);

@@ -272,11 +272,11 @@ void ListViewDelegate::paint(QPainter *painter,
       }
       
       QColor bgColor = opt.palette.color(QPalette::Window);
-      bgColor.setAlpha(200);
+      bgColor.setAlpha(255);
       
       if (isHovered) {
         bgColor = accent;
-        bgColor.setAlpha(230);
+        bgColor.setAlpha(255);
       }
       
       painter->setBrush(bgColor);
@@ -302,9 +302,10 @@ void ListViewDelegate::paint(QPainter *painter,
     bool configHovered = configRect.contains(mousePos);
     bool isPressed = opt.state & QStyle::State_Sunken;
 
-    // Theme-aware soft colors for hover
-    QColor playAccent = QColor(46, 204, 113); // Soft green
+    // Theme-aware soft colors for hover (fully opaque)
+    QColor playAccent = QColor(46, 204, 113, 255); // Soft green
     QColor configAccent = opt.palette.color(QPalette::Highlight); // Theme accent
+    configAccent.setAlpha(255);
 
     drawAction(playRect, "status-running", playHovered, playHovered && isPressed, playAccent);
     drawAction(configRect, "settings", configHovered, configHovered && isPressed, configAccent);
@@ -552,8 +553,9 @@ bool ListViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
       QRect textRect = option.rect;
       textRect.adjust(textMargin, iconSize + textMargin + 10, -textMargin, 0);
 
-      QRect playRect(cardRect.left() + 6, textRect.top() + 2, btnSize, btnSize);
-      QRect configRect(cardRect.right() - btnSize - 6, textRect.top() + 2, btnSize, btnSize);
+      // Position buttons cleanly at the bottom corners of the card
+      QRect playRect(cardRect.left() + 8, cardRect.bottom() - btnSize - 8, btnSize, btnSize);
+      QRect configRect(cardRect.right() - btnSize - 8, cardRect.bottom() - btnSize - 8, btnSize, btnSize);
 
       if (playRect.contains(mouseEvent->pos())) {
         emit launchRequested(index);
