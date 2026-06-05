@@ -12,6 +12,8 @@
 #include <QAbstractButton>
 #include <QBoxLayout>
 #include <QVBoxLayout>
+#include <QPainterPath>
+#include <QRegion>
 
 SetupWizard::SetupWizard(QWidget *parent) : QWizard(parent) {
   setObjectName(QStringLiteral("SetupWizard"));
@@ -31,6 +33,11 @@ SetupWizard::SetupWizard(QWidget *parent) : QWizard(parent) {
 
 void SetupWizard::resizeEvent(QResizeEvent *event) {
   QWizard::resizeEvent(event);
+  // Apply rounded corners via clipping mask
+  QPainterPath path;
+  path.addRoundedRect(rect(), 12, 12);
+  QRegion mask = QRegion(path.toFillPolygon().toPolygon());
+  setMask(mask);
 }
 
 #include <QMouseEvent>
