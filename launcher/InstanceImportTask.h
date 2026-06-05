@@ -44,7 +44,6 @@ protected:
 private:
     void processZipPack();
     void processMultiMC();
-    void processTechnic();
     void processModrinth();
     void processCurseForge();
     void startCurseForgeDownload(QByteArray responseData);
@@ -68,7 +67,6 @@ private: /* data */
     enum class ModpackType{
         Unknown,
         MultiMC,
-        Technic,
         Modrinth,
         CurseForge,
     } m_modpackType = ModpackType::Unknown;
