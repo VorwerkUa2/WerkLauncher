@@ -5078,3 +5078,7 @@ msgstr "Створити групу"
 msgctxt "MainWindow"
 msgid "Group name:"
 msgstr "Назва групи:"
+
+msgctxt "MainWindow"
+msgid "Sort by Version"
+msgstr "За версією"
