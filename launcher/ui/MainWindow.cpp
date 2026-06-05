@@ -1454,20 +1454,13 @@ void MainWindow::showInstanceContextMenu(const QPoint &pos) {
 
   if (onInstance) {
     actions.append(ui->actionChangeInstIcon.operator->());
-    actions.append(ui->actionRenameInstance.operator->());
     actions.append(actionSep);
     actions.append(ui->actionChangeInstGroup.operator->());
-    actions.append(ui->actionLaunchInstance.operator->());
     actions.append(actionSep);
     actions.append(ui->actionEditInstance.operator->());
-    actions.append(ui->actionEditInstNotes.operator->());
-    actions.append(ui->actionMods.operator->());
-    actions.append(ui->actionWorlds.operator->());
-    actions.append(ui->actionScreenshots.operator->());
     actions.append(actionSep);
     actions.append(ui->actionViewSelectedMCFolder.operator->());
     actions.append(ui->actionConfig_Folder.operator->());
-    actions.append(ui->actionViewSelectedInstFolder.operator->());
     actions.append(actionSep);
     actions.append(ui->actionCreateShortcut.operator->());
     actions.append(ui->actionExportInstance.operator->());
