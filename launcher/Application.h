@@ -85,6 +85,8 @@ public:
 
   MCEditTool *mcedit() const { return m_mcedit.get(); }
 
+  QFile *getLogFile() const { return logFile.get(); }
+
   DiscordRPC *discordRPC() const { return m_discordRPC; }
 
   shared_qobject_ptr<AccountList> accounts() const { return m_accounts; }
@@ -222,7 +224,7 @@ private:
   SetupWizard *m_setupWizard = nullptr;
   DiscordRPC *m_discordRPC = nullptr;
 
-public:
+  // Launch parameters (set during command-line parsing, consumed at startup)
   QString m_instanceIdToLaunch;
   QString m_serverToJoin;
   QString m_worldToJoin;

@@ -30,7 +30,7 @@ void JavaWizardPage::setupUi() {
   QVBoxLayout *layout = new QVBoxLayout(this);
 
   m_java_widget = new JavaSettingsWidget(this);
-  layout->setContentsMargins(0, 32, 0, 0);
+  layout->setContentsMargins(0, 10, 0, 0);
   layout->addWidget(m_java_widget);
   setLayout(layout);
 

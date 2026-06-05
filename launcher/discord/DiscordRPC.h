@@ -36,6 +36,7 @@ private:
   bool m_connected = false;
   bool m_handshakeComplete = false;
   QString m_clientId = "1476261502846631956";
+  int m_currentPipeIndex = 0; // for non-blocking reconnect iteration
   QDateTime m_startTime;
 
   // Pending activity (queued before handshake completes)

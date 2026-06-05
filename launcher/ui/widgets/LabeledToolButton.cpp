@@ -84,9 +84,15 @@ void LabeledToolButton::resizeEvent(QResizeEvent *event) {
 }
 
 void LabeledToolButton::resetIcon() {
+  if (m_icon.isNull()) {
+    return;
+  }
   auto iconSz = m_icon.actualSize(QSize(160, 80));
   float w = iconSz.width();
   float h = iconSz.height();
+  if (h <= 0.001f || w <= 0.001f) {
+    return;
+  }
   float ar = w / h;
   // FIXME: hardcoded max size of 160x80
   int newW = 80 * ar;

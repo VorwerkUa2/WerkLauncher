@@ -19,25 +19,15 @@
 
 PageDialog::PageDialog(BasePageProvider *pageProvider, QString defaultId,
                        QWidget *parent)
-    : QDialog(parent) {
-  setWindowFlags(Qt::FramelessWindowHint | windowFlags());
+    : QWidget(parent) {
 
-#ifdef Q_OS_WIN
-  HWND hwnd = (HWND)winId();
-  LONG style = GetWindowLong(hwnd, GWL_STYLE);
-  SetWindowLong(hwnd, GWL_STYLE, style | WS_THICKFRAME | WS_CAPTION | WS_MINIMIZEBOX);
-#endif
-  setWindowTitle(pageProvider->dialogTitle());
-
+  setWindowTitle(tr("Settings"));
   m_container = new PageContainer(pageProvider, defaultId, this);
 
   QVBoxLayout *mainLayout = new QVBoxLayout;
   mainLayout->setContentsMargins(0, 0, 0, 0);
   mainLayout->setSpacing(0);
 
-  auto titleBar = new CustomTitleBar(this);
-  titleBar->setTitle(pageProvider->dialogTitle());
-  mainLayout->addWidget(titleBar);
   mainLayout->addWidget(m_container);
 
   setLayout(mainLayout);
@@ -53,16 +43,12 @@ PageDialog::PageDialog(BasePageProvider *pageProvider, QString defaultId,
   connect(buttons->button(QDialogButtonBox::Help), SIGNAL(clicked()),
           m_container, SLOT(help()));
 
-  restoreGeometry(QByteArray::fromBase64(
-      APPLICATION->settings()->get("PagedGeometry").toByteArray()));
 }
 
 void PageDialog::closeEvent(QCloseEvent *event) {
   qDebug() << "Paged dialog close requested";
   if (m_container->prepareToClose()) {
     qDebug() << "Paged dialog close approved";
-    APPLICATION->settings()->set("PagedGeometry", saveGeometry().toBase64());
-    qDebug() << "Paged dialog geometry saved";
-    QDialog::closeEvent(event);
+    QWidget::closeEvent(event);
   }
 }

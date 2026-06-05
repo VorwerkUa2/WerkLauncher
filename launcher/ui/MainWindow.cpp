@@ -3,6 +3,8 @@
 #define NOMINMAX
 #include <windows.h>
 #include <windowsx.h>
+#include <dwmapi.h>
+#pragma comment(lib, "dwmapi.lib")
 #endif
 
 #include <QtCore/QDir>
@@ -18,6 +20,10 @@
 #include <QtGui/QAction>
 
 #include <QtGui/QShortcut>
+
+#include <QtGui/QWindow>
+
+#include <QtWidgets/QStyle>
 
 #include <QtWidgets/QApplication>
 
@@ -112,6 +118,7 @@
 #include "ui/dialogs/ModrinthExportDialog.h"
 
 #include "ui/dialogs/NewInstanceDialog.h"
+#include "GlobalResizeFilter.h"
 
 #include "ui/dialogs/NotificationDialog.h"
 
@@ -268,6 +275,7 @@ private:
 class MainWindow::Ui {
 
 public:
+  TranslatedAction actionBack;
   TranslatedAction actionAddInstance;
 
   // TranslatedAction actionRefresh;
@@ -350,8 +358,6 @@ public:
 
   TranslatedToolbar mainToolBar;
 
-  TranslatedToolbar instanceToolBar;
-
   TranslatedToolbar newsToolBar;
 
   QVector<TranslatedToolbar *> all_toolbars;
@@ -401,19 +407,7 @@ public:
 
     mainToolBar->setFloatable(false);
 
-    mainToolBar->setStyleSheet(
-        "QToolButton { "
-        "   min-width: 48px; max-width: 48px; "
-        "   min-height: 48px; max-height: 48px; "
-        "   padding: 0px; margin: 2px; border-radius: 8px; "
-        "}"
-        "QToolButton::menu-indicator { image: none; width: 0px; }"
-        "QToolTip { "
-        "   background-color: #2b2b2b; color: #ffffff; "
-        "   border: 1px solid #4a4a4a; border-radius: 6px; "
-        "   padding: 4px 8px; "
-        "}"
-    );
+
 
     mainToolBar.setWindowTitleId(
 
@@ -434,6 +428,15 @@ public:
         QT_TRANSLATE_NOOP("MainWindow", "Add a new instance."));
 
     all_actions.append(&actionAddInstance);
+
+    actionBack = TranslatedAction(MainWindow);
+    actionBack->setObjectName(QStringLiteral("actionBack"));
+    actionBack->setIcon(MainWindow->style()->standardIcon(QStyle::SP_ArrowBack));
+    actionBack.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Back"));
+    actionBack.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Back to Instances"));
+    all_actions.append(&actionBack);
+    mainToolBar->addAction(actionBack);
+    actionBack->setVisible(false); // Hidden by default
 
     QWidget *topSpacer = new QWidget(MainWindow);
     topSpacer->setFixedSize(1, 30);
@@ -692,345 +695,134 @@ public:
     MainWindow->setStatusBar(statusBar);
   }
 
-  void createInstanceToolbar(QMainWindow *MainWindow) {
-
-    instanceToolBar = TranslatedToolbar(MainWindow);
-
-    instanceToolBar->setObjectName(QStringLiteral("instanceToolBar"));
-
-    // disabled until we have an instance selected
-
-    instanceToolBar->setEnabled(false);
-
-    instanceToolBar->setAllowedAreas(Qt::LeftToolBarArea |
-
-                                     Qt::RightToolBarArea);
-
-    instanceToolBar->setToolButtonStyle(Qt::ToolButtonTextOnly);
-
-    instanceToolBar->setFloatable(false);
-
-    instanceToolBar->setWindowTitle(
-
-        QT_TRANSLATE_NOOP("MainWindow", "Instance Toolbar"));
-
-    // NOTE: not added to toolbar, but used for instance context menu (right
-
-    // click)
-
+  void createInstanceActions(QMainWindow *MainWindow) {
     actionChangeInstIcon = TranslatedAction(MainWindow);
-
     actionChangeInstIcon->setObjectName(QStringLiteral("actionChangeInstIcon"));
-
     actionChangeInstIcon->setIcon(QIcon(":/logo.svg"));
-
     actionChangeInstIcon->setIconVisibleInMenu(true);
-
     actionChangeInstIcon.setTextId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Change Icon"));
-
     actionChangeInstIcon.setTooltipId(QT_TRANSLATE_NOOP(
-
         "MainWindow", "Change the selected instance's icon."));
-
     all_actions.append(&actionChangeInstIcon);
 
-    changeIconButton = new LabeledToolButton(MainWindow);
-
-    changeIconButton->setObjectName(QStringLiteral("changeIconButton"));
-
-    changeIconButton->setIcon(APPLICATION->getThemedIcon("news"));
-
-    changeIconButton->setToolTip(actionChangeInstIcon->toolTip());
-
-    changeIconButton->setSizePolicy(QSizePolicy::Expanding,
-
-                                    QSizePolicy::Preferred);
-
-    instanceToolBar->addWidget(changeIconButton);
-
-    // NOTE: not added to toolbar, but used for instance context menu (right
-
-    // click)
-
     actionRenameInstance = TranslatedAction(MainWindow);
-
     actionRenameInstance->setObjectName(QStringLiteral("actionRenameInstance"));
-
     actionRenameInstance.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Rename"));
-
     actionRenameInstance.setTooltipId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Rename the selected instance."));
-
     all_actions.append(&actionRenameInstance);
 
-    // the rename label is inside the rename tool button
-
-    renameButton = new LabeledToolButton(MainWindow);
-
-    renameButton->setObjectName(QStringLiteral("renameButton"));
-
-    renameButton->setToolTip(actionRenameInstance->toolTip());
-
-    renameButton->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-
-    instanceToolBar->addWidget(renameButton);
-
     actionChangeInstGroup = TranslatedAction(MainWindow);
-
     actionChangeInstGroup->setObjectName(
-
         QStringLiteral("actionChangeInstGroup"));
-
     actionChangeInstGroup.setTextId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Change Group"));
-
     actionChangeInstGroup.setTooltipId(QT_TRANSLATE_NOOP(
-
         "MainWindow", "Change the selected instance's group."));
-
     all_actions.append(&actionChangeInstGroup);
 
-    instanceToolBar->addAction(actionChangeInstGroup);
-
-    instanceToolBar->addSeparator();
-
     actionLaunchInstance = TranslatedAction(MainWindow);
-
     actionLaunchInstance->setObjectName(QStringLiteral("actionLaunchInstance"));
-
     all_actions.append(&actionLaunchInstance);
 
-    instanceToolBar->addAction(actionLaunchInstance);
-
-    instanceToolBar->addSeparator();
-
     actionEditInstance = TranslatedAction(MainWindow);
-
     actionEditInstance->setObjectName(QStringLiteral("actionEditInstance"));
-
     actionEditInstance.setTextId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Edit Instance"));
-
     actionEditInstance.setTooltipId(QT_TRANSLATE_NOOP(
-
         "MainWindow", "Change the instance settings, mods and versions."));
-
     all_actions.append(&actionEditInstance);
 
-    instanceToolBar->addAction(actionEditInstance);
-
     actionEditInstNotes = TranslatedAction(MainWindow);
-
     actionEditInstNotes->setObjectName(QStringLiteral("actionEditInstNotes"));
-
     actionEditInstNotes.setTextId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Edit Notes"));
-
     actionEditInstNotes.setTooltipId(QT_TRANSLATE_NOOP(
-
         "MainWindow", "Edit the notes for the selected instance."));
-
     all_actions.append(&actionEditInstNotes);
 
-    instanceToolBar->addAction(actionEditInstNotes);
-
     actionMods = TranslatedAction(MainWindow);
-
     actionMods->setObjectName(QStringLiteral("actionMods"));
-
     actionMods.setTextId(QT_TRANSLATE_NOOP("MainWindow", "View Mods"));
-
     actionMods.setTooltipId(
-
         QT_TRANSLATE_NOOP("MainWindow", "View the mods of this instance."));
-
     all_actions.append(&actionMods);
 
-    instanceToolBar->addAction(actionMods);
-
     actionWorlds = TranslatedAction(MainWindow);
-
     actionWorlds->setObjectName(QStringLiteral("actionWorlds"));
-
     actionWorlds.setTextId(QT_TRANSLATE_NOOP("MainWindow", "View Worlds"));
-
     actionWorlds.setTooltipId(
-
         QT_TRANSLATE_NOOP("MainWindow", "View the worlds of this instance."));
-
     all_actions.append(&actionWorlds);
 
-    instanceToolBar->addAction(actionWorlds);
-
     actionScreenshots = TranslatedAction(MainWindow);
-
     actionScreenshots->setObjectName(QStringLiteral("actionScreenshots"));
-
     actionScreenshots.setTextId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Manage Screenshots"));
-
     actionScreenshots.setTooltipId(QT_TRANSLATE_NOOP(
-
         "MainWindow", "View and upload screenshots for this instance."));
-
     all_actions.append(&actionScreenshots);
 
-    instanceToolBar->addAction(actionScreenshots);
-
-    instanceToolBar->addSeparator();
-
     actionViewSelectedMCFolder = TranslatedAction(MainWindow);
-
     actionViewSelectedMCFolder->setObjectName(
-
         QStringLiteral("actionViewSelectedMCFolder"));
-
     actionViewSelectedMCFolder.setTextId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Minecraft Folder"));
-
     actionViewSelectedMCFolder.setTooltipId(QT_TRANSLATE_NOOP(
-
         "MainWindow",
-
         "Open the selected instance's minecraft folder in a file browser."));
-
     all_actions.append(&actionViewSelectedMCFolder);
 
-    instanceToolBar->addAction(actionViewSelectedMCFolder);
-
-    /*
-
-    actionViewSelectedModsFolder = TranslatedAction(MainWindow);
-
-    actionViewSelectedModsFolder->setObjectName(QStringLiteral("actionViewSelectedModsFolder"));
-
-    actionViewSelectedModsFolder.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Mods
-
-    Folder"));
-
-    actionViewSelectedModsFolder.setTooltipId(QT_TRANSLATE_NOOP("MainWindow",
-
-    "Open the selected instance's mods folder in a file browser."));
-
-    all_actions.append(&actionViewSelectedModsFolder);
-
-    instanceToolBar->addAction(actionViewSelectedModsFolder);
-
-    */
-
     actionConfig_Folder = TranslatedAction(MainWindow);
-
     actionConfig_Folder->setObjectName(QStringLiteral("actionConfig_Folder"));
-
     actionConfig_Folder.setTextId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Config Folder"));
-
     actionConfig_Folder.setTooltipId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Open the instance's config folder."));
-
     all_actions.append(&actionConfig_Folder);
 
-    instanceToolBar->addAction(actionConfig_Folder);
-
     actionViewSelectedInstFolder = TranslatedAction(MainWindow);
-
     actionViewSelectedInstFolder->setObjectName(
-
         QStringLiteral("actionViewSelectedInstFolder"));
-
     actionViewSelectedInstFolder.setTextId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Instance Folder"));
-
     actionViewSelectedInstFolder.setTooltipId(QT_TRANSLATE_NOOP(
-
         "MainWindow",
-
         "Open the selected instance's root folder in a file browser."));
-
     all_actions.append(&actionViewSelectedInstFolder);
 
-    instanceToolBar->addAction(actionViewSelectedInstFolder);
-
-    instanceToolBar->addSeparator();
-
     actionCreateShortcut = TranslatedAction(MainWindow);
-
     actionCreateShortcut->setObjectName(QStringLiteral("actionCreateShortcut"));
-
     actionCreateShortcut.setTextId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Create Shortcut"));
-
     actionCreateShortcut.setTooltipId(QT_TRANSLATE_NOOP(
-
         "MainWindow", "Create a shortcut that launches the selected instance"));
-
     all_actions.append(&actionCreateShortcut);
 
-    instanceToolBar->addAction(actionCreateShortcut);
-
     actionExportInstance = TranslatedAction(MainWindow);
-
     actionExportInstance->setObjectName(QStringLiteral("actionExportInstance"));
-
     actionExportInstance.setTextId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Export Instance"));
-
     actionExportInstance.setTooltipId(QT_TRANSLATE_NOOP(
-
         "MainWindow", "Export the selected instance as a zip file."));
-
     all_actions.append(&actionExportInstance);
 
-    instanceToolBar->addAction(actionExportInstance);
-
     actionDeleteInstance = TranslatedAction(MainWindow);
-
     actionDeleteInstance->setObjectName(QStringLiteral("actionDeleteInstance"));
-
     actionDeleteInstance.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Delete"));
-
     actionDeleteInstance.setTooltipId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Delete the selected instance."));
-
     all_actions.append(&actionDeleteInstance);
 
-    instanceToolBar->addAction(actionDeleteInstance);
-
     actionCopyInstance = TranslatedAction(MainWindow);
-
     actionCopyInstance->setObjectName(QStringLiteral("actionCopyInstance"));
-
     actionCopyInstance->setIcon(APPLICATION->getThemedIcon("copy"));
-
     actionCopyInstance.setTextId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Copy Instance"));
-
     actionCopyInstance.setTooltipId(
-
         QT_TRANSLATE_NOOP("MainWindow", "Copy the selected instance."));
-
     all_actions.append(&actionCopyInstance);
-
-    instanceToolBar->addAction(actionCopyInstance);
-
-    all_toolbars.append(&instanceToolBar);
-
-    // MainWindow->addToolBar(Qt::LeftToolBarArea, instanceToolBar);
   }
 
   void setupUi(QMainWindow *MainWindow) {
@@ -1040,7 +832,7 @@ public:
       MainWindow->setObjectName(QStringLiteral("MainWindow"));
     }
 
-    MainWindow->resize(800, 600);
+    MainWindow->resize(1024, 768);
 
     MainWindow->setWindowIcon(APPLICATION->getThemedIcon("logo"));
 
@@ -1052,6 +844,7 @@ public:
 
 #endif
 
+    qDebug() << "setupUi: createMainToolbar";
     createMainToolbar(MainWindow);
 
     centralWidget = new QWidget(MainWindow);
@@ -1070,14 +863,19 @@ public:
 
     MainWindow->setCentralWidget(centralWidget);
 
+    qDebug() << "setupUi: createStatusBar";
     createStatusBar(MainWindow);
 
-    createInstanceToolbar(MainWindow);
+    qDebug() << "setupUi: createInstanceActions";
+    createInstanceActions(MainWindow);
 
+    qDebug() << "setupUi: retranslateUi";
     retranslateUi(MainWindow);
 
+    qDebug() << "setupUi: connectSlotsByName";
     QMetaObject::connectSlotsByName(MainWindow);
 
+    qDebug() << "setupUi: DONE";
   } // setupUi
 
   void retranslateUi(QMainWindow *MainWindow) {
@@ -1141,9 +939,20 @@ MainWindow::MainWindow(QWidget *parent)
   SetWindowLong(hwnd, GWL_STYLE,
                 style | WS_THICKFRAME | WS_CAPTION | WS_MAXIMIZEBOX |
                     WS_MINIMIZEBOX);
+                    
+  // CRITICAL: DWM Bug Fix for Windows 10/11
+  // If we return 0 in WM_NCCALCSIZE to make the window frameless, DWM loses track 
+  // of the window's frame. After a modal dialog closes, DWM will start completely 
+  // ignoring WM_SYSCOMMAND SC_SIZE messages unless we extend the frame into the client area.
+  MARGINS margins = {1, 1, 1, 1};
+  DwmExtendFrameIntoClientArea(hwnd, &margins);
 #endif
 
   ui->setupUi(this);
+
+  // Install global resize filter to handle frameless window resizing in pure Qt
+  auto resizeFilter = new GlobalResizeFilter(this);
+  qApp->installEventFilter(resizeFilter);
 
   // OSX magic.
 
@@ -1177,7 +986,11 @@ MainWindow::MainWindow(QWidget *parent)
 
   {
 
-    auto *verticalLayout = new QVBoxLayout();
+    m_pageStack = new QStackedWidget(ui->centralWidget);
+    ui->horizontalLayout->addWidget(m_pageStack);
+
+    m_instanceViewPage = new QWidget(m_pageStack);
+    auto *verticalLayout = new QVBoxLayout(m_instanceViewPage);
 
     verticalLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -1301,8 +1114,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     verticalLayout->addWidget(view);
 
-    ui->horizontalLayout->addLayout(verticalLayout);
+    m_pageStack->addWidget(m_instanceViewPage);
   }
+
+  // Back button connection
+  connect(ui->actionBack.operator->(), &QAction::triggered, this, &MainWindow::showInstanceView);
 
   // start instance when double-clicked
 
@@ -1478,7 +1294,7 @@ MainWindow::MainWindow(QWidget *parent)
       APPLICATION->settings()->get("SelectedInstance").toString());
 
   // Hide the instance toolbar by default until an instance is selected
-  ui->instanceToolBar->setVisible(false);
+
 
   // removing this looks stupid
 
@@ -1560,7 +1376,11 @@ void MainWindow::retranslateUi() {
   ui->retranslateUi(this);
 }
 
-MainWindow::~MainWindow() {}
+MainWindow::~MainWindow() {
+  if (m_trayIcon) {
+    m_trayIcon->hide();
+  }
+}
 
 QMenu *MainWindow::createPopupMenu() {
 
@@ -1576,6 +1396,52 @@ void MainWindow::konamiTriggered() {
   qDebug() << "Super Secret Mode ACTIVATED!";
 }
 
+void MainWindow::showInstanceView() {
+  QWidget *current = m_pageStack->currentWidget();
+  if (current == m_instanceViewPage) return;
+
+  if (current) {
+    bool isAlreadyClosing = current->property("isClosing").toBool();
+    if (!isAlreadyClosing) {
+      current->setProperty("isClosing", true);
+      if (!current->close()) {
+        current->setProperty("isClosing", false);
+        return;
+      }
+    }
+    m_pageStack->removeWidget(current);
+    if (!current->testAttribute(Qt::WA_DeleteOnClose)) {
+      current->deleteLater();
+    }
+  }
+
+  m_pageStack->setCurrentWidget(m_instanceViewPage);
+  ui->actionBack->setVisible(false);
+
+  QString winTitle = tr("%1 - Version %2", "Launcher - Version X")
+                       .arg(BuildConfig.LAUNCHER_DISPLAYNAME,
+                            BuildConfig.printableVersionString());
+  if (!BuildConfig.BUILD_PLATFORM.isEmpty()) {
+    winTitle += tr(" on %1", "on platform, as in operating system")
+                    .arg(BuildConfig.BUILD_PLATFORM);
+  }
+  m_titleBar->setTitle(winTitle);
+}
+
+void MainWindow::showPage(QWidget *page) {
+  if (m_pageStack->indexOf(page) == -1) {
+    m_pageStack->addWidget(page);
+  }
+  m_pageStack->setCurrentWidget(page);
+  ui->actionBack->setVisible(true);
+
+  if (page->windowTitle().isEmpty()) {
+     m_titleBar->setTitle(BuildConfig.LAUNCHER_DISPLAYNAME);
+  } else {
+     m_titleBar->setTitle(QString("%1 / %2").arg(BuildConfig.LAUNCHER_DISPLAYNAME, page->windowTitle()));
+  }
+}
+
 void MainWindow::showInstanceContextMenu(const QPoint &pos) {
 
   QList<QAction *> actions;
@@ -1587,27 +1453,31 @@ void MainWindow::showInstanceContextMenu(const QPoint &pos) {
   bool onInstance = view->indexAt(pos).isValid();
 
   if (onInstance) {
-
-    actions = ui->instanceToolBar->actions();
-
-    // replace the change icon widget with an actual action
-
-    actions.replace(0, ui->actionChangeInstIcon);
-
-    // replace the rename widget with an actual action
-
-    actions.replace(1, ui->actionRenameInstance);
-
-    // add header
-
-    actions.prepend(actionSep);
+    actions.append(ui->actionChangeInstIcon.operator->());
+    actions.append(ui->actionRenameInstance.operator->());
+    actions.append(actionSep);
+    actions.append(ui->actionChangeInstGroup.operator->());
+    actions.append(ui->actionLaunchInstance.operator->());
+    actions.append(actionSep);
+    actions.append(ui->actionEditInstance.operator->());
+    actions.append(ui->actionEditInstNotes.operator->());
+    actions.append(ui->actionMods.operator->());
+    actions.append(ui->actionWorlds.operator->());
+    actions.append(ui->actionScreenshots.operator->());
+    actions.append(actionSep);
+    actions.append(ui->actionViewSelectedMCFolder.operator->());
+    actions.append(ui->actionConfig_Folder.operator->());
+    actions.append(ui->actionViewSelectedInstFolder.operator->());
+    actions.append(actionSep);
+    actions.append(ui->actionCreateShortcut.operator->());
+    actions.append(ui->actionExportInstance.operator->());
+    actions.append(ui->actionDeleteInstance.operator->());
+    actions.append(ui->actionCopyInstance.operator->());
 
     QAction *actionVoid = new QAction(m_selectedInstance->name(), this);
-
     actionVoid->setEnabled(false);
-
     actions.prepend(actionVoid);
-
+    actions.prepend(actionSep);
   } else {
 
     auto group = view->groupNameAt(pos);
@@ -1720,13 +1590,16 @@ void MainWindow::sortModeChanged(int index) {
 }
 
 void MainWindow::updateToolsMenu() {
+  qDebug() << "updateToolsMenu: start";
 
-  QToolButton *exportButton = dynamic_cast<QToolButton *>(
+  // QToolButton *exportButton = dynamic_cast<QToolButton *>(
+  //     ui->instanceToolBar->widgetForAction(ui->actionExportInstance));
 
-      ui->instanceToolBar->widgetForAction(ui->actionExportInstance));
+  // if (exportButton) {
+  //   exportButton->setPopupMode(QToolButton::MenuButtonPopup);
+  // }
 
-  exportButton->setPopupMode(QToolButton::MenuButtonPopup);
-
+  qDebug() << "updateToolsMenu: getting exportMenu";
   QMenu *exportMenu = ui->actionExportInstance->menu();
 
   if (exportMenu) {
@@ -1759,28 +1632,29 @@ void MainWindow::updateToolsMenu() {
 
   ui->actionExportInstance->setMenu(exportMenu);
 
-  QToolButton *launchButton = dynamic_cast<QToolButton *>(
-
+  QToolButton *launchButton = nullptr;
+  /*
+  dynamic_cast<QToolButton *>(
       ui->instanceToolBar->widgetForAction(ui->actionLaunchInstance));
+  */
 
   if (!m_selectedInstance || m_selectedInstance->isRunning()) {
-
     ui->actionLaunchInstance->setMenu(nullptr);
-
+    /*
     if (launchButton) {
-
       launchButton->setPopupMode(QToolButton::InstantPopup);
     }
-
+    */
     return;
   }
 
   QMenu *launchMenu = ui->actionLaunchInstance->menu();
 
+  /*
   if (launchButton) {
-
     launchButton->setPopupMode(QToolButton::MenuButtonPopup);
   }
+  */
 
   if (launchMenu) {
 
@@ -2536,31 +2410,23 @@ void MainWindow::on_actionChangeInstIcon_triggered() {
 
     ui->actionChangeInstIcon->setIcon(icon);
 
-    ui->changeIconButton->setIcon(icon);
+    // ui->changeIconButton->setIcon(icon);
   }
 }
 
 void MainWindow::iconUpdated(QString icon) {
-
   if (icon == m_currentInstIcon) {
-
     auto icon = APPLICATION->icons()->getIcon(m_currentInstIcon);
-
     ui->actionChangeInstIcon->setIcon(icon);
-
-    ui->changeIconButton->setIcon(icon);
+    // ui->changeIconButton->setIcon(icon);
   }
 }
 
 void MainWindow::updateInstanceToolIcon(QString new_icon) {
-
   m_currentInstIcon = new_icon;
-
   auto icon = APPLICATION->icons()->getIcon(m_currentInstIcon);
-
   ui->actionChangeInstIcon->setIcon(icon);
-
-  ui->changeIconButton->setIcon(icon);
+  // ui->changeIconButton->setIcon(icon);
 }
 
 void MainWindow::setSelectedInstanceById(const QString &id) {
@@ -2866,6 +2732,10 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
   APPLICATION->settings()->set("MainWindowGeometry", saveGeometry().toBase64());
 
+  if (m_trayIcon) {
+      m_trayIcon->hide();
+  }
+
   event->accept();
 
   emit isClosing();
@@ -2874,6 +2744,20 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 void MainWindow::changeEvent(QEvent *event) {
   if (event->type() == QEvent::LanguageChange) {
     retranslateUi();
+  } else if (event->type() == QEvent::ActivationChange) {
+#ifdef Q_OS_WIN
+    if (isActiveWindow()) {
+      // When returning from a modal dialog, Qt may have stripped WS_THICKFRAME.
+      // Re-apply it to ensure window resizing still works.
+      HWND hwnd = (HWND)winId();
+      LONG style = GetWindowLong(hwnd, GWL_STYLE);
+      if ((style & WS_THICKFRAME) == 0) {
+        qDebug() << "ActivationChange: WS_THICKFRAME was MISSING, restoring. style=" << Qt::hex << style;
+        SetWindowLong(hwnd, GWL_STYLE, style | WS_THICKFRAME | WS_CAPTION | WS_MAXIMIZEBOX | WS_MINIMIZEBOX);
+        SetWindowPos(hwnd, nullptr, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+      }
+    }
+#endif
   } else if (event->type() == QEvent::WindowStateChange) {
     auto titleBar = findChild<CustomTitleBar *>();
     if (titleBar) {
@@ -2990,9 +2874,9 @@ void MainWindow::instanceChanged(const QModelIndex &current,
 
   if (m_selectedInstance) {
 
-    // ui->instanceToolBar->setEnabled(true);
-    // ui->instanceToolBar->setVisible(true);
 
+
+    qDebug() << "instanceChanged: checking isRunning";
     if (m_selectedInstance->isRunning()) {
 
       ui->actionLaunchInstance->setEnabled(true);
@@ -3006,10 +2890,12 @@ void MainWindow::instanceChanged(const QModelIndex &current,
       ui->setLaunchAction(false);
     }
 
+    qDebug() << "instanceChanged: setEnabled export";
     ui->actionExportInstance->setEnabled(m_selectedInstance->canExport());
 
-    ui->renameButton->setText(m_selectedInstance->name());
+    // ui->renameButton->setText(m_selectedInstance->name());
 
+    qDebug() << "instanceChanged: getStatusbarDescription";
     try {
       m_statusLeft->setText(m_selectedInstance->getStatusbarDescription());
     } catch (...) {
@@ -3017,18 +2903,21 @@ void MainWindow::instanceChanged(const QModelIndex &current,
       m_statusLeft->setText(tr("Instance: %1").arg(id));
     }
 
+    qDebug() << "instanceChanged: updateStatusCenter";
     updateStatusCenter();
 
+    qDebug() << "instanceChanged: updateInstanceToolIcon";
     updateInstanceToolIcon(m_selectedInstance->iconKey());
 
+    qDebug() << "instanceChanged: updateToolsMenu";
     updateToolsMenu();
+    qDebug() << "instanceChanged: updateToolsMenu done";
 
     APPLICATION->settings()->set("SelectedInstance", m_selectedInstance->id());
 
   } else {
 
-    // ui->instanceToolBar->setEnabled(false);
-    // ui->instanceToolBar->setVisible(false);
+
 
     APPLICATION->settings()->set("SelectedInstance", QString());
 
@@ -3065,10 +2954,9 @@ void MainWindow::selectionBad() {
 
   statusBar()->clearMessage();
 
-  ui->instanceToolBar->setEnabled(false);
-  ui->instanceToolBar->setVisible(false);
 
-  ui->renameButton->setText(tr("Rename Instance"));
+
+  // ui->renameButton->setText(tr("Rename Instance"));
 
   updateInstanceToolIcon("logo");
 
@@ -3199,8 +3087,6 @@ bool MainWindow::nativeEvent(const QByteArray &eventType, void *message,
   if (msg->message == WM_NCCALCSIZE && msg->wParam) {
     if (IsZoomed(msg->hwnd)) {
       NCCALCSIZE_PARAMS *params = (NCCALCSIZE_PARAMS *)msg->lParam;
-      // Get the system metric for the border width.
-      // Usually 8px on Win10/11 at 100% DPI.
       int borderWidth = GetSystemMetrics(SM_CXPADDEDBORDER) + GetSystemMetrics(SM_CXSIZEFRAME);
       
       params->rgrc[0].top += borderWidth;
@@ -3219,76 +3105,34 @@ bool MainWindow::nativeEvent(const QByteArray &eventType, void *message,
       MONITORINFO monitorInfo;
       monitorInfo.cbSize = sizeof(MONITORINFO);
       if (GetMonitorInfo(monitor, &monitorInfo)) {
-        // Limit the maximized size to the work area (excluding taskbar)
         mmi->ptMaxPosition.x = monitorInfo.rcWork.left - monitorInfo.rcMonitor.left;
         mmi->ptMaxPosition.y = monitorInfo.rcWork.top - monitorInfo.rcMonitor.top;
         mmi->ptMaxSize.x = monitorInfo.rcWork.right - monitorInfo.rcWork.left;
         mmi->ptMaxSize.y = monitorInfo.rcWork.bottom - monitorInfo.rcWork.top;
       }
     }
+    mmi->ptMinTrackSize.x = 640;
+    mmi->ptMinTrackSize.y = 480;
+    mmi->ptMaxTrackSize.x = 99999;
+    mmi->ptMaxTrackSize.y = 99999;
+    *result = 0;
     return true;
   }
 
-  // Catch WM_SIZE to reliably detect maximize/restore during Aero Snap.
-  // changeEvent(WindowStateChange) may fire too early or not at all when
-  // WM_NCCALCSIZE returns 0.
   if (msg->message == WM_SIZE) {
     auto titleBar = findChild<CustomTitleBar *>();
     if (titleBar) {
-      // wParam tells us the exact new state:
-      // SIZE_MAXIMIZED = 2, SIZE_RESTORED = 0
       titleBar->setMaximizedState(msg->wParam == SIZE_MAXIMIZED);
       titleBar->updateMaximizeIcon();
     }
   }
 
-  if (msg->message == WM_NCHITTEST) {
-    long x = GET_X_LPARAM(msg->lParam);
-    long y = GET_Y_LPARAM(msg->lParam);
-
-    RECT rw;
-    GetWindowRect((HWND)winId(), &rw);
-    int w = rw.right - rw.left;
-    int h = rw.bottom - rw.top;
-    
-    int local_x = x - rw.left;
-    int local_y = y - rw.top;
-
-    // Calculate border width based on DPI
-    const int border_width = qRound(8 * this->devicePixelRatioF());
-    const int title_bar_height = qRound(32 * this->devicePixelRatioF());
-    const int button_area_width = qRound(120 * this->devicePixelRatioF());
-
-    if (!isMaximized()) {
-      if (local_x < border_width && local_y < border_width)
-        *result = HTTOPLEFT;
-      else if (local_x >= w - border_width && local_y < border_width)
-        *result = HTTOPRIGHT;
-      else if (local_x < border_width && local_y >= h - border_width)
-        *result = HTBOTTOMLEFT;
-      else if (local_x >= w - border_width && local_y >= h - border_width)
-        *result = HTBOTTOMRIGHT;
-      else if (local_x < border_width)
-        *result = HTLEFT;
-      else if (local_x >= w - border_width)
-        *result = HTRIGHT;
-      else if (local_y < border_width)
-        *result = HTTOP;
-      else if (local_y >= h - border_width)
-        *result = HTBOTTOM;
-      else if (local_y < title_bar_height && local_x < w - button_area_width)
-        *result = HTCAPTION;
-      else
-        return QMainWindow::nativeEvent(eventType, message, result);
-    } else {
-      if (local_y < title_bar_height && local_x < w - button_area_width)
-        *result = HTCAPTION;
-      else
-        return QMainWindow::nativeEvent(eventType, message, result);
-    }
-
-    return true;
+  if (msg->message == WM_STYLECHANGING && msg->wParam == GWL_STYLE) {
+    STYLESTRUCT *ss = (STYLESTRUCT *)msg->lParam;
+    ss->styleNew |= (WS_THICKFRAME | WS_CAPTION | WS_MAXIMIZEBOX | WS_MINIMIZEBOX);
   }
+
+  // Helper lambda: compute which edge the cursor is near (screen coords)
 #endif
   return QMainWindow::nativeEvent(eventType, message, result);
 }

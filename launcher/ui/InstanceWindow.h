@@ -15,7 +15,7 @@
 
 #pragma once
 
-#include <QMainWindow>
+#include <QWidget>
 #include <QSystemTrayIcon>
 
 #include "LaunchController.h"
@@ -27,7 +27,7 @@
 
 class QPushButton;
 class PageContainer;
-class InstanceWindow : public QMainWindow, public BasePageContainer {
+class InstanceWindow : public QWidget, public BasePageContainer {
   Q_OBJECT
 
 public:
@@ -58,6 +58,7 @@ private slots:
                                 BaseInstance::Status newStatus);
 
 protected:
+  bool nativeEvent(const QByteArray &eventType, void *message, qintptr *result) override;
   void closeEvent(QCloseEvent *) override;
 
 private:

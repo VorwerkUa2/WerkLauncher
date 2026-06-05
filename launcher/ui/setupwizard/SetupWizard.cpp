@@ -16,17 +16,13 @@
 SetupWizard::SetupWizard(QWidget *parent) : QWizard(parent) {
   setObjectName(QStringLiteral("SetupWizard"));
   resize(615, 659);
-  setWindowFlags(Qt::FramelessWindowHint | windowFlags());
+  setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | windowFlags());
 
-  // make it look better with custom title bar
   setWizardStyle(QWizard::ModernStyle);
   setOptions(QWizard::NoCancelButton | QWizard::IndependentPages |
              QWizard::HaveCustomButton1 | QWizard::NoDefaultButton);
 
-  // Add custom title bar
-  auto titleBar = new CustomTitleBar(this);
-  titleBar->setTitle(tr("%1 Quick Setup").arg(BuildConfig.LAUNCHER_NAME));
-  titleBar->setObjectName("titleBar");
+
 
   retranslate();
 
@@ -35,9 +31,35 @@ SetupWizard::SetupWizard(QWidget *parent) : QWizard(parent) {
 
 void SetupWizard::resizeEvent(QResizeEvent *event) {
   QWizard::resizeEvent(event);
-  if (auto titleBar = findChild<CustomTitleBar *>("titleBar")) {
-    titleBar->resize(width(), 32);
-    titleBar->move(0, 0);
+}
+
+#include <QMouseEvent>
+
+void SetupWizard::mousePressEvent(QMouseEvent *event) {
+  if (event->button() == Qt::LeftButton) {
+    m_isDragging = true;
+    m_dragPosition = event->globalPos() - frameGeometry().topLeft();
+    event->accept();
+  } else {
+    QWizard::mousePressEvent(event);
+  }
+}
+
+void SetupWizard::mouseMoveEvent(QMouseEvent *event) {
+  if (m_isDragging && (event->buttons() & Qt::LeftButton)) {
+    move(event->globalPos() - m_dragPosition);
+    event->accept();
+  } else {
+    QWizard::mouseMoveEvent(event);
+  }
+}
+
+void SetupWizard::mouseReleaseEvent(QMouseEvent *event) {
+  if (event->button() == Qt::LeftButton) {
+    m_isDragging = false;
+    event->accept();
+  } else {
+    QWizard::mouseReleaseEvent(event);
   }
 }
 

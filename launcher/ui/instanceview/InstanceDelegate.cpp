@@ -21,6 +21,7 @@
 #include <QTextOption>
 #include <QtMath>
 
+#include "Application.h"
 #include "BaseInstance.h"
 #include "InstanceList.h"
 #include "InstanceView.h"
@@ -58,32 +59,37 @@ void drawSelectionRect(QPainter *painter, const QStyleOptionViewItem &option,
   painter->save();
   painter->setRenderHint(QPainter::Antialiasing);
 
-  // Subtle drop shadow for depth on all items
-  QColor shadowColor(0, 0, 0, 25);
-  painter->setBrush(shadowColor);
+  // Modern card background
+  QColor cardBg = option.palette.color(QPalette::Base);
+  if (cardBg.lightness() < 128) {
+      cardBg = QColor(255, 255, 255, 10); // Slight white overlay for dark theme
+  } else {
+      cardBg = QColor(0, 0, 0, 10); // Slight dark overlay for light theme
+  }
+  painter->setBrush(cardBg);
   painter->setPen(Qt::NoPen);
-  painter->drawRoundedRect(rect.adjusted(3, 3, -1, -1), 8, 8);
+  painter->drawRoundedRect(rect.adjusted(2, 2, -2, -2), 12, 12);
 
   if ((option.state & QStyle::State_Selected)) {
     QColor highlightColor = option.palette.color(QPalette::Highlight);
+    highlightColor.setAlpha(50);
     painter->setBrush(highlightColor);
-    painter->setPen(Qt::NoPen);
-    painter->drawRoundedRect(rect.adjusted(2, 2, -2, -2), 8, 8);
+    painter->setPen(QPen(option.palette.color(QPalette::Highlight), 1.5));
+    painter->drawRoundedRect(rect.adjusted(2, 2, -2, -2), 12, 12);
   } else if (option.state & QStyle::State_MouseOver) {
-    QColor hoverBg = option.palette.color(QPalette::Highlight);
+    QColor glowColor(230, 126, 34); // Orange glow (#e67e22)
+    QColor hoverBg = glowColor;
     hoverBg.setAlpha(20);
-    QColor hoverBorder = option.palette.color(QPalette::Highlight);
-    hoverBorder.setAlpha(70);
+    
     painter->setBrush(hoverBg);
-    painter->setPen(QPen(hoverBorder, 1.0));
-    painter->drawRoundedRect(rect.adjusted(2, 2, -2, -2), 8, 8);
+    painter->setPen(QPen(glowColor, 1.5));
+    painter->drawRoundedRect(rect.adjusted(2, 2, -2, -2), 12, 12);
 
-    // Softer, wider outer glow for hover
-    QColor glowColor = option.palette.color(QPalette::Highlight);
-    glowColor.setAlpha(25);
-    painter->setPen(QPen(glowColor, 3));
+    // Glow
+    glowColor.setAlpha(40);
+    painter->setPen(QPen(glowColor, 4));
     painter->setBrush(Qt::NoBrush);
-    painter->drawRoundedRect(rect.adjusted(0, 0, 0, 0), 10, 10);
+    painter->drawRoundedRect(rect.adjusted(1, 1, -1, -1), 13, 13);
   }
   painter->restore();
 }
@@ -203,81 +209,20 @@ void ListViewDelegate::paint(QPainter *painter,
 
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
 
-  // const int iconSize =  style->pixelMetric(QStyle::PM_IconViewIconSize);
-  static const int iconSize = 52;
+  static const int iconSize = 64;
   QRect iconbox = opt.rect;
   const int textMargin =
       style->pixelMetric(QStyle::PM_FocusFrameHMargin, 0, opt.widget) + 1;
   QRect textRect = opt.rect;
   QRect textHighlightRect = textRect;
   // clip the decoration on top, remove width padding
-  textRect.adjust(textMargin, iconSize + textMargin + 5, -textMargin, 0);
+  textRect.adjust(textMargin, iconSize + textMargin + 10, -textMargin, 0);
 
   textHighlightRect.adjust(0, iconSize + 5, 0, 0);
 
-  // draw background
-  {
-    // FIXME: unused
-    // QSize textSize = viewItemTextSize ( &opt );
-    drawSelectionRect(painter, opt, textHighlightRect);
-    /*
-    QPalette::ColorGroup cg;
-    QStyleOptionViewItem opt2(opt);
-
-    if ((opt.widget && opt.widget->isEnabled()) || (opt.state &
-    QStyle::State_Enabled))
-    {
-        if (!(opt.state & QStyle::State_Active))
-            cg = QPalette::Inactive;
-        else
-            cg = QPalette::Normal;
-    }
-    else
-    {
-        cg = QPalette::Disabled;
-    }
-    */
-    /*
-    opt2.palette.setCurrentColorGroup(cg);
-
-    // fill in background, if any
-
-
-    if (opt.backgroundBrush.style() != Qt::NoBrush)
-    {
-        QPointF oldBO = painter->brushOrigin();
-        painter->setBrushOrigin(opt.rect.topLeft());
-        painter->fillRect(opt.rect, opt.backgroundBrush);
-        painter->setBrushOrigin(oldBO);
-    }
-
-    drawSelectionRect(painter, opt2, textHighlightRect);
-    */
-
-    /*
-    if (opt.showDecorationSelected)
-    {
-        drawSelectionRect(painter, opt2, opt.rect);
-        drawFocusRect(painter, opt2, opt.rect);
-        // painter->fillRect ( opt.rect, opt.palette.brush ( cg,
-    QPalette::Highlight ) );
-    }
-    else
-    {
-
-        // if ( opt.state & QStyle::State_Selected )
-        {
-            // QRect textRect = subElementRect ( QStyle::SE_ItemViewItemText,
-    opt,
-            // opt.widget );
-            // painter->fillRect ( textHighlightRect, opt.palette.brush ( cg,
-            // QPalette::Highlight ) );
-            drawSelectionRect(painter, opt2, textHighlightRect);
-            drawFocusRect(painter, opt2, textHighlightRect);
-        }
-    }
-    */
-  }
+  QRect cardRect = opt.rect;
+  cardRect.adjust(textMargin, 2, -textMargin, -2);
+  drawSelectionRect(painter, opt, cardRect);
 
   // icon mode and state, also used for badges
   QIcon::Mode mode = QIcon::Normal;
@@ -305,32 +250,63 @@ void ListViewDelegate::paint(QPainter *painter,
   }
 
   // quick actions on hover
-  if (opt.state & QStyle::State_MouseOver) {
+  if ((opt.state & QStyle::State_MouseOver) && opt.widget) {
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
 
-    auto drawButton = [&](const QRect &r, const QString &iconName,
-                          const QColor &baseColor) {
-      bool hovered = r.contains(opt.widget->mapFromGlobal(QCursor::pos()));
-      QColor btnColor = baseColor;
-      btnColor.setAlpha(hovered ? 230 : 150);
+    int btnSize = 28;
+    QRect cardRect = opt.rect;
+    cardRect.adjust(textMargin, 2, -textMargin, -2);
+    
+    // Position buttons carefully near the top of the text area (near the name)
+    QRect playRect(cardRect.left() + 6, textRect.top() + 2, btnSize, btnSize);
+    QRect configRect(cardRect.right() - btnSize - 6, textRect.top() + 2, btnSize, btnSize);
 
-      painter->setBrush(btnColor);
-      painter->setPen(Qt::NoPen);
+    auto drawAction = [&](const QRect &r, const QString &iconName, bool isHovered, bool isPressed, const QColor& accent) {
+      painter->save();
+      if (isPressed) {
+        painter->translate(r.center());
+        painter->scale(0.9, 0.9);
+        painter->translate(-r.center());
+      }
+      
+      QColor bgColor = opt.palette.color(QPalette::Window);
+      bgColor.setAlpha(200);
+      
+      if (isHovered) {
+        bgColor = accent;
+        bgColor.setAlpha(230);
+      }
+      
+      painter->setBrush(bgColor);
+      // Soft border matching the text color but very transparent
+      QColor borderColor = opt.palette.color(QPalette::Text);
+      borderColor.setAlpha(isHovered ? 80 : 30);
+      painter->setPen(QPen(borderColor, 1));
       painter->drawEllipse(r);
-
-      auto icon = XdgIcon::fromTheme(iconName);
-      icon.paint(painter, r.adjusted(4, 4, -4, -4), Qt::AlignCenter,
-                 QIcon::Normal);
+      
+      auto icon = APPLICATION->getThemedIcon(iconName);
+      QPixmap pix = icon.pixmap(r.size(), QIcon::Active, QIcon::On);
+      QPainter p(&pix);
+      p.setCompositionMode(QPainter::CompositionMode_SourceIn);
+      QColor iconColor = isHovered ? Qt::white : opt.palette.color(QPalette::Text);
+      p.fillRect(pix.rect(), iconColor);
+      p.end();
+      painter->drawPixmap(r.adjusted(6, 6, -6, -6), pix);
+      painter->restore();
     };
 
-    // Play button (bottom left of icon)
-    QRect playRect(iconbox.left() + 4, iconbox.bottom() - 24, 24, 24);
-    drawButton(playRect, "media-playback-start", QColor(46, 204, 113)); // Green
+    QPoint mousePos = opt.widget->mapFromGlobal(QCursor::pos());
+    bool playHovered = playRect.contains(mousePos);
+    bool configHovered = configRect.contains(mousePos);
+    bool isPressed = opt.state & QStyle::State_Sunken;
 
-    // Config button (bottom right of icon)
-    QRect configRect(iconbox.right() - 28, iconbox.bottom() - 24, 24, 24);
-    drawButton(configRect, "configure", QColor(52, 152, 219)); // Blue
+    // Theme-aware soft colors for hover
+    QColor playAccent = QColor(46, 204, 113); // Soft green
+    QColor configAccent = opt.palette.color(QPalette::Highlight); // Theme accent
+
+    drawAction(playRect, "status-running", playHovered, playHovered && isPressed, playAccent);
+    drawAction(configRect, "settings", configHovered, configHovered && isPressed, configAccent);
 
     painter->restore();
   }
@@ -354,7 +330,10 @@ void ListViewDelegate::paint(QPainter *painter,
   QTextLayout textLayout;
   textLayout.setTextOption(textOption);
   QFont nameFont = opt.font;
-  nameFont.setWeight(QFont::DemiBold);
+  nameFont.setWeight(QFont::Medium);
+  if (nameFont.pointSize() > 0) {
+      nameFont.setPointSize(nameFont.pointSize() + 1);
+  }
   textLayout.setFont(nameFont);
   textLayout.setText(opt.text);
 
@@ -471,8 +450,8 @@ QSize ListViewDelegate::sizeHint(const QStyleOptionViewItem &option,
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
   const int textMargin =
       style->pixelMetric(QStyle::PM_FocusFrameHMargin, &option, opt.widget) + 1;
-  static const int baseIconSize = 52;
-  int height = baseIconSize + textMargin * 2 + 5;
+  static const int baseIconSize = 64;
+  int height = baseIconSize + textMargin * 2 + 15; // Increased base height for padding
   QSize szz = viewItemTextSize(&opt);
   height += szz.height();
 
@@ -559,14 +538,21 @@ bool ListViewDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
   if (event->type() == QEvent::MouseButtonRelease) {
     QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
     if (mouseEvent->button() == Qt::LeftButton) {
-      static const int iconSize = 52;
+      static const int iconSize = 64;
       QRect iconbox = option.rect;
       iconbox.setHeight(iconSize);
 
-      // Play button (bottom left of icon)
-      QRect playRect(iconbox.left() + 4, iconbox.bottom() - 24, 24, 24);
-      // Config button (bottom right of icon)
-      QRect configRect(iconbox.right() - 28, iconbox.bottom() - 24, 24, 24);
+      int btnSize = 28;
+      QRect cardRect = option.rect;
+      QStyle *style = option.widget ? option.widget->style() : QApplication::style();
+      const int textMargin = style->pixelMetric(QStyle::PM_FocusFrameHMargin, &option, option.widget) + 1;
+      cardRect.adjust(textMargin, 2, -textMargin, -2);
+      
+      QRect textRect = option.rect;
+      textRect.adjust(textMargin, iconSize + textMargin + 10, -textMargin, 0);
+
+      QRect playRect(cardRect.left() + 6, textRect.top() + 2, btnSize, btnSize);
+      QRect configRect(cardRect.right() - btnSize - 6, textRect.top() + 2, btnSize, btnSize);
 
       if (playRect.contains(mouseEvent->pos())) {
         emit launchRequested(index);

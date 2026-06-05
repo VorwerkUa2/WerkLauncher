@@ -46,6 +46,7 @@ Config::Config()
     PASTE_EE_KEY = "@Launcher_PASTE_EE_API_KEY@";
     MSA_CLIENT_ID = "@Launcher_MSA_CLIENT_ID@";
     IMGUR_CLIENT_ID = "@Launcher_IMGUR_CLIENT_ID@";
+    CURSEFORGE_API_KEY = "@Launcher_CURSEFORGE_API_KEY@";
     META_URL = "@Launcher_META_URL@";
 
     BUG_TRACKER_URL = "@Launcher_BUG_TRACKER_URL@";

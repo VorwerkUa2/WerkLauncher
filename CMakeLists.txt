@@ -108,13 +108,28 @@ add_custom_target(tcversion echo "\\#\\#teamcity[setParameter name=\\'env.LAUNCH
 ################################ 3rd Party Libs ################################
 
 # Find the required Qt parts
-list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.10.2/msvc2022_64")
+# Use QT_DIR environment variable if set, otherwise fall back to default path
+if(DEFINED ENV{QT_DIR})
+    list(APPEND CMAKE_PREFIX_PATH "$ENV{QT_DIR}")
+else()
+    list(APPEND CMAKE_PREFIX_PATH "C:/Qt/6.10.2/msvc2022_64")
+endif()
 list(APPEND CMAKE_PREFIX_PATH "$ENV{USERPROFILE}/vcpkg/installed/x64-windows")
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Concurrent Network NetworkAuth Test Xml Svg OpenGL)
 
 if(WIN32)
     set(VCPKG_ROOT "$ENV{USERPROFILE}/vcpkg/installed/x64-windows")
-    set(QT_BIN_DIR "C:/Qt/6.10.2/msvc2022_64/bin")
+    # Derive QT_BIN_DIR from Qt6 install prefix
+    get_target_property(_qt6_core_dir Qt6::Core IMPORTED_LOCATION_RELEASE)
+    if(NOT _qt6_core_dir)
+        get_target_property(_qt6_core_dir Qt6::Core IMPORTED_LOCATION_DEBUG)
+    endif()
+    if(NOT _qt6_core_dir)
+        # Fallback: use Qt6_DIR which points to lib/cmake/Qt6
+        get_filename_component(QT_BIN_DIR "${Qt6_DIR}/../../../bin" ABSOLUTE)
+    else()
+        get_filename_component(QT_BIN_DIR "${_qt6_core_dir}" DIRECTORY)
+    endif()
     
     set(COMMON_DLLS
         "${QT_BIN_DIR}/Qt6Core.dll"
@@ -159,7 +174,7 @@ if(WIN32)
     # 2. Build-time target (Ensures updates and dependency tracking)
     add_custom_target(DeployCommonDependencies ALL
         COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${COMMON_DLLS} "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${DLLS_TO_DEPLOY} "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
         COMMENT "Deploying common Qt and vcpkg dependencies to ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
     )
 endif()
@@ -179,18 +194,19 @@ set(Launcher_CommonName "WerkLauncher")
 
 set(Launcher_Copyright "Vorwerkua Studio")
 set(Launcher_Domain "werklauncher.com")
-set(Launcher_Name "MultiMC")
+set(Launcher_Name "WerkLauncher")
 set(Launcher_DisplayName "WerkLauncher")
 set(Launcher_APP_BINARY_NAME "WerkLauncher")
 set(Launcher_UserAgent "${Launcher_CommonName}/${Launcher_RELEASE_VERSION_NAME}")
-set(Launcher_ConfigFile "multimc.cfg")
+set(Launcher_ConfigFile "werklauncher.cfg")
 set(Launcher_Git "https://github.com/WerkLauncher/Launcher")
 
 set(Launcher_Branding_ICNS "${PROJECT_SOURCE_DIR}/branding/${Launcher_CommonName}.icns")
 set(Launcher_Branding_WindowsRC "${PROJECT_SOURCE_DIR}/branding/multimc.rc")
 set(Launcher_Branding_LogoQRC "${PROJECT_SOURCE_DIR}/branding/logo.qrc")
 
-set(Launcher_META_URL "https://meta.multimc.org/v1/")
+set(Launcher_META_URL "https://meta.multimc.org/v1/") # TODO: migrate to own meta server
+set(Launcher_CURSEFORGE_API_KEY "$2a$10$fDvjEOK3YoF8yMPmPnaMrewnOo3X4GYDBGoyQgYeAOM1wQQrkYsmm")
 set(Launcher_PASTE_EE_API_KEY "")
 set(Launcher_MSA_CLIENT_ID "c36a9fb6-4f2a-41ff-90bd-ae7cc92031eb")
 set(Launcher_IMGUR_CLIENT_ID "")

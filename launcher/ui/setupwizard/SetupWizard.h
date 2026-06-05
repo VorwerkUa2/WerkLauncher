@@ -39,7 +39,14 @@ private slots:
 
 protected:
   void resizeEvent(QResizeEvent *event) override;
+  void mousePressEvent(QMouseEvent *event) override;
+  void mouseMoveEvent(QMouseEvent *event) override;
+  void mouseReleaseEvent(QMouseEvent *event) override;
 
 private: /* methods */
   void retranslate();
+
+private: /* data */
+  QPoint m_dragPosition;
+  bool m_isDragging = false;
 };

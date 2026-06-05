@@ -2,7 +2,9 @@
 
 #include "BaseWizardPage.h"
 
-class LanguageSelectionWidget;
+#include <QString>
+class QPushButton;
+class QLabel;
 
 class LanguageWizardPage : public BaseWizardPage {
   Q_OBJECT
@@ -16,6 +18,13 @@ public:
 protected:
   void retranslate() override;
 
+private slots:
+  void languageClicked(const QString &key);
+
 private:
-  LanguageSelectionWidget *mainWidget = nullptr;
+  QString m_selectedLanguageKey;
+  QLabel *welcomeLabel = nullptr;
+  QLabel *subtitleLabel = nullptr;
+  QPushButton *btnEn = nullptr;
+  QPushButton *btnUk = nullptr;
 };

@@ -171,6 +171,7 @@ private:
   QMap<InstanceId, GroupId> m_instanceGroupIndex;
   QSet<InstanceId> instanceSet;
   QMap<BaseInstance *, int> m_instanceIndex;
+  QHash<QString, int> m_idIndex; // O(1) lookup by instance ID
   bool m_groupsLoaded = false;
   bool m_instancesProbed = false;
 };

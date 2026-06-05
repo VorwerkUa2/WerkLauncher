@@ -139,7 +139,7 @@ QVariant InstanceList::data(const QModelIndex &index, int role) const {
     return tr("%1 Instance").arg(pdata->name());
   }
   case Qt::ToolTipRole: {
-    return pdata->instanceRoot();
+    return QVariant();
   }
   case Qt::DecorationRole: {
     return pdata->iconKey();
@@ -149,27 +149,7 @@ QVariant InstanceList::data(const QModelIndex &index, int role) const {
     return getInstanceGroup(pdata->id());
   }
   case VersionDescriptionRole: {
-    QString desc = pdata->getStatusbarDescription();
-    qint64 lastLaunch = pdata->lastLaunch();
-    if (lastLaunch > 0) {
-      QDateTime lastTime = QDateTime::fromMSecsSinceEpoch(lastLaunch);
-      qint64 secsAgo = lastTime.secsTo(QDateTime::currentDateTime());
-      QString agoStr;
-      if (secsAgo < 60) {
-        agoStr = tr("just now");
-      } else if (secsAgo < 3600) {
-        int mins = secsAgo / 60;
-        agoStr = tr("%1 min ago").arg(mins);
-      } else if (secsAgo < 86400) {
-        int hours = secsAgo / 3600;
-        agoStr = tr("%1h ago").arg(hours);
-      } else {
-        int days = secsAgo / 86400;
-        agoStr = tr("%1d ago").arg(days);
-      }
-      desc += " · " + agoStr;
-    }
-    return desc;
+    return QString();
   }
   default:
     break;
@@ -241,7 +221,13 @@ void InstanceList::setInstanceGroup(const InstanceId &id, const GroupId &name) {
   }
 }
 
-QStringList InstanceList::getGroups() { return m_groupNameCache.values(); }
+QStringList InstanceList::getGroups() {
+  QStringList groups = m_groupNameCache.values();
+  if (!groups.contains("")) {
+    groups.prepend("");
+  }
+  return groups;
+}
 
 void InstanceList::addGroup(const QString &name) {
   if (name.isEmpty() || m_groupNameCache.contains(name)) {
@@ -255,13 +241,8 @@ void InstanceList::addGroup(const QString &name) {
 }
 
 bool InstanceList::isGroupEmpty(const GroupId &name) const {
-  for (auto it = m_instanceGroupIndex.begin(); it != m_instanceGroupIndex.end();
-       ++it) {
-    if (it.value() == name) {
-      return false;
-    }
-  }
-  return true;
+  // Use QMap::key() for reverse lookup — avoids full iteration
+  return !m_instanceGroupIndex.values().contains(name);
 }
 
 void InstanceList::deleteGroup(const GroupId &name) {
@@ -498,6 +479,7 @@ void InstanceList::add(const QList<InstancePtr> &t) {
     auto &ptr = t.at(i);
     m_instances.append(ptr);
     m_instanceIndex[ptr.get()] = first + i;
+    m_idIndex[ptr->id()] = first + i;
     connect(ptr.get(), &BaseInstance::propertiesChanged, this,
             &InstanceList::propertiesChanged);
   }
@@ -527,10 +509,9 @@ void InstanceList::providerUpdated() {
 InstancePtr InstanceList::getInstanceById(QString instId) const {
   if (instId.isEmpty())
     return InstancePtr();
-  for (auto &inst : m_instances) {
-    if (inst->id() == instId) {
-      return inst;
-    }
+  auto it = m_idIndex.find(instId);
+  if (it != m_idIndex.end() && *it >= 0 && *it < m_instances.size()) {
+    return m_instances.at(*it);
   }
   return InstancePtr();
 }

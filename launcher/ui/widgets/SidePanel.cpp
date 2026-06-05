@@ -47,13 +47,14 @@ void SidePanel::updateStyles() {
   auto btnStyle =
       QString(
           "QPushButton { background: rgb(%1, %2, %3); color: %4; "
-          "border: none; padding: 10px; border-radius: 5px; text-align: left; "
+          "border: none; padding: 10px; border-radius: 6px; text-align: left; "
           "padding-left: 15px; } "
           "QPushButton:hover { background: rgba(%5, %6, %7, 60); "
-          "color: %8; } "
+          "color: %8; border: none; } "
+          "QPushButton:pressed { background: %8; color: %9; border: none; } "
           "QPushButton#playBtn { background: %8; font-weight: bold; "
-          "text-align: center; padding-left: 10px; color: %9; } "
-          "QPushButton#playBtn:hover { background: rgba(%5, %6, %7, 200); }")
+          "text-align: center; padding-left: 10px; color: %9; border: none; } "
+          "QPushButton#playBtn:hover { background: rgba(%5, %6, %7, 200); border: none; }")
           .arg(btnBg.red())
           .arg(btnBg.green())
           .arg(btnBg.blue())

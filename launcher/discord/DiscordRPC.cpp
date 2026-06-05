@@ -51,21 +51,21 @@ void DiscordRPC::reconnect() {
 
   m_handshakeComplete = false;
 
-  for (int i = 0; i < 10; ++i) {
-    QString path = getPipePath(i);
-    qDebug() << "Discord RPC: trying pipe" << path;
-    m_socket->connectToServer(path);
-    if (m_socket->waitForConnected(200)) {
-      qDebug() << "Discord RPC: connected to pipe" << i;
-      return;
+  // Non-blocking: try one pipe at a time, rely on connected/error signals
+  if (m_currentPipeIndex >= 10) {
+    m_currentPipeIndex = 0;
+    qDebug() << "Discord RPC: exhausted all pipes, retrying in 5s";
+    if (!m_reconnectTimer->isActive()) {
+      m_reconnectTimer->start();
     }
-    m_socket->disconnectFromServer();
+    return;
   }
 
-  qDebug() << "Discord RPC: could not connect, retrying in 5s";
-  if (!m_reconnectTimer->isActive()) {
-    m_reconnectTimer->start();
-  }
+  QString path = getPipePath(m_currentPipeIndex);
+  qDebug() << "Discord RPC: trying pipe" << path;
+  m_currentPipeIndex++;
+  m_socket->connectToServer(path);
+  // If connection fails, onError() will fire and schedule next attempt
 }
 
 QString DiscordRPC::getPipePath(int index) {
@@ -86,6 +86,7 @@ QString DiscordRPC::getPipePath(int index) {
 
 void DiscordRPC::onConnected() {
   m_connected = true;
+  m_currentPipeIndex = 0;
   m_reconnectTimer->stop();
   qDebug() << "Discord RPC: pipe connected, sending handshake";
   sendHandshake();
@@ -104,8 +105,9 @@ void DiscordRPC::onError(QLocalSocket::LocalSocketError error) {
   Q_UNUSED(error);
   m_connected = false;
   m_handshakeComplete = false;
-  if (m_enabled && !m_reconnectTimer->isActive()) {
-    m_reconnectTimer->start();
+  if (m_enabled) {
+    // Try next pipe immediately (non-blocking)
+    QTimer::singleShot(0, this, &DiscordRPC::reconnect);
   }
 }
 

@@ -90,6 +90,11 @@ public:
     QString IMGUR_CLIENT_ID;
 
     /**
+     * CurseForge API key for mod downloads
+     */
+    QString CURSEFORGE_API_KEY;
+
+    /**
      * Metadata repository URL prefix
      */
     QString META_URL;

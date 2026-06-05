@@ -22,6 +22,9 @@
 #include <QSystemTrayIcon>
 #include <QTimer>
 
+#include <QStackedWidget>
+#include <QPushButton>
+
 #include "BaseInstance.h"
 #include "minecraft/auth/MinecraftAccount.h"
 #include "net/NetJob.h"
@@ -175,6 +178,10 @@ private slots:
 
   void selectionBad();
 
+public:
+  void showInstanceView();
+  void showPage(QWidget *page);
+
   void startTask(Task *task);
 
   void updateAvailable(GoUpdate::Status status);
@@ -232,6 +239,9 @@ private:
   KonamiCode *secretEventFilter = nullptr;
 
   CustomTitleBar *m_titleBar = nullptr;
+  QStackedWidget *m_pageStack = nullptr;
+  QPushButton *m_backButton = nullptr;
+  QWidget *m_instanceViewPage = nullptr;
   QLineEdit *m_searchBar = nullptr;
   QComboBox *m_sortBox = nullptr;
   QSystemTrayIcon *m_trayIcon = nullptr;

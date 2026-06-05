@@ -1,11 +1,11 @@
 #include "CurseForgeModel.h"
 #include "Application.h"
+#include "BuildConfig.h"
 #include "Json.h"
 
 #include <QIcon>
 #include <QNetworkRequest>
 
-static const char * CURSEFORGE_API_KEY = "$2a$10$fDvjEOK3YoF8yMPmPnaMrewnOo3X4GYDBGoyQgYeAOM1wQQrkYsmm";
 static const char * CURSEFORGE_API_BASE = "https://api.curseforge.com";
 
 // Minecraft gameId = 432, classId for Modpacks = 4471
@@ -98,7 +98,7 @@ void CurseForge::ListModel::performPaginatedSearch() {
   }
 
   auto dl = Net::Download::makeByteArray(QUrl(searchUrl), &response);
-  dl->setHeader("x-api-key", QByteArray(CURSEFORGE_API_KEY));
+  dl->setHeader("x-api-key", BuildConfig.CURSEFORGE_API_KEY.toUtf8());
   netJob->addNetAction(dl);
   jobPtr = netJob;
   jobPtr->start();
@@ -269,7 +269,7 @@ void CurseForge::ListModel::getPackDetails(int id) {
     QString descUrl = QString("%1/v1/mods/%2/description").arg(CURSEFORGE_API_BASE).arg(idStr);
     auto *netJob = new NetJob("CurseForge::PackDescription", APPLICATION->network());
     auto dl = Net::Download::makeByteArray(QUrl(descUrl), &descriptionResponse);
-    dl->setHeader("x-api-key", QByteArray(CURSEFORGE_API_KEY));
+    dl->setHeader("x-api-key", BuildConfig.CURSEFORGE_API_KEY.toUtf8());
     netJob->addNetAction(dl);
     descriptionPtr = netJob;
     descriptionPtr->start();
@@ -284,7 +284,7 @@ void CurseForge::ListModel::getPackDetails(int id) {
     QString filesUrl = QString("%1/v1/mods/%2/files?pageSize=50").arg(CURSEFORGE_API_BASE).arg(idStr);
     auto *netJob = new NetJob("CurseForge::PackFiles", APPLICATION->network());
     auto dl = Net::Download::makeByteArray(QUrl(filesUrl), &filesResponse);
-    dl->setHeader("x-api-key", QByteArray(CURSEFORGE_API_KEY));
+    dl->setHeader("x-api-key", BuildConfig.CURSEFORGE_API_KEY.toUtf8());
     netJob->addNetAction(dl);
     filesPtr = netJob;
     filesPtr->start();

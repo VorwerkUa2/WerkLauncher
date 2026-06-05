@@ -17,13 +17,13 @@
 #include "BaseInstance.h"
 #include "FileSystem.h"
 #include "Application.h"
+#include "BuildConfig.h"
 #include "MMCZip.h"
 #include "NullInstance.h"
 #include "settings/INISettingsObject.h"
 #include "icons/IconUtils.h"
 #include <QtConcurrentRun>
 
-// FIXME: this does not belong here, it's Minecraft/Flame specific
 #include "minecraft/MinecraftInstance.h"
 #include "minecraft/PackProfile.h"
 #include "Json.h"
@@ -32,7 +32,6 @@
 #include "modplatform/technic/TechnicPackProcessor.h"
 
 #include "icons/IconList.h"
-#include "Application.h"
 #include "net/ChecksumValidator.h"
 
 #include <algorithm>
@@ -426,16 +425,7 @@ void InstanceImportTask::processModrinth() {
         emitFailed(tr("Could not understand pack index:\n") + e.cause());
         return;
     }
-    QString clientOverridePath = FS::PathCombine(m_stagingPath, "client-overrides");
-    if (QFile::exists(clientOverridePath)) {
-        QString mcPath = FS::PathCombine(m_stagingPath, ".minecraft");
-        if (!QFile::rename(clientOverridePath, mcPath)) {
-            emitFailed(tr("Could not rename the overrides folder:\n") + "overrides");
-            return;
-        }
-    }
-
-    // TODO: only extract things we actually want instead of everything only to just delete it afterwards ...
+    // Merge client-overrides first (Modrinth-specific), then standard overrides
     if(!mergeOverrides(FS::PathCombine(m_stagingPath, "client-overrides"), FS::PathCombine(m_stagingPath, ".minecraft"))) {
         emitFailed(tr("Could not merge the overrides folder:\n") + "client-overrides");
         return;
@@ -481,17 +471,17 @@ void InstanceImportTask::processModrinth() {
         dl->addValidator(new Net::ChecksumValidator(file.hashAlgorithm, file.hash));
         m_filesNetJob->addNetAction(dl);
     }
-    connect(m_filesNetJob.get(), &NetJob::succeeded, this, [&]()
+    connect(m_filesNetJob.get(), &NetJob::succeeded, this, [this]()
     {
         m_filesNetJob.reset();
         emitSucceeded();
     });
-    connect(m_filesNetJob.get(), &NetJob::failed, [&](const QString &reason)
+    connect(m_filesNetJob.get(), &NetJob::failed, this, [this](const QString &reason)
     {
         m_filesNetJob.reset();
         emitFailed(reason);
     });
-    connect(m_filesNetJob.get(), &NetJob::progress, [&](qint64 current, qint64 total)
+    connect(m_filesNetJob.get(), &NetJob::progress, this, [this](qint64 current, qint64 total)
     {
         setProgress(current, total);
     });
@@ -523,9 +513,7 @@ void InstanceImportTask::processCurseForge() {
         QNetworkRequest request(QUrl("https://api.curseforge.com/v1/mods/files"));
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
         request.setRawHeader("Accept", "application/json");
-        request.setRawHeader("x-api-key", "$2a$10$fDvjEOK30yO9iP9P3b10bOzHkP11m5p0.j.yP0zM0mH0n0yQ0p0.zM"); // Using placeholder, wait, I have the real API key in CurseForgeModel.cpp! Let's put the real API key.
-        // The real key: "$2a$10$fDvjEOK3YoF8yMPmPnaMrewnOo3X4GYDBGoyQgYeAOM1wQQrkYsmm"
-        request.setRawHeader("x-api-key", "$2a$10$fDvjEOK3YoF8yMPmPnaMrewnOo3X4GYDBGoyQgYeAOM1wQQrkYsmm");
+        request.setRawHeader("x-api-key", BuildConfig.CURSEFORGE_API_KEY.toUtf8());
 
         setStatus(tr("Fetching CurseForge download URLs..."));
         
@@ -637,15 +625,15 @@ void InstanceImportTask::startCurseForgeDownload(QByteArray responseData) {
         instance.setName(m_instName);
         instance.saveNow();
 
-        connect(m_filesNetJob.get(), &NetJob::succeeded, this, [&]() {
+        connect(m_filesNetJob.get(), &NetJob::succeeded, this, [this]() {
             m_filesNetJob.reset();
             emitSucceeded();
         });
-        connect(m_filesNetJob.get(), &NetJob::failed, [&](const QString &reason) {
+        connect(m_filesNetJob.get(), &NetJob::failed, this, [this](const QString &reason) {
             m_filesNetJob.reset();
             emitFailed(reason);
         });
-        connect(m_filesNetJob.get(), &NetJob::progress, [&](qint64 current, qint64 total) {
+        connect(m_filesNetJob.get(), &NetJob::progress, this, [this](qint64 current, qint64 total) {
             setProgress(current, total);
         });
         

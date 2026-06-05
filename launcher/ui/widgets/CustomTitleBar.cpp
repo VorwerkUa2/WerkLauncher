@@ -180,7 +180,6 @@ void CustomTitleBar::changeEvent(QEvent *event) {
 
 void CustomTitleBar::mousePressEvent(QMouseEvent *event) {
   if (event->button() == Qt::LeftButton) {
-#ifndef Q_OS_WIN
     if (auto win = window()) {
       if (auto handle = win->windowHandle()) {
         handle->startSystemMove();
@@ -188,7 +187,6 @@ void CustomTitleBar::mousePressEvent(QMouseEvent *event) {
         return;
       }
     }
-#endif
   }
   QWidget::mousePressEvent(event);
 }

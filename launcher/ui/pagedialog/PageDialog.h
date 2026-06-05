@@ -15,11 +15,11 @@
 
 #pragma once
 
-#include <QDialog>
+#include <QWidget>
 #include "ui/pages/BasePageProvider.h"
 
 class PageContainer;
-class PageDialog : public QDialog
+class PageDialog : public QWidget
 {
     Q_OBJECT
 public:

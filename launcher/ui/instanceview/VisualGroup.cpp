@@ -27,11 +27,13 @@ VisualGroup::VisualGroup(const QString &text, InstanceView *view)
     : view(view), text(text), collapsed(false) {}
 
 VisualGroup::VisualGroup(const VisualGroup *other)
-    : view(other->view), text(other->text), collapsed(other->collapsed) {}
+    : view(other->view), text(other->text), collapsed(other->collapsed),
+      rows(other->rows), firstItemIndex(other->firstItemIndex),
+      m_verticalPosition(other->m_verticalPosition) {}
 
 void VisualGroup::update() {
   auto temp_items = items();
-  auto itemsPerRow = view->itemsPerRow();
+  auto itemsPerRow = qMax(1, view->itemsPerRow());
 
   int numRows = qMax(1, qCeil((qreal)temp_items.size() / (qreal)itemsPerRow));
   rows = QVector<VisualRow>(numRows);
@@ -77,12 +79,16 @@ QPair<int, int> VisualGroup::positionOf(const QModelIndex &index) const {
 }
 
 int VisualGroup::rowTopOf(const QModelIndex &index) const {
+  if (rows.isEmpty()) return 0;
   auto position = positionOf(index);
+  if (position.second < 0 || position.second >= rows.size()) return 0;
   return rows[position.second].top;
 }
 
 int VisualGroup::rowHeightOf(const QModelIndex &index) const {
+  if (rows.isEmpty()) return 0;
   auto position = positionOf(index);
+  if (position.second < 0 || position.second >= rows.size()) return 0;
   return rows[position.second].height;
 }
 
@@ -208,6 +214,9 @@ int VisualGroup::headerHeight() const {
 
 int VisualGroup::contentHeight() const {
   if (collapsed) {
+    return 0;
+  }
+  if (rows.isEmpty()) {
     return 0;
   }
   auto last = rows[numRows() - 1];

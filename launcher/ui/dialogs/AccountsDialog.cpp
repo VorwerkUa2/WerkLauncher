@@ -37,27 +37,11 @@ constexpr auto selectionFlags =
     QItemSelectionModel::Rows | QItemSelectionModel::Current;
 
 AccountsDialog::AccountsDialog(QWidget *parent, const QString &internalId)
-    : QDialog(parent), ui(new Ui::AccountsDialog) {
+    : QWidget(parent), ui(new Ui::AccountsDialog) {
   qCDebug(L_ACCOUNTS) << "AccountsDialog constructor started";
   ui->setupUi(this);
-  setWindowFlags(Qt::FramelessWindowHint | windowFlags());
-  setMinimumSize(800, 500);
+  setWindowTitle(tr("Accounts"));
 
-  // Inject custom title bar
-  auto titleBar = new CustomTitleBar(this);
-  titleBar->setTitle(tr("Minecraft Accounts"));
-
-  // The UI has a QHBoxLayout named wrapLayout as its top-level layout.
-  // We need to move the existing windowLayout into a new vertical layout
-  // that also contains the title bar.
-  if (auto box = qobject_cast<QBoxLayout *>(layout())) {
-    box->setDirection(QBoxLayout::TopToBottom);
-    box->setContentsMargins(0, 0, 0, 0);
-    box->setSpacing(0);
-    box->insertWidget(0, titleBar);
-    // Ensure the windowLayout takes up all available space
-    box->setStretch(1, 1);
-  }
   // Prevent QMainWindow from popping out as a separate window
   ui->windowLayout->setWindowFlags(Qt::Widget);
   ui->windowLayout->setSizePolicy(QSizePolicy::Expanding,
@@ -87,8 +71,6 @@ AccountsDialog::AccountsDialog(QWidget *parent, const QString &internalId)
           &AccountsDialog::onSkinModelUpdated);
   qCDebug(L_ACCOUNTS) << "setting skins model...";
   ui->skinsView->setModel(m_skinsModel);
-  setWindowIcon(icon);
-  setWindowTitle(tr("Minecraft Accounts"));
   qCDebug(L_ACCOUNTS) << "Connections stage...";
 
   QItemSelectionModel *skinSelectionModel = ui->skinsView->selectionModel();
@@ -236,7 +218,7 @@ void AccountsDialog::closeEvent(QCloseEvent *event) {
                                ui->splitter->saveState().toBase64());
   APPLICATION->settings()->set("AccountsDialogGeometry",
                                saveGeometry().toBase64());
-  QDialog::closeEvent(event);
+  QWidget::closeEvent(event);
 }
 
 void AccountsDialog::onRevertChangesClicked(bool) { revertEdits(); }
@@ -818,7 +800,7 @@ void AccountsDialog::changeEvent(QEvent *event) {
   if (event->type() == QEvent::LanguageChange) {
     ui->retranslateUi(this);
   }
-  QDialog::changeEvent(event);
+  QWidget::changeEvent(event);
 }
 
 void AccountsDialog::onRefreshButtonClicked(bool) {

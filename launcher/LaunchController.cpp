@@ -163,10 +163,9 @@ void LaunchController::login() {
 
           box.exec();
           if (box.clickedButton() == accountsButton) {
-            AccountsDialog dialog(m_parentWidget, m_accountToUse->internalId());
-            dialog.exec();
-            tryagain = true;
-            continue;
+            APPLICATION->ShowAccountsDialog(m_parentWidget);
+            emitFailed(tr("Please create a profile in the Accounts dialog and try launching again."));
+            return;
           } else {
             emitFailed(
                 tr("Launch cancelled - account does not own Minecraft."));
@@ -233,9 +232,8 @@ void LaunchController::login() {
       if (button == QMessageBox::StandardButton::Ok) {
         auto accounts = APPLICATION->accounts();
         accounts->removeAccount(m_accountToUse->internalId());
-        AccountsDialog accountsDialog;
-        accountsDialog.exec();
-        emitFailed("The account has expired.");
+        APPLICATION->ShowAccountsDialog(m_parentWidget);
+        emitFailed(tr("The account has expired. Please log in again."));
         return;
       } else {
         emitFailed(errorString);

@@ -1,6 +1,7 @@
 #include "LoggedProcess.h"
 #include "MessageLevel.h"
 #include <QDebug>
+#include <cstring>
 
 #include <sys.h>
 
@@ -10,10 +11,10 @@ LoggedProcess::LoggedProcess(QObject *parent) : QProcess(parent) {
           &LoggedProcess::on_stdOut);
   connect(this, &QProcess::readyReadStandardError, this,
           &LoggedProcess::on_stdErr);
-  connect(this, SIGNAL(finished(int, QProcess::ExitStatus)),
-          SLOT(on_exit(int, QProcess::ExitStatus)));
-  connect(this, SIGNAL(error(QProcess::ProcessError)), this,
-          SLOT(on_error(QProcess::ProcessError)));
+  connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+          this, &LoggedProcess::on_exit);
+  connect(this, &QProcess::errorOccurred, this,
+          &LoggedProcess::on_error);
   connect(this, &QProcess::stateChanged, this, &LoggedProcess::on_stateChange);
 }
 
@@ -52,7 +53,7 @@ void LoggedProcess::on_exit(int exit_code, QProcess::ExitStatus status) {
     m_err_leftover.clear();
   }
   if (!m_out_leftover.isEmpty()) {
-    emit log({m_err_leftover}, MessageLevel::StdOut);
+    emit log({m_out_leftover}, MessageLevel::StdOut);
     m_out_leftover.clear();
   }
 
@@ -81,9 +82,9 @@ void LoggedProcess::on_exit(int exit_code, QProcess::ExitStatus status) {
     // -1, 0, 1 and 255 are usually program generated and don't aid much in
     // debugging
     if ((exit_code < -1 || exit_code > 1) && (exit_code != 255)) {
-      // Gross hack for preserving the **exact bit pattern**, we need to "cast"
-      // while ignoring the sign bit
-      unsigned int u_exit_code = *((unsigned int *)&exit_code);
+      // Preserve the exact bit pattern using memcpy to avoid strict aliasing violation
+      unsigned int u_exit_code;
+      std::memcpy(&u_exit_code, &exit_code, sizeof(u_exit_code));
 
       std::string statusName;
       std::string statusDescription;

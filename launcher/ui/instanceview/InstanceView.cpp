@@ -141,6 +141,8 @@ void InstanceView::updateScrollbar() {
 }
 
 void InstanceView::updateGeometries() {
+  if (!model()) return;
+
   geometryCache.clear();
 
   QMap<LocaleString, VisualGroup *> cats;
@@ -308,10 +310,6 @@ void InstanceView::mouseMoveEvent(QMouseEvent *event) {
     if (m_hoveredIndex.isValid()) {
       viewport()->update(visualRect(m_hoveredIndex));
     }
-  } else if (m_hoveredIndex.isValid()) {
-    // Update the hovered item anyway to handle button hover effects if we add
-    // them later
-    viewport()->update(visualRect(m_hoveredIndex));
   }
 
   QPoint topLeft;
@@ -535,6 +533,7 @@ void InstanceView::paintEvent(QPaintEvent *event) {
 }
 
 void InstanceView::resizeEvent(QResizeEvent *event) {
+  QAbstractItemView::resizeEvent(event);
   int newItemsPerRow = calculateItemsPerRow();
   if (newItemsPerRow != m_currentItemsPerRow) {
     m_currentCursorColumn = -1;
@@ -672,6 +671,9 @@ QRect InstanceView::geometryRect(const QModelIndex &index) const {
   }
 
   const VisualGroup *cat = category(index);
+  if (!cat) {
+    return QRect();
+  }
   QPair<int, int> pos = cat->positionOf(index);
   int x = pos.first;
   // int y = pos.second;

@@ -45,7 +45,6 @@ private:
     void processZipPack();
     void processMultiMC();
     void processTechnic();
-    void processFlame();
     void processModrinth();
     void processCurseForge();
     void startCurseForgeDownload(QByteArray responseData);

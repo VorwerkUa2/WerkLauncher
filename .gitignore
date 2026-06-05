@@ -38,10 +38,14 @@ tags
 run/
 
 # Custom ignores
-MCL.rar
+*.rar
 .vs/
 .vscode/
 out/
 *.exe
 *.log
+CMakePresets.json
+
+# Scripts not needed for build
+find_crash_symbol.py
 make_bmps.py

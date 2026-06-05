@@ -8,9 +8,7 @@
 
 #include "minecraft/auth/AccountList.h"
 #include "minecraft/auth/AccountTask.h"
-#include <QDialog>
-
-#include <QDialog>
+#include <QWidget>
 #include <QIcon>
 #include <QNetworkReply>
 #include <QString>
@@ -34,7 +32,7 @@ struct SkinState {
   Skins::SkinEntry skinEntry;
 };
 
-class AccountsDialog : public QDialog {
+class AccountsDialog : public QWidget {
   Q_OBJECT
 
 public:

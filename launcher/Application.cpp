@@ -86,8 +86,6 @@
 #define WIN32_LEAN_AND_MEAN
 #endif
 #include <stdio.h>
-#include <windows.h>
-
 #endif
 
 #define STRINGIFY(x) #x
@@ -128,8 +126,8 @@ void appDebugOutput(QtMsgType type, const QMessageLogContext &context,
               .arg(msg);
   }
 
-  APPLICATION->logFile->write(out.toUtf8());
-  APPLICATION->logFile->flush();
+  APPLICATION->getLogFile()->write(out.toUtf8());
+  APPLICATION->getLogFile()->flush();
   QTextStream(stderr) << out.toLocal8Bit();
   fflush(stderr);
 }
@@ -640,23 +638,22 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv) {
     qDebug() << "<> Paths set.";
   }
 
-  do // once
-  {
-    if (m_liveCheck) {
-      QFile check(liveCheckFile);
-      if (!check.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-        qWarning() << "Could not open" << liveCheckFile << "for writing!";
-        break;
-      }
-      auto payload = appID.toString().toUtf8();
-      if (check.write(payload) != payload.size()) {
-        qWarning() << "Could not write into" << liveCheckFile << "!";
-        check.remove();
-        break;
-      }
-      check.close();
+  // Write live-check file
+  [&]() {
+    if (!m_liveCheck) return;
+    QFile check(liveCheckFile);
+    if (!check.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+      qWarning() << "Could not open" << liveCheckFile << "for writing!";
+      return;
     }
-  } while (false);
+    auto payload = appID.toString().toUtf8();
+    if (check.write(payload) != payload.size()) {
+      qWarning() << "Could not write into" << liveCheckFile << "!";
+      check.remove();
+      return;
+    }
+    check.close();
+  }();
 
   // Initialize application settings
   {
@@ -865,7 +862,7 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv) {
             [&](const Setting &, QVariant value) {
               m_icons->directoryChanged(value.toString());
             });
-    qDebug() << "<> Instance icons intialized.";
+    qDebug() << "<> Instance icons initialized.";
   }
 
   // Icon themes
@@ -897,7 +894,7 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv) {
             [&](const Setting &, QVariant value) {
               m_skinsModel->directoryChanged(value.toString());
             });
-    qDebug() << "<> Skins intialized.";
+    qDebug() << "<> Skins initialized.";
   }
 
   // initialize and load all instances
@@ -979,8 +976,8 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv) {
 
   // Initialize Discord Rich Presence
   {
-    m_discordRPC = new DiscordRPC(this);
-    m_discordRPC->setActivity("In the launcher", "Browsing instances");
+    // m_discordRPC = new DiscordRPC(this);
+    // m_discordRPC->setActivity("In the launcher", "Browsing instances");
     qDebug() << "<> Discord RPC initialized.";
   }
 
@@ -1043,6 +1040,7 @@ bool Application::createSetupWizard() {
     if (javaRequired) {
       m_setupWizard->addPage(new JavaWizardPage(m_setupWizard));
     }
+    m_setupWizard->setWindowTitle(tr("Quick Setup"));
     connect(m_setupWizard, &QDialog::finished, this,
             &Application::setupWizardFinished);
     m_setupWizard->show();
@@ -1053,6 +1051,10 @@ bool Application::createSetupWizard() {
 
 void Application::setupWizardFinished(int status) {
   qDebug() << "Wizard result =" << status;
+  if (m_setupWizard) {
+    m_setupWizard->deleteLater();
+    m_setupWizard = nullptr;
+  }
   performMainStartupAction();
 }
 
@@ -1368,7 +1370,12 @@ void Application::controllerSucceeded() {
   // on success, do...
   if (controller->instance()->settings()->get("AutoCloseConsole").toBool()) {
     if (extras.window) {
-      extras.window->close();
+      if (m_mainWindow) {
+        m_mainWindow->showInstanceView();
+      } else {
+        extras.window->close();
+      }
+      extras.window = nullptr;
     }
   }
   extras.controller.reset();
@@ -1405,23 +1412,36 @@ void Application::ShowGlobalSettings(class QWidget *parent, QString open_page) {
     return;
   }
   emit globalSettingsAboutToOpen();
-  {
-    SettingsObject::Lock lock(APPLICATION->settings());
-    PageDialog dlg(m_globalSettingsProvider.get(), open_page, parent);
-    dlg.exec();
+
+  if (m_mainWindow) {
+    PageDialog *dlg = new PageDialog(m_globalSettingsProvider.get(), open_page, m_mainWindow);
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    connect(dlg, &QObject::destroyed, this, &Application::globalSettingsClosed);
+    m_mainWindow->showPage(dlg);
+  } else {
+    PageDialog *dlg = new PageDialog(m_globalSettingsProvider.get(), open_page, parent);
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    connect(dlg, &QObject::destroyed, this, &Application::globalSettingsClosed);
+    dlg->show();
   }
-  emit globalSettingsClosed();
 }
 
 void Application::ShowAccountsDialog(class QWidget *parent) {
-  AccountsDialog dialog(parent);
-  dialog.exec();
+  if (m_mainWindow) {
+    AccountsDialog *dialog = new AccountsDialog(m_mainWindow);
+    m_mainWindow->showPage(dialog);
+  } else {
+    // Fallback if main window is somehow not available
+    AccountsDialog *dialog = new AccountsDialog(parent);
+    dialog->show();
+  }
 }
 
 MainWindow *Application::showMainWindow(bool minimized) {
   if (m_mainWindow) {
     m_mainWindow->setWindowState(m_mainWindow->windowState() &
                                  ~Qt::WindowMinimized);
+    m_mainWindow->show();
     m_mainWindow->raise();
     m_mainWindow->activateWindow();
   } else {
@@ -1455,13 +1475,30 @@ InstanceWindow *Application::showInstanceWindow(InstancePtr instance,
   auto &window = extras.window;
 
   if (window) {
-    window->raise();
-    window->activateWindow();
+    if (m_mainWindow) {
+      m_mainWindow->showPage(window);
+    } else {
+      window->raise();
+      window->activateWindow();
+    }
   } else {
     window = new InstanceWindow(instance);
-    m_openWindows++;
-    connect(window, &InstanceWindow::isClosing, this,
-            &Application::on_windowClose);
+    if (m_mainWindow) {
+      // When embedded, MainWindow manages the lifecycle - don't self-delete on close
+      window->setAttribute(Qt::WA_DeleteOnClose, false);
+      m_mainWindow->showPage(window);
+      // Clean up extras.window when the widget is destroyed
+      connect(window, &QObject::destroyed, this, [this, id]() {
+        auto it = m_instanceExtras.find(id);
+        if (it != m_instanceExtras.end()) {
+          it->second.window = nullptr;
+        }
+      });
+    } else {
+      m_openWindows++;
+      connect(window, &InstanceWindow::isClosing, this,
+              &Application::on_windowClose);
+    }
   }
   if (!page.isEmpty()) {
     window->selectPage(page);

@@ -32,18 +32,21 @@
 
 #include "icons/IconList.h"
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#include <windowsx.h>
+#endif
+
 InstanceWindow::InstanceWindow(InstancePtr instance, QWidget *parent)
-    : QMainWindow(parent), m_instance(instance) {
+    : QWidget(parent), m_instance(instance) {
   setAttribute(Qt::WA_DeleteOnClose);
 
   auto icon = APPLICATION->icons()->getIcon(m_instance->iconKey());
-  QString windowTitle = tr("Console window for ") + m_instance->name();
+  QString windowTitle = m_instance->name();
 
-  setWindowFlags(Qt::FramelessWindowHint | windowFlags());
 
-  auto titleBar = new CustomTitleBar(this);
-  titleBar->setTitle(windowTitle);
-  titleBar->setObjectName("titleBar");
+
+  setWindowTitle(windowTitle);
 
   // Add page container
   {
@@ -51,13 +54,11 @@ InstanceWindow::InstanceWindow(InstancePtr instance, QWidget *parent)
     m_container = new PageContainer(provider.get(), "console", this);
     m_container->setParentContainer(this);
 
-    auto mainWidget = new QWidget(this);
-    auto mainLayout = new QVBoxLayout(mainWidget);
+    auto mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
-    mainLayout->addWidget(titleBar);
+
     mainLayout->addWidget(m_container);
-    setCentralWidget(mainWidget);
   }
 
   // Add custom buttons to the page container layout.
@@ -91,15 +92,7 @@ InstanceWindow::InstanceWindow(InstancePtr instance, QWidget *parent)
     m_container->addButtons(horizontalLayout);
   }
 
-  // restore window state
-  {
-    auto base64State =
-        APPLICATION->settings()->get("ConsoleWindowState").toByteArray();
-    restoreState(QByteArray::fromBase64(base64State));
-    auto base64Geometry =
-        APPLICATION->settings()->get("ConsoleWindowGeometry").toByteArray();
-    restoreGeometry(QByteArray::fromBase64(base64Geometry));
-  }
+
 
   // set up instance and launch process recognition
   {
@@ -116,7 +109,7 @@ InstanceWindow::InstanceWindow(InstancePtr instance, QWidget *parent)
     connect(m_instance.get(), &BaseInstance::statusChanged, this,
             &InstanceWindow::on_instanceStatusChanged);
   }
-  show();
+
 }
 
 void InstanceWindow::on_instanceStatusChanged(BaseInstance::Status,
@@ -172,9 +165,7 @@ void InstanceWindow::closeEvent(QCloseEvent *event) {
     return;
   }
 
-  APPLICATION->settings()->set("ConsoleWindowState", saveState().toBase64());
-  APPLICATION->settings()->set("ConsoleWindowGeometry",
-                               saveGeometry().toBase64());
+
   emit isClosing();
   event->accept();
 }
@@ -205,4 +196,8 @@ bool InstanceWindow::requestClose() {
     return true;
   }
   return false;
+}
+
+bool InstanceWindow::nativeEvent(const QByteArray &eventType, void *message, qintptr *result) {
+  return QWidget::nativeEvent(eventType, message, result);
 }

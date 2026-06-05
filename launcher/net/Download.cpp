@@ -262,7 +262,7 @@ void Download::downloadFinished() {
     // request done
     m_reply->deleteLater();
     m_reply = nullptr;
-    emit succeeded(m_index_within_job);
+    emit failed(m_index_within_job);
     return;
   }
   m_reply->deleteLater();
