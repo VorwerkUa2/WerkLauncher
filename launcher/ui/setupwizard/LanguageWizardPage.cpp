@@ -76,8 +76,8 @@ LanguageWizardPage::LanguageWizardPage(QWidget *parent)
       return btn;
   };
 
-  btnEn = createLangButton(QString::fromUtf8("\xF0\x9F\x87\xAC\xF0\x9F\x87\xA7  English"), "en_US");
-  btnUk = createLangButton(QString::fromUtf8("\xF0\x9F\x87\xBA\xF0\x9F\x87\xA6  \xD0\xA3\xD0\xBA\xD1\x80\xD0\xB0\xD1\x97\xD0\xBD\xD1\x81\xD1\x8C\xD0\xBA\xD0\xB0"), "uk_UA");
+  btnEn = createLangButton(QString::fromUtf8("EN  English"), "en_US");
+  btnUk = createLangButton(QString::fromUtf8("UK  \xD0\xA3\xD0\xBA\xD1\x80\xD0\xB0\xD1\x97\xD0\xBD\xD1\x81\xD1\x8C\xD0\xBA\xD0\xB0"), "uk");
 
   btnLayout->addWidget(btnEn);
   btnLayout->addWidget(btnUk);
@@ -88,7 +88,7 @@ LanguageWizardPage::LanguageWizardPage(QWidget *parent)
   // Set default
   auto settings = APPLICATION->settings();
   m_selectedLanguageKey = settings->get("Language").toString();
-  if (m_selectedLanguageKey == "uk_UA") {
+  if (m_selectedLanguageKey == "uk") {
       btnUk->setChecked(true);
   } else {
       btnEn->setChecked(true);
@@ -116,4 +116,11 @@ void LanguageWizardPage::languageClicked(const QString &key) {
 void LanguageWizardPage::retranslate() {
   welcomeLabel->setText(tr("Welcome"));
   subtitleLabel->setText(tr("Select your language to continue"));
+}
+
+void LanguageWizardPage::changeEvent(QEvent *event) {
+  if (event->type() == QEvent::LanguageChange) {
+    retranslate();
+  }
+  BaseWizardPage::changeEvent(event);
 }

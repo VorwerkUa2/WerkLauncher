@@ -211,14 +211,17 @@ void ListViewDelegate::paint(QPainter *painter,
 
   static const int iconSize = 64;
   QRect iconbox = opt.rect;
+  iconbox.setHeight(iconSize);
+  iconbox.moveTop(opt.rect.top() + 12); // Move icon down slightly
+
   const int textMargin =
       style->pixelMetric(QStyle::PM_FocusFrameHMargin, 0, opt.widget) + 1;
   QRect textRect = opt.rect;
   QRect textHighlightRect = textRect;
-  // clip the decoration on top, remove width padding
-  textRect.adjust(textMargin, iconSize + textMargin + 10, -textMargin, 0);
+  // clip the decoration on top, remove width padding. Text starts below the moved icon.
+  textRect.adjust(textMargin, iconSize + textMargin + 15, -textMargin, 0);
 
-  textHighlightRect.adjust(0, iconSize + 5, 0, 0);
+  textHighlightRect.adjust(0, iconSize + 15, 0, 0);
 
   QRect cardRect = opt.rect;
   cardRect.adjust(textMargin, 2, -textMargin, -2);
@@ -234,8 +237,6 @@ void ListViewDelegate::paint(QPainter *painter,
 
   // draw the icon
   {
-    iconbox.setHeight(iconSize);
-
     // Scale icon slightly on hover for "animation" feel
     if (opt.state & QStyle::State_MouseOver) {
       painter->save();
@@ -254,13 +255,13 @@ void ListViewDelegate::paint(QPainter *painter,
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
 
-    int btnSize = 28;
+    int btnSize = 30;
     QRect cardRect = opt.rect;
     cardRect.adjust(textMargin, 2, -textMargin, -2);
     
-    // Position buttons carefully near the top of the text area (near the name)
-    QRect playRect(cardRect.left() + 6, textRect.top() + 2, btnSize, btnSize);
-    QRect configRect(cardRect.right() - btnSize - 6, textRect.top() + 2, btnSize, btnSize);
+    // Position buttons cleanly at the bottom corners of the card
+    QRect playRect(cardRect.left() + 8, cardRect.bottom() - btnSize - 8, btnSize, btnSize);
+    QRect configRect(cardRect.right() - btnSize - 8, cardRect.bottom() - btnSize - 8, btnSize, btnSize);
 
     auto drawAction = [&](const QRect &r, const QString &iconName, bool isHovered, bool isPressed, const QColor& accent) {
       painter->save();
@@ -451,7 +452,7 @@ QSize ListViewDelegate::sizeHint(const QStyleOptionViewItem &option,
   const int textMargin =
       style->pixelMetric(QStyle::PM_FocusFrameHMargin, &option, opt.widget) + 1;
   static const int baseIconSize = 64;
-  int height = baseIconSize + textMargin * 2 + 15; // Increased base height for padding
+  int height = baseIconSize + textMargin * 2 + 35; // Increased base height for icon padding and bottom buttons
   QSize szz = viewItemTextSize(&opt);
   height += szz.height();
 

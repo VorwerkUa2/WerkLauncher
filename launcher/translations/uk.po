@@ -248,3 +248,23 @@ msgstr "Який акаунт ви бажаєте використати?"
 msgctxt "AccountList"
 msgid "Add New Account"
 msgstr "Додати новий акаунт"
+
+msgctxt "LanguageWizardPage"
+msgid "Welcome"
+msgstr "Ласкаво просимо"
+
+msgctxt "LanguageWizardPage"
+msgid "Select your language to continue"
+msgstr "Виберіть мову для продовження"
+
+msgctxt "MainWindow"
+msgid "Search instances..."
+msgstr "Пошук збірок..."
+
+msgctxt "MainWindow"
+msgid "Sort by Name"
+msgstr "За ім'ям"
+
+msgctxt "MainWindow"
+msgid "Sort by Last Played"
+msgstr "За останнім запуском"

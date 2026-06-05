@@ -17,6 +17,7 @@ public:
 
 protected:
   void retranslate() override;
+  void changeEvent(QEvent *event) override;
 
 private slots:
   void languageClicked(const QString &key);
