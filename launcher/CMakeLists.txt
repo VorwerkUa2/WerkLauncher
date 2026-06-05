@@ -994,7 +994,7 @@ if(WIN32)
         COMMAND ${CMAKE_COMMAND} -E echo "Deploying assets..."
         COMMAND C:/Qt/6.10.2/msvc2022_64/bin/windeployqt.exe --no-compiler-runtime --no-opengl-sw --no-translations --dir $<TARGET_FILE_DIR:${Launcher_Name}> $<TARGET_FILE:${Launcher_Name}>
         COMMAND ${CMAKE_COMMAND} -E make_directory $<TARGET_FILE_DIR:${Launcher_Name}>/translations
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/translations/mmc_uk.qm $<TARGET_FILE_DIR:${Launcher_Name}>/translations/
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/translations/en_GB.po $<TARGET_FILE_DIR:${Launcher_Name}>/translations/
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/translations/uk.po $<TARGET_FILE_DIR:${Launcher_Name}>/translations/
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/translations/index_v2.json $<TARGET_FILE_DIR:${Launcher_Name}>/translations/
         COMMAND ${CMAKE_COMMAND} -E copy_if_different C:/Qt/6.10.2/msvc2022_64/translations/qtbase_uk.qm $<TARGET_FILE_DIR:${Launcher_Name}>/translations/qt_uk.qm
