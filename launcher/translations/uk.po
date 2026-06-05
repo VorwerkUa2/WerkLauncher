@@ -5069,3 +5069,12 @@ msgstr "За ім'ям"
 msgctxt "MainWindow"
 msgid "Sort by Last Played"
 msgstr "За останнім запуском"
+
+
+msgctxt "MainWindow"
+msgid "Create group"
+msgstr "Створити групу"
+
+msgctxt "MainWindow"
+msgid "Group name:"
+msgstr "Назва групи:"
