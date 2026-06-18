@@ -10,9 +10,73 @@ static const char * CURSEFORGE_API_BASE = "https://api.curseforge.com";
 
 // Minecraft gameId = 432, classId for Modpacks = 4471
 
+QVector<CurseForge::ListModel::Category> CurseForge::ListModel::s_categories;
+bool CurseForge::ListModel::s_categoriesLoaded = false;
+bool CurseForge::ListModel::s_categoriesLoading = false;
+
 CurseForge::ListModel::ListModel(QObject *parent) : QAbstractListModel(parent) {}
 
 CurseForge::ListModel::~ListModel() = default;
+
+const QVector<CurseForge::ListModel::Category>& CurseForge::ListModel::getCategories() {
+    return s_categories;
+}
+
+void CurseForge::ListModel::fetchCategories() {
+    if (s_categoriesLoaded || s_categoriesLoading) {
+        if (s_categoriesLoaded) {
+            emit categoriesLoaded();
+        }
+        return;
+    }
+    s_categoriesLoading = true;
+    
+    auto *netJob = new NetJob("CurseForge::Categories", APPLICATION->network());
+    QString url = QString("%1/v1/categories?gameId=432&classId=4471").arg(CURSEFORGE_API_BASE);
+    
+    auto dl = Net::Download::makeByteArray(QUrl(url), &categoriesResponse);
+    dl->setHeader("x-api-key", BuildConfig.CURSEFORGE_API_KEY.toUtf8());
+    netJob->addNetAction(dl);
+    categoriesPtr = netJob;
+    categoriesPtr->start();
+    
+    QObject::connect(netJob, &NetJob::succeeded, this, &ListModel::categoriesRequestFinished);
+    QObject::connect(netJob, &NetJob::failed, this, &ListModel::categoriesRequestFailed);
+}
+
+void CurseForge::ListModel::categoriesRequestFinished() {
+    categoriesPtr.reset();
+    s_categoriesLoading = false;
+
+    QJsonParseError parse_error;
+    QJsonDocument doc = QJsonDocument::fromJson(categoriesResponse, &parse_error);
+    if (parse_error.error == QJsonParseError::NoError) {
+        try {
+            auto obj = Json::requireObject(doc);
+            auto dataArray = Json::requireArray(obj, "data");
+            
+            s_categories.clear();
+            for (auto catRaw : dataArray) {
+                auto catObj = catRaw.toObject();
+                Category cat;
+                cat.id = Json::requireInteger(catObj, "id");
+                cat.name = Json::requireString(catObj, "name");
+                cat.iconUrl = QUrl(Json::ensureString(catObj, "iconUrl", ""));
+                s_categories.append(cat);
+            }
+            s_categoriesLoaded = true;
+            emit categoriesLoaded();
+        } catch (const JSONValidationError &e) {
+            qWarning() << "Error parsing CurseForge categories: " << e.cause();
+        }
+    }
+}
+
+void CurseForge::ListModel::categoriesRequestFailed() {
+    categoriesPtr.reset();
+    s_categoriesLoading = false;
+    qWarning() << "Failed to fetch CurseForge categories.";
+}
 
 QVariant CurseForge::ListModel::data(const QModelIndex &index, int role) const {
   int pos = index.row();
@@ -34,6 +98,10 @@ QVariant CurseForge::ListModel::data(const QModelIndex &index, int role) const {
   } else if (role == Qt::ToolTipRole) {
     return pack.summary;
   } else if (role == Qt::UserRole) {
+    return pack.author;
+  } else if (role == Qt::UserRole + 1) {
+    return (qulonglong)pack.downloadCount;
+  } else if (role == Qt::UserRole + 2) {
     QVariant v;
     v.setValue(pack);
     return v;
@@ -63,13 +131,14 @@ int CurseForge::ListModel::rowCount(const QModelIndex &parent) const {
   return modpacks.size();
 }
 
-void CurseForge::ListModel::searchWithTerm(const QString &term, int sortField) {
+void CurseForge::ListModel::searchWithTerm(const QString &term, int sortField, int categoryId) {
   if (currentSearchTerm == term &&
-      currentSearchTerm.isNull() == term.isNull() && currentSortField == sortField) {
+      currentSearchTerm.isNull() == term.isNull() && currentSortField == sortField && currentCategoryId == categoryId) {
     return;
   }
   currentSearchTerm = term;
   currentSortField = sortField;
+  currentCategoryId = categoryId;
   if (jobPtr) {
     jobPtr->abort();
     searchState = ResetRequested;
@@ -92,6 +161,10 @@ void CurseForge::ListModel::performPaginatedSearch() {
                           .arg(CURSEFORGE_API_BASE)
                           .arg(currentSortField)
                           .arg(nextSearchOffset);
+
+  if (currentCategoryId != 0) {
+      searchUrl += QString("&categoryId=%1").arg(currentCategoryId);
+  }
 
   if (!currentSearchTerm.isEmpty()) {
     searchUrl += "&searchFilter=" + QUrl::toPercentEncoding(currentSearchTerm);

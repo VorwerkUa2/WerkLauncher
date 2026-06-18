@@ -44,6 +44,7 @@ public:
 
 private slots:
     void triggerSearch();
+    void onCategoriesLoaded();
     void onSelectionChanged(QModelIndex first, QModelIndex second);
     void onVersionSelectionChanged(const QString & version);
     void onPackDataChanged(int id);

@@ -67,11 +67,6 @@ InstanceWindow::InstanceWindow(InstancePtr instance, QWidget *parent)
     horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
     horizontalLayout->setContentsMargins(6, -1, 6, -1);
 
-    auto btnHelp = new QPushButton();
-    btnHelp->setText(tr("Help"));
-    horizontalLayout->addWidget(btnHelp);
-    connect(btnHelp, SIGNAL(clicked(bool)), m_container, SLOT(help()));
-
     auto spacer =
         new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
     horizontalLayout->addSpacerItem(spacer);

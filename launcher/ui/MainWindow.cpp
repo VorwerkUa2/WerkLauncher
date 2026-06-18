@@ -23,6 +23,9 @@
 
 #include <QtGui/QWindow>
 
+#include <QtGui/QPainter>
+#include <QtGui/QPaintEvent>
+
 #include <QtWidgets/QStyle>
 
 #include <QtWidgets/QApplication>
@@ -112,11 +115,13 @@
 #include "ui/dialogs/CustomMessageBox.h"
 
 #include "ui/dialogs/ExportInstanceDialog.h"
+#include "ui/dialogs/GroupInputDialog.h"
 
 #include "ui/dialogs/IconPickerDialog.h"
 
 #include "ui/dialogs/ModrinthExportDialog.h"
 
+#include "ui/dialogs/StatisticsDialog.h"
 #include "ui/dialogs/NewInstanceDialog.h"
 #include "GlobalResizeFilter.h"
 
@@ -275,6 +280,9 @@ private:
 class MainWindow::Ui {
 
 public:
+  TranslatedAction actionStatistics;
+  TranslatedAction actionBuyMeACoffee;
+
   TranslatedAction actionBack;
   TranslatedAction actionAddInstance;
 
@@ -328,19 +336,13 @@ public:
 
   LabeledToolButton *changeIconButton = nullptr;
 
-  QMenu *foldersMenu = nullptr;
-
-  TranslatedToolButton foldersMenuButton;
-
   TranslatedAction actionViewInstanceFolder;
 
-  TranslatedAction actionViewCentralModsFolder;
+
 
   QMenu *helpMenu = nullptr;
 
   TranslatedToolButton helpMenuButton;
-
-  TranslatedAction actionReportBug;
 
   TranslatedAction actionDISCORD;
 
@@ -438,85 +440,25 @@ public:
     mainToolBar->addAction(actionBack);
     actionBack->setVisible(false); // Hidden by default
 
-    QWidget *topSpacer = new QWidget(MainWindow);
-    topSpacer->setFixedSize(1, 30);
-    mainToolBar->addWidget(topSpacer);
+    QWidget* alignSpacer = new QWidget(MainWindow);
+    alignSpacer->setFixedSize(1, 34); // Adjusted to 34 to perfectly align with search bar
+    mainToolBar->addWidget(alignSpacer);
 
     mainToolBar->addAction(actionAddInstance);
 
     mainToolBar->addSeparator();
 
-    foldersMenu = new QMenu(MainWindow);
-
-    foldersMenu->setToolTipsVisible(true);
-
     actionViewInstanceFolder = TranslatedAction(MainWindow);
-
     actionViewInstanceFolder->setObjectName(
-
         QStringLiteral("actionViewInstanceFolder"));
-
     actionViewInstanceFolder->setIcon(APPLICATION->getThemedIcon("viewfolder"));
-
     actionViewInstanceFolder.setTextId(
-
-        QT_TRANSLATE_NOOP("MainWindow", "View Instance Folder"));
-
+        QT_TRANSLATE_NOOP("MainWindow", "Folders"));
     actionViewInstanceFolder.setTooltipId(QT_TRANSLATE_NOOP(
-
         "MainWindow", "Open the instance folder in a file browser."));
-
     all_actions.append(&actionViewInstanceFolder);
 
-    foldersMenu->addAction(actionViewInstanceFolder);
-
-    actionViewCentralModsFolder = TranslatedAction(MainWindow);
-
-    actionViewCentralModsFolder->setObjectName(
-
-        QStringLiteral("actionViewCentralModsFolder"));
-
-    actionViewCentralModsFolder->setIcon(
-
-        APPLICATION->getThemedIcon("centralmods"));
-
-    actionViewCentralModsFolder.setTextId(
-
-        QT_TRANSLATE_NOOP("MainWindow", "View Central Mods Folder"));
-
-    actionViewCentralModsFolder.setTooltipId(QT_TRANSLATE_NOOP(
-
-        "MainWindow", "Open the central mods folder in a file browser."));
-
-    all_actions.append(&actionViewCentralModsFolder);
-
-    foldersMenu->addAction(actionViewCentralModsFolder);
-
-    foldersMenuButton = TranslatedToolButton(MainWindow);
-
-    foldersMenuButton.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Folders"));
-
-    foldersMenuButton.setTooltipId(QT_TRANSLATE_NOOP(
-
-        "MainWindow", "Open one of the folders shared between instances."));
-
-    foldersMenuButton->setMenu(foldersMenu);
-
-    foldersMenuButton->setPopupMode(QToolButton::InstantPopup);
-
-    foldersMenuButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
-
-    foldersMenuButton->setIcon(APPLICATION->getThemedIcon("viewfolder"));
-
-    foldersMenuButton->setFocusPolicy(Qt::NoFocus);
-
-    all_toolbuttons.append(&foldersMenuButton);
-
-    QWidgetAction *foldersButtonAction = new QWidgetAction(MainWindow);
-
-    foldersButtonAction->setDefaultWidget(foldersMenuButton);
-
-    mainToolBar->addAction(foldersButtonAction);
+    mainToolBar->addAction(actionViewInstanceFolder);
 
     actionSettings = TranslatedAction(MainWindow);
 
@@ -542,58 +484,39 @@ public:
 
     if (!BuildConfig.BUG_TRACKER_URL.isEmpty()) {
 
-      actionReportBug = TranslatedAction(MainWindow);
+      actionStatistics = TranslatedAction(MainWindow);
+      actionStatistics->setObjectName(QStringLiteral("actionStatistics"));
+      actionStatistics->setIcon(APPLICATION->getThemedIcon("log"));
+      actionStatistics.setTextId("Статистика часу");
+      actionStatistics.setTooltipId("Переглянути статистику часу.");
+      all_actions.append(&actionStatistics);
+      helpMenu->addAction(actionStatistics);
 
-      actionReportBug->setObjectName(QStringLiteral("actionReportBug"));
-
-      actionReportBug->setIcon(APPLICATION->getThemedIcon("bug"));
-
-      actionReportBug.setTextId(
-
-          QT_TRANSLATE_NOOP("MainWindow", "Report a Bug"));
-
-      actionReportBug.setTooltipId(QT_TRANSLATE_NOOP(
-
-          "MainWindow", "Open the bug tracker to report a bug with %1."));
-
-      all_actions.append(&actionReportBug);
-
-      helpMenu->addAction(actionReportBug);
+      actionBuyMeACoffee = TranslatedAction(MainWindow);
+      actionBuyMeACoffee->setObjectName(QStringLiteral("actionBuyMeACoffee"));
+      actionBuyMeACoffee->setIcon(APPLICATION->getThemedIcon("patreon")); // Use patreon icon or similar
+      actionBuyMeACoffee.setTextId("Buy Me a Coffee");
+      actionBuyMeACoffee.setTooltipId("Підтримати проєкт.");
+      all_actions.append(&actionBuyMeACoffee);
+      helpMenu->addAction(actionBuyMeACoffee);
     }
 
     if (!BuildConfig.DISCORD_URL.isEmpty()) {
 
       actionDISCORD = TranslatedAction(MainWindow);
-
       actionDISCORD->setObjectName(QStringLiteral("actionDISCORD"));
-
       actionDISCORD->setIcon(APPLICATION->getThemedIcon("discord"));
-
-      actionDISCORD.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Discord"));
-
-      actionDISCORD.setTooltipId(
-
-          QT_TRANSLATE_NOOP("MainWindow", "Open %1 discord voice chat."));
-
+      actionDISCORD.setTextId("Дискорд");
+      actionDISCORD.setTooltipId("Відкрити Дискорд.");
       all_actions.append(&actionDISCORD);
-
       helpMenu->addAction(actionDISCORD);
     }
 
     actionTELEGRAM = TranslatedAction(MainWindow);
-
     actionTELEGRAM->setObjectName(QStringLiteral("actionTELEGRAM"));
-
-    actionTELEGRAM->setIcon(APPLICATION->getThemedIcon(
-
-        "telegram")); // Need Telegram icon or generic help icon
-
-    actionTELEGRAM.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Telegram"));
-
-    actionTELEGRAM.setTooltipId(
-
-        QT_TRANSLATE_NOOP("MainWindow", "Open %1 telegram chat."));
-
+    actionTELEGRAM->setIcon(APPLICATION->getThemedIcon("telegram"));
+    actionTELEGRAM.setTextId("Telegram");
+    actionTELEGRAM.setTooltipId("Відкрити чат в Telegram.");
     all_actions.append(&actionTELEGRAM);
 
     helpMenu->addAction(actionTELEGRAM);
@@ -691,6 +614,10 @@ public:
     statusBar = new QStatusBar(MainWindow);
 
     statusBar->setObjectName(QStringLiteral("statusBar"));
+    statusBar->setFixedHeight(22);
+    statusBar->setStyleSheet(
+        "QStatusBar { border-top: 1px solid rgba(255,255,255,0.06); background: transparent; }"
+        "QStatusBar QLabel { font-size: 11px; color: rgba(255,255,255,0.45); padding: 0 8px; }");
 
     MainWindow->setStatusBar(statusBar);
   }
@@ -698,7 +625,7 @@ public:
   void createInstanceActions(QMainWindow *MainWindow) {
     actionChangeInstIcon = TranslatedAction(MainWindow);
     actionChangeInstIcon->setObjectName(QStringLiteral("actionChangeInstIcon"));
-    actionChangeInstIcon->setIcon(QIcon(":/logo.svg"));
+    actionChangeInstIcon->setIcon(APPLICATION->getThemedIcon("logo"));
     actionChangeInstIcon->setIconVisibleInMenu(true);
     actionChangeInstIcon.setTextId(
         QT_TRANSLATE_NOOP("MainWindow", "Change Icon"));
@@ -875,6 +802,8 @@ public:
     qDebug() << "setupUi: connectSlotsByName";
     QMetaObject::connectSlotsByName(MainWindow);
 
+    MainWindow->setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
+
     qDebug() << "setupUi: DONE";
   } // setupUi
 
@@ -913,8 +842,6 @@ public:
     }
 
     // submenu buttons
-
-    foldersMenuButton->setText(tr("Folders"));
 
     helpMenuButton->setText(tr("Help"));
 
@@ -1174,16 +1101,6 @@ MainWindow::MainWindow(QWidget *parent)
 
           &MainWindow::globalSettingsClosed);
 
-  m_statusLeft = new QLabel(tr("No instance selected"), this);
-
-  m_statusCenter = new QLabel(tr("Total playtime: 0s"), this);
-
-  m_statusCenter->setObjectName("playtimeLabel");
-
-  statusBar()->addPermanentWidget(m_statusLeft, 1);
-
-  statusBar()->addPermanentWidget(m_statusCenter, 0);
-
   // Add "manage accounts" button, right align
 
   QWidget *spacer = new QWidget();
@@ -1366,11 +1283,7 @@ void MainWindow::retranslateUi() {
 
   if (m_selectedInstance) {
 
-    m_statusLeft->setText(m_selectedInstance->getStatusbarDescription());
-
   } else {
-
-    m_statusLeft->setText(tr("No instance selected"));
   }
 
   ui->retranslateUi(this);
@@ -1523,12 +1436,12 @@ void MainWindow::showInstanceContextMenu(const QPoint &pos) {
       QAction *actionCreateGroup = new QAction(tr("Create group"), this);
 
       connect(actionCreateGroup, &QAction::triggered, this, [this]() {
-        bool ok = false;
-        QString name =
-            QInputDialog::getText(this, tr("Create group"), tr("Group name:"),
-                                  QLineEdit::Normal, "", &ok);
-        if (ok && !name.isEmpty()) {
-          APPLICATION->instances()->addGroup(name);
+        GroupInputDialog dialog(tr("Create group"), tr("Group name:"), QString(), this);
+        if (dialog.exec() == QDialog::Accepted) {
+          QString name = dialog.textValue();
+          if (!name.isEmpty()) {
+            APPLICATION->instances()->addGroup(name);
+          }
         }
       });
 
@@ -2524,12 +2437,7 @@ void MainWindow::on_actionViewInstanceFolder_triggered() {
 
 void MainWindow::refreshInstances() { APPLICATION->instances()->loadList(); }
 
-void MainWindow::on_actionViewCentralModsFolder_triggered() {
 
-  DesktopServices::openDirectory(
-
-      APPLICATION->settings()->get("CentralModsDir").toString());
-}
 
 void MainWindow::on_actionConfig_Folder_triggered() {
 
@@ -2561,6 +2469,8 @@ void MainWindow::on_actionSettings_triggered() {
 }
 
 void MainWindow::globalSettingsClosed() {
+  updateCachedBackground();
+  update();
 
   // FIXME: quick HACK to make this work. improve, optimize.
 
@@ -2612,9 +2522,13 @@ void MainWindow::on_actionManageAccounts_triggered() {
   APPLICATION->ShowAccountsDialog(this);
 }
 
-void MainWindow::on_actionReportBug_triggered() {
+void MainWindow::on_actionStatistics_triggered() {
+    StatisticsDialog dialog(this);
+    dialog.exec();
+}
 
-  DesktopServices::openUrl(QUrl(BuildConfig.BUG_TRACKER_URL));
+void MainWindow::on_actionBuyMeACoffee_triggered() {
+  DesktopServices::openUrl(QUrl("https://buymeacoffee.com/")); // Placeholder
 }
 
 void MainWindow::on_actionAbout_triggered() {
@@ -2717,6 +2631,51 @@ void MainWindow::on_actionViewSelectedModsFolder_triggered() {
   }
 }
 
+void MainWindow::updateCachedBackground() {
+  auto bgPath = APPLICATION->settings()->get("CustomBackgroundImage").toString();
+  if (bgPath.isEmpty() || !QFile::exists(bgPath)) {
+    m_cachedBackground = QPixmap();
+    return;
+  }
+  
+  QPixmap pix(bgPath);
+  if (pix.isNull()) {
+    m_cachedBackground = QPixmap();
+    return;
+  }
+  
+  // Scale to window size
+  m_cachedBackground = pix.scaled(this->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+  
+  // Blur if enabled (using fast downscale/upscale trick)
+  if (APPLICATION->settings()->get("CustomBackgroundBlur").toBool()) {
+    m_cachedBackground = m_cachedBackground.scaled(m_cachedBackground.size() / 16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation)
+                                           .scaled(m_cachedBackground.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+  }
+}
+
+void MainWindow::paintEvent(QPaintEvent *event) {
+  QMainWindow::paintEvent(event);
+  if (!m_cachedBackground.isNull()) {
+    QPainter painter(this);
+    // Center crop the background
+    int x = (m_cachedBackground.width() - this->width()) / 2;
+    int y = (m_cachedBackground.height() - this->height()) / 2;
+    painter.drawPixmap(0, 0, m_cachedBackground, x, y, this->width(), this->height());
+    
+    // Apply dimming overlay
+    double opacity = APPLICATION->settings()->get("CustomBackgroundOpacity").toDouble();
+    QColor overlayColor = palette().color(QPalette::Window).lightness() < 128 ? QColor(26, 26, 27) : QColor(255, 255, 255);
+    overlayColor.setAlphaF(1.0 - opacity);
+    painter.fillRect(this->rect(), overlayColor);
+  }
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event) {
+  QMainWindow::resizeEvent(event);
+  updateCachedBackground();
+}
+
 void MainWindow::closeEvent(QCloseEvent *event) {
 
   // Save the window state and geometry.
@@ -2737,6 +2696,12 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 void MainWindow::changeEvent(QEvent *event) {
   if (event->type() == QEvent::LanguageChange) {
     retranslateUi();
+  } else if (event->type() == QEvent::PaletteChange) {
+    auto icon = APPLICATION->getThemedIcon("logo");
+    setWindowIcon(icon);
+    if (m_trayIcon) {
+        m_trayIcon->setIcon(icon);
+    }
   } else if (event->type() == QEvent::ActivationChange) {
 #ifdef Q_OS_WIN
     if (isActiveWindow()) {
@@ -2888,16 +2853,9 @@ void MainWindow::instanceChanged(const QModelIndex &current,
 
     // ui->renameButton->setText(m_selectedInstance->name());
 
-    qDebug() << "instanceChanged: getStatusbarDescription";
-    try {
-      m_statusLeft->setText(m_selectedInstance->getStatusbarDescription());
-    } catch (...) {
-      qWarning() << "Failed to get instance status description for" << id;
-      m_statusLeft->setText(tr("Instance: %1").arg(id));
-    }
-
     qDebug() << "instanceChanged: updateStatusCenter";
-    updateStatusCenter();
+
+
 
     qDebug() << "instanceChanged: updateInstanceToolIcon";
     updateInstanceToolIcon(m_selectedInstance->iconKey());
@@ -3034,36 +2992,7 @@ void MainWindow::checkInstancePathForProblems() {
 }
 
 void MainWindow::updateStatusCenter() {
-  if (!m_statusCenter)
-    return;
-
-  m_statusCenter->setVisible(
-
-      APPLICATION->settings()->get("ShowGlobalGameTime").toBool());
-
-  try {
-    int timePlayed = APPLICATION->instances()->getTotalPlayTime();
-
-    if (timePlayed > 0) {
-
-      if (APPLICATION->settings()->get("ShowGameTimeHours").toBool()) {
-
-        m_statusCenter->setText(
-
-            tr("Total playtime: %1 hours")
-
-                .arg(Time::prettifyDurationHours(timePlayed)));
-
-      } else {
-
-        m_statusCenter->setText(
-
-            tr("Total playtime: %1").arg(Time::prettifyDuration(timePlayed)));
-      }
-    }
-  } catch (...) {
-    qWarning() << "Failed to calculate total play time";
-  }
+  // Removed, playtime moved to Statistics dialog
 }
 
 void MainWindow::showEvent(QShowEvent *event) {

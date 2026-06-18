@@ -71,7 +71,7 @@ void drawSelectionRect(QPainter *painter, const QStyleOptionViewItem &option,
   painter->drawRoundedRect(rect.adjusted(2, 2, -2, -2), 12, 12);
 
   if (option.state & QStyle::State_MouseOver) {
-    QColor glowColor(230, 126, 34); // Orange glow (#e67e22)
+    QColor glowColor = option.palette.color(QPalette::Highlight);
     QColor hoverBg = glowColor;
     hoverBg.setAlpha(20);
     
@@ -213,7 +213,7 @@ void ListViewDelegate::paint(QPainter *painter,
   QRect textRect = opt.rect;
   QRect textHighlightRect = textRect;
   // clip the decoration on top, remove width padding. Text starts below the moved icon.
-  textRect.adjust(textMargin, iconSize + textMargin + 15, -textMargin, 0);
+  textRect.adjust(textMargin, iconSize + textMargin + 15, -textMargin, -44);
 
   textHighlightRect.adjust(0, iconSize + 15, 0, 0);
 
@@ -225,87 +225,13 @@ void ListViewDelegate::paint(QPainter *painter,
   QIcon::Mode mode = QIcon::Normal;
   if (!(opt.state & QStyle::State_Enabled))
     mode = QIcon::Disabled;
-  else if (opt.state & QStyle::State_Selected)
-    mode = QIcon::Selected;
   QIcon::State state = opt.state & QStyle::State_Open ? QIcon::On : QIcon::Off;
 
-  // draw the icon
+  // draw the icon (always at normal size, no hover scaling)
   {
-    // Scale icon slightly on hover for "animation" feel
-    if (opt.state & QStyle::State_MouseOver) {
-      painter->save();
-      painter->translate(iconbox.center());
-      painter->scale(1.05, 1.05);
-      painter->translate(-iconbox.center());
-      opt.icon.paint(painter, iconbox, Qt::AlignCenter, mode, state);
-      painter->restore();
-    } else {
-      opt.icon.paint(painter, iconbox, Qt::AlignCenter, mode, state);
-    }
+    opt.icon.paint(painter, iconbox, Qt::AlignCenter, mode, state);
   }
 
-  // quick actions on hover
-  if ((opt.state & QStyle::State_MouseOver) && opt.widget) {
-    painter->save();
-    painter->setRenderHint(QPainter::Antialiasing);
-
-    int btnSize = 30;
-    QRect cardRect = opt.rect;
-    cardRect.adjust(textMargin, 2, -textMargin, -2);
-    
-    // Position buttons cleanly at the bottom corners of the card
-    QRect playRect(cardRect.left() + 8, cardRect.bottom() - btnSize - 8, btnSize, btnSize);
-    QRect configRect(cardRect.right() - btnSize - 8, cardRect.bottom() - btnSize - 8, btnSize, btnSize);
-
-    auto drawAction = [&](const QRect &r, const QString &iconName, bool isHovered, bool isPressed, const QColor& accent) {
-      painter->save();
-      if (isPressed) {
-        painter->translate(r.center());
-        painter->scale(0.9, 0.9);
-        painter->translate(-r.center());
-      }
-      
-      QColor bgColor = opt.palette.color(QPalette::Window);
-      bgColor.setAlpha(255);
-      
-      if (isHovered) {
-        bgColor = accent;
-        bgColor.setAlpha(255);
-      }
-      
-      painter->setBrush(bgColor);
-      // Soft border matching the text color but very transparent
-      QColor borderColor = opt.palette.color(QPalette::Text);
-      borderColor.setAlpha(isHovered ? 80 : 30);
-      painter->setPen(QPen(borderColor, 1));
-      painter->drawEllipse(r);
-      
-      auto icon = APPLICATION->getThemedIcon(iconName);
-      QPixmap pix = icon.pixmap(r.size(), QIcon::Active, QIcon::On);
-      QPainter p(&pix);
-      p.setCompositionMode(QPainter::CompositionMode_SourceIn);
-      QColor iconColor = isHovered ? Qt::white : opt.palette.color(QPalette::Text);
-      p.fillRect(pix.rect(), iconColor);
-      p.end();
-      painter->drawPixmap(r.adjusted(6, 6, -6, -6), pix);
-      painter->restore();
-    };
-
-    QPoint mousePos = opt.widget->mapFromGlobal(QCursor::pos());
-    bool playHovered = playRect.contains(mousePos);
-    bool configHovered = configRect.contains(mousePos);
-    bool isPressed = opt.state & QStyle::State_Sunken;
-
-    // Theme-aware soft colors for hover (fully opaque)
-    QColor playAccent = QColor(46, 204, 113, 255); // Soft green
-    QColor configAccent = opt.palette.color(QPalette::Highlight); // Theme accent
-    configAccent.setAlpha(255);
-
-    drawAction(playRect, "status-running", playHovered, playHovered && isPressed, playAccent);
-    drawAction(configRect, "settings", configHovered, configHovered && isPressed, configAccent);
-
-    painter->restore();
-  }
   // set the text colors
   QPalette::ColorGroup cg =
       opt.state & QStyle::State_Enabled ? QPalette::Normal : QPalette::Disabled;
@@ -360,16 +286,18 @@ void ListViewDelegate::paint(QPainter *painter,
       QColor subColor = opt.palette.color(cg, QPalette::Text);
       subColor.setAlphaF(0.55f);
       painter->setPen(subColor);
-      QRect drawRect(layoutRect.left(), currentY, layoutRect.width(), 600);
-      painter->drawText(drawRect,
-                        Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap,
-                        versionText);
+      QRect drawRect(layoutRect.left(), currentY, layoutRect.width(), textRect.bottom() - currentY);
+      if (drawRect.height() > 0) {
+        painter->drawText(drawRect,
+                          Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap,
+                          versionText);
 
-      // Calculate the bottom of the drawn text to adjust the layout rect
-      QRect textBoundingRect = painter->fontMetrics().boundingRect(
-          drawRect, Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap,
-          versionText);
-      currentY += textBoundingRect.height() + 2;
+        // Calculate the bottom of the drawn text to adjust the layout rect
+        QRect textBoundingRect = painter->fontMetrics().boundingRect(
+            drawRect, Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap,
+            versionText);
+        currentY += textBoundingRect.height() + 2;
+      }
     }
   }
 
@@ -377,43 +305,88 @@ void ListViewDelegate::paint(QPainter *painter,
   auto instance = (BaseInstance *)index.data(InstanceList::InstancePointerRole)
                       .value<void *>();
   if (instance) {
-    int64_t totalTime = instance->totalTimePlayed();
     qint64 lastLaunch = instance->lastLaunch();
+    if (lastLaunch > 0) {
+        QFont tinyFont = opt.font;
+        tinyFont.setPointSizeF(tinyFont.pointSizeF() * 0.75);
+        painter->setFont(tinyFont);
+        QColor tinyColor = opt.palette.color(cg, QPalette::Text);
+        tinyColor.setAlphaF(0.4f);
+        painter->setPen(tinyColor);
 
-    QString playtimeText;
-    if (totalTime > 0) {
-      playtimeText = tr("Played: %1").arg(Time::prettifyDuration(totalTime));
-    }
-
-    if (lastLaunch > 0 || !playtimeText.isEmpty()) {
-      QFont tinyFont = opt.font;
-      tinyFont.setPointSizeF(tinyFont.pointSizeF() * 0.75);
-      painter->setFont(tinyFont);
-      QColor tinyColor = opt.palette.color(cg, QPalette::Text);
-      tinyColor.setAlphaF(0.4f);
-      painter->setPen(tinyColor);
-
-      QString text;
-      if (!playtimeText.isEmpty()) {
-        text = playtimeText;
-      }
-
-      if (lastLaunch > 0) {
         QString dateText = QDateTime::fromMSecsSinceEpoch(lastLaunch)
                                .date()
                                .toString(Qt::ISODate);
-        if (!text.isEmpty())
-          text += "\n";
-        text += dateText;
+        
+        QRect drawRect(layoutRect.left(), currentY, layoutRect.width(), textRect.bottom() - currentY);
+        if (drawRect.height() > 0) {
+          painter->drawText(
+              drawRect, Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap, dateText);
+        }
       }
-
-      if (!text.isEmpty()) {
-        QRect drawRect(layoutRect.left(), currentY, layoutRect.width(), 600);
-        painter->drawText(
-            drawRect, Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap, text);
-      }
-    }
     drawBadges(painter, opt, instance, mode, state);
+  }
+
+  // quick actions on hover (drawn last so they are over the text)
+  if ((opt.state & QStyle::State_MouseOver) && opt.widget) {
+    painter->save();
+    painter->setRenderHint(QPainter::Antialiasing);
+
+    int btnSize = 30;
+    QRect cardRect = opt.rect;
+    cardRect.adjust(textMargin, 2, -textMargin, -2);
+    
+    // Position buttons cleanly at the bottom corners of the card
+    QRect playRect(cardRect.left() + 8, cardRect.bottom() - btnSize - 8, btnSize, btnSize);
+    QRect configRect(cardRect.right() - btnSize - 8, cardRect.bottom() - btnSize - 8, btnSize, btnSize);
+
+    auto drawAction = [&](const QRect &r, const QString &iconName, bool isHovered, bool isPressed, const QColor& accent) {
+      painter->save();
+      if (isPressed) {
+        painter->translate(r.center());
+        painter->scale(0.9, 0.9);
+        painter->translate(-r.center());
+      }
+      
+      QColor bgColor = opt.palette.color(QPalette::Base);
+      bgColor.setAlpha(255);
+      
+      if (isHovered) {
+        bgColor = accent;
+        bgColor.setAlpha(255);
+      }
+      
+      painter->setBrush(bgColor);
+      // Removed the soft border so it doesn't overlap text awkwardly
+      painter->setPen(Qt::NoPen);
+      painter->drawEllipse(r);
+      
+      auto icon = APPLICATION->getThemedIcon(iconName);
+      QPixmap pix = icon.pixmap(r.size(), QIcon::Active, QIcon::On);
+      QPainter p(&pix);
+      p.setCompositionMode(QPainter::CompositionMode_SourceIn);
+      QColor iconColor = isHovered ? Qt::white : opt.palette.color(QPalette::Text);
+      p.fillRect(pix.rect(), iconColor);
+      p.end();
+      painter->drawPixmap(r.adjusted(6, 6, -6, -6), pix);
+      painter->restore();
+    };
+
+    QPoint mousePos = opt.widget->mapFromGlobal(QCursor::pos());
+    bool playHovered = playRect.contains(mousePos);
+    bool configHovered = configRect.contains(mousePos);
+    bool isPressed = opt.state & QStyle::State_Sunken;
+
+    QColor actionColor = opt.palette.color(QPalette::Base); // Fully opaque button background
+
+    QColor playAccent = opt.palette.color(QPalette::Highlight); // Use dynamic accent color
+    QColor configAccent = opt.palette.color(QPalette::Highlight); // Theme accent
+    configAccent.setAlpha(255);
+
+    drawAction(playRect, "status-running", playHovered, playHovered && isPressed, playAccent);
+    drawAction(configRect, "settings", configHovered, configHovered && isPressed, configAccent);
+
+    painter->restore();
   }
 
   drawProgressOverlay(
@@ -457,32 +430,18 @@ QSize ListViewDelegate::sizeHint(const QStyleOptionViewItem &option,
   // Add space for playtime and last played
   auto instance = (BaseInstance *)index.data(InstanceList::InstancePointerRole)
                       .value<void *>();
-  if (instance &&
-      (instance->totalTimePlayed() > 0 || instance->lastLaunch() > 0)) {
+  if (instance && instance->lastLaunch() > 0) {
     QFont tinyFont = opt.font;
     tinyFont.setPointSizeF(tinyFont.pointSizeF() * 0.75);
-    QString playtimeText;
-    int64_t totalTime = instance->totalTimePlayed();
-    if (totalTime > 0) {
-      playtimeText = tr("Played: %1").arg(Time::prettifyDuration(totalTime));
-    }
-    QString text = playtimeText;
     qint64 lastLaunch = instance->lastLaunch();
-    if (lastLaunch > 0) {
-      QString dateText = QDateTime::fromMSecsSinceEpoch(lastLaunch)
-                             .date()
-                             .toString(Qt::ISODate);
-      if (!text.isEmpty())
-        text += "\n";
-      text += dateText;
-    }
-    if (!text.isEmpty()) {
-      QFontMetrics tinyFm(tinyFont);
-      QRect maxRect(0, 0, 100 - textMargin * 2, 600);
-      QRect boundRect = tinyFm.boundingRect(
-          maxRect, Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap, text);
-      height += boundRect.height() + 2;
-    }
+    QString dateText = QDateTime::fromMSecsSinceEpoch(lastLaunch)
+                           .date()
+                           .toString(Qt::ISODate);
+    QFontMetrics tinyFm(tinyFont);
+    QRect maxRect(0, 0, 100 - textMargin * 2, 600);
+    QRect boundRect = tinyFm.boundingRect(
+        maxRect, Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap, dateText);
+    height += boundRect.height() + 2;
   }
 
   // FIXME: maybe the icon items could scale and keep proportions?

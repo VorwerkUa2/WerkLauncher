@@ -304,7 +304,7 @@ void VersionPage::on_actionInstall_mods_triggered()
 
 void VersionPage::on_actionAdd_to_Minecraft_jar_triggered()
 {
-    auto list = GuiUtil::BrowseForFiles("jarmod", tr("Select jar mods"), tr("Minecraft.jar mods (*.zip *.jar)"), APPLICATION->settings()->get("CentralModsDir").toString(), this->parentWidget());
+    auto list = GuiUtil::BrowseForFiles("jarmod", tr("Select jar mods"), tr("Minecraft.jar mods (*.zip *.jar)"), QString(), this->parentWidget());
     if(!list.empty())
     {
         m_profile->installJarMods(list);
@@ -314,7 +314,7 @@ void VersionPage::on_actionAdd_to_Minecraft_jar_triggered()
 
 void VersionPage::on_actionReplace_Minecraft_jar_triggered()
 {
-    auto jarPath = GuiUtil::BrowseForFile("jar", tr("Select jar"), tr("Minecraft.jar replacement (*.jar)"), APPLICATION->settings()->get("CentralModsDir").toString(), this->parentWidget());
+    auto jarPath = GuiUtil::BrowseForFile("jar", tr("Select jar"), tr("Minecraft.jar replacement (*.jar)"), QString(), this->parentWidget());
     if(!jarPath.isEmpty())
     {
         m_profile->installCustomJar(jarPath);

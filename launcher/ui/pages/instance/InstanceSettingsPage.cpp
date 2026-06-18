@@ -15,6 +15,7 @@
 
 #include "java/JavaInstallList.h"
 #include "FileSystem.h"
+#include "ui/pages/instance/InstanceJavaPage.h"
 
 #include "minecraft/MinecraftInstance.h"
 #include "minecraft/PackProfile.h"
@@ -29,6 +30,23 @@ InstanceSettingsPage::InstanceSettingsPage(BaseInstance *inst, QWidget *parent)
     connect(ui->openGlobalJavaSettingsButton, &QCommandLinkButton::clicked, this, &InstanceSettingsPage::globalSettingsButtonClicked);
     connect(APPLICATION, &Application::globalSettingsAboutToOpen, this, &InstanceSettingsPage::applySettings);
     connect(APPLICATION, &Application::globalSettingsClosed, this, &InstanceSettingsPage::loadSettings);
+
+    // Embed Java page dynamically
+    ui->settingsTabs->removeTab(0); // Remove dummy "Java" tab
+    m_javaPage = new InstanceJavaPage(inst, this);
+    ui->settingsTabs->insertTab(0, m_javaPage, tr("Java"));
+
+    ui->openGlobalJavaSettingsButton->hide();
+    
+    // Remove unwanted tabs to simplify UI
+    for (int i = ui->settingsTabs->count() - 1; i >= 0; --i) {
+        QWidget *t = ui->settingsTabs->widget(i);
+        if (t == ui->tab || 
+            t == ui->workaroundsPage || 
+            t == ui->miscellaneousPage) {
+            ui->settingsTabs->removeTab(i);
+        }
+    }
 
     bool supportsQuickPlay = false;
     auto *mcInst = dynamic_cast<MinecraftInstance *>(inst);
@@ -85,6 +103,9 @@ void InstanceSettingsPage::globalSettingsButtonClicked(bool)
 bool InstanceSettingsPage::apply()
 {
     applySettings();
+    if(m_javaPage) {
+        m_javaPage->apply();
+    }
     return true;
 }
 

@@ -89,6 +89,10 @@ public:
   void startWatching();
   void stopWatching();
 
+  void checkModUpdates();
+  void updateMod(int row, const Mod &mod);
+  void setInstance(BaseInstance *inst) { m_instance = inst; }
+
   bool isValid();
 
   QDir dir() { return m_dir; }
@@ -120,5 +124,6 @@ protected:
   QMap<QString, int> modsIndex;
   QMap<int, LocalModParseTask::ResultPtr> activeTickets;
   int nextResolutionTicket = 0;
+  BaseInstance *m_instance = nullptr;
   QList<Mod> mods;
 };

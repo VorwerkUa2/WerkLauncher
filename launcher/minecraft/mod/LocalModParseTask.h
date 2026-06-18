@@ -11,6 +11,7 @@ class LocalModParseTask : public QObject, public QRunnable
 public:
     struct Result {
         QString id;
+        QString sha1;
         std::shared_ptr<ModDetails> details;
     };
     using ResultPtr = std::shared_ptr<Result>;

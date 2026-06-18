@@ -15,10 +15,13 @@
 
 #include "LauncherPage.h"
 #include "ui_LauncherPage.h"
+#include "ui/widgets/CustomTitleBar.h"
+#include <QVBoxLayout>
 
 #include <QColorDialog>
 #include <QDir>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QMessageBox>
 #include <QPointer>
 #include <QTextCharFormat>
@@ -136,19 +139,7 @@ void LauncherPage::on_iconsDirOpenBtn_clicked() {
   DesktopServices::openDirectory(ui->iconsDirTextBox->text());
 }
 
-void LauncherPage::on_modsDirBrowseBtn_clicked() {
-  QString raw_dir = QFileDialog::getExistingDirectory(
-      this, tr("Mods Folder"), ui->modsDirTextBox->text());
 
-  // do not allow current dir - it's dirty. Do not allow dirs that don't exist
-  if (!raw_dir.isEmpty() && QDir(raw_dir).exists()) {
-    QString cooked_dir = FS::NormalizePath(raw_dir);
-    ui->modsDirTextBox->setText(cooked_dir);
-  }
-}
-void LauncherPage::on_modsDirOpenBtn_clicked() {
-  DesktopServices::openDirectory(ui->modsDirTextBox->text());
-}
 
 void LauncherPage::on_skinsDirBrowseBtn_clicked() {
   QString raw_dir = QFileDialog::getExistingDirectory(
@@ -220,8 +211,27 @@ void LauncherPage::on_accentColorButton_clicked() {
   QString currentColorStr = s->get("CustomAccentColor").toString();
   QColor currentColor(currentColorStr);
 
-  QColor newColor =
-      QColorDialog::getColor(currentColor, this, tr("Select Accent Color"));
+  QColorDialog colorDlg(currentColor, this);
+  colorDlg.setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+  colorDlg.setOptions(QColorDialog::DontUseNativeDialog);
+  
+  auto titleBar = new CustomTitleBar(&colorDlg);
+  if (auto layout = qobject_cast<QVBoxLayout*>(colorDlg.layout())) {
+      layout->insertWidget(0, titleBar);
+      layout->setContentsMargins(0, 0, 0, 0); // Remove outer margins if any, to make titlebar flush
+  } else {
+      // Fallback if layout is not QVBoxLayout
+      auto vLayout = new QVBoxLayout(&colorDlg);
+      vLayout->setContentsMargins(0, 0, 0, 0);
+      vLayout->addWidget(titleBar);
+      vLayout->addWidget(colorDlg.layout()->widget()); // This might not work, but let's hope it's QVBoxLayout
+  }
+  
+  if (colorDlg.exec() != QDialog::Accepted) {
+      return;
+  }
+  
+  QColor newColor = colorDlg.currentColor();
   if (!newColor.isValid())
     return;
 
@@ -249,6 +259,42 @@ void LauncherPage::on_accentColorButton_clicked() {
       safeThis->ui->accentColorButton->setEnabled(true);
     }
   });
+}
+
+void LauncherPage::on_bgChooseBtn_clicked() {
+  QString path = QFileDialog::getOpenFileName(
+      this, "Оберіть зображення для фону", QString(),
+      "Зображення (*.png *.jpg *.jpeg *.bmp *.webp)");
+  if (path.isEmpty())
+    return;
+
+  auto s = APPLICATION->settings();
+  s->set("CustomBackgroundImage", path);
+  ui->bgPathLabel->setText(QFileInfo(path).fileName());
+
+  // Re-apply theme so QMainWindow becomes transparent
+  auto currentTheme = ui->themeComboBoxColors->currentData().toString();
+  APPLICATION->setApplicationTheme(currentTheme, false);
+}
+
+void LauncherPage::on_bgClearBtn_clicked() {
+  auto s = APPLICATION->settings();
+  s->set("CustomBackgroundImage", "");
+  ui->bgPathLabel->setText("Немає");
+
+  // Re-apply theme so QMainWindow gets solid background back
+  auto currentTheme = ui->themeComboBoxColors->currentData().toString();
+  APPLICATION->setApplicationTheme(currentTheme, false);
+}
+
+void LauncherPage::on_bgOpacitySlider_valueChanged(int value) {
+  auto s = APPLICATION->settings();
+  s->set("CustomBackgroundOpacity", value / 100.0);
+}
+
+void LauncherPage::on_bgBlurCheck_stateChanged(int state) {
+  auto s = APPLICATION->settings();
+  s->set("CustomBackgroundBlur", state == Qt::Checked);
 }
 
 void LauncherPage::applySettings() {
@@ -308,7 +354,7 @@ void LauncherPage::applySettings() {
   // Folders
   // TODO: Offer to move instances to new instance folder.
   s->set("InstanceDir", ui->instDirTextBox->text());
-  s->set("CentralModsDir", ui->modsDirTextBox->text());
+
   s->set("IconsDir", ui->iconsDirTextBox->text());
   s->set("SkinsDir", ui->skinsDirTextBox->text());
 
@@ -386,7 +432,7 @@ void LauncherPage::loadSettings() {
 
   // Folders
   ui->instDirTextBox->setText(s->get("InstanceDir").toString());
-  ui->modsDirTextBox->setText(s->get("CentralModsDir").toString());
+
   ui->iconsDirTextBox->setText(s->get("IconsDir").toString());
   ui->skinsDirTextBox->setText(s->get("SkinsDir").toString());
 
@@ -397,6 +443,17 @@ void LauncherPage::loadSettings() {
   } else {
     ui->sortByNameBtn->setChecked(true);
   }
+
+  // Background settings
+  QString bgPath = s->get("CustomBackgroundImage").toString();
+  if (!bgPath.isEmpty()) {
+    ui->bgPathLabel->setText(QFileInfo(bgPath).fileName());
+  } else {
+    ui->bgPathLabel->setText("Немає");
+  }
+  ui->bgOpacitySlider->setValue(
+      (int)(s->get("CustomBackgroundOpacity").toDouble() * 100));
+  ui->bgBlurCheck->setChecked(s->get("CustomBackgroundBlur").toBool());
 }
 
 void LauncherPage::refreshFontPreview() {

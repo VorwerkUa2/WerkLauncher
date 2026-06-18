@@ -52,8 +52,6 @@ private slots:
   void on_instDirBrowseBtn_clicked();
   void on_instDirOpenBtn_clicked();
 
-  void on_modsDirBrowseBtn_clicked();
-  void on_modsDirOpenBtn_clicked();
 
   void on_iconsDirBrowseBtn_clicked();
   void on_iconsDirOpenBtn_clicked();
@@ -71,6 +69,11 @@ private slots:
   void on_accentColorButton_clicked();
   void on_themeComboBox_currentIndexChanged(int index);
   void on_themeComboBoxColors_currentIndexChanged(int index);
+
+  void on_bgChooseBtn_clicked();
+  void on_bgClearBtn_clicked();
+  void on_bgOpacitySlider_valueChanged(int value);
+  void on_bgBlurCheck_stateChanged(int state);
 
 private:
   Ui::LauncherPage *ui;

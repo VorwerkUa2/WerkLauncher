@@ -22,6 +22,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
+#include <QTimer>
 
 
 #include "Application.h"
@@ -37,6 +38,10 @@
 #include "minecraft/mod/Mod.h"
 #include "minecraft/mod/ModFolderModel.h"
 
+#include "ui/dialogs/ModDownloaderDialog.h"
+
+#include "ui/pages/instance/ModUpdateDelegate.h"
+#include "minecraft/mod/ModUpdateCheckTask.h"
 
 #include "Version.h"
 
@@ -89,6 +94,14 @@ protected:
 
     auto column = (ModFolderModel::Columns)source_left.column();
     bool invert = false;
+
+    // Always sort mods with updates to the top, regardless of column
+    const auto &modL = model->at(source_left.row());
+    const auto &modR = model->at(source_right.row());
+    if (modL.hasUpdate() != modR.hasUpdate()) {
+        return modL.hasUpdate();
+    }
+
     switch (column) {
     // GH-2550 - sort by enabled/disabled
     case ModFolderModel::ActiveColumn: {
@@ -156,6 +169,15 @@ ModFolderPage::ModFolderPage(BaseInstance *inst,
   m_displayName = displayName;
   m_iconName = iconName;
   m_helpName = helpPage;
+  
+  if (m_id == "resourcepacks") {
+      ui->actionDownload->setText(tr("Завантажити ресурспаки"));
+  } else if (m_id == "shaderpacks") {
+      ui->actionDownload->setText(tr("Завантажити шейдери"));
+  } else {
+      ui->actionDownload->setText(tr("Завантажити моди"));
+  }
+  
   m_fileSelectionFilter = "%1 (*.zip *.jar)";
   m_filterModel = new ModSortProxy(this);
   m_filterModel->setDynamicSortFilter(true);
@@ -179,6 +201,21 @@ ModFolderPage::ModFolderPage(BaseInstance *inst,
           &ModFolderPage::on_filterTextChanged);
   connect(m_inst, &BaseInstance::runningStatusChanged, this,
           &ModFolderPage::on_RunningState_changed);
+  
+  // Set instance on model for update checks
+  m_mods->setInstance(m_inst);
+  
+  // Set up update delegate on the Name column
+  auto *updateDelegate = new ModUpdateDelegate(m_mods.get(), this);
+  ui->modTreeView->setItemDelegateForColumn(ModFolderModel::NameColumn, updateDelegate);
+  connect(updateDelegate, &ModUpdateDelegate::updateClicked, this, [this](int sourceRow) {
+      if (sourceRow < 0 || sourceRow >= m_mods->rowCount()) return;
+      auto mod = m_mods->at(sourceRow);
+      // For now, just show a message that the update would be downloaded
+      QMessageBox::information(this, tr("Оновлення мода"),
+          tr("Мод '%1' має доступне оновлення до версії %2.\nФункція автоматичного завантаження буде доступна найближчим часом.")
+          .arg(mod.name()).arg(mod.latestVersion()));
+  });
 }
 
 void ModFolderPage::modItemActivated(const QModelIndex &) {
@@ -202,7 +239,13 @@ void ModFolderPage::ShowContextMenu(const QPoint &pos) {
   delete menu;
 }
 
-void ModFolderPage::openedImpl() { m_mods->startWatching(); }
+void ModFolderPage::openedImpl() {
+  m_mods->startWatching();
+  // Check for mod updates from Modrinth
+  QTimer::singleShot(2000, this, [this]() {
+      m_mods->checkModUpdates();
+  });
+}
 
 void ModFolderPage::closedImpl() { m_mods->stopWatching(); }
 
@@ -299,6 +342,21 @@ void ModFolderPage::on_actionAdd_triggered() {
       m_mods->installMod(filename);
     }
   }
+}
+
+void ModFolderPage::on_actionDownload_triggered() {
+  Unified::ProjectType ptype = Unified::ProjectType::Mod;
+  if (m_id == "resourcepacks") ptype = Unified::ProjectType::ResourcePack;
+  else if (m_id == "shaderpacks") ptype = Unified::ProjectType::ShaderPack;
+
+  ModDownloaderDialog dialog(m_inst, ptype, this);
+  if (dialog.exec() == QDialog::Accepted) {
+    // Refresh the mod list if something was installed
+  }
+}
+
+void ModFolderPage::on_actionUpdateAll_triggered() {
+  // TODO: Launch ModUpdaterTask
 }
 
 void ModFolderPage::on_actionEnable_triggered() {

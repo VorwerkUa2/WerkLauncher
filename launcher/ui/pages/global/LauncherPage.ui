@@ -342,7 +342,7 @@
           <item row="2" column="0">
            <widget class="QLabel" name="label_accent">
             <property name="text">
-             <string>Accent Color</string>
+             <string>Колір акценту</string>
             </property>
             <property name="buddy">
              <cstring>accentColorButton</cstring>
@@ -352,15 +352,83 @@
           <item row="2" column="1">
            <widget class="QPushButton" name="accentColorButton">
             <property name="text">
-             <string>Change Accent Color...</string>
+             <string>Змінити колір...</string>
             </property>
            </widget>
           </item>
          </layout>
-        </widget>
-       </item>
-       <item>
-        <spacer name="generalTabSpacer">
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="backgroundBox">
+          <property name="title">
+           <string>Заднє тло (Експериментально)</string>
+          </property>
+          <layout class="QFormLayout" name="bgFormLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="bgLabel">
+             <property name="text">
+              <string>Зображення</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <layout class="QHBoxLayout" name="bgHLayout">
+             <item>
+              <widget class="QLabel" name="bgPathLabel">
+               <property name="text">
+                <string>Немає</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="bgChooseBtn">
+               <property name="text">
+                <string>Обрати...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="bgClearBtn">
+               <property name="text">
+                <string>Очистити</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="bgOpacityLabel">
+             <property name="text">
+              <string>Прозорість (видимість фону)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSlider" name="bgOpacitySlider">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="minimum">
+              <number>0</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QCheckBox" name="bgBlurCheck">
+             <property name="text">
+              <string>Увімкнути розмиття зображення</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="generalTabSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>

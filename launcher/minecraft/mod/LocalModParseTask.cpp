@@ -10,6 +10,7 @@
 
 #include "settings/INIFile.h"
 #include "FileSystem.h"
+#include <QCryptographicHash>
 
 namespace {
 
@@ -519,6 +520,16 @@ void LocalModParseTask::processAsLitemod()
 
 void LocalModParseTask::run()
 {
+    // Calculate SHA1
+    QFile hashFile(m_modFile.filePath());
+    if (hashFile.open(QIODevice::ReadOnly)) {
+        QCryptographicHash hash(QCryptographicHash::Sha1);
+        if (hash.addData(&hashFile)) {
+            m_result->sha1 = hash.result().toHex();
+        }
+        hashFile.close();
+    }
+
     switch(m_type)
     {
         case Mod::MOD_ZIPFILE:

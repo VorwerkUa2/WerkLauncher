@@ -44,6 +44,7 @@
 #include <QNetworkAccessManager>
 #include <QPointer>
 #include <QStringList>
+#include <QPainter>
 #include <QStyleFactory>
 #include <QTimer>
 #include <QTranslator>
@@ -701,7 +702,7 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv) {
 
     // Folders
     m_settings->registerSetting("InstanceDir", "instances");
-    m_settings->registerSetting({"CentralModsDir", "ModsDir"}, "mods");
+
     m_settings->registerSetting("IconsDir", "icons");
     m_settings->registerSetting("SkinsDir", "skins");
 
@@ -775,6 +776,9 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv) {
     // Window settings
     m_settings->registerSetting("MinimizeToTray", false);
     m_settings->registerSetting("CustomAccentColor", "#ffae00");
+    m_settings->registerSetting("CustomBackgroundImage", "");
+    m_settings->registerSetting("CustomBackgroundOpacity", 0.5);
+    m_settings->registerSetting("CustomBackgroundBlur", false);
 
     // Window state and geometry
     m_settings->registerSetting("MainWindowState", "");
@@ -1224,10 +1228,8 @@ void Application::setApplicationTheme(const QString &name, bool initial) {
     qDebug() << "Theme application already in progress, ignoring.";
     return;
   }
-  if (m_currentTheme == name && !initial) {
-    qDebug() << "Theme already set, ignoring.";
-    return;
-  }
+  // Always allow theme application to update accent colors if changed.
+  // We removed the early return for matching m_currentTheme.
   auto themeIter = m_themes.find(name);
   if (themeIter != m_themes.end()) {
     m_isApplyingTheme = true;
@@ -1249,7 +1251,41 @@ void Application::setIconTheme(const QString &name) {
 
 QIcon Application::getThemedIcon(const QString &name) {
   if (name == "logo") {
-    return QIcon(":/logo.svg");
+    QString accentStr = m_settings->get("CustomAccentColor").toString();
+    QColor accentColor = accentStr.isEmpty() ? QColor("#ffae00") : QColor(accentStr);
+    
+    QImage sourceImage("c:/Users/knyaz/Desktop/MCL/branding/logo_gray.png");
+    if (sourceImage.isNull()) {
+        sourceImage = QIcon(":/logo.svg").pixmap(512, 512).toImage();
+    }
+
+    // Tint the full-size image first for accurate colors
+    QPixmap originalPix = QPixmap::fromImage(sourceImage);
+    QPixmap tintedPix(originalPix.size());
+    tintedPix.fill(Qt::transparent);
+    
+    QPainter p(&tintedPix);
+    p.setRenderHint(QPainter::Antialiasing);
+    p.setRenderHint(QPainter::SmoothPixmapTransform);
+    
+    // 1. Fill with accent color
+    p.fillRect(tintedPix.rect(), accentColor);
+    
+    // 2. Multiply by the grayscale image
+    p.setCompositionMode(QPainter::CompositionMode_Multiply);
+    p.drawPixmap(0, 0, originalPix);
+    
+    // 3. Cut out using original transparency
+    p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+    p.drawPixmap(0, 0, originalPix);
+    p.end();
+
+    // Now scale the correctly tinted image into different sizes
+    QIcon coloredIcon;
+    for (int size : {16, 24, 32, 48, 64, 128}) {
+      coloredIcon.addPixmap(tintedPix.scaled(size, size, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    }
+    return coloredIcon;
   }
   return XdgIcon::fromTheme(name);
 }

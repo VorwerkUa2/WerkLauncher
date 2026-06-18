@@ -77,8 +77,8 @@ set(Launcher_NEWS_RSS_URL "" CACHE STRING "URL to fetch Launcher's news RSS feed
 
 ######## Set version numbers ########
 set(Launcher_VERSION_MAJOR    1)
-set(Launcher_VERSION_MINOR    0)
-set(Launcher_VERSION_HOTFIX   1)
+set(Launcher_VERSION_MINOR    1)
+set(Launcher_VERSION_HOTFIX   5)
 
 # Build number
 set(Launcher_VERSION_BUILD -1 CACHE STRING "Build number. -1 for no build number.")
@@ -202,7 +202,7 @@ set(Launcher_ConfigFile "werklauncher.cfg")
 set(Launcher_Git "https://github.com/WerkLauncher/Launcher")
 
 set(Launcher_Branding_ICNS "${PROJECT_SOURCE_DIR}/branding/${Launcher_CommonName}.icns")
-set(Launcher_Branding_WindowsRC "${PROJECT_SOURCE_DIR}/branding/multimc.rc")
+set(Launcher_Branding_WindowsRC "${PROJECT_SOURCE_DIR}/branding/werklauncher.rc")
 set(Launcher_Branding_LogoQRC "${PROJECT_SOURCE_DIR}/branding/logo.qrc")
 
 set(Launcher_META_URL "https://meta.multimc.org/v1/") # TODO: migrate to own meta server

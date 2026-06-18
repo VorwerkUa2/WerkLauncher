@@ -55,6 +55,7 @@ struct Modpack {
     LoadState detailsLoaded = LoadState::NotLoaded;
     QString wikiUrl;
     QString body;
+    uint64_t downloads = 0;
 
     LoadState versionsLoaded = LoadState::NotLoaded;
     QVector<Version> versions;

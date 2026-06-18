@@ -3,7 +3,7 @@
 ; Встановіть Inno Setup 6 перед компіляцією цього скрипта
 
 #define MyAppName "WerkLauncher"
-#define MyAppVersion "1.0.1"
+#define MyAppVersion "1.1.5"
 #define MyAppPublisher "Vorwerkua Studio"
 #define MyAppURL "https://werklauncher.com"
 #define MyAppExeName "WerkLauncher.exe"
@@ -31,7 +31,7 @@ OutputDir=out\installer
 OutputBaseFilename=WerkLauncher_Setup_{#MyAppVersion}
 
 ; Іконка інсталятора (той самий що і в програми)
-SetupIconFile=branding\MultiMC.ico
+SetupIconFile=branding\WerkLauncher.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 
 ; -------- КАСТОМІЗАЦІЯ ДИЗАЙНУ --------
@@ -65,7 +65,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 ; ---- Головний файл та іконка ----
 Source: "{#BuildDir}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "branding\MultiMC.ico"; DestDir: "{app}\branding"; Flags: ignoreversion createallsubdirs
+Source: "branding\WerkLauncher.ico"; DestDir: "{app}\branding"; Flags: ignoreversion createallsubdirs
 
 ; ---- Qt6 DLLs (Release) ----
 Source: "{#BuildDir}\Qt6Core.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -101,9 +101,9 @@ Source: "{#BuildDir}\generic\*.dll"; DestDir: "{app}\generic"; Flags: ignorevers
 Source: "{#BuildDir}\jars\*.jar"; DestDir: "{app}\jars"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\branding\MultiMC.ico"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\branding\WerkLauncher.ico"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\branding\MultiMC.ico"; Tasks: desktopicon
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\branding\WerkLauncher.ico"; Tasks: desktopicon
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent

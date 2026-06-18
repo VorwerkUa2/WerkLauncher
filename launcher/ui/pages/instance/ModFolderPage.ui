@@ -84,6 +84,9 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionAdd"/>
+   <addaction name="actionDownload"/>
+   <addaction name="separator"/>
+   <addaction name="actionUpdateAll"/>
    <addaction name="separator"/>
    <addaction name="actionRemove"/>
    <addaction name="actionEnable"/>
@@ -128,7 +131,23 @@
     <string>View &amp;Configs</string>
    </property>
    <property name="toolTip">
-    <string>Open the 'config' folder in the system file manager.</string>
+    <string>Open the instance's config folder</string>
+   </property>
+  </action>
+  <action name="actionDownload">
+   <property name="text">
+    <string>&amp;Download Mods</string>
+   </property>
+   <property name="toolTip">
+    <string>Download mods from Modrinth/CurseForge</string>
+   </property>
+  </action>
+  <action name="actionUpdateAll">
+   <property name="text">
+    <string>&amp;Update All</string>
+   </property>
+   <property name="toolTip">
+    <string>Check and update all installed mods</string>
    </property>
   </action>
   <action name="actionView_Folder">

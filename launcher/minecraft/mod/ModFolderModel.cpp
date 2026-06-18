@@ -16,6 +16,7 @@
 #include "ModFolderModel.h"
 #include "LocalModParseTask.h"
 #include "ModFolderLoadTask.h"
+#include "ModUpdateCheckTask.h"
 #include <FileSystem.h>
 #include <QDebug>
 #include <QFileSystemWatcher>
@@ -189,8 +190,16 @@ void ModFolderModel::finishModParse(int token) {
   activeTickets.remove(token);
   int row = modsIndex[result->id];
   auto &mod = mods[row];
+  mod.setSha1(result->sha1);
   mod.finishResolvingWithDetails(result->details);
   emit dataChanged(index(row), index(row, columnCount(QModelIndex()) - 1));
+}
+
+void ModFolderModel::checkModUpdates() {
+    if (!m_instance) return;
+    auto *task = new ModUpdateCheckTask(this, m_instance, this);
+    connect(task, &ModUpdateCheckTask::finished, task, &QObject::deleteLater);
+    task->start();
 }
 
 void ModFolderModel::disableInteraction(bool disabled) {
@@ -427,6 +436,13 @@ bool ModFolderModel::setModStatus(int row,
   modsIndex[newId] = row;
   emit dataChanged(index(row, 0), index(row, columnCount(QModelIndex()) - 1));
   return true;
+}
+
+void ModFolderModel::updateMod(int row, const Mod &mod) {
+    if (row >= 0 && row < mods.size()) {
+        mods[row] = mod;
+        emit dataChanged(index(row, 0), index(row, columnCount(QModelIndex()) - 1));
+    }
 }
 
 QVariant ModFolderModel::headerData(int section, Qt::Orientation orientation,

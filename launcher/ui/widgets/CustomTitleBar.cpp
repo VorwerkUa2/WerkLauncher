@@ -31,7 +31,7 @@ void CustomTitleBar::setupUi() {
   layout->setSpacing(0);
 
   m_iconLabel = new QLabel(this);
-  m_iconLabel->setPixmap(QIcon(":/logo.svg").pixmap(16, 16));
+  m_iconLabel->setPixmap(APPLICATION->getThemedIcon("logo").pixmap(16, 16));
 
   m_titleLabel = new QLabel(BuildConfig.LAUNCHER_NAME, this);
 
@@ -128,6 +128,9 @@ void CustomTitleBar::updateStyles() {
   });
 
   updateMaximizeIcon();
+  
+  // Refresh the logo in case the accent color changed
+  m_iconLabel->setPixmap(APPLICATION->getThemedIcon("logo").pixmap(16, 16));
 }
 
 void CustomTitleBar::updateMaximizeIcon() {

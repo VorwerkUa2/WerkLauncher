@@ -3318,6 +3318,58 @@ msgctxt "ModFolderPage|"
 msgid "Add mods"
 msgstr "Додати моди"
 
+msgctxt "ModFolderPage|"
+msgid "&Download Mods"
+msgstr "&Завантажити моди"
+
+msgctxt "ModFolderPage|"
+msgid "Download mods from Modrinth/CurseForge"
+msgstr "Завантажити моди з Modrinth/CurseForge"
+
+msgctxt "ModFolderPage|"
+msgid "&Update All"
+msgstr "&Оновити все"
+
+msgctxt "ModFolderPage|"
+msgid "Check and update all installed mods"
+msgstr "Перевірити та оновити всі встановлені моди"
+
+msgctxt "ModDownloaderDialog|"
+msgid "Download Mods"
+msgstr "Завантажити моди"
+
+msgctxt "ModDownloaderDialog|"
+msgid "Search for mods..."
+msgstr "Пошук модів..."
+
+msgctxt "ModDownloaderDialog|"
+msgid "All Platforms"
+msgstr "Всі платформи"
+
+msgctxt "ModDownloaderDialog|"
+msgid "Search"
+msgstr "Пошук"
+
+msgctxt "ModDownloaderDialog|"
+msgid "← Back"
+msgstr "← Назад"
+
+msgctxt "ModDownloaderDialog|"
+msgid "Install"
+msgstr "Встановити"
+
+msgctxt "ModDownloaderDialog|"
+msgid "Description"
+msgstr "Опис"
+
+msgctxt "ModDownloaderDialog|"
+msgid "Versions"
+msgstr "Версії"
+
+msgctxt "ModDownloaderDialog|"
+msgid "Gallery"
+msgstr "Галерея"
+
 msgctxt "LegacyFTB::Page|"
 msgid "Add pack"
 msgstr "Додати збірку"

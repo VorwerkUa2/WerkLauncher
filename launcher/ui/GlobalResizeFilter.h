@@ -58,7 +58,7 @@ private:
         int y = globalPos.y() - rect.y();
         int w = rect.width();
         int h = rect.height();
-        int border = 8;
+        int border = 4;
 
         // "до створення інстансу змінювати розмір через верхню частину я не міг"
         // This is because the top area has the titlebar. But the user SHOULD be able 

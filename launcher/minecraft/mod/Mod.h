@@ -101,6 +101,18 @@ public:
         m_localDetails = details;
     }
 
+    QString sha1() const { return m_sha1; }
+    void setSha1(const QString &val) { m_sha1 = val; }
+    
+    bool hasUpdate() const { return m_hasUpdate; }
+    void setHasUpdate(bool val) { m_hasUpdate = val; }
+    
+    QString latestVersion() const { return m_latestVersion; }
+    void setLatestVersion(const QString &val) { m_latestVersion = val; }
+    
+    QString updateUrl() const { return m_updateUrl; }
+    void setUpdateUrl(const QString &val) { m_updateUrl = val; }
+
 protected:
     QFileInfo m_file;
     QDateTime m_changedDateTime;
@@ -112,4 +124,9 @@ protected:
     int m_resolutionTicket = 0;
     ModType m_type = MOD_UNKNOWN;
     std::shared_ptr<ModDetails> m_localDetails;
+    
+    QString m_sha1;
+    bool m_hasUpdate = false;
+    QString m_latestVersion;
+    QString m_updateUrl;
 };

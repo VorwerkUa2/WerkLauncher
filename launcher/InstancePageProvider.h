@@ -45,26 +45,26 @@ public:
             values.append(new ResourcePackPage(onesix.get()));
             values.append(new TexturePackPage(onesix.get()));
             values.append(new ShaderPackPage(onesix.get()));
-            values.append(new NotesPage(onesix.get()));
+            // values.append(new NotesPage(onesix.get()));
             values.append(new WorldListPage(onesix, onesix->worldList()));
             values.append(new ServersPage(onesix));
             // values.append(new GameOptionsPage(onesix.get()));
             values.append(new ScreenshotsPage(FS::PathCombine(onesix->gameRoot(), "screenshots")));
-            values.append(new InstanceJavaPage(onesix.get()));
+            // values.append(new InstanceJavaPage(onesix.get()));
             values.append(new InstanceSettingsPage(onesix.get()));
         }
         std::shared_ptr<LegacyInstance> legacy = std::dynamic_pointer_cast<LegacyInstance>(inst);
         if(legacy)
         {
             values.append(new LegacyUpgradePage(legacy));
-            values.append(new NotesPage(legacy.get()));
+            // values.append(new NotesPage(legacy.get()));
             values.append(new WorldListPage(legacy, legacy->worldList()));
             values.append(new ScreenshotsPage(FS::PathCombine(legacy->gameRoot(), "screenshots")));
         }
         auto logMatcher = inst->getLogFileMatcher();
         if(logMatcher)
         {
-            values.append(new OtherLogsPage(inst->getLogFileRoot(), logMatcher));
+            // values.append(new OtherLogsPage(inst->getLogFileRoot(), logMatcher));
         }
         return values;
     }

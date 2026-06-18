@@ -33,13 +33,10 @@ PageDialog::PageDialog(BasePageProvider *pageProvider, QString defaultId,
   setLayout(mainLayout);
 
   QDialogButtonBox *buttons =
-      new QDialogButtonBox(QDialogButtonBox::Help | QDialogButtonBox::Close);
-  buttons->button(QDialogButtonBox::Close)->setDefault(true);
+      new QDialogButtonBox(QDialogButtonBox::Help);
   buttons->setContentsMargins(6, 6, 6, 6);
   m_container->addButtons(buttons);
 
-  connect(buttons->button(QDialogButtonBox::Close), SIGNAL(clicked()), this,
-          SLOT(close()));
   connect(buttons->button(QDialogButtonBox::Help), SIGNAL(clicked()),
           m_container, SLOT(help()));
 

@@ -12,9 +12,70 @@
 
 #include <QIcon>
 
+QVector<Modrinth::ListModel::Category> Modrinth::ListModel::s_categories;
+bool Modrinth::ListModel::s_categoriesLoaded = false;
+bool Modrinth::ListModel::s_categoriesLoading = false;
+
 Modrinth::ListModel::ListModel(QObject *parent) : QAbstractListModel(parent) {}
 
 Modrinth::ListModel::~ListModel() = default;
+
+const QVector<Modrinth::ListModel::Category>& Modrinth::ListModel::getCategories() {
+    return s_categories;
+}
+
+void Modrinth::ListModel::fetchCategories() {
+    if (s_categoriesLoaded || s_categoriesLoading) {
+        if (s_categoriesLoaded) {
+            emit categoriesLoaded();
+        }
+        return;
+    }
+    s_categoriesLoading = true;
+    auto *netJob = new NetJob("Modrinth::Categories", APPLICATION->network());
+    netJob->addNetAction(Net::Download::makeByteArray(QUrl("https://api.modrinth.com/v2/tag/category"), &categoriesResponse));
+    categoriesPtr = netJob;
+    categoriesPtr->start();
+    QObject::connect(netJob, &NetJob::succeeded, this, &ListModel::categoriesRequestFinished);
+    QObject::connect(netJob, &NetJob::failed, this, &ListModel::categoriesRequestFailed);
+}
+
+void Modrinth::ListModel::categoriesRequestFinished() {
+    categoriesPtr.reset();
+    s_categoriesLoading = false;
+
+    QJsonParseError parse_error;
+    QJsonDocument doc = QJsonDocument::fromJson(categoriesResponse, &parse_error);
+    if (parse_error.error == QJsonParseError::NoError) {
+        try {
+            auto arr = Json::requireArray(doc);
+            s_categories.clear();
+            for (auto itemRaw : arr) {
+                auto obj = itemRaw.toObject();
+                if (Json::ensureString(obj, "project_type", "") == "modpack") {
+                    Category cat;
+                    cat.id = Json::requireString(obj, "name");
+                    cat.name = cat.id;
+                    if (!cat.name.isEmpty()) {
+                        cat.name[0] = cat.name[0].toUpper();
+                    }
+                    s_categories.append(cat);
+                }
+            }
+            s_categoriesLoaded = true;
+            emit categoriesLoaded();
+        } catch (const JSONValidationError &e) {
+            qWarning() << "Error parsing Modrinth categories: " << e.cause();
+        }
+    }
+}
+
+void Modrinth::ListModel::categoriesRequestFailed() {
+    categoriesPtr.reset();
+    s_categoriesLoading = false;
+    qWarning() << "Failed to fetch Modrinth categories.";
+}
+
 
 QVariant Modrinth::ListModel::data(const QModelIndex &index, int role) const {
   int pos = index.row();
@@ -35,6 +96,10 @@ QVariant Modrinth::ListModel::data(const QModelIndex &index, int role) const {
   } else if (role == Qt::ToolTipRole) {
     return pack.description;
   } else if (role == Qt::UserRole) {
+    return pack.author;
+  } else if (role == Qt::UserRole + 1) {
+    return (qulonglong)pack.downloads;
+  } else if (role == Qt::UserRole + 2) {
     QVariant v;
     v.setValue(pack);
     return v;
@@ -65,13 +130,14 @@ int Modrinth::ListModel::rowCount(const QModelIndex &parent) const {
 }
 
 void Modrinth::ListModel::searchWithTerm(const QString &term,
-                                         const QString &sort) {
+                                         const QString &sort, const QString &categoryId) {
   if (currentSearchTerm == term &&
-      currentSearchTerm.isNull() == term.isNull() && currentSort == sort) {
+      currentSearchTerm.isNull() == term.isNull() && currentSort == sort && currentCategoryId == categoryId) {
     return;
   }
   currentSearchTerm = term;
   currentSort = sort;
+  currentCategoryId = categoryId;
   if (jobPtr) {
     jobPtr->abort();
     searchState = ResetRequested;
@@ -88,20 +154,19 @@ void Modrinth::ListModel::searchWithTerm(const QString &term,
 
 void Modrinth::ListModel::performPaginatedSearch() {
   auto *netJob = new NetJob("Modrinth::Search", APPLICATION->network());
-  QString searchUrl = "";
-  if (currentSearchTerm.isEmpty()) {
-    searchUrl = QString("https://api.modrinth.com/v2/"
-                        "search?facets=[[%22project_type:modpack%22]]&index=%1&"
-                        "limit=25&offset=%2")
-                    .arg(currentSort)
-                    .arg(nextSearchOffset);
-  } else {
-    searchUrl = QString("https://api.modrinth.com/v2/"
-                        "search?facets=[[%22project_type:modpack%22]]&index=%1&"
-                        "limit=25&offset=%2&query=%3")
-                    .arg(currentSort)
-                    .arg(nextSearchOffset)
-                    .arg(currentSearchTerm);
+  QString facetsStr = "[[%22project_type:modpack%22]";
+  if (!currentCategoryId.isEmpty()) {
+      facetsStr += QString(",[%22categories:%1%22]").arg(currentCategoryId);
+  }
+  facetsStr += "]";
+  
+  QString searchUrl = QString("https://api.modrinth.com/v2/search?facets=%1&index=%2&limit=25&offset=%3")
+                          .arg(facetsStr)
+                          .arg(currentSort)
+                          .arg(nextSearchOffset);
+
+  if (!currentSearchTerm.isEmpty()) {
+      searchUrl += "&query=" + QString(QUrl::toPercentEncoding(currentSearchTerm));
   }
   netJob->addNetAction(
       Net::Download::makeByteArray(QUrl(searchUrl), &response));
@@ -151,6 +216,7 @@ void Modrinth::ListModel::searchRequestFinished() {
       pack.iconUrl = Json::requireUrl(packObj, "icon_url");
       pack.author = Json::requireString(packObj, "author");
       pack.description = Json::requireString(packObj, "description");
+      pack.downloads = Json::ensureInteger(packObj, "downloads", 0);
       newList.append(pack);
     } catch (const JSONValidationError &e) {
       qWarning() << "Error while loading pack from Modrinth: " << e.cause();

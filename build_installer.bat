@@ -52,7 +52,7 @@ if %errorlevel% neq 0 (
 echo.
 echo ============================================
 echo   SUCCESS! Installer created in:
-echo   out\installer\WerkLauncher_Setup_1.0.1.exe
+echo   out\installer\WerkLauncher_Setup_1.1.5.exe
 echo ============================================
 pause
 exit /b 0

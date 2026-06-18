@@ -24,6 +24,7 @@
 
 #include <QStackedWidget>
 #include <QPushButton>
+#include <QPixmap>
 
 #include "BaseInstance.h"
 #include "minecraft/auth/MinecraftAccount.h"
@@ -66,6 +67,8 @@ public:
 protected:
   bool nativeEvent(const QByteArray &eventType, void *message,
                    qintptr *result) override;
+  void paintEvent(QPaintEvent *event) override;
+  void resizeEvent(QResizeEvent *event) override;
 
 public slots:
   void checkInstancePathForProblems();
@@ -113,7 +116,7 @@ private slots:
 
   void refreshInstances();
 
-  void on_actionViewCentralModsFolder_triggered();
+
 
   void checkForUpdates();
 
@@ -123,7 +126,8 @@ private slots:
 
   void on_actionManageAccounts_triggered();
 
-  void on_actionReportBug_triggered();
+  void on_actionBuyMeACoffee_triggered();
+  void on_actionStatistics_triggered();
 
   void on_actionPatreon_triggered();
 
@@ -195,6 +199,7 @@ public:
   void changeActiveAccount();
 
   void searchTextChanged(const QString &text);
+
   void sortModeChanged(int index);
   void droppedURLsOnIndex(QList<QUrl> urls, QModelIndex index);
 
@@ -254,4 +259,8 @@ private:
 
   // managed by the application object
   Task *m_versionLoadTask = nullptr;
+
+  // Background image caching
+  QPixmap m_cachedBackground;
+  void updateCachedBackground();
 };

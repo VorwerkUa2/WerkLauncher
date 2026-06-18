@@ -22,6 +22,7 @@
 #include "Application.h"
 
 class JavaChecker;
+class InstanceJavaPage;
 namespace Ui
 {
 class InstanceSettingsPage;
@@ -66,4 +67,5 @@ private:
     Ui::InstanceSettingsPage *ui;
     BaseInstance *m_instance;
     SettingsObjectPtr m_settings;
+    InstanceJavaPage *m_javaPage = nullptr;
 };

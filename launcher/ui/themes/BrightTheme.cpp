@@ -49,8 +49,8 @@ QString BrightTheme::appStyleSheet() {
       "QWidget { background: transparent; border: none; font-family: 'Segoe "
       "UI', 'SF Pro Display', 'Helvetica Neue', 'Ubuntu', sans-serif; }"
       "QWizard#SetupWizard { background-color: #f5f5f7; border: 1px solid #d1d1d6; }"
-      "QMainWindow, QDialog, QDockWidget { background-color: "
-      "#f5f5f7; }"
+      "QMainWindow { background-color: %1; }"
+      "QDialog, QDockWidget { background-color: #f5f5f7; }"
       "QDockWidget::title { background-color: #f5f5f7; color: "
       "#1a1a1b; "
       "padding: 4px; }"
@@ -76,7 +76,7 @@ QString BrightTheme::appStyleSheet() {
       "color: #1a1a1b; margin: 1px 2px; }"
       "QMenu::item:selected { background-color: #ffae00; color: #ffffff; }"
       "QMenu::item:pressed { padding: 5px 17px 3px 9px; }"
-      "QToolTip { color: #ffffff; background-color: #ffae00; border: 1px "
+      "QToolTip { color: #000000; background-color: #ffae00; border: 1px "
       "solid #ffae00; border-radius: 6px; padding: 4px; }"
       "QPushButton, QToolButton { background-color: #ffffff; "
       "border: 1px solid #d1d1d6; "
@@ -117,11 +117,11 @@ QString BrightTheme::appStyleSheet() {
       "QComboBox QAbstractItemView::item:selected { background-color: "
       "#ffae00; color: #ffffff; }"
       "QListView, QTreeView, QTableView, InstanceView { background-color: "
-      "#ffffff; "
+      "%2; "
       "border: 1px solid #e5e5ea; border-radius: 8px; outline: "
       "none; }"
-      "QListView::indicator, QTreeView::indicator { width: 18px; height: "
-      "18px; "
+      "QListView::indicator, QTreeView::indicator { width: 14px; height: "
+      "14px; "
       "background-color: #ffffff; border: 1px solid #d1d1d6; border-radius: "
       "6px; }"
       "QListView::indicator:checked, QTreeView::indicator:checked { "
@@ -205,5 +205,9 @@ QString BrightTheme::appStyleSheet() {
       "QStatusBar { border-top: 1px solid #d1d1d6; }"
       "QStatusBar QLabel#playtimeLabel { padding-right: 20px; "
       "padding-bottom: 6px; }";
+  
+  bool hasBg = !APPLICATION->settings()->get("CustomBackgroundImage").toString().isEmpty();
+  qss = qss.replace("%1", hasBg ? "transparent" : "#f5f5f7");
+  qss = qss.replace("%2", hasBg ? "transparent" : "#ffffff");
   return qss.replace("#ffae00", customAccent);
 }

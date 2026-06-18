@@ -32,12 +32,22 @@ public:
     bool canFetchMore(const QModelIndex &parent) const override;
     void fetchMore(const QModelIndex &parent) override;
 
-    void searchWithTerm(const QString &term, const QString &sort);
+    struct Category {
+        QString id;
+        QString name;
+        QUrl iconUrl;
+    };
+
+    static const QVector<Category>& getCategories();
+    void fetchCategories();
+
+    void searchWithTerm(const QString &term, const QString &sort, const QString &categoryId = QString());
     void getPackDetails(const QString &id);
     nonstd::optional<Modpack> getModpackById(const QString &id);
 
 signals:
     void packDataChanged(const QString &id);
+    void categoriesLoaded();
 
 private slots:
     void searchRequestFinished();
@@ -48,6 +58,9 @@ private slots:
 
     void versionsRequestFinished();
     void versionsRequestFailed();
+
+    void categoriesRequestFinished();
+    void categoriesRequestFailed();
 
 private:
     void performPaginatedSearch();
@@ -71,6 +84,7 @@ private:
 
     QString currentSearchTerm;
     QString currentSort = QStringLiteral("relevance");
+    QString currentCategoryId;
     int nextSearchOffset = 0;
     enum SearchState {
         None,
@@ -89,6 +103,13 @@ private:
 
     NetJob::Ptr versionsPtr;
     QByteArray versionsResponse;
+
+    NetJob::Ptr categoriesPtr;
+    QByteArray categoriesResponse;
+
+    static QVector<Category> s_categories;
+    static bool s_categoriesLoaded;
+    static bool s_categoriesLoading;
 };
 
 }

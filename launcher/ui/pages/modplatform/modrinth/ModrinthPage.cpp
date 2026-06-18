@@ -19,6 +19,7 @@
 #include "ModrinthPage.h"
 #include "ModrinthDocument.h"
 #include "ui/dialogs/NewInstanceDialog.h"
+#include "ui/pages/modplatform/ModpackDelegate.h"
 
 #include "ui_ModrinthPage.h"
 
@@ -32,6 +33,12 @@ ModrinthPage::ModrinthPage(NewInstanceDialog *dialog, QWidget *parent) : QWidget
     ui->searchEdit->installEventFilter(this);
     model = new Modrinth::ListModel(this);
     ui->packView->setModel(model);
+    ui->packView->setItemDelegate(new ModpackDelegate(this));
+
+    ui->packDescription->hide();
+    connect(ui->packView, &QListView::doubleClicked, this, [this](const QModelIndex&) {
+        ui->packDescription->show();
+    });
 
     ui->versionSelectionBox->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     ui->versionSelectionBox->view()->parentWidget()->setMaximumHeight(300);
@@ -43,9 +50,14 @@ ModrinthPage::ModrinthPage(NewInstanceDialog *dialog, QWidget *parent) : QWidget
     ui->sortByBox->addItem(tr("Sort by last updated"), QStringLiteral("updated"));
 
     connect(ui->sortByBox, SIGNAL(currentIndexChanged(int)), this, SLOT(triggerSearch()));
+    connect(ui->categoryBox, SIGNAL(currentIndexChanged(int)), this, SLOT(triggerSearch()));
     connect(ui->packView->selectionModel(), &QItemSelectionModel::currentChanged, this, &ModrinthPage::onSelectionChanged);
     connect(ui->versionSelectionBox, &QComboBox::currentTextChanged, this, &ModrinthPage::onVersionSelectionChanged);
     connect(model, &Modrinth::ListModel::packDataChanged, this, &ModrinthPage::onPackDataChanged);
+    connect(model, &Modrinth::ListModel::categoriesLoaded, this, &ModrinthPage::onCategoriesLoaded);
+
+    ui->categoryBox->addItem(tr("All Categories"), QString());
+    model->fetchCategories();
 }
 
 ModrinthPage::~ModrinthPage()
@@ -73,7 +85,27 @@ bool ModrinthPage::eventFilter(QObject *watched, QEvent *event)
 }
 
 void ModrinthPage::triggerSearch() {
-    model->searchWithTerm(ui->searchEdit->text(), ui->sortByBox->itemData(ui->sortByBox->currentIndex()).toString());
+    QString categoryId = ui->categoryBox->currentData().toString();
+    model->searchWithTerm(ui->searchEdit->text(), ui->sortByBox->itemData(ui->sortByBox->currentIndex()).toString(), categoryId);
+}
+
+void ModrinthPage::onCategoriesLoaded() {
+    QString currentId = ui->categoryBox->currentData().toString();
+    
+    ui->categoryBox->blockSignals(true);
+    ui->categoryBox->clear();
+    ui->categoryBox->addItem(tr("All Categories"), QString());
+    
+    const auto& categories = model->getCategories();
+    for (const auto& cat : categories) {
+        ui->categoryBox->addItem(cat.name, cat.id);
+    }
+    
+    int idx = ui->categoryBox->findData(currentId);
+    if (idx != -1) {
+        ui->categoryBox->setCurrentIndex(idx);
+    }
+    ui->categoryBox->blockSignals(false);
 }
 
 void ModrinthPage::onSelectionChanged(QModelIndex first, QModelIndex second) {
@@ -87,7 +119,7 @@ void ModrinthPage::onSelectionChanged(QModelIndex first, QModelIndex second) {
         return;
     }
 
-    current = model->data(first, Qt::UserRole).value<Modrinth::Modpack>();
+    current = model->data(first, Qt::UserRole + 2).value<Modrinth::Modpack>();
     model->getPackDetails(current.id);
     updateCurrentPackUI();
     suggestCurrent();

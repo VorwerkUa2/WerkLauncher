@@ -30,12 +30,15 @@
 #include <QDialogButtonBox>
 #include <QFileDialog>
 #include <QLayout>
+#include <QHBoxLayout>
+#include <QSizeGrip>
 #include <QPushButton>
 #include <QValidator>
 
 #include "ui/pages/modplatform/ImportPage.h"
 #include "ui/pages/modplatform/VanillaPage.h"
 #include "ui/pages/modplatform/modrinth/ModrinthPage.h"
+#include "ui/pages/modplatform/werk/WerkModpacksPage.h"
 #include "ui/pages/modplatform/curseforge/CurseForgePage.h"
 #include "ui/widgets/PageContainer.h"
 
@@ -97,7 +100,12 @@ NewInstanceDialog::NewInstanceDialog(const QString &initialGroup,
   m_container->layout()->setContentsMargins(0, 0, 0, 0);
   ui->verticalLayout->insertWidget(2, m_container);
 
-  m_container->addButtons(m_buttons);
+  auto buttonsLayout = new QHBoxLayout();
+  buttonsLayout->setContentsMargins(0, 0, 0, 0);
+  buttonsLayout->addWidget(m_buttons);
+  auto sizeGrip = new QSizeGrip(this);
+  buttonsLayout->addWidget(sizeGrip, 0, Qt::AlignBottom | Qt::AlignRight);
+  m_container->addButtons(buttonsLayout);
 
   // Bonk Qt over its stupid head and make sure it understands which button is
   // the default one... See:
@@ -129,19 +137,15 @@ NewInstanceDialog::NewInstanceDialog(const QString &initialGroup,
 
   updateDialogState();
 
-  restoreGeometry(QByteArray::fromBase64(
-      APPLICATION->settings()->get("NewInstanceGeometry").toByteArray()));
+  resize(900, 650);
 }
 
 void NewInstanceDialog::reject() {
-  APPLICATION->settings()->set("NewInstanceGeometry",
-                               saveGeometry().toBase64());
+
   QDialog::reject();
 }
 
 void NewInstanceDialog::accept() {
-  APPLICATION->settings()->set("NewInstanceGeometry",
-                               saveGeometry().toBase64());
   importIconNow();
   QDialog::accept();
 }
@@ -151,7 +155,8 @@ QList<BasePage *> NewInstanceDialog::getPages() {
   return {new VanillaPage(this),
           importPage,
           new CurseForgePage(this),
-          new ModrinthPage(this)};
+          new ModrinthPage(this),
+          new WerkModpacksPage(this)};
 }
 
 QString NewInstanceDialog::dialogTitle() { return tr("New Instance"); }

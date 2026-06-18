@@ -354,6 +354,8 @@ set(MINECRAFT_SOURCES
     minecraft/mod/ModFolderLoadTask.cpp
     minecraft/mod/LocalModParseTask.h
     minecraft/mod/LocalModParseTask.cpp
+    minecraft/mod/ModUpdateCheckTask.h
+    minecraft/mod/ModUpdateCheckTask.cpp
     minecraft/mod/ResourcePackFolderModel.h
     minecraft/mod/ResourcePackFolderModel.cpp
     minecraft/mod/TexturePackFolderModel.h
@@ -654,6 +656,8 @@ SET(LAUNCHER_SOURCES
     ui/pages/instance/ShaderPackPage.h
     ui/pages/instance/ModFolderPage.cpp
     ui/pages/instance/ModFolderPage.h
+    ui/pages/instance/ModUpdateDelegate.cpp
+    ui/pages/instance/ModUpdateDelegate.h
     ui/pages/instance/NotesPage.cpp
     ui/pages/instance/NotesPage.h
     ui/pages/instance/LogPage.cpp
@@ -686,8 +690,8 @@ SET(LAUNCHER_SOURCES
     # GUI - platform pages
     ui/pages/modplatform/VanillaPage.cpp
     ui/pages/modplatform/VanillaPage.h
-
-
+    ui/pages/modplatform/ModpackDelegate.cpp
+    ui/pages/modplatform/ModpackDelegate.h
 
     ui/pages/modplatform/curseforge/CurseForgeData.h
     ui/pages/modplatform/curseforge/CurseForgeModel.cpp
@@ -702,8 +706,14 @@ SET(LAUNCHER_SOURCES
     ui/pages/modplatform/modrinth/ModrinthDocument.h
     ui/pages/modplatform/modrinth/ModrinthPage.cpp
     ui/pages/modplatform/modrinth/ModrinthPage.h
+    ui/pages/modplatform/werk/WerkModpacksPage.cpp
+    ui/pages/modplatform/werk/WerkModpacksPage.h
 
-
+    ui/pages/modplatform/unified/UnifiedModData.h
+    ui/pages/modplatform/unified/UnifiedModModel.cpp
+    ui/pages/modplatform/unified/UnifiedModModel.h
+    ui/pages/modplatform/unified/ModListDelegate.cpp
+    ui/pages/modplatform/unified/ModListDelegate.h
 
     ui/pages/modplatform/ImportPage.cpp
     ui/pages/modplatform/ImportPage.h
@@ -717,6 +727,8 @@ SET(LAUNCHER_SOURCES
     ui/dialogs/ProfileSelectDialog.h
     ui/dialogs/CopyInstanceDialog.cpp
     ui/dialogs/CopyInstanceDialog.h
+    ui/dialogs/StatisticsDialog.cpp
+    ui/dialogs/StatisticsDialog.h
     ui/dialogs/CustomMessageBox.cpp
     ui/dialogs/CustomMessageBox.h
     ui/dialogs/ExportInstanceDialog.cpp
@@ -729,6 +741,8 @@ SET(LAUNCHER_SOURCES
     ui/dialogs/NewComponentDialog.h
     ui/dialogs/NewInstanceDialog.cpp
     ui/dialogs/NewInstanceDialog.h
+    ui/dialogs/ModDownloaderDialog.cpp
+    ui/dialogs/ModDownloaderDialog.h
     ui/dialogs/NotificationDialog.cpp
     ui/dialogs/NotificationDialog.h
     ui/dialogs/OfflineNameDialog.cpp
@@ -815,6 +829,7 @@ qt6_wrap_ui(LAUNCHER_UI
     ui/dialogs/ModrinthExportDialog.ui
     ui/dialogs/NewComponentDialog.ui
     ui/dialogs/NewInstanceDialog.ui
+    ui/dialogs/ModDownloaderDialog.ui
     ui/dialogs/NotificationDialog.ui
     ui/dialogs/ProfileSelectDialog.ui
     ui/dialogs/ProgressDialog.ui

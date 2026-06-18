@@ -513,7 +513,7 @@ public:
   void createInstanceActions(QMainWindow *MainWindow) {
     actionChangeInstIcon = TranslatedAction(MainWindow);
     actionChangeInstIcon->setObjectName(QStringLiteral("actionChangeInstIcon"));
-    actionChangeInstIcon->setIcon(QIcon(":/logo.svg"));
+    actionChangeInstIcon->setIcon(APPLICATION->getThemedIcon("logo"));
     actionChangeInstIcon->setIconVisibleInMenu(true);
     actionChangeInstIcon.setTextId(
         QT_TRANSLATE_NOOP("MainWindow", "Change Icon"));
