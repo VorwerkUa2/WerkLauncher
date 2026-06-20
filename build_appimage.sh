@@ -61,33 +61,24 @@ if [ -f "branding/logo.svg" ]; then
     cp "branding/logo.svg" "${APPDIR}/werklauncher.svg"
 fi
 
-# Ensure qmake is found by linuxdeployqt
-export PATH="/usr/lib/qt6/bin:$PATH"
-if command -v qmake6 &> /dev/null && ! command -v qmake &> /dev/null; then
-    mkdir -p /tmp/qmake-bin
-    ln -s $(which qmake6) /tmp/qmake-bin/qmake
-    export PATH="/tmp/qmake-bin:$PATH"
-fi
+# Use linuxdeploy and linuxdeploy-plugin-qt instead of linuxdeployqt for Qt6
+echo "Downloading linuxdeploy..."
+wget -q "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage" -O linuxdeploy
+chmod +x linuxdeploy
 
-# Download linuxdeployqt if not available
-if ! command -v linuxdeployqt &> /dev/null; then
-    if [ ! -f "linuxdeployqt" ]; then
-        echo "Downloading linuxdeployqt..."
-        wget -q "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
-        chmod +x linuxdeployqt
-    fi
-    LINUXDEPLOYQT="./linuxdeployqt"
-else
-    LINUXDEPLOYQT="linuxdeployqt"
-fi
+echo "Downloading linuxdeploy-plugin-qt..."
+wget -q "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage" -O linuxdeploy-plugin-qt
+chmod +x linuxdeploy-plugin-qt
 
-# Bundle Qt libraries and create AppImage
 echo "Bundling Qt libraries and creating AppImage..."
+export QMAKE=/usr/lib/qt6/bin/qmake
+if [ ! -f "$QMAKE" ]; then
+    export QMAKE=$(which qmake6)
+fi
 export VERSION="${APP_VERSION}"
-${LINUXDEPLOYQT} "${APPDIR}/usr/share/applications/WerkLauncher.desktop" \
-    -unsupported-allow-new-glibc \
-    -appimage \
-    -verbose=1
+export EXTRA_QT_PLUGINS="iconengines,imageformats,tls"
+
+./linuxdeploy --appdir "${APPDIR}" --plugin qt --output appimage
 
 echo ""
 echo "============================================"
