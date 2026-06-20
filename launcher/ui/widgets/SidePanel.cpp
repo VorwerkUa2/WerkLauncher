@@ -5,7 +5,7 @@
 #include <QPainter>
 #include <QStyleOption>
 #include <QTimer>
-#include <XdgIcon.h>
+#include <xdgicon.h>
 
 SidePanel::SidePanel(QWidget *parent) : QWidget(parent) {
   setFixedWidth(250);

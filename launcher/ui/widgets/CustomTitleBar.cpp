@@ -8,7 +8,7 @@
 #include <QStyle>
 #include <QTimer>
 #include <QWindow>
-#include <XdgIcon.h>
+#include <xdgicon.h>
 
 #ifdef Q_OS_WIN
 #include <windows.h>

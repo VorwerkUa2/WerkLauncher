@@ -4,7 +4,7 @@
 #include <QPainter>
 #include <QScreen>
 #include <QStyle>
-#include <XdgIcon.h>
+#include <xdgicon.h>
 
 ToastNotification::ToastNotification(QWidget *parent, const QString &message,
                                      Type type)
