@@ -68,20 +68,20 @@ Source: "{#BuildDir}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "branding\WerkLauncher.ico"; DestDir: "{app}\branding"; Flags: ignoreversion createallsubdirs
 
 ; ---- Qt6 DLLs (Release) ----
-Source: "{#BuildDir}\Qt6Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildDir}\Qt6Core5Compat.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildDir}\Qt6Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildDir}\Qt6Network.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildDir}\Qt6OpenGL.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildDir}\Qt6Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildDir}\Qt6Xml.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildDir}\Qt6Concurrent.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildDir}\Qt6Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildDir}\Qt6Core.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\Qt6Core5Compat.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\Qt6Gui.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\Qt6Network.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\Qt6OpenGL.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\Qt6Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\Qt6Xml.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\Qt6Concurrent.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\Qt6Svg.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
 
 ; ---- Інші DLLs ----
-Source: "{#BuildDir}\Launcher_iconfix.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildDir}\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildDir}\d3dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildDir}\Launcher_iconfix.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\d3dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
 
 ; ---- Опціональні DLLs для графіки/локалізації (ігнорувати, якщо немає) ----
 Source: "{#BuildDir}\dxcompiler.dll"; DestDir: "{app}"; Flags: skipifsourcedoesntexist
@@ -89,16 +89,16 @@ Source: "{#BuildDir}\dxil.dll"; DestDir: "{app}"; Flags: skipifsourcedoesntexist
 Source: "{#BuildDir}\icuuc.dll"; DestDir: "{app}"; Flags: skipifsourcedoesntexist
 
 ; ---- Qt Плагіни ----
-Source: "{#BuildDir}\platforms\qwindows.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
-Source: "{#BuildDir}\imageformats\*.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
-Source: "{#BuildDir}\iconengines\*.dll"; DestDir: "{app}\iconengines"; Flags: ignoreversion
-Source: "{#BuildDir}\styles\*.dll"; DestDir: "{app}\styles"; Flags: ignoreversion
-Source: "{#BuildDir}\tls\*.dll"; DestDir: "{app}\tls"; Flags: ignoreversion
-Source: "{#BuildDir}\networkinformation\*.dll"; DestDir: "{app}\networkinformation"; Flags: ignoreversion
-Source: "{#BuildDir}\generic\*.dll"; DestDir: "{app}\generic"; Flags: ignoreversion
+Source: "{#BuildDir}\platforms\qwindows.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\imageformats\*.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\iconengines\*.dll"; DestDir: "{app}\iconengines"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\styles\*.dll"; DestDir: "{app}\styles"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\tls\*.dll"; DestDir: "{app}\tls"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\networkinformation\*.dll"; DestDir: "{app}\networkinformation"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "{#BuildDir}\generic\*.dll"; DestDir: "{app}\generic"; Flags: ignoreversion skipifsourcedoesntexist
 
 ; ---- JAR файли ----
-Source: "{#BuildDir}\jars\*.jar"; DestDir: "{app}\jars"; Flags: ignoreversion
+Source: "{#BuildDir}\jars\*.jar"; DestDir: "{app}\jars"; Flags: ignoreversion skipifsourcedoesntexist
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\branding\WerkLauncher.ico"
