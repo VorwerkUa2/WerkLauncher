@@ -87,9 +87,7 @@ export VERSION="${APP_VERSION}"
 ${LINUXDEPLOYQT} "${APPDIR}/usr/share/applications/WerkLauncher.desktop" \
     -unsupported-allow-new-glibc \
     -appimage \
-    -qmake=/usr/bin/qmake6 \
-    -verbose=1 \
-    -extra-plugins=iconengines,imageformats,platformthemes/libqgtk3.so,tls
+    -verbose=1
 
 echo ""
 echo "============================================"
