@@ -118,7 +118,11 @@ list(APPEND CMAKE_PREFIX_PATH "$ENV{USERPROFILE}/vcpkg/installed/x64-windows")
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Concurrent Network NetworkAuth Test Xml Svg OpenGL)
 
 if(WIN32)
-    set(VCPKG_ROOT "$ENV{USERPROFILE}/vcpkg/installed/x64-windows")
+    if(DEFINED ENV{VCPKG_INSTALLATION_ROOT})
+        set(VCPKG_ROOT "$ENV{VCPKG_INSTALLATION_ROOT}/installed/x64-windows")
+    else()
+        set(VCPKG_ROOT "$ENV{USERPROFILE}/vcpkg/installed/x64-windows")
+    endif()
     # Derive QT_BIN_DIR from Qt6 install prefix
     get_target_property(_qt6_core_dir Qt6::Core IMPORTED_LOCATION_RELEASE)
     if(NOT _qt6_core_dir)
