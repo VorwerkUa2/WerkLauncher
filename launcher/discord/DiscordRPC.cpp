@@ -5,7 +5,9 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-
+#ifndef Q_OS_WIN
+#include <unistd.h>
+#endif
 DiscordRPC::DiscordRPC(QObject *parent) : QObject(parent) {
   m_socket = new QLocalSocket(this);
   m_reconnectTimer = new QTimer(this);
