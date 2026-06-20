@@ -215,8 +215,14 @@ ModFolderPage::ModFolderPage(BaseInstance *inst,
   connect(updateDelegate, &ModUpdateDelegate::updateClicked, this, [this](int sourceRow) {
       if (sourceRow < 0 || sourceRow >= m_mods->rowCount(QModelIndex())) return;
       auto mod = m_mods->at(sourceRow);
+      QString itemType = tr("елемент");
+      QString itemTypeCap = tr("Елемент");
+      if (m_mods->dir().dirName() == "mods") { itemType = tr("мод"); itemTypeCap = tr("Мод"); }
+      else if (m_mods->dir().dirName() == "resourcepacks") { itemType = tr("ресурспак"); itemTypeCap = tr("Ресурспак"); }
+      else if (m_mods->dir().dirName() == "shaderpacks") { itemType = tr("шейдер"); itemTypeCap = tr("Шейдер"); }
+      
       if (mod.updateUrl().isEmpty()) {
-          CustomMessageBox::information(this, tr("Оновлення мода"), 
+          CustomMessageBox::information(this, tr("Оновлення відсутнє"), 
               tr("На жаль, посилання на завантаження відсутнє для '%1'.").arg(mod.name()));
           return;
       }
@@ -228,12 +234,23 @@ ModFolderPage::ModFolderPage(BaseInstance *inst,
       ProgressDialog progDialog(this);
       if (progDialog.execWithTask(task) == QDialog::Accepted) {
           CustomMessageBox::information(this, tr("Оновлення завершено"), 
-              tr("Мод '%1' успішно оновлено!").arg(mod.name()));
+              tr("%1 '%2' успішно оновлено!").arg(itemTypeCap, mod.name()));
       } else {
           CustomMessageBox::information(this, tr("Помилка"), 
-              tr("Не вдалося оновити мод '%1':\n%2").arg(mod.name(), task->failReason()));
+              tr("Не вдалося оновити %1 '%2':\n%3").arg(itemType, mod.name(), task->failReason()));
       }
   });
+
+  if (m_mods->dir().dirName() == "resourcepacks") {
+      ui->actionUpdateAll->setToolTip(tr("Перевірити та оновити всі ресурспаки"));
+      ui->actionDownload->setToolTip(tr("Завантажити ресурспаки"));
+  } else if (m_mods->dir().dirName() == "shaderpacks") {
+      ui->actionUpdateAll->setToolTip(tr("Перевірити та оновити всі шейдери"));
+      ui->actionDownload->setToolTip(tr("Завантажити шейдери"));
+  } else {
+      ui->actionUpdateAll->setToolTip(tr("Перевірити та оновити всі моди"));
+      ui->actionDownload->setToolTip(tr("Завантажити моди"));
+  }
 }
 
 void ModFolderPage::modItemActivated(const QModelIndex &) {
@@ -388,11 +405,16 @@ void ModFolderPage::on_actionUpdateAll_triggered() {
         return;
     }
     
+    QString itemTypePlural = tr("елемент(ів)");
+    if (m_mods->dir().dirName() == "mods") itemTypePlural = tr("мод(ів)");
+    else if (m_mods->dir().dirName() == "resourcepacks") itemTypePlural = tr("ресурспак(ів)");
+    else if (m_mods->dir().dirName() == "shaderpacks") itemTypePlural = tr("шейдер(ів)");
+
     auto task = new ModUpdateInstallTask(m_inst, m_mods.get(), modsToUpdate, this);
     ProgressDialog progDialog(this);
     if (progDialog.execWithTask(task) == QDialog::Accepted) {
         CustomMessageBox::information(this, tr("Оновлення завершено"), 
-            tr("Успішно оновлено %1 мод(ів)!").arg(modsToUpdate.size()));
+            tr("Успішно оновлено %1 %2!").arg(QString::number(modsToUpdate.size()), itemTypePlural));
     } else {
         CustomMessageBox::information(this, tr("Помилка"), 
             tr("Під час оновлення виникла помилка:\n%1").arg(task->failReason()));
