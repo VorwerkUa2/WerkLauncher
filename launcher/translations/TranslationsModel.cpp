@@ -357,7 +357,7 @@ Language *TranslationsModel::findLanguage(const QString &key) {
   if (found == d->m_languages.end()) {
     return nullptr;
   } else {
-    return found;
+    return &*found;
   }
 }
 
@@ -463,8 +463,7 @@ bool TranslationsModel::selectLanguage(QString key) {
 QModelIndex TranslationsModel::selectedIndex() {
   auto found = findLanguage(d->m_selectedLanguage);
   if (found) {
-    // QVector iterator freely converts to pointer to contained type
-    return index(found - d->m_languages.begin(), 0, QModelIndex());
+    return index(found - d->m_languages.data(), 0, QModelIndex());
   }
   return QModelIndex();
 }
