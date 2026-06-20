@@ -61,6 +61,14 @@ if [ -f "branding/logo.svg" ]; then
     cp "branding/logo.svg" "${APPDIR}/werklauncher.svg"
 fi
 
+# Ensure qmake is found by linuxdeployqt
+export PATH="/usr/lib/qt6/bin:$PATH"
+if command -v qmake6 &> /dev/null && ! command -v qmake &> /dev/null; then
+    mkdir -p /tmp/qmake-bin
+    ln -s $(which qmake6) /tmp/qmake-bin/qmake
+    export PATH="/tmp/qmake-bin:$PATH"
+fi
+
 # Download linuxdeployqt if not available
 if ! command -v linuxdeployqt &> /dev/null; then
     if [ ! -f "linuxdeployqt" ]; then
@@ -79,6 +87,7 @@ export VERSION="${APP_VERSION}"
 ${LINUXDEPLOYQT} "${APPDIR}/usr/share/applications/WerkLauncher.desktop" \
     -unsupported-allow-new-glibc \
     -appimage \
+    -qmake=/usr/bin/qmake6 \
     -verbose=1 \
     -extra-plugins=iconengines,imageformats,platformthemes/libqgtk3.so,tls
 

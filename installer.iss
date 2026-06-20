@@ -9,7 +9,9 @@
 #define MyAppExeName "WerkLauncher.exe"
 
 ; Шлях до скомпільованого Release білда
+#ifndef BuildDir
 #define BuildDir "out\build\x64-Release"
+#endif
 
 [Setup]
 ; Унікальний ID додатку (не змінювати для майбутніх оновлень!)
