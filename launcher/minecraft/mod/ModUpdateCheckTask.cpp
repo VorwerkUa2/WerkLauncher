@@ -57,7 +57,7 @@ void ModUpdateCheckTask::start()
     }
 
     QJsonArray hashesArray;
-    for (int i = 0; i < m_model->rowCount(); ++i) {
+    for (int i = 0; i < m_model->rowCount(QModelIndex()); ++i) {
         auto mod = m_model->at(i);
         QString sha1 = mod.sha1();
         if (!sha1.isEmpty()) {
@@ -110,20 +110,29 @@ void ModUpdateCheckTask::onReplyFinished()
                     
                     QJsonArray files = versionObj["files"].toArray();
                     QString newHash;
+                    QString updateUrl;
+                    QString updateFileName;
                     for (int i = 0; i < files.size(); ++i) {
                         auto fileObj = files[i].toObject();
                         if (fileObj["primary"].toBool()) {
                             newHash = fileObj["hashes"].toObject()["sha1"].toString();
+                            updateUrl = fileObj["url"].toString();
+                            updateFileName = fileObj["filename"].toString();
                             break;
                         }
                     }
                     if (newHash.isEmpty() && files.size() > 0) {
-                        newHash = files[0].toObject()["hashes"].toObject()["sha1"].toString();
+                        auto fileObj = files[0].toObject();
+                        newHash = fileObj["hashes"].toObject()["sha1"].toString();
+                        updateUrl = fileObj["url"].toString();
+                        updateFileName = fileObj["filename"].toString();
                     }
                     
                     if (!newHash.isEmpty() && newHash != oldHash) {
                         mod.setHasUpdate(true);
                         mod.setLatestVersion(versionObj["version_number"].toString());
+                        mod.setUpdateUrl(updateUrl);
+                        mod.setUpdateFileName(updateFileName);
                         
                         m_model->updateMod(row, mod);
                     }

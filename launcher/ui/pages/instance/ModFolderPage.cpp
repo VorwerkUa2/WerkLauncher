@@ -43,6 +43,9 @@
 
 #include "ui/pages/instance/ModUpdateDelegate.h"
 #include "minecraft/mod/ModUpdateCheckTask.h"
+#include "minecraft/mod/ModUpdateInstallTask.h"
+#include "ui/dialogs/ProgressDialog.h"
+#include "ui/dialogs/CustomMessageBox.h"
 
 #include "Version.h"
 
@@ -212,10 +215,24 @@ ModFolderPage::ModFolderPage(BaseInstance *inst,
   connect(updateDelegate, &ModUpdateDelegate::updateClicked, this, [this](int sourceRow) {
       if (sourceRow < 0 || sourceRow >= m_mods->rowCount(QModelIndex())) return;
       auto mod = m_mods->at(sourceRow);
-      // For now, just show a message that the update would be downloaded
-      QMessageBox::information(this, tr("Оновлення мода"),
-          tr("Мод '%1' має доступне оновлення до версії %2.\nФункція автоматичного завантаження буде доступна найближчим часом.")
-          .arg(mod.name()).arg(mod.latestVersion()));
+      if (mod.updateUrl().isEmpty()) {
+          CustomMessageBox::information(this, tr("Оновлення мода"), 
+              tr("На жаль, посилання на завантаження відсутнє для '%1'.").arg(mod.name()));
+          return;
+      }
+      
+      QList<Mod> modsToUpdate;
+      modsToUpdate.append(mod);
+      
+      auto task = new ModUpdateInstallTask(m_inst, m_mods.get(), modsToUpdate, this);
+      ProgressDialog progDialog(this);
+      if (progDialog.execWithTask(task) == QDialog::Accepted) {
+          CustomMessageBox::information(this, tr("Оновлення завершено"), 
+              tr("Мод '%1' успішно оновлено!").arg(mod.name()));
+      } else {
+          CustomMessageBox::information(this, tr("Помилка"), 
+              tr("Не вдалося оновити мод '%1':\n%2").arg(mod.name(), task->failReason()));
+      }
   });
 }
 
@@ -357,7 +374,29 @@ void ModFolderPage::on_actionDownload_triggered() {
 }
 
 void ModFolderPage::on_actionUpdateAll_triggered() {
-  // TODO: Launch ModUpdaterTask
+    QList<Mod> modsToUpdate;
+    for (int i = 0; i < m_mods->rowCount(QModelIndex()); ++i) {
+        auto mod = m_mods->at(i);
+        if (mod.hasUpdate() && !mod.updateUrl().isEmpty()) {
+            modsToUpdate.append(mod);
+        }
+    }
+    
+    if (modsToUpdate.isEmpty()) {
+        CustomMessageBox::information(this, tr("Оновлення відсутні"), 
+            tr("Немає доступних оновлень або посилання на завантаження відсутні."));
+        return;
+    }
+    
+    auto task = new ModUpdateInstallTask(m_inst, m_mods.get(), modsToUpdate, this);
+    ProgressDialog progDialog(this);
+    if (progDialog.execWithTask(task) == QDialog::Accepted) {
+        CustomMessageBox::information(this, tr("Оновлення завершено"), 
+            tr("Успішно оновлено %1 мод(ів)!").arg(modsToUpdate.size()));
+    } else {
+        CustomMessageBox::information(this, tr("Помилка"), 
+            tr("Під час оновлення виникла помилка:\n%1").arg(task->failReason()));
+    }
 }
 
 void ModFolderPage::on_actionEnable_triggered() {

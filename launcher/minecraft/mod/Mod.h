@@ -112,6 +112,9 @@ public:
     
     QString updateUrl() const { return m_updateUrl; }
     void setUpdateUrl(const QString &val) { m_updateUrl = val; }
+    
+    QString updateFileName() const { return m_updateFileName; }
+    void setUpdateFileName(const QString &val) { m_updateFileName = val; }
 
 protected:
     QFileInfo m_file;
@@ -129,4 +132,5 @@ protected:
     bool m_hasUpdate = false;
     QString m_latestVersion;
     QString m_updateUrl;
+    QString m_updateFileName;
 };

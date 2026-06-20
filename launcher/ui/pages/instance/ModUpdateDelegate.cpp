@@ -6,6 +6,7 @@
 #include <QMouseEvent>
 #include <QApplication>
 #include <QSortFilterProxyModel>
+#include <QModelIndex>
 
 ModUpdateDelegate::ModUpdateDelegate(ModFolderModel *model, QObject *parent)
     : QStyledItemDelegate(parent), m_model(model)
@@ -36,7 +37,7 @@ void ModUpdateDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opt
         sourceRow = proxy->mapToSource(index).row();
     }
 
-    if (sourceRow < 0 || sourceRow >= m_model->rowCount())
+    if (sourceRow < 0 || sourceRow >= m_model->rowCount(QModelIndex()))
         return;
 
     const Mod &mod = m_model->at(sourceRow);
@@ -89,7 +90,7 @@ bool ModUpdateDelegate::editorEvent(QEvent *event, QAbstractItemModel *model,
             sourceRow = proxy->mapToSource(index).row();
         }
 
-        if (sourceRow < 0 || sourceRow >= m_model->rowCount())
+        if (sourceRow < 0 || sourceRow >= m_model->rowCount(QModelIndex()))
             return false;
 
         const Mod &mod = m_model->at(sourceRow);

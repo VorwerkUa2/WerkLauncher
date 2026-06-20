@@ -356,6 +356,8 @@ set(MINECRAFT_SOURCES
     minecraft/mod/LocalModParseTask.cpp
     minecraft/mod/ModUpdateCheckTask.h
     minecraft/mod/ModUpdateCheckTask.cpp
+    minecraft/mod/ModUpdateInstallTask.h
+    minecraft/mod/ModUpdateInstallTask.cpp
     minecraft/mod/ResourcePackFolderModel.h
     minecraft/mod/ResourcePackFolderModel.cpp
     minecraft/mod/TexturePackFolderModel.h
