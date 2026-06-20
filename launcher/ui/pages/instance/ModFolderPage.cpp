@@ -23,6 +23,7 @@
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 #include <QTimer>
+#include <QModelIndex>
 
 
 #include "Application.h"
@@ -209,7 +210,7 @@ ModFolderPage::ModFolderPage(BaseInstance *inst,
   auto *updateDelegate = new ModUpdateDelegate(m_mods.get(), this);
   ui->modTreeView->setItemDelegateForColumn(ModFolderModel::NameColumn, updateDelegate);
   connect(updateDelegate, &ModUpdateDelegate::updateClicked, this, [this](int sourceRow) {
-      if (sourceRow < 0 || sourceRow >= m_mods->rowCount()) return;
+      if (sourceRow < 0 || sourceRow >= m_mods->rowCount(QModelIndex())) return;
       auto mod = m_mods->at(sourceRow);
       // For now, just show a message that the update would be downloaded
       QMessageBox::information(this, tr("Оновлення мода"),
