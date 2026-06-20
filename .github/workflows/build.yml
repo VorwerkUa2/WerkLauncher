@@ -18,7 +18,7 @@ jobs:
       uses: jurplel/install-qt-action@v4
       with:
         version: '6.6.1'
-        modules: 'qtnetworkauth qtsvg'
+        modules: 'qtnetworkauth'
     - name: Configure CMake
       run: cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
     - name: Build
