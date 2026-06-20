@@ -14,8 +14,13 @@ jobs:
         submodules: recursive
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        version: '6.6.1'
+        modules: 'qtnetworkauth qtsvg'
     - name: Configure CMake
-      run: cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE="${{ env.VCPKG_INSTALLATION_ROOT }}/scripts/buildsystems/vcpkg.cmake"
+      run: cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
     - name: Build
       run: cmake --build build
     - name: Build Installer
