@@ -18,7 +18,7 @@ jobs:
       uses: jurplel/install-qt-action@v4
       with:
         version: '6.6.1'
-        modules: 'qtnetworkauth'
+        modules: 'qtnetworkauth qt5compat'
     - name: Install dependencies via vcpkg
       run: vcpkg install zlib:x64-windows
     - name: Configure CMake
