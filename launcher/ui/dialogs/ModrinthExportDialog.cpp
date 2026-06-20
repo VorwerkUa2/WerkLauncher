@@ -26,7 +26,7 @@ ModrinthExportDialog::ModrinthExportDialog(InstancePtr instance,
   ui->setupUi(this);
 
   auto titleBar = new CustomTitleBar(this);
-  titleBar->setTitle(tr("Export to Modrinth"));
+  titleBar->setTitle(tr("Export Modrinth modpack"));
   ui->mainLayout->setContentsMargins(0, 0, 0, 0);
   ui->mainLayout->setSpacing(0);
   ui->mainLayout->insertWidget(0, titleBar);

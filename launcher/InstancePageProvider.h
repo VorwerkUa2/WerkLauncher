@@ -41,7 +41,7 @@ public:
             auto modsPage = new ModFolderPage(onesix.get(), onesix->loaderModList(), "mods", "loadermods", tr("Loader mods"), "Loader-mods");
             modsPage->setFilter("%1 (*.zip *.jar *.litemod)");
             values.append(modsPage);
-            values.append(new CoreModFolderPage(onesix.get(), onesix->coreModList(), "coremods", "coremods", tr("Core mods"), "Core-mods"));
+            // values.append(new CoreModFolderPage(onesix.get(), onesix->coreModList(), "coremods", "coremods", tr("Core mods"), "Core-mods"));
             values.append(new ResourcePackPage(onesix.get()));
             values.append(new TexturePackPage(onesix.get()));
             values.append(new ShaderPackPage(onesix.get()));

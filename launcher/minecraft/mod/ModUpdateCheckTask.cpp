@@ -79,9 +79,18 @@ void ModUpdateCheckTask::start()
     gameVersions.append(mcVersion);
     payload["game_versions"] = gameVersions;
 
+    if (m_model->dir().dirName() == "resourcepacks") {
+        loaderType = "minecraft";
+    } else if (m_model->dir().dirName() == "shaderpacks") {
+        loaderType = "iris"; // Often works for Modrinth shaders
+    }
+    
     if (!loaderType.isEmpty()) {
         QJsonArray loaders;
         loaders.append(loaderType);
+        if (m_model->dir().dirName() == "shaderpacks") {
+            loaders.append("optifine");
+        }
         payload["loaders"] = loaders;
     }
 
