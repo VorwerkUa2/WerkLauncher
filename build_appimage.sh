@@ -8,7 +8,7 @@ set -e
 
 APP_NAME="WerkLauncher"
 APP_VERSION="1.0.1"
-BUILD_DIR="out/build/x64-Release"
+BUILD_DIR="${BUILD_DIR:-out/build/x64-Release}"
 APPDIR="AppDir"
 
 echo "============================================"

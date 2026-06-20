@@ -40,11 +40,17 @@ jobs:
       run: cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
     - name: Build
       run: cmake --build build
+    - name: Build AppImage
+      env:
+        BUILD_DIR: build
+      run: |
+        chmod +x build_appimage.sh
+        ./build_appimage.sh
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: WerkLauncher-Linux
-        path: build/WerkLauncher
+        name: WerkLauncher-Linux-AppImage
+        path: "*.AppImage"
 
   build-macos:
     runs-on: macos-latest
@@ -56,8 +62,10 @@ jobs:
       run: cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(brew --prefix qt@6)"
     - name: Build
       run: cmake --build build
+    - name: Package DMG
+      run: $(brew --prefix qt@6)/bin/macdeployqt build/WerkLauncher.app -dmg
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: WerkLauncher-macOS
-        path: build/WerkLauncher.app
+        name: WerkLauncher-macOS-DMG
+        path: build/WerkLauncher.dmg
