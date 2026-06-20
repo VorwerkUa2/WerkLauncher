@@ -67,7 +67,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 ; ---- Головний файл та іконка ----
 Source: "{#BuildDir}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "branding\WerkLauncher.ico"; DestDir: "{app}\branding"; Flags: ignoreversion createallsubdirs
+Source: "branding\WerkLauncher.ico"; DestDir: "{app}\branding"; Flags: ignoreversion
 
 ; ---- Qt6 DLLs (Release) ----
 Source: "{#BuildDir}\Qt6Core.dll"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
