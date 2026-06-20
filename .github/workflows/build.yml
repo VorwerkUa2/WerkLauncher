@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup Ninja
-      uses: ninja-actions/setup-ninja@v1
+      run: choco install ninja
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
     - name: Configure CMake
