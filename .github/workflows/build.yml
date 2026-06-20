@@ -10,8 +10,10 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: recursive
     - name: Setup Ninja
-      run: choco install ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
     - name: Configure CMake
@@ -31,6 +33,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: recursive
     - name: Install Qt6 and dependencies
       run: |
         sudo apt-get update
@@ -56,6 +60,8 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: recursive
     - name: Install dependencies
       run: brew install qt@6 ninja cmake
     - name: Configure
