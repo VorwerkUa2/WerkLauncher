@@ -1,0 +1,85 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(Launcher_quazip)
+
+#### LIBRARY ####
+find_package(ZLIB REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Core Network Test Core5Compat)
+
+set(QUAZIP_SRC
+	quazip/crypt.h
+	quazip/ioapi.h
+	quazip/JlCompress.cpp
+	quazip/JlCompress.h
+	quazip/qioapi.cpp
+	quazip/quaadler32.cpp
+	quazip/quaadler32.h
+	quazip/quachecksum32.h
+	quazip/quacrc32.cpp
+	quazip/quacrc32.h
+	quazip/quagzipfile.cpp
+	quazip/quagzipfile.h
+	quazip/quaziodevice.cpp
+	quazip/quaziodevice.h
+	quazip/quazip.cpp
+	quazip/quazip.h
+	quazip/quazip_global.h
+	quazip/quazipdir.cpp
+	quazip/quazipdir.h
+	quazip/quazipfile.cpp
+	quazip/quazipfile.h
+	quazip/quazipfileinfo.cpp
+	quazip/quazipfileinfo.h
+	quazip/quazipnewinfo.cpp
+	quazip/quazipnewinfo.h
+	quazip/unzip.c
+	quazip/unzip.h
+	quazip/zip.c
+	quazip/zip.h
+)
+
+if (Qt6_POSITION_INDEPENDENT_CODE)
+    SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
+endif()
+
+add_library(Launcher_quazip STATIC ${QUAZIP_SRC})
+target_include_directories(Launcher_quazip PUBLIC "quazip" "${CMAKE_CURRENT_BINARY_DIR}" ${ZLIB_INCLUDE_DIRS})
+target_link_libraries(Launcher_quazip Qt6::Core Qt6::Core5Compat ${ZLIB_LIBRARIES})
+target_compile_definitions(Launcher_quazip PUBLIC "-DQUAZIP_STATIC")
+
+# Install it
+install(
+	TARGETS Launcher_quazip
+	RUNTIME DESTINATION ${LIBRARY_DEST_DIR}
+	LIBRARY DESTINATION ${LIBRARY_DEST_DIR}
+)
+
+#### UNIT TESTS ####
+# find_package already called above
+
+set(QUAZIP_TEST_SRC
+	qztest/qztest.cpp
+	qztest/qztest.h
+	qztest/testjlcompress.cpp
+	qztest/testjlcompress.h
+	qztest/testquachecksum32.cpp
+	qztest/testquachecksum32.h
+	qztest/testquagzipfile.cpp
+	qztest/testquagzipfile.h
+	qztest/testquaziodevice.cpp
+	qztest/testquaziodevice.h
+	qztest/testquazip.cpp
+	qztest/testquazip.h
+	qztest/testquazipdir.cpp
+	qztest/testquazipdir.h
+	qztest/testquazipfile.cpp
+	qztest/testquazipfile.h
+	qztest/testquazipfileinfo.cpp
+	qztest/testquazipfileinfo.h
+	qztest/testquazipnewinfo.cpp
+	qztest/testquazipnewinfo.h
+)
+
+add_executable(Launcher_quazip_test ${QUAZIP_TEST_SRC})
+target_link_libraries(Launcher_quazip_test Launcher_quazip Qt6::Network Qt6::Test)
+add_test(NAME quazip_testsuite COMMAND Launcher_quazip_test)
