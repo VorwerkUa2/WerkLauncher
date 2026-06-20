@@ -145,7 +145,6 @@ if(WIN32)
         "${QT_BIN_DIR}/Qt6Concurrent.dll"
         "${QT_BIN_DIR}/Qt6Svg.dll"
         "${QT_BIN_DIR}/d3dcompiler_47.dll"
-        "${VCPKG_ROOT}/bin/zlib1.dll"
     )
 
     set(COMMON_DLLS_DEBUG
@@ -158,7 +157,6 @@ if(WIN32)
         "${QT_BIN_DIR}/Qt6Concurrentd.dll"
         "${QT_BIN_DIR}/Qt6Svgd.dll"
         "${QT_BIN_DIR}/d3dcompiler_47.dll"
-        "${VCPKG_ROOT}/debug/bin/zlibd1.dll"
     )
 
     # Choose DLLs based on build type
