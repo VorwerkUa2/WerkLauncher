@@ -281,7 +281,7 @@ class MainWindow::Ui {
 
 public:
   TranslatedAction actionStatistics;
-  TranslatedAction actionBuyMeACoffee;
+  TranslatedAction actionDonatello;
 
   TranslatedAction actionBack;
   TranslatedAction actionAddInstance;
@@ -492,13 +492,13 @@ public:
       all_actions.append(&actionStatistics);
       helpMenu->addAction(actionStatistics);
 
-      actionBuyMeACoffee = TranslatedAction(MainWindow);
-      actionBuyMeACoffee->setObjectName(QStringLiteral("actionBuyMeACoffee"));
-      actionBuyMeACoffee->setIcon(APPLICATION->getThemedIcon("patreon")); // Use patreon icon or similar
-      actionBuyMeACoffee.setTextId("Buy Me a Coffee");
-      actionBuyMeACoffee.setTooltipId("Підтримати проєкт.");
-      all_actions.append(&actionBuyMeACoffee);
-      helpMenu->addAction(actionBuyMeACoffee);
+      actionDonatello = TranslatedAction(MainWindow);
+      actionDonatello->setObjectName(QStringLiteral("actionDonatello"));
+      actionDonatello->setIcon(APPLICATION->getThemedIcon("patreon")); // Use patreon icon or similar
+      actionDonatello.setTextId("Donatello");
+      actionDonatello.setTooltipId("Підтримати проєкт на Donatello.");
+      all_actions.append(&actionDonatello);
+      helpMenu->addAction(actionDonatello);
     }
 
     if (!BuildConfig.DISCORD_URL.isEmpty()) {
@@ -2527,8 +2527,8 @@ void MainWindow::on_actionStatistics_triggered() {
     dialog.exec();
 }
 
-void MainWindow::on_actionBuyMeACoffee_triggered() {
-  DesktopServices::openUrl(QUrl("https://buymeacoffee.com/")); // Placeholder
+void MainWindow::on_actionDonatello_triggered() {
+  DesktopServices::openUrl(QUrl("https://donatello.to/Airlii"));
 }
 
 void MainWindow::on_actionAbout_triggered() {

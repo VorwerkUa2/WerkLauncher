@@ -126,7 +126,7 @@ private slots:
 
   void on_actionManageAccounts_triggered();
 
-  void on_actionBuyMeACoffee_triggered();
+  void on_actionDonatello_triggered();
   void on_actionStatistics_triggered();
 
   void on_actionPatreon_triggered();
