@@ -1263,7 +1263,7 @@ QIcon Application::getThemedIcon(const QString &name) {
     QString accentStr = m_settings->get("CustomAccentColor").toString();
     QColor accentColor = accentStr.isEmpty() ? QColor("#ffae00") : QColor(accentStr);
     
-    QImage sourceImage("c:/Users/knyaz/Desktop/MCL/branding/logo_gray.png");
+    QImage sourceImage(":/logo_gray.png");
     if (sourceImage.isNull()) {
         sourceImage = QIcon(":/logo.svg").pixmap(512, 512).toImage();
     }
