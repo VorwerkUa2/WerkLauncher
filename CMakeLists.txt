@@ -144,6 +144,8 @@ if(WIN32)
         "${QT_BIN_DIR}/Qt6Test.dll"
         "${QT_BIN_DIR}/Qt6Concurrent.dll"
         "${QT_BIN_DIR}/Qt6Svg.dll"
+        "${QT_BIN_DIR}/Qt6NetworkAuth.dll"
+        "${QT_BIN_DIR}/Qt6Core5Compat.dll"
         "${QT_BIN_DIR}/d3dcompiler_47.dll"
     )
 
@@ -156,6 +158,8 @@ if(WIN32)
         "${QT_BIN_DIR}/Qt6Testd.dll"
         "${QT_BIN_DIR}/Qt6Concurrentd.dll"
         "${QT_BIN_DIR}/Qt6Svgd.dll"
+        "${QT_BIN_DIR}/Qt6NetworkAuthd.dll"
+        "${QT_BIN_DIR}/Qt6Core5Compatd.dll"
         "${QT_BIN_DIR}/d3dcompiler_47.dll"
     )
 
