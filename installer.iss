@@ -57,7 +57,6 @@ WizardSmallImageFile=branding\installer_header.bmp
 LicenseFile=COPYING.md
 
 ; Сучасний стиль сторінок
-WizardStyle=modern
 Compression=lzma2/ultra64
 SolidCompression=yes
 
