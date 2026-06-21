@@ -149,4 +149,20 @@ begin
   WizardForm.LicenseMemo.Font.Color := clWhite;
   WizardForm.ReadyMemo.Color := $252525;
   WizardForm.ReadyMemo.Font.Color := clWhite;
+  
+  // Виправлення списку програм, що працюють
+  WizardForm.PreparingMemo.Color := $252525;
+  WizardForm.PreparingMemo.Font.Color := clWhite;
+  
+  // Виправлення перемикачів ліцензії
+  WizardForm.LicenseAcceptedRadio.Font.Color := clWhite;
+  WizardForm.LicenseNotAcceptedRadio.Font.Color := clWhite;
+  
+  // Виправлення перемикачів "Закрити програми"
+  WizardForm.PreparingYesRadio.Font.Color := clWhite;
+  WizardForm.PreparingNoRadio.Font.Color := clWhite;
+  
+  // Виправлення списку завдань (іконок)
+  WizardForm.TasksList.Color := $252525;
+  WizardForm.TasksList.Font.Color := clWhite;
 end;
