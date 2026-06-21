@@ -342,7 +342,16 @@ Application::Application(int &argc, char **argv) : QApplication(argc, argv) {
     adjustedBy += "Command line " + dirParam;
     dataPath = dirParam;
   } else {
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_WIN32)
+    QFileInfo portableFile(FS::PathCombine(applicationDirPath(), "portable.txt"));
+    if (portableFile.exists()) {
+        dataPath = applicationDirPath();
+        adjustedBy += "Fallback to binary path " + dataPath;
+    } else {
+        dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+        adjustedBy += "Fallback to AppData " + dataPath;
+    }
+#elif defined(Q_OS_MAC)
     QDir foo(FS::PathCombine(applicationDirPath(), "../../Data"));
     dataPath = foo.absolutePath();
     adjustedBy += "Fallback to special Mac location " + dataPath;

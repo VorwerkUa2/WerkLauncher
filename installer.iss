@@ -23,6 +23,11 @@ AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 
+; Осучаснення вигляду
+WizardStyle=modern
+WizardSizePercent=110
+DisableWelcomePage=no
+
 ; Шлях за замовчуванням
 DefaultDirName={autopf}\{#MyAppName}
 ; Назва теки в меню Пуск
@@ -111,3 +116,26 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilen
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+
+[Code]
+procedure InitializeWizard;
+begin
+  // Встановлюємо темний колір фону та білий текст
+  WizardForm.Color := $202020;
+  WizardForm.Font.Color := clWhite;
+  
+  WizardForm.WelcomePage.Color := $202020;
+  WizardForm.InnerPage.Color := $202020;
+  WizardForm.FinishedPage.Color := $202020;
+  WizardForm.LicensePage.Color := $202020;
+  WizardForm.SelectDirPage.Color := $202020;
+  WizardForm.SelectProgramGroupPage.Color := $202020;
+  WizardForm.SelectTasksPage.Color := $202020;
+  WizardForm.ReadyPage.Color := $202020;
+  WizardForm.PreparingPage.Color := $202020;
+  WizardForm.InstallingPage.Color := $202020;
+  
+  WizardForm.MainPanel.Color := $252525;
+  WizardForm.PageNameLabel.Font.Color := clWhite;
+  WizardForm.PageDescriptionLabel.Font.Color := $DDDDDD;
+end;
