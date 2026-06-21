@@ -137,4 +137,16 @@ begin
   WizardForm.MainPanel.Color := $252525;
   WizardForm.PageNameLabel.Font.Color := clWhite;
   WizardForm.PageDescriptionLabel.Font.Color := $DDDDDD;
+  
+  // Виправлення тексту на головних сторінках
+  WizardForm.WelcomeLabel1.Font.Color := clWhite;
+  WizardForm.WelcomeLabel2.Font.Color := clWhite;
+  WizardForm.FinishedHeadingLabel.Font.Color := clWhite;
+  WizardForm.FinishedLabel.Font.Color := clWhite;
+  
+  // Виправлення текстових полів (Ліцензія та Підсумок)
+  WizardForm.LicenseMemo.Color := $252525;
+  WizardForm.LicenseMemo.Font.Color := clWhite;
+  WizardForm.ReadyMemo.Color := $252525;
+  WizardForm.ReadyMemo.Font.Color := clWhite;
 end;

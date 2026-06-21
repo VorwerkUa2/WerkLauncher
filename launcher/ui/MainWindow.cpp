@@ -433,7 +433,7 @@ public:
 
     actionBack = TranslatedAction(MainWindow);
     actionBack->setObjectName(QStringLiteral("actionBack"));
-    actionBack->setIcon(MainWindow->style()->standardIcon(QStyle::SP_ArrowBack));
+    actionBack->setIcon(APPLICATION->getThemedIcon("back"));
     actionBack.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Back"));
     actionBack.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Back to Instances"));
     all_actions.append(&actionBack);

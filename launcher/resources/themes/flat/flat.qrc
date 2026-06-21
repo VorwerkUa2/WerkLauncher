@@ -2,7 +2,8 @@
 <RCC version="1.0">
     <qresource prefix="/icons/flat">
         <file>index.theme</file>
-        <file>scalable/about.svg</file>
+        <file>scalable/back.svg</file>
+    <file>scalable/about.svg</file>
         <file>scalable/accounts.svg</file>
         <file>scalable/bug.svg</file>
         <file>scalable/cat.svg</file>
