@@ -868,10 +868,10 @@ MainWindow::MainWindow(QWidget *parent)
                     WS_MINIMIZEBOX);
                     
   // CRITICAL: DWM Bug Fix for Windows 10/11
-  // If we return 0 in WM_NCCALCSIZE to make the window frameless, DWM loses track 
-  // of the window's frame. After a modal dialog closes, DWM will start completely 
-  // ignoring WM_SYSCOMMAND SC_SIZE messages unless we extend the frame into the client area.
-  MARGINS margins = {1, 1, 1, 1};
+  // Extend frame into client area to enable DWM shadow rendering.
+  // Using {0,0,0,1} instead of {1,1,1,1} to avoid the visible accent-colored
+  // border that Windows 11 renders for DWM-extended frames.
+  MARGINS margins = {0, 0, 0, 1};
   DwmExtendFrameIntoClientArea(hwnd, &margins);
 #endif
 

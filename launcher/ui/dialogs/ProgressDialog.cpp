@@ -22,6 +22,8 @@
 
 #ifdef Q_OS_WIN
 #include <windows.h>
+#include <dwmapi.h>
+#pragma comment(lib, "dwmapi.lib")
 #endif
 
 #include "tasks/Task.h"
@@ -32,9 +34,12 @@ ProgressDialog::ProgressDialog(QWidget *parent)
   ui->setupUi(this);
 
 #ifdef Q_OS_WIN
+  // Enable DWM shadow without adding WS_THICKFRAME (which causes visible
+  // accent-colored border on Windows 11). Minimal bottom margin triggers
+  // DWM to render the drop shadow.
   HWND hwnd = (HWND)winId();
-  LONG style = GetWindowLong(hwnd, GWL_STYLE);
-  SetWindowLong(hwnd, GWL_STYLE, style | WS_THICKFRAME | WS_CAPTION | WS_MINIMIZEBOX);
+  MARGINS margins = {0, 0, 0, 1};
+  DwmExtendFrameIntoClientArea(hwnd, &margins);
 #endif
 
   auto titleBar = new CustomTitleBar(this);
