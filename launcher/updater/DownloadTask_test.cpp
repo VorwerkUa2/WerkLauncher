@@ -1,4 +1,5 @@
-#include <QCoreApplication>
+#include <QDir>
+#include <QFile>
 #include <QSignalSpy>
 #include <QTest>
 
@@ -13,8 +14,7 @@ using namespace GoUpdate;
 
 // Robust helper to find test files in the build directory
 QByteArray getTestFileData(const QString &relativePathComponent) {
-  QString path = FS::PathCombine(QCoreApplication::applicationDirPath(),
-                                 relativePathComponent);
+  QString path = FS::PathCombine(QDir::currentPath(), relativePathComponent);
   QFile f(path);
   if (!f.open(QFile::ReadOnly)) {
     qWarning() << "Failed to open test file:" << path;
@@ -24,13 +24,13 @@ QByteArray getTestFileData(const QString &relativePathComponent) {
 }
 
 FileSourceList encodeBaseFile(const char *suffix) {
-  auto base = QCoreApplication::applicationDirPath();
+  auto base = QDir::currentPath();
   QUrl localFile = QUrl::fromLocalFile(base + suffix);
   return FileSourceList({FileSource("http", localFile.toString())});
 }
 
 QByteArray processTestData(QByteArray data) {
-  auto base = QCoreApplication::applicationDirPath();
+  auto base = QDir::currentPath();
   auto baseUrl = QUrl::fromLocalFile(base + "/data").toString();
   return data.replace("@TEST_DATA_URL@", baseUrl.toUtf8());
 }
@@ -178,9 +178,8 @@ private slots:
     shared_qobject_ptr<QNetworkAccessManager> network =
         new QNetworkAccessManager();
 
-    processFileLists(currentVersion, newVersion,
-                     QCoreApplication::applicationDirPath(), tempFolder,
-                     new NetJob("Dummy", network), operations);
+    processFileLists(currentVersion, newVersion, QDir::currentPath(),
+                     tempFolder, new NetJob("Dummy", network), operations);
 
     if (operations != expectedOperations) {
       qDebug() << "Operations:" << operations;
